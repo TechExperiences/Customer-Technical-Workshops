@@ -1,6 +1,6 @@
 [
   {
-    "Name": "Sandbox-Environment-for-Amplify-your-intelligence",
+    "Name": "Sandbox-Environment-for-Modernize-with-confidence",
     "Language": "English",
     "Files": [
       {
@@ -8,11 +8,11 @@
         "Order": 1
       },
       {
-        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Customer-Technical-Workshops/refs/heads/main/Build-a-unified-governed-data-and%20AI-estate/Guide01.md",
+        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Customer-Technical-Workshops/refs/heads/main/Modernize-with-confidence/Guide01.md",
         "Order": 2
       },
       {
-        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Customer-Technical-Workshops/refs/heads/main/Build-a-unified-governed-data-and%20AI-estate/Guide02.md",
+        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Customer-Technical-Workshops/refs/heads/main/Modernize-with-confidence/Guide02.md",
         "Order": 3
       }
     ]  
