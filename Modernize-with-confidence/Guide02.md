@@ -1,5 +1,6 @@
 # 2. Rapid Prototyping
 
+- <inject key="openaiPrimaryKey" enableCopy="false"/>
 
 Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
