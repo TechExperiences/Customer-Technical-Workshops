@@ -94,296 +94,242 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Select the **Future-State-Architecture.png**.
 
-   ![](../Sandbox-Environment-Guides/Images/b88.png)
+   ![](../Sandbox-Environment-Guides/Images/Vsfiles.png)
 
 1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b89.png)
 
-### Fabric IQ
+## Migration From On-Prem SQl to Azure SQL DB Hyperscale
+
+Migrate the pharmaceutical manufacturing database from on-premises SQL Server to Azure SQL Database Hyperscale to provide scalable, highly available, and cloud-based data management. The migration preserves critical manufacturing, product, inventory, production, and operational data while enabling improved performance, scalability, and integration with modern Azure analytics and AI services.
 
 1. Along with the attached **Solution Architecture** (1), please paste the below prompt (2).
 
    ```
-   You are my smart agent to read my attached architecture design for Zava Retail and create bicep/ARM template based on the identified resources.
- 
-   Please follow these below instructions for Fabric IQ section:
-   1. List down all the Azure resources from the attached architecture diagram.
-   2. Create a new resource group.
-   3. Create a new Fabric Capacity using **SKU F16** for the **West US 3** region.
-   4. Create a new Fabric Workspace attaching with above newly created capacity. 
-   5. Create Lakehouse and store sample data into tables(Tables should be as per architecture design)
-   6. Create Fabric Ontology using above Lakehouse tables with proper relationship and generate Ontology Graph View
-   7. Create Data Agent using above Ontology as a data source and prepare proper Agent Instruction based on these Ontology Entities.
-   
-   Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment(create workspace, create lakehouse, table creation, sample data insertion, ontology creation, data agent creation)
+   You are my smart agent to understand below are the problem statement and planned solution architecture design which will help Caldova to overcome from their problems. After that, please prepare bicep/ARM template and deploy the resources in the respective environment.
+
+   Proposed Solution: The proposed solution is to migrate Caldova’s on-premises SQL Server database from the existing VM-based environment to Azure SQL Database Hyperscale. The migration will preserve the existing database objects. The migrated database will provide a scalable and secure foundation for the modernized .NET application on Azure App Service and future capabilities such as native SQL vector search over product descriptions, while reducing infrastructure-management overhead and supporting Caldova’s planned business growth.
+
+   Planned Solution Architecture Design: Attached  Future-State-Architecture.png.
+
+   First Migrate OnPrem SQL Database available in the VM to Azure SQL Server(Hyperscale) and modernize it with following below instructions:
+
+   Instructions:
+   1.	Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
+   2.	Use Existing Azure SQL Server and one Azure SQL Hyperscale Database (CaldovaOrderManagement) which is available in same Resource Group
+   3.	Make UPN - **<inject key="AzureAdUserEmail"></inject>** set as admin to the azure sql server and hyperscale databse
+   4.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
+   5.	Connect and Access the OnPrem SQL Sever using credentials
+   	User Name: caldova-admin
+   	Password: B!Admin@123
+   6.	Access database CaldovaOrderManagement in this OnPrem server.
+   7.	Migrate Tables and data into the created Azure SQL Hyperscale Database
+   8.	Maintain a similar relationship among all tables.
+
    ```
 
-   - Then **Send (3)**.
+   - Then click **Send (3)** button.
 
-    ![](../Sandbox-Environment-Guides/Images/b12.png)
+    ![](../Sandbox-Environment-Guides/Images/prompt.png)
    
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
-1. If Copilot Asks below question to create new Resource Group, please select the option similar to the one marked below.
+1. If Copilot Asks to aunthenticate like below, please click on provided link and provide the code which was given by copilot 
 
-   ![](../Sandbox-Environment-Guides/Images/Prompt-followup.png)
+   ![](../Sandbox-Environment-Guides/Images/Login.png)
+
+1. Click on Yes, completed and then click on **Submit** button
+    
+    ![](../Sandbox-Environment-Guides/Images/Login2.png)
 
 1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
-
-1. Select **Yes**, if any question prompts you to respond related to `F16` deployment.
-
-   ![](../Sandbox-Environment-Guides/Images/b13.png)
-
-1. If prompted to provide the UPN for assigning **Fabric Administrator access**, enter **<inject key="AzureAdUserEmail"></inject> (1)** and then select **Submit (2)**. 
-
-    ![](../Sandbox-Environment-Guides/Images/b14.png)
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
+   
+   >Wait for the deployment to complete. This may take approximately `20–30` minutes.
 
-1. Wait for the deployment to complete. This may take approximately `20–30` minutes. Once completed, you will see a Summary/Conclusion similar to the example below, although the details may vary **(1)** and select **Keep (2)** to keep the created files.
+### Validation - Azure SQL DB Hyperscale
 
-   ![](../Sandbox-Environment-Guides/Images/b15.png)
+1. Navigate to the [Azure portal](https://portal.azure.com/). Click on **Resource groups**. and Click on **rg-caldova-modernize** Resource Group.
 
-    >**Note:** The **Summary/Conclusion** may look different for you. Once the deployment is completed, you will be able to view the results in the chat.
+   ![](../Sandbox-Environment-Guides/Images/portal.png)
 
-1. Once the deployment is complete, you can verify the deployed resources by navigating to the newly created resource group.
+1. You can see all the resources and click on **Azure SQL Database**
 
-1. Navigate to the Azure portal. Click on **Resource group**.
+   ![](../Sandbox-Environment-Guides/Images/Database.png)
 
-   ![](../Sandbox-Environment-Guides/Images/b16.png)
+1. Click on **Query Editor** to connect SQL Database and Validate databse objects.
 
-1. Select the newly created Resource Group, excluding the **resource groups** highlighted below.
+   ![](../Sandbox-Environment-Guides/Images/Queryeditor.png)
 
-   ![](../Sandbox-Environment-Guides/Images/b55.png)
+1. To authorize user click on **Connect as odl_user**.
 
-1. You should see the deployed Fabric capacity.
+     ![](../Sandbox-Environment-Guides/Images/entra.png)
 
-   ![](../Sandbox-Environment-Guides/Images/b17.png)
+1. Expand Schema(dbo) -> Tables -> and Click any table to see data.
 
-1. Click on the **App launcher (1)** and select **Microsoft fabric** icon.
+    ![](../Sandbox-Environment-Guides/Images/Validation.png)   
 
-   ![](../Sandbox-Environment-Guides/Images/amp55.png)
+   >**Note**: Similarly click other tables to compare and validate data.
 
-1. Navigate to **Workspaces**, there should be workspace created with the name similar to **Zava Retail**. 
+## Migration From On-Prem Web Application to Azure App Service 
 
-   - If your unable to see. Please go back to the **GitHub Copilot Chat**.
+Migrate the pharmaceutical manufacturing web application (Order Management) from on-premises infrastructure to Azure App Service to provide a scalable, secure, and highly available cloud-hosted platform. The migration enables improved application performance, simplified infrastructure management, and seamless integration with Azure services and the modernized Azure SQL Database backend.
+ 
+Follow below instructions to migrate On-prem web application to Azure app service.
 
-     ![](../Sandbox-Environment-Guides/Images/b18.png)
-
-      >**Note:** Not the one which starts with **Microsoft IQ**.
-
-1. From the **GitHub Copilot Chat**, send the the below prompt to make the UPN **<inject key="AzureAdUserEmail"></inject>** as Fabric admin **(1)** and then **Send (2)**.
-
-   ```
-   Please provide Fabric admin access to the UPN <inject key="AzureAdUserEmail"></inject> to see the fabric workspace
-   ```
-
-    ![](../Sandbox-Environment-Guides/Images/b19.png)   
-
-1. Wait for the process to complete and then **Keep** the file.
-
-   ![](../Sandbox-Environment-Guides/Images/b20.png)
-
-1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace which starts with something similar to `Zava Retail`.
-
-   ![](../Sandbox-Environment-Guides/Images/b21.png)
-
-1. Open the **Zava Retail** workspace.
-
-1. Make sure that all the workspace items mentioned in the prompt are created. 
-
-   ![](../Sandbox-Environment-Guides/Images/b22.png)
-
-1. Please open each item and verify that it has been created correctly. If anything is missing, go back to the **GitHub Copilot Chat** and provide a follow-up prompt to address the missing item.  
-
-1. In this case, when I opened the workspace. There are no tables created in the Lakehouse.
-
-   ![](../Sandbox-Environment-Guides/Images/b23.png)
-
-1. Navigate back to the **GitHub Copilot Chat** to send the follow up prompt.
+1. Navigate to VScode and paste the below prompt in chat window
 
    ```
-   Issues identified with the workspace items, please fix this issue.
+   Great, you have completed OnPrem SQL migration to Azure SQL Database Hyperscale. Now we need to migrate OnPrem Web Application to Azure Web App Service and modernize. 
 
-   No table has been created in the Lakehouse, and no sample data has been loaded.
-   The Ontology was created, but no entities or relationships have been added.
-   The Ontology has not been configured as the Data Source for the Data Agent.
-   ```
+   Follow the instructions below:
 
-    ![](../Sandbox-Environment-Guides/Images/b25.png)
-
-1. Wait for the process to complete and click **Keep** to keep the file.
-
-   ![](../Sandbox-Environment-Guides/Images/b24.png)
-
-1. Navigate back to the Fabric workspace, refresh the Lakehouse, and verify that the tables have been created and the sample data has been loaded successfully.
-
-   ![](../Sandbox-Environment-Guides/Images/b26.png)
-
-1. Open the **Ontology** item and verify that the entities and relationships have been created successfully.
-
-   ![](../Sandbox-Environment-Guides/Images/b27.png)
-
-1. Select **Product** Entity **(1)** and then click on **View Entity Type details (2)**.   
-
-   ![](../Sandbox-Environment-Guides/Images/b60.png)
-
-1. Click on **Overview**.
-
-   ![](../Sandbox-Environment-Guides/Images/b61.png)
-
-1. Set the `Time range` to **Last 30 minutes (1)**,
-
-   - `Time granularity`: **1 hr (2)**
-   - `Aggregation`: **Sum (3)**
-   - Then **Apply (4)**
-
-     ![](../Sandbox-Environment-Guides/Images/b76.png) 
-
-1. Wait until you see the **Relationship graph**.
-
-   ![](../Sandbox-Environment-Guides/Images/graph.png)
-
-1. Close the **Ontology** page.
-
-1. Open the **Data Agent** from the workspace and verify that the **Ontology** is configured as the Data Source.
-
-1. If not please go back to **GitHub Copilot Chat** and explain the issue and ask to fix.
-
-   - Navigate back to the **Fabric workspace** and open the **Data Agent**. If the error persists, remove the existing Data Source and manually add the **Ontology** as the Data Source.
-
-   - Click on the **elipses (1)** and then **Remove (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/b28.png)
-
-   - Click **Yes, remove**. 
-
-   - Select **Add data (1)** drop down and then **Data source (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/b30.png)   
-
-   - Select the **Ontology (1)** and then **Add (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/b31.png)        
-
-1. Make sure Ontology is added.
-
-   ![](../Sandbox-Environment-Guides/Images/b32.png)
-
-1. Navigate to **Test data agent (1)**, send the following prompts in Data agent input box **(2)**:
+   Instructions:
+   1.	Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
+   2.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
+   3.	Access CaldovaOrderManagement(Caldova.OrderManagement) web application is already deployed in this above VM.
+   4.	Migrate CaldovaOrderManagement web application to Azure Web App Service. 
+   5.	Modernize the migrated web application and follow below modernization activities:
+   a.	Use latest .NET Framework (.NET 10) 
+   b.	Use CSS/Bootstrap etc. to make modernize look and feel
+   c.	Can use some visuals in the Dashboard page to enhance the look and feel
+   d.	Menu items should places at left side of the page. 
+   e.	Top banner with company details with optimized details/views
+   f.	Modernized Web App responsiveness
+   6.	Migrated and Modernized web applications should integrate with Azure SQL Database (CaldovaOrderManagement) and integrate all functional pages to the respective tables. 
+   7.	Please include one more page(in Web Application) for "Traditional SQL Search" where user will perform product based search.
 
    ```
-   Which products are below their reorder level?
-   ```
+   - Then click **Send** button.
 
-   ![](../Sandbox-Environment-Guides/Images/b58.png)   
+1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
-   ```
-   List all suppliers and their lead times.
-   ```
+   >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
 
-   ![](../Sandbox-Environment-Guides/Images/b59.png)    
+### Validation - Azure App Service
 
-1. Click on **Publish**.
+1. Navigate back to Azure portal to validate the migrated web application and search for **rg-caldova-modernize** Resource Group. you can see app service resources along with SQL Database
 
-   ![](../Sandbox-Environment-Guides/Images/b65.png)  
+1. Click on **app-caldova-ordermanagement.**
 
-1. Click on **Publish** again to publish the data agent.
+   ![](../Sandbox-Environment-Guides/Images/appservice.png)
 
-   ![](../Sandbox-Environment-Guides/Images/b66.png)  
+1. You can see all app related information and click on **default domain**
 
-### Foundry IQ    
+   ![](../Sandbox-Environment-Guides/Images/applink.png)
 
-1. Navigate back to the **GitHub Copilot Chat** to deploy the **Foundry resources**.
+1. It will open application in new tab and you can see migrated application. 
 
-1. Navigate back to the **GitHub Copilot Chat** 
+   ![](../Sandbox-Environment-Guides/Images/appDB.png)
 
-1. Copy the prompt below into the chat and send.
+   >**Note:** Will do Semantic search validation once next deployment(Vector embedding) is done.
 
-   ```
-   You are my smart agent to read my attached architecture design for Zava Retail and create bicep/ARM template based on the identified resources.
+## Implementation of Vector/Semantic Search in Azure SQL Database Hyperscale
 
-   Please follow these below instructions for Foundry IQ section in the same Resource group.
-   1. List down all the Azure Foundry related resources from the architecture diagram.
-   2. Create Foundry resources in Azure(Please use same Resource Group created for the above Fabric Resources) and use Sweden Central region. 
-   3. In Foundry Project, create two models(1. gpt-5-mini, 2. text-embedding-3-small)
-   4. In Foundry Project, create knowledge base and having one knowledge source which should point to the Azure resource > Resource group (rg-miqsolution)-> Container -> All files(PDFs) using Azure AI Search Service.
-   5. Create Foundry Agent("Retail-Agent") and use "Fabric Data Agent" using tool calling and use above knowledge base as attaching knowledge.
-   6. Once "Retail-Agent" get created, please validate(prompt should work and return valid results) and provide confirmation.
+Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embeddings and the native VECTOR data type to enable natural-language product searches. Query and product embeddings are compared using vector similarity to identify relevant products beyond exact keyword matching, improving search accuracy and product discovery.
 
-   Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment.
-   ```
+1. Navigate to **Visual Studio Code**.
 
-1. Wait for the deployment to complete and the **Keep** the file.
+1. In **Visual Studio Code**, open the `.env` file from the project explorer.
 
-   ![](../Sandbox-Environment-Guides/Images/b38.png)  
+   ![](../Sandbox-Environment-Guides/Images/envdetails.png)
 
-1. Navigate back to the Resource group. Select the **Foundry Project**.
+1. Under the **Azure OpenAI Configuration** section, update the following variables:
+   - `AZURE_OPENAI_ENDPOINT`
+   - `AZURE_OPENAI_API_KEY`
 
-   ![](../Sandbox-Environment-Guides/Images/b39.png)  
+1. In the **Azure Migrate** environment pane on the right, select the **Environment** tab.
 
-1. Click On **Go to Foundry portal**.
+1. Under **Environment Information**, locate the **OpenAIEndpoint** value and copy it.
 
-   ![](../Sandbox-Environment-Guides/Images/b40.png)  
+1. Paste the copied endpoint into the `.env` file as the value of `AZURE_OPENAI_ENDPOINT`.
 
-1. Click on **Build**.
+1. In the same **Environment Information** section, locate **OpenaiPrimaryKey** and copy the key.
 
-   ![](../Sandbox-Environment-Guides/Images/b41.png)  
+1. Paste the copied key into the `.env` file as the value of `AZURE_OPENAI_API_KEY`.
 
-1. Navigate to **Models (1)** and make sure 2  models are deployed **(2)**,
 
-   ![](../Sandbox-Environment-Guides/Images/b42.png)  
+1. Copy the below prompt and paste it in chat window
 
-1. Navigate to **Agents (1)** and click on the **Retail-Agent (2)**.
+ ```
+   Great, both SQL Database and Web application migration were completed successfully.
+   BUSINESS OBJECTIVE: Enable semantic/vector search over product descriptions, so users can search using natural language rather than exact keywords.
+   Two examples given below:
+   "medicine used to reduce fever"
+   "best medicine for hypertension"
+   "tablet for controlling blood sugar"
+ 
+   The system should identify relevant products based on the meaning of their descriptions, even when the exact search terms are not present. Demonstrate semantic/vector search versus traditional SQL LIKE search.
 
-   ![](../Sandbox-Environment-Guides/Images/b43.png)  
-
-1. Make sure the model is set to **gpt-5-mini (1)**. If you get any error in the **Tools (2)** section as below:
-
-   ![](../Sandbox-Environment-Guides/Images/b44.png)  
-
-   - From the **Model** drop down, switch to **gpt-5** model.
-
-     ![](../Sandbox-Environment-Guides/Images/b45.png)  
-
-   - Then again select the **gpt-5-mini** model.
-
-   - Scroll down to **Tools**. Click on **Add (1)** drop down and then select **Add tools (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/b46.png)  
-
-   - Select **Fabric IQ(OneLake Catalog) (1)** and then **Add tool (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/a32.png)      
-
-   - Select the **Zava Retail** Ontology **(1)** and then **Add (2)**. 
-
-     ![](../Sandbox-Environment-Guides/Images/b47.png)          
-
-1. Scroll down to **Knowledge**, verify that the Knowledge source has been added.
-
-   ![](../Sandbox-Environment-Guides/Images/b48.png)  
-
-1. Lets test the Agent by providing some prompts related to documents and agent.
-
-1. For getting the prompts, you can go back to **GitHub Copilot Chat**, and send the below query:
+   IMPLEMENTATION REQUIREMENTS:
+   1. Use existing resource-group(rg-caldova-modernize) and proceed further.
+   2. Please execute the attached script file (Embedding_Script.sql) for the below activities:
+      . Read OpeanAI Configuration details (API Endpoint, Key, Models etc.) from .env file and use it in this SQL script file
+      . Use Azure SQL Database (CaldovaOrderManagement) Hyperscale and generate embedding for all existing Products and its Descriptions.
+      . Create a table dbo.ProductDescriptionEmbeddings with below columns and  store all embedding details
+         1.ProductDescriptionEmbeddingID
+         2.ProductID
+         3.ProductDescriptionID
+         4.ContentText
+         5.Embedding
+         6.CreatedDate
+         7.ModifiedDate
+      . Make sure vector embedding should be created for all the products and its descriptions.
+      . Store embeddings in the same Azure SQL DB using the SQL vector data type and the correct dimension for the selected embedding model.
+   3. Create searchable text representations for each product description.
+   4. Create a new Semantic/vector search" page besides the SQL Traditional search page to validate side by side.
+   5. Existing Web Application will be used to do semantic search where natural-language query will accept and return matching products with probability score.
+   6. Create graphical visualization to the existing web application/dashboard demonstrating the vector search on product trend
 
    ```
-   Can you please provide some of the prompts to test the foundry agent.
+   - Then click **Send** button.
+
+
+1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
+
+   >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
+
+### Validation - Traditional SQL Search Vs Vector Semantic Search
+
+1. Navigate Azure Portal and Open Migrated Application
+
+1. In update application you can see **Semantic/Vector search** page got added.
+
+   ![](../Sandbox-Environment-Guides/Images/newapp.png)
+
+1. Click on **Traditional Sql Search Page** and paste the below prompt in search area and click on **search** button.
+
+   ``` 
+   medicine used to reduce fever
    ```
+   ![](../Sandbox-Environment-Guides/Images/traditional.png)
 
-   ![](../Sandbox-Environment-Guides/Images/b49.png) 
+1. You can observe it will return no results.
 
-1. Once the prompts are generated, you can go back to the Foundry Agent **Chat** section and paste the prompts to see the results.
+1. Click on **Semantic/Vector search** page and paste the same prompt in search area and click on **search** button. 
 
-   ![](../Sandbox-Environment-Guides/Images/b51.png)  
+   ``` 
+   medicine used to reduce fever
+   ```
+   ![](../Sandbox-Environment-Guides/Images/vector.png)
 
-   ![](../Sandbox-Environment-Guides/Images/b52.png)  
+1. It will provide all matching results.
 
-   ![](../Sandbox-Environment-Guides/Images/b53.png)     
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session
