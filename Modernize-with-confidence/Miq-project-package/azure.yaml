@@ -1,0 +1,17 @@
+name: caldova-order-management
+metadata:
+  template: caldova-order-management@0.0.1
+
+# The preprovision hook owns the deployment because ARM/Bicep cannot itself catch
+# a regional failure and retry another location. The no-op module prevents azd
+# from creating an additional resource group after that hook succeeds.
+infra:
+  provider: bicep
+  path: infra
+  module: azd-noop
+
+hooks:
+  preprovision:
+    windows:
+      shell: pwsh
+      run: ./scripts/azd-provision.ps1
