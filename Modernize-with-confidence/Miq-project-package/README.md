@@ -2,14 +2,14 @@
 
 This package creates the resources shown in the supplied image:
 
-- `app-caldova-ordermgmt` — App Service
+- `app-caldova-ordermgmt-<subscription-id-without-hyphens>` — App Service (a stable, globally unique name)
 - `plan-caldova-ordermgmt` — App Service plan
 - `sql-caldova-2401974` and `CaldovaOrderManagement` — Azure SQL logical server and Hyperscale database
 - `openai-caldova` — Azure OpenAI account with `gpt-5-mini` and `text-embedding-ada-002` deployments
 
 ## Regional fallback behavior
 
-`deploy.ps1` creates `rg-caldova` and deploys SQL/Azure OpenAI using this fallback order: **West US 2**, **West US**, **East US**, then **East US 2**. The App Service plan and web app use **West Central US** first, then follow that same fallback order.
+`deploy.ps1` creates `rg-caldova` and deploys SQL/Azure OpenAI using this fallback order: **West US 2**, **West US**, **East US**, then **East US 2**. The App Service plan and web app use **West US 2** first, **West Central US** second, then follow the remaining fallback order.
 
 The resource group's location cannot be changed after creation. Each remaining dependency group then applies the same ordered fallback independently. Azure requires these resources to be in the same region as their parent/dependency, so they move together:
 

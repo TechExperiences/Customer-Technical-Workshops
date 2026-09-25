@@ -2,7 +2,8 @@ targetScope = 'resourceGroup'
 
 param location string
 param appServicePlanName string = 'plan-caldova-ordermgmt'
-param webAppName string = 'app-caldova-ordermgmt'
+@description('Web app name. App Service names are globally unique; the default adds a stable hash to avoid name collisions.')
+param webAppName string = 'app-caldova-ordermgmt-${uniqueString(subscription().id, resourceGroup().id)}'
 @allowed([
   'Basic'
   'Standard'

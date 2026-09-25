@@ -19,7 +19,10 @@ param(
 $ErrorActionPreference = 'Stop'
 $scriptRoot = $PSScriptRoot
 $candidateLocations = @('westus2', 'westus', 'eastus', 'eastus2')
-$appServiceCandidateLocations = @('westcentralus', 'westus2', 'westus', 'eastus', 'eastus2')
+$appServiceCandidateLocations = @('westus2', 'westcentralus', 'westus', 'eastus', 'eastus2')
+# App Service names are globally unique, unlike App Service plan names. A subscription
+# GUID is globally unique and keeps this generated name stable across reruns.
+$webAppName = "app-caldova-ordermgmt-$($SubscriptionId.Replace('-', ''))"
 
 function Invoke-AzChecked {
   param([string[]] $Arguments)
@@ -108,7 +111,7 @@ $passwordText = [System.Net.NetworkCredential]::new('', $SqlAdministratorPasswor
 # This prevents a failed retry cleanup from ever touching a resource that existed before
 # this run. Use a different name, or deliberately remove/rename the existing resource,
 # before rerunning this package.
-$reservedNames = @('app-caldova-ordermgmt', 'plan-caldova-ordermgmt', 'sql-caldova-2401974', 'openai-caldova')
+$reservedNames = @($webAppName, 'plan-caldova-ordermgmt', 'sql-caldova-2401974', 'openai-caldova')
 foreach ($reservedName in $reservedNames) {
   $found = & az resource list --resource-group $ResourceGroupName --query "[?name=='$reservedName'].id" --output tsv
   if ($LASTEXITCODE -ne 0) { throw "Unable to check existing resource name $reservedName." }
@@ -119,10 +122,10 @@ foreach ($reservedName in $reservedNames) {
 # and OpenAI model deployments + their OpenAI account. Each group retries independently.
 $appLocation = Invoke-RegionalFallback -Name 'App Service plan and web app' -CandidateLocations $appServiceCandidateLocations -Deploy {
   param($location)
-  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "app-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/app-service.bicep'), '--parameters', "location=$location", "appServicePlanSkuTier=$AppServicePlanSkuTier", "appServicePlanSkuName=$AppServicePlanSkuName")
+  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "app-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/app-service.bicep'), '--parameters', "location=$location", "webAppName=$webAppName", "appServicePlanSkuTier=$AppServicePlanSkuTier", "appServicePlanSkuName=$AppServicePlanSkuName")
 } -Cleanup {
   param($location)
-  & az webapp delete --resource-group $ResourceGroupName --name 'app-caldova-ordermgmt' 2>$null
+  & az webapp delete --resource-group $ResourceGroupName --name $webAppName 2>$null
   & az appservice plan delete --resource-group $ResourceGroupName --name 'plan-caldova-ordermgmt' --yes 2>$null
 }
 
