@@ -65,8 +65,17 @@ if (-not (Get-Command az -ErrorAction SilentlyContinue)) {
 # this script, so sign in to Azure CLI only when an existing session is unavailable.
 & az account show --output none 2>$null
 if ($LASTEXITCODE -ne 0) {
-  Write-Host 'No Azure CLI session was found. Opening Azure sign-in...'
-  & az login --output none
+  $servicePrincipalVariables = @('AZURE_CLIENT_ID', 'AZURE_TENANT_ID', 'AZURE_CLIENT_SECRET')
+  $hasServicePrincipal = ($servicePrincipalVariables | Where-Object {
+    [string]::IsNullOrWhiteSpace([Environment]::GetEnvironmentVariable($_, 'Process'))
+  }).Count -eq 0
+  if ($hasServicePrincipal) {
+    & az login --service-principal --username $env:AZURE_CLIENT_ID --password $env:AZURE_CLIENT_SECRET --tenant $env:AZURE_TENANT_ID --output none
+  }
+  else {
+    Write-Host 'No Azure CLI session was found. Opening Azure sign-in...'
+    & az login --output none
+  }
   if ($LASTEXITCODE -ne 0) { throw 'Azure CLI sign-in failed or was cancelled.' }
 }
 

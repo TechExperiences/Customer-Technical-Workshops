@@ -29,13 +29,17 @@ Before deploying the three dependency groups, the script verifies that their nam
 
 ## Deploy
 
-The recommended option is a single command from this folder:
+Create your local `.env` file from `.env.example`, set at least `AZURE_SUBSCRIPTION_ID` and `SQL_ADMINISTRATOR_PASSWORD`, then run this single command from the package root:
 
 ```powershell
-azd up
+.\up.ps1
 ```
 
-`azd up` prompts for Azure authentication, environment, and subscription as necessary. Its provisioning hook invokes `az login` only if Azure CLI has no current session, then prompts securely for the SQL administrator password and deploys the full fallback workflow. No separate `az login`, `azd provision`, or script command is required.
+`up.ps1` loads the root `.env` into the current process before starting `azd up --no-prompt`. This is necessary because azd validates the subscription before project hooks run. The azd hook loads the same `.env` and supplies the SQL password without prompting. `.env` and `.azure` are ignored by Git.
+
+Azure still requires an authenticated identity. With a personal account, the first `az login` is interactive by design. Use a service principal or managed identity if the login must also be fully unattended.
+
+For a fully unattended sign-in, set `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_CLIENT_SECRET` in the local `.env`. `up.ps1` uses them for both azd and Azure CLI sign-in. Keep this local `.env` protected; it is ignored by Git.
 
 For direct Azure CLI execution instead, the script remains available and prompts securely for the SQL administrator password if it is not supplied:
 
