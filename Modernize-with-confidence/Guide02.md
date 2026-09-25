@@ -1,7 +1,5 @@
 # 2. Rapid Prototyping
 
-- <inject key="openaiPrimaryKey" enableCopy="false"/>
-
 Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
 ## Rapid Prototyping using GitHub Copilot
@@ -165,7 +163,7 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
    ![](../Sandbox-Environment-Guides/Images/Queryeditor.png)
 
-1. To authorize user click on **Connect as odl_user**.
+1. To authorize user click on **Connect as odl_user_<inject key="Deployment-ID" enableCopy="false"/>**.
 
      ![](../Sandbox-Environment-Guides/Images/entra.png)
 
@@ -238,24 +236,14 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
    ![](../Sandbox-Environment-Guides/Images/envdetails.png)
 
-1. Under the **Azure OpenAI Configuration** section, update the following variables:
-   - `AZURE_OPENAI_ENDPOINT`
-   - `AZURE_OPENAI_API_KEY`
+1. Under the **Azure OpenAI Configuration** section, update the following variables with corresponding values:
 
-1. In the **Azure Migrate** environment pane on the right, select the **Environment** tab.
-
-1. Under **Environment Information**, locate the **OpenAIEndpoint** value and copy it.
-
-1. Paste the copied endpoint into the `.env` file as the value of `AZURE_OPENAI_ENDPOINT`.
-
-1. In the same **Environment Information** section, locate **OpenaiPrimaryKey** and copy the key.
-
-1. Paste the copied key into the `.env` file as the value of `AZURE_OPENAI_API_KEY`.
-
+   - `AZURE_OPENAI_ENDPOINT` > <inject key="openaiEndpoint" enableCopy="false"/>
+   - `AZURE_OPENAI_API_KEY` > <inject key="openaiPrimaryKey" enableCopy="false"/>
 
 1. Copy the below prompt and paste it in chat window
 
- ```
+   ```
    Great, both SQL Database and Web application migration were completed successfully.
    BUSINESS OBJECTIVE: Enable semantic/vector search over product descriptions, so users can search using natural language rather than exact keywords.
    Two examples given below:
@@ -267,8 +255,10 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
    IMPLEMENTATION REQUIREMENTS:
    1. Use existing resource-group(rg-caldova-modernize) and proceed further.
+
    2. Please execute the attached script file (Embedding_Script.sql) for the below activities:
-      . Read OpeanAI Configuration details (API Endpoint, Key, Models etc.) from .env file and use it in this SQL script file
+
+       Read OpeanAI Configuration details (API Endpoint, Key, Models etc.) from .env file and use it in this SQL script file
       . Use Azure SQL Database (CaldovaOrderManagement) Hyperscale and generate embedding for all existing Products and its Descriptions.
       . Create a table dbo.ProductDescriptionEmbeddings with below columns and  store all embedding details
          1.ProductDescriptionEmbeddingID
@@ -287,7 +277,6 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
    ```
    - Then click **Send** button.
-
 
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
