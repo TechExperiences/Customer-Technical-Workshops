@@ -1,7 +1,7 @@
 targetScope = 'subscription'
 
 @description('The name of the resource group to create.')
-param resourceGroupName string = 'rg-fallback-caldova-mwc'
+param resourceGroupName string = 'rg-caldova'
 
 @description('The already-selected location for the resource group. The deployment script chooses this from its ordered fallback list.')
 param resourceGroupLocation string

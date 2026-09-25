@@ -3,7 +3,7 @@ param(
   [Parameter(Mandatory)]
   [string] $SubscriptionId,
 
-  [string] $ResourceGroupName = 'rg-fallback-caldova-mwc',
+  [string] $ResourceGroupName = 'rg-caldova',
 
   [string] $SqlAdministratorLogin = 'sqladmincaldova',
 
