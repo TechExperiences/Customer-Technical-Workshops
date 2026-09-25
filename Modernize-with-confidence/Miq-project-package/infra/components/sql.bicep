@@ -1,7 +1,8 @@
 targetScope = 'resourceGroup'
 
 param location string
-param sqlServerName string = 'sql-caldova-2401974'
+@description('Logical SQL server name. The deployment script supplies a globally unique name.')
+param sqlServerName string = 'sql-caldova-${uniqueString(subscription().id, resourceGroup().id)}'
 param databaseName string = 'CaldovaOrderManagement'
 param administratorLogin string
 @secure()

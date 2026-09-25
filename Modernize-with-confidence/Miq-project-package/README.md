@@ -2,10 +2,10 @@
 
 This package creates the resources shown in the supplied image:
 
-- `app-caldova-ordermgmt-<subscription-id-without-hyphens>` — App Service (a stable, globally unique name)
+- `app-caldova-ordermgmt-<deployment-suffix>` — App Service
 - `plan-caldova-ordermgmt` — App Service plan
-- `sql-caldova-2401974` and `CaldovaOrderManagement` — Azure SQL logical server and Hyperscale database
-- `openai-caldova` — Azure OpenAI account with `gpt-5-mini` and `text-embedding-ada-002` deployments
+- `sql-caldova-<deployment-suffix>` and `CaldovaOrderManagement` — Azure SQL logical server and Hyperscale database
+- `openai-caldova-<deployment-suffix>` — Azure OpenAI account with `gpt-5-mini` and `text-embedding-ada-002` deployments
 
 ## Regional fallback behavior
 
@@ -19,7 +19,9 @@ The resource group's location cannot be changed after creation. Each remaining d
 
 This means a resource group can remain in West US 2 while, for example, Azure OpenAI is placed in East US after capacity or model availability failures.
 
-Before deploying the three dependency groups, the script verifies that their named resources do not already exist in the resource group. If a regional attempt partially creates a new pair and fails, it removes only those newly-created resources before moving to the next candidate region.
+If a regional attempt partially creates a new dependency pair and fails, the script removes those generated resources before moving to the next candidate region.
+
+At first deployment, the script generates one random eight-character suffix for globally named resources and saves it in the ignored `.deployment-state.json` file. Retrying the deployment reuses the same names. Delete this state file only when intentionally starting a new set of globally named resources.
 
 ## Prerequisites
 

@@ -20,9 +20,25 @@ $ErrorActionPreference = 'Stop'
 $scriptRoot = $PSScriptRoot
 $candidateLocations = @('westus2', 'westus', 'eastus', 'eastus2')
 $appServiceCandidateLocations = @('westus2', 'westcentralus', 'westus', 'eastus', 'eastus2')
-# App Service names are globally unique, unlike App Service plan names. A subscription
-# GUID is globally unique and keeps this generated name stable across reruns.
-$webAppName = "app-caldova-ordermgmt-$($SubscriptionId.Replace('-', ''))"
+$deploymentStatePath = Join-Path $scriptRoot '.deployment-state.json'
+
+# App Service, SQL logical-server, and Azure OpenAI account names must be globally
+# unique. Generate one suffix per deployment and persist it so retries reuse the same
+# resources instead of creating duplicates.
+if (Test-Path -LiteralPath $deploymentStatePath -PathType Leaf) {
+  $deploymentSuffix = (Get-Content -LiteralPath $deploymentStatePath -Raw | ConvertFrom-Json).deploymentSuffix
+  if ([string]::IsNullOrWhiteSpace($deploymentSuffix) -or $deploymentSuffix -notmatch '^[a-z0-9]{8}$') {
+    throw "Invalid deployment state file: $deploymentStatePath"
+  }
+}
+else {
+  $deploymentSuffix = [guid]::NewGuid().ToString('N').Substring(0, 8)
+  @{ deploymentSuffix = $deploymentSuffix } | ConvertTo-Json | Set-Content -LiteralPath $deploymentStatePath -Encoding utf8
+}
+
+$webAppName = "app-caldova-ordermgmt-$deploymentSuffix"
+$sqlServerName = "sql-caldova-$deploymentSuffix"
+$openAiAccountName = "openai-caldova-$deploymentSuffix"
 
 function Invoke-AzChecked {
   param([string[]] $Arguments)
@@ -108,16 +124,6 @@ if (-not $SqlAdministratorPassword) {
 }
 $passwordText = [System.Net.NetworkCredential]::new('', $SqlAdministratorPassword).Password
 
-# This prevents a failed retry cleanup from ever touching a resource that existed before
-# this run. Use a different name, or deliberately remove/rename the existing resource,
-# before rerunning this package.
-$reservedNames = @($webAppName, 'plan-caldova-ordermgmt', 'sql-caldova-2401974', 'openai-caldova')
-foreach ($reservedName in $reservedNames) {
-  $found = & az resource list --resource-group $ResourceGroupName --query "[?name=='$reservedName'].id" --output tsv
-  if ($LASTEXITCODE -ne 0) { throw "Unable to check existing resource name $reservedName." }
-  if ($found) { throw "Resource '$reservedName' already exists in $ResourceGroupName. This script will not modify or delete an existing resource." }
-}
-
 # These dependency groups must be co-located: web app + plan, database + server,
 # and OpenAI model deployments + their OpenAI account. Each group retries independently.
 $appLocation = Invoke-RegionalFallback -Name 'App Service plan and web app' -CandidateLocations $appServiceCandidateLocations -Deploy {
@@ -131,18 +137,18 @@ $appLocation = Invoke-RegionalFallback -Name 'App Service plan and web app' -Can
 
 $sqlLocation = Invoke-RegionalFallback -Name 'SQL server and database' -Deploy {
   param($location)
-  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "sql-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/sql.bicep'), '--parameters', "location=$location", "administratorLogin=$SqlAdministratorLogin", "administratorLoginPassword=$passwordText", "databaseSkuName=$DatabaseSkuName")
+  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "sql-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/sql.bicep'), '--parameters', "location=$location", "sqlServerName=$sqlServerName", "administratorLogin=$SqlAdministratorLogin", "administratorLoginPassword=$passwordText", "databaseSkuName=$DatabaseSkuName")
 } -Cleanup {
   param($location)
-  & az sql server delete --resource-group $ResourceGroupName --name 'sql-caldova-2401974' --yes 2>$null
+  & az sql server delete --resource-group $ResourceGroupName --name $sqlServerName --yes 2>$null
 }
 
 $openAiLocation = Invoke-RegionalFallback -Name 'Azure OpenAI account and model deployments' -Deploy {
   param($location)
-  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "openai-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/openai.bicep'), '--parameters', "location=$location", "chatModelVersion=$ChatModelVersion", "embeddingModelVersion=$EmbeddingModelVersion")
+  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "openai-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/openai.bicep'), '--parameters', "location=$location", "openAiAccountName=$openAiAccountName", "chatModelVersion=$ChatModelVersion", "embeddingModelVersion=$EmbeddingModelVersion")
 } -Cleanup {
   param($location)
-  & az cognitiveservices account delete --resource-group $ResourceGroupName --name 'openai-caldova' --yes 2>$null
+  & az cognitiveservices account delete --resource-group $ResourceGroupName --name $openAiAccountName --yes 2>$null
 }
 
 Write-Host "Deployment complete. Resource group: $ResourceGroupName ($resourceGroupLocation)"

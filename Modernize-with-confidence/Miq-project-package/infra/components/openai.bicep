@@ -1,7 +1,8 @@
 targetScope = 'resourceGroup'
 
 param location string
-param openAiAccountName string = 'openai-caldova'
+@description('Azure OpenAI account name. The deployment script supplies a globally unique name.')
+param openAiAccountName string = 'openai-caldova-${uniqueString(subscription().id, resourceGroup().id)}'
 param chatDeploymentName string = 'gpt-5-mini'
 @description('Confirm this version is offered in each candidate region before deployment.')
 param chatModelVersion string = '2025-08-07'
