@@ -118,7 +118,7 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
    Instructions:
    1.	Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
    2.	Use Existing Azure SQL Server and one Azure SQL Hyperscale Database (CaldovaOrderManagement) which is available in same Resource Group
-   3.	Make UPN - **<inject key="AzureAdUserEmail"></inject>** set as admin to the azure sql server and hyperscale databse
+   3.	Make UPN - <inject key="AzureAdUserEmail"></inject> set as admin to the azure sql server and hyperscale databse
    4.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
    5.	Connect and Access the OnPrem SQL Sever using credentials
    	User Name: caldova-admin
