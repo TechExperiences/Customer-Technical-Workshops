@@ -9,7 +9,7 @@ This package creates the resources shown in the supplied image:
 
 ## Regional fallback behavior
 
-`deploy.ps1` tries, in order: **West US 2**, **West US**, **East US**, then **East US 2**. It creates `rg-caldova` in the first successful location.
+`deploy.ps1` creates `rg-caldova` and deploys SQL/Azure OpenAI using this fallback order: **West US 2**, **West US**, **East US**, then **East US 2**. The App Service plan and web app use **West Central US** first, then follow that same fallback order.
 
 The resource group's location cannot be changed after creation. Each remaining dependency group then applies the same ordered fallback independently. Azure requires these resources to be in the same region as their parent/dependency, so they move together:
 

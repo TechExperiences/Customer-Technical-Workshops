@@ -19,6 +19,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $scriptRoot = $PSScriptRoot
 $candidateLocations = @('westus2', 'westus', 'eastus', 'eastus2')
+$appServiceCandidateLocations = @('westcentralus', 'westus2', 'westus', 'eastus', 'eastus2')
 
 function Invoke-AzChecked {
   param([string[]] $Arguments)
@@ -35,10 +36,11 @@ function Invoke-RegionalFallback {
   param(
     [Parameter(Mandatory)][string] $Name,
     [Parameter(Mandatory)][scriptblock] $Deploy,
-    [scriptblock] $Cleanup
+    [scriptblock] $Cleanup,
+    [string[]] $CandidateLocations = $candidateLocations
   )
 
-  foreach ($location in $candidateLocations) {
+  foreach ($location in $CandidateLocations) {
     Write-Host "Trying $Name in $location..."
     try {
       & $Deploy $location
@@ -54,7 +56,7 @@ function Invoke-RegionalFallback {
       }
     }
   }
-  throw "$Name could not be deployed in any candidate location: $($candidateLocations -join ', ')."
+  throw "$Name could not be deployed in any candidate location: $($CandidateLocations -join ', ')."
 }
 
 if (-not (Get-Command az -ErrorAction SilentlyContinue)) {
@@ -115,7 +117,7 @@ foreach ($reservedName in $reservedNames) {
 
 # These dependency groups must be co-located: web app + plan, database + server,
 # and OpenAI model deployments + their OpenAI account. Each group retries independently.
-$appLocation = Invoke-RegionalFallback -Name 'App Service plan and web app' -Deploy {
+$appLocation = Invoke-RegionalFallback -Name 'App Service plan and web app' -CandidateLocations $appServiceCandidateLocations -Deploy {
   param($location)
   Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "app-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/app-service.bicep'), '--parameters', "location=$location", "appServicePlanSkuTier=$AppServicePlanSkuTier", "appServicePlanSkuName=$AppServicePlanSkuName")
 } -Cleanup {
