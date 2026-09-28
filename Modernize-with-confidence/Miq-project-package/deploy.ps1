@@ -26,6 +26,7 @@ $ErrorActionPreference = 'Stop'
 $scriptRoot = $PSScriptRoot
 $candidateLocations = @('westus2', 'westus', 'eastus', 'eastus2')
 $appServiceCandidateLocations = @('westus2', 'westcentralus', 'westus', 'eastus', 'eastus2')
+$openAiCandidateLocations = @('westus')
 $deploymentStatePath = Join-Path $scriptRoot '.deployment-state.json'
 
 # App Service, SQL logical-server, and Azure OpenAI account names must be globally
@@ -164,7 +165,7 @@ $sqlLocation = Invoke-RegionalFallback -Name 'SQL server and database' -Deploy {
   & az sql server delete --resource-group $ResourceGroupName --name $sqlServerName --yes 2>$null
 }
 
-$openAiLocation = Invoke-RegionalFallback -Name 'Azure OpenAI account and model deployments' -Deploy {
+$openAiLocation = Invoke-RegionalFallback -Name 'Azure OpenAI account and model deployments' -CandidateLocations $openAiCandidateLocations -Deploy {
   param($location)
   Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "openai-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/openai.bicep'), '--parameters', "location=$location", "openAiAccountName=$openAiAccountName", "chatModelVersion=$ChatModelVersion", "embeddingModelVersion=$EmbeddingModelVersion")
 } -Cleanup {

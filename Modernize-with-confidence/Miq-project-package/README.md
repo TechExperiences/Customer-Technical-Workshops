@@ -20,19 +20,19 @@ The local CSVs are a **simulated on-premises export**. The package does not conn
 - `app-caldova-ordermgmt-<deployment-suffix>` — App Service
 - `plan-caldova-ordermgmt` — App Service plan
 - `sql-caldova-<deployment-suffix>` and `CaldovaOrderManagement` — Azure SQL logical server and Hyperscale database
-- `openai-caldova-<deployment-suffix>` — Azure OpenAI account with `gpt-5-mini` and `text-embedding-ada-002` deployments
+- `openai-caldova-<deployment-suffix>` — Azure OpenAI account with `gpt-5-mini` and `text-embedding-ada-002` deployments in West US
 
 ## Regional fallback behavior
 
-`deploy.ps1` creates `rg-caldova` and deploys SQL/Azure OpenAI using this fallback order: **West US 2**, **West US**, **East US**, then **East US 2**. The App Service plan and web app use **West US 2** first, **West Central US** second, then follow the remaining fallback order.
+`deploy.ps1` creates `rg-caldova` and deploys SQL using this fallback order: **West US 2**, **West US**, **East US**, then **East US 2**. The App Service plan and web app use **West US 2** first, **West Central US** second, then follow the remaining fallback order. Azure OpenAI and both model deployments are intentionally deployed in **West US only**.
 
-The resource group's location cannot be changed after creation. Each remaining dependency group then applies the same ordered fallback independently. Azure requires these resources to be in the same region as their parent/dependency, so they move together:
+The resource group's location cannot be changed after creation. Each remaining dependency group then applies its configured location policy independently. Azure requires resources in each group to be in the same region as their parent/dependency, so they move together:
 
 - App Service plan + web app
 - SQL logical server + database
 - Azure OpenAI account + both model deployments
 
-This means a resource group can remain in West US 2 while, for example, Azure OpenAI is placed in East US after capacity or model availability failures.
+This means a resource group can remain in West US 2 while SQL or App Service independently use another supported fallback region. Azure OpenAI has no fallback by design; a West US OpenAI failure stops the deployment rather than placing models in another region.
 
 If a regional attempt partially creates a new dependency pair and fails, the script removes those generated resources before moving to the next candidate region.
 
@@ -43,7 +43,7 @@ At first deployment, the script generates one random eight-character suffix for 
 1. Azure CLI, Azure Developer CLI, and PowerShell 7.
 2. The azd identity must be the Microsoft Entra SQL administrator configured in `.env`, or otherwise be authorized to connect as an Azure SQL Entra administrator.
 3. Permission to create resource groups/resources, list Azure OpenAI keys, and create role assignments if app OpenAI RBAC is required.
-4. An Azure OpenAI quota/model offer for `gpt-5-mini` and `text-embedding-ada-002` in a candidate region.
+4. An Azure OpenAI quota/model offer for `gpt-5-mini` and `text-embedding-ada-002` in West US.
 5. A local `.env` copied from `.env.example`; it must contain the subscription ID, SQL admin password, and Entra SQL administrator values. Do not commit it.
 
 ## Deploy
