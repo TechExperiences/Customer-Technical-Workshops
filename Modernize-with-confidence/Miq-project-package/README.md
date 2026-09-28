@@ -54,7 +54,7 @@ Create your local `.env` file from `.env.example`, set the required values, then
 .\up.ps1
 ```
 
-`up.ps1` loads the root `.env` into the current process before starting `azd up --no-prompt`. This is necessary because azd validates the subscription before project hooks run. The azd hooks load the same `.env`, run all three migration phases, and do not prompt for the SQL password. `.env` and `.azure` are ignored by Git.
+`up.ps1` loads the root `.env`, creates or selects the local azd environment named by `AZURE_ENV_NAME`, saves the subscription ID into that environment, and starts `azd up --no-prompt`. This removes the one-time manual `azd env new` and `azd env set` setup. The azd hooks then load the same `.env`, run all three migration phases, and do not prompt for the SQL password. `.env` and `.azure` are ignored by Git.
 
 Azure still requires an authenticated identity. With a personal account, the first `az login` is interactive by design. Use a service principal or managed identity if the login must also be fully unattended.
 
