@@ -8,7 +8,7 @@ This package provisions the Caldova modernization demo and runs the full local-C
 2. Sets the supplied Microsoft Entra administrator on Azure SQL.
 3. Creates a temporary firewall rule for the current deployment client, then imports the 11 simulated on-prem CSV exports from `data/`.
 4. Verifies the relational schema and source-table counts.
-5. Runs `infra/sql/Embedding_Script.sql`, which creates `dbo.ProductDescriptionEmbeddings` and calls Azure OpenAI to generate native `VECTOR(1536)` embeddings.
+5. Waits until the `text-embedding-ada-002` data-plane endpoint accepts an embedding request, then runs `infra/sql/Embedding_Script.sql`, which creates `dbo.ProductDescriptionEmbeddings` and generates native `VECTOR(1536)` embeddings.
 6. Verifies generated embeddings, grants the web app identity Azure OpenAI access when permitted, then removes the temporary SQL firewall rule.
 
 `data/ProductDescriptionEmbeddings.csv` is deliberately excluded from initial import. The 12th table is generated from the imported product, category, and description data so the demo clearly shows the AI modernization phase.
