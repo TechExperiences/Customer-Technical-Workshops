@@ -12,7 +12,6 @@ foreach ($name in @('AZURE_SUBSCRIPTION_ID', 'SQL_ADMINISTRATOR_PASSWORD', 'SQL_
 }
 
 $environmentName = if ([string]::IsNullOrWhiteSpace($env:AZURE_ENV_NAME)) { 'Miq-project-package' } else { $env:AZURE_ENV_NAME }
-$environmentFile = Join-Path $PSScriptRoot ".azure\$environmentName\.env"
 
 & azd auth login --check-status --no-prompt 1>$null 2>$null
 if ($LASTEXITCODE -ne 0) {
@@ -31,12 +30,18 @@ if ($LASTEXITCODE -ne 0) {
   if ($LASTEXITCODE -ne 0) { throw 'azd authentication failed or was cancelled.' }
 }
 
-if (Test-Path -LiteralPath $environmentFile -PathType Leaf) {
-  & azd env select $environmentName --no-prompt
-}
-else {
+# Try selecting first. An azd environment can exist even when its local .env
+# file was interrupted or has not been written yet, so testing that file before
+# selecting would incorrectly try to create an environment that already exists.
+& azd env select $environmentName --no-prompt 1>$null 2>$null
+if ($LASTEXITCODE -ne 0) {
   Write-Host "Creating azd environment '$environmentName'..."
   & azd env new $environmentName --subscription $env:AZURE_SUBSCRIPTION_ID --no-prompt
+  if ($LASTEXITCODE -ne 0) {
+    # It may have been created by an earlier interrupted run. Select it once
+    # more before reporting a failure.
+    & azd env select $environmentName --no-prompt
+  }
 }
 if ($LASTEXITCODE -ne 0) { throw "Unable to create or select azd environment '$environmentName'." }
 
