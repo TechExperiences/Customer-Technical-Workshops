@@ -12,6 +12,9 @@ foreach ($name in @('AZURE_SUBSCRIPTION_ID', 'SQL_ADMINISTRATOR_PASSWORD', 'SQL_
 }
 
 $environmentName = if ([string]::IsNullOrWhiteSpace($env:AZURE_ENV_NAME)) { 'Miq-project-package' } else { $env:AZURE_ENV_NAME }
+# This is only the location required by azd's subscription-level deployment
+# record. Resource locations remain exclusively controlled by deploy.ps1.
+$azdDeploymentLocation = 'westus2'
 
 & azd auth login --check-status --no-prompt 1>$null 2>$null
 if ($LASTEXITCODE -ne 0) {
@@ -47,6 +50,9 @@ if ($LASTEXITCODE -ne 0) { throw "Unable to create or select azd environment '$e
 
 & azd env set AZURE_SUBSCRIPTION_ID $env:AZURE_SUBSCRIPTION_ID --no-prompt
 if ($LASTEXITCODE -ne 0) { throw 'Unable to save AZURE_SUBSCRIPTION_ID in the azd environment.' }
+
+& azd env set AZURE_LOCATION $azdDeploymentLocation --no-prompt
+if ($LASTEXITCODE -ne 0) { throw 'Unable to save AZURE_LOCATION in the azd environment.' }
 
 & azd up --no-prompt
 exit $LASTEXITCODE
