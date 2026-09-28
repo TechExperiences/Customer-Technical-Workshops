@@ -36,7 +36,7 @@ This means a resource group can remain in West US 2 while SQL or App Service ind
 
 If a regional attempt partially creates a new dependency pair and fails, the script removes those generated resources before moving to the next candidate region.
 
-At first deployment, the script generates one random eight-character suffix for globally named resources and saves it in the ignored `.deployment-state.json` file. Retrying the deployment reuses the same names. Delete this state file only when intentionally starting a new set of globally named resources.
+Every deployment run generates a fresh random eight-character suffix for the App Service, SQL logical server, and Azure OpenAI account. The ignored `.deployment-state.json` file records that run's names so post-provisioning targets the resources just created. The App Service plan remains fixed as `plan-caldova-ordermgmt`. Earlier failed resources are not reused or deleted automatically; remove them manually when they are no longer needed to avoid ongoing Azure charges.
 
 ## Prerequisites
 

@@ -30,18 +30,11 @@ $openAiCandidateLocations = @('westus')
 $deploymentStatePath = Join-Path $scriptRoot '.deployment-state.json'
 
 # App Service, SQL logical-server, and Azure OpenAI account names must be globally
-# unique. Generate one suffix per deployment and persist it so retries reuse the same
-# resources instead of creating duplicates.
-if (Test-Path -LiteralPath $deploymentStatePath -PathType Leaf) {
-  $deploymentSuffix = (Get-Content -LiteralPath $deploymentStatePath -Raw | ConvertFrom-Json).deploymentSuffix
-  if ([string]::IsNullOrWhiteSpace($deploymentSuffix) -or $deploymentSuffix -notmatch '^[a-z0-9]{8}$') {
-    throw "Invalid deployment state file: $deploymentStatePath"
-  }
-}
-else {
-  $deploymentSuffix = [guid]::NewGuid().ToString('N').Substring(0, 8)
-  @{ deploymentSuffix = $deploymentSuffix } | ConvertTo-Json | Set-Content -LiteralPath $deploymentStatePath -Encoding utf8
-}
+# unique. Generate a fresh suffix for every run so an earlier failed or soft-deleted
+# resource can never block a subsequent deployment. The state file communicates this
+# run's names to postprovision; it is not reused on a later run.
+$deploymentSuffix = [guid]::NewGuid().ToString('N').Substring(0, 8)
+@{ deploymentSuffix = $deploymentSuffix } | ConvertTo-Json | Set-Content -LiteralPath $deploymentStatePath -Encoding utf8
 
 $webAppName = "app-caldova-ordermgmt-$deploymentSuffix"
 $sqlServerName = "sql-caldova-$deploymentSuffix"
