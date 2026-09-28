@@ -44,6 +44,8 @@ At first deployment, the script generates one random eight-character suffix for 
 2. The azd identity must be the Microsoft Entra SQL administrator configured in `.env`, or otherwise be authorized to connect as an Azure SQL Entra administrator.
 3. Permission to create resource groups/resources, list Azure OpenAI keys, and create role assignments if app OpenAI RBAC is required.
 4. An Azure OpenAI quota/model offer for `gpt-5-mini` and `text-embedding-ada-002` in West US.
+
+Azure OpenAI model deployments are created serially because the Azure OpenAI control plane permits only one deployment operation at a time per account. If Azure reports a transient in-progress operation, the deployment retries West US for up to six minutes before failing.
 5. A local `.env` copied from `.env.example`; it must contain the subscription ID, SQL admin password, and Entra SQL administrator values. Do not commit it.
 
 ## Deploy

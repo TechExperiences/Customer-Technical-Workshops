@@ -63,23 +63,35 @@ function Invoke-RegionalFallback {
     [Parameter(Mandatory)][string] $Name,
     [Parameter(Mandatory)][scriptblock] $Deploy,
     [scriptblock] $Cleanup,
-    [string[]] $CandidateLocations = $candidateLocations
+    [string[]] $CandidateLocations = $candidateLocations,
+    [int] $MaxAttemptsPerLocation = 1,
+    [int] $RetryDelaySeconds = 30
   )
 
   foreach ($location in $CandidateLocations) {
-    Write-Host "Trying $Name in $location..."
-    try {
-      & $Deploy $location
-      Write-Host "$Name deployed in $location."
-      return $location
-    }
-    catch {
-      Write-Warning "$Name failed in ${location}: $($_.Exception.Message)"
-      if ($Cleanup) {
-        # A failed ARM deployment can leave an earlier, dependent resource behind.
-        # Cleanup is limited to names preflight verified as absent before this run.
-        try { & $Cleanup $location } catch { Write-Warning "Cleanup after $Name failed in ${location} also failed: $($_.Exception.Message)" }
+    for ($attempt = 1; $attempt -le $MaxAttemptsPerLocation; $attempt++) {
+      Write-Host "Trying $Name in $location..."
+      try {
+        & $Deploy $location
+        Write-Host "$Name deployed in $location."
+        return $location
       }
+      catch {
+        $failureMessage = $_.Exception.Message
+        $isTransientConflict = $failureMessage -match 'RequestConflict|Another operation is being performed|OperationInProgress'
+        if ($isTransientConflict -and $attempt -lt $MaxAttemptsPerLocation) {
+          Write-Warning "$Name has an in-progress Azure operation in ${location}; retrying in $RetryDelaySeconds seconds ($attempt/$MaxAttemptsPerLocation)."
+          Start-Sleep -Seconds $RetryDelaySeconds
+          continue
+        }
+
+        Write-Warning "$Name failed in ${location}: $failureMessage"
+        break
+      }
+    }
+    if ($Cleanup) {
+      # A failed ARM deployment can leave an earlier, dependent resource behind.
+      try { & $Cleanup $location } catch { Write-Warning "Cleanup after $Name failed in ${location} also failed: $($_.Exception.Message)" }
     }
   }
   throw "$Name could not be deployed in any candidate location: $($CandidateLocations -join ', ')."
@@ -165,7 +177,7 @@ $sqlLocation = Invoke-RegionalFallback -Name 'SQL server and database' -Deploy {
   & az sql server delete --resource-group $ResourceGroupName --name $sqlServerName --yes 2>$null
 }
 
-$openAiLocation = Invoke-RegionalFallback -Name 'Azure OpenAI account and model deployments' -CandidateLocations $openAiCandidateLocations -Deploy {
+$openAiLocation = Invoke-RegionalFallback -Name 'Azure OpenAI account and model deployments' -CandidateLocations $openAiCandidateLocations -MaxAttemptsPerLocation 12 -RetryDelaySeconds 30 -Deploy {
   param($location)
   Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "openai-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/openai.bicep'), '--parameters', "location=$location", "openAiAccountName=$openAiAccountName", "chatModelVersion=$ChatModelVersion", "embeddingModelVersion=$EmbeddingModelVersion")
 } -Cleanup {

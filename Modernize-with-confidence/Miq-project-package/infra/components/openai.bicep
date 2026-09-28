@@ -49,6 +49,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-0
 resource embeddingDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-06-01' = {
   parent: openAi
   name: embeddingDeploymentName
+  // Azure OpenAI serializes account-level deployment operations. Do not submit
+  // this child deployment until the gpt-5-mini deployment has completed.
+  dependsOn: [
+    chatDeployment
+  ]
   sku: {
     name: 'Standard'
     capacity: 1
