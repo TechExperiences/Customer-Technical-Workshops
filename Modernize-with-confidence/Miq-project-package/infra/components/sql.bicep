@@ -7,6 +7,10 @@ param databaseName string = 'CaldovaOrderManagement'
 param administratorLogin string
 @secure()
 param administratorLoginPassword string
+@description('Microsoft Entra administrator UPN for the logical SQL server.')
+param entraAdministratorLogin string
+@description('Object ID of the Microsoft Entra administrator.')
+param entraAdministratorObjectId string
 @description('Hyperscale SKU to use. Change this if the selected region does not offer HS_Gen5_2.')
 param databaseSkuName string = 'HS_Gen5_2'
 
@@ -25,6 +29,17 @@ resource server 'Microsoft.Sql/servers@2023-08-01-preview' = {
     publicNetworkAccess: 'Enabled'
   }
   tags: commonTags
+}
+
+resource entraAdministrator 'Microsoft.Sql/servers/administrators@2023-08-01-preview' = {
+  parent: server
+  name: 'ActiveDirectory'
+  properties: {
+    administratorType: 'ActiveDirectory'
+    login: entraAdministratorLogin
+    sid: entraAdministratorObjectId
+    tenantId: subscription().tenantId
+  }
 }
 
 resource database 'Microsoft.Sql/servers/databases@2023-08-01-preview' = {

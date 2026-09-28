@@ -1,6 +1,21 @@
 # Caldova Azure fallback deployment
 
-This package creates the resources shown in the supplied image:
+This package provisions the Caldova modernization demo and runs the full local-CSV migration pipeline through `azd up`.
+
+## What `azd up` does
+
+1. Creates `rg-caldova`, the App Service plan/web app, Azure SQL Hyperscale database, Azure OpenAI account, and its chat/embedding model deployments.
+2. Sets the supplied Microsoft Entra administrator on Azure SQL.
+3. Creates a temporary firewall rule for the current deployment client, then imports the 11 simulated on-prem CSV exports from `data/`.
+4. Verifies the relational schema and source-table counts.
+5. Runs `infra/sql/Embedding_Script.sql`, which creates `dbo.ProductDescriptionEmbeddings` and calls Azure OpenAI to generate native `VECTOR(1536)` embeddings.
+6. Verifies generated embeddings, grants the web app identity Azure OpenAI access when permitted, then removes the temporary SQL firewall rule.
+
+`data/ProductDescriptionEmbeddings.csv` is deliberately excluded from initial import. The 12th table is generated from the imported product, category, and description data so the demo clearly shows the AI modernization phase.
+
+The local CSVs are a **simulated on-premises export**. The package does not connect to an on-premises VM and does not store any source-system credentials.
+
+## Resources
 
 - `app-caldova-ordermgmt-<deployment-suffix>` — App Service
 - `plan-caldova-ordermgmt` — App Service plan
@@ -25,19 +40,21 @@ At first deployment, the script generates one random eight-character suffix for 
 
 ## Prerequisites
 
-1. Azure CLI installed and authenticated: `az login`
-2. Permission to create resource groups and the listed resource providers.
-3. An Azure OpenAI quota/model offer for `gpt-5-mini` and `text-embedding-ada-002` in a candidate region.
+1. Azure CLI, Azure Developer CLI, and PowerShell 7.
+2. The azd identity must be the Microsoft Entra SQL administrator configured in `.env`, or otherwise be authorized to connect as an Azure SQL Entra administrator.
+3. Permission to create resource groups/resources, list Azure OpenAI keys, and create role assignments if app OpenAI RBAC is required.
+4. An Azure OpenAI quota/model offer for `gpt-5-mini` and `text-embedding-ada-002` in a candidate region.
+5. A local `.env` copied from `.env.example`; it must contain the subscription ID, SQL admin password, and Entra SQL administrator values. Do not commit it.
 
 ## Deploy
 
-Create your local `.env` file from `.env.example`, set at least `AZURE_SUBSCRIPTION_ID` and `SQL_ADMINISTRATOR_PASSWORD`, then run this single command from the package root:
+Create your local `.env` file from `.env.example`, set the required values, then run from the package root:
 
 ```powershell
 .\up.ps1
 ```
 
-`up.ps1` loads the root `.env` into the current process before starting `azd up --no-prompt`. This is necessary because azd validates the subscription before project hooks run. The azd hook loads the same `.env` and supplies the SQL password without prompting. `.env` and `.azure` are ignored by Git.
+`up.ps1` loads the root `.env` into the current process before starting `azd up --no-prompt`. This is necessary because azd validates the subscription before project hooks run. The azd hooks load the same `.env`, run all three migration phases, and do not prompt for the SQL password. `.env` and `.azure` are ignored by Git.
 
 Azure still requires an authenticated identity. With a personal account, the first `az login` is interactive by design. Use a service principal or managed identity if the login must also be fully unattended.
 
@@ -60,4 +77,4 @@ AZURE_OPENAI_EMBEDDING_API_VERSION=2023-05-15
 
 ## Security note
 
-The starter configuration enables public network access for SQL and Azure OpenAI so the infrastructure can be reached during initial setup. Restrict both with private endpoints/firewall rules before production use. The script does not store the SQL password in a file.
+The starter configuration enables public network access for SQL and Azure OpenAI so the migration can run from the deployment client. The pipeline automatically removes its temporary SQL firewall rule afterward. Use Private Link/VNet integration for production app-to-SQL connectivity. The script does not commit the SQL password or Azure OpenAI key.

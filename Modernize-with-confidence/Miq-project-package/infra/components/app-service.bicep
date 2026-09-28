@@ -39,6 +39,9 @@ resource app 'Microsoft.Web/sites@2024-04-01' = {
   name: webAppName
   location: location
   kind: 'app'
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: plan.id
     httpsOnly: true

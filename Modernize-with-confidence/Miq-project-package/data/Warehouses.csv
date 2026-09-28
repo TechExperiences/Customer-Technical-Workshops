@@ -1,0 +1,4 @@
+"WarehouseID","WarehouseCode","WarehouseName","AddressLine1","City","State","PostalCode","Country","IsActive"
+"1","WH-EAST","East Regional Distribution Center","4200 Freight Way","Columbus","OH","43207","USA","True"
+"2","WH-CENTRAL","Central Distribution Center","1150 Industrial Pkwy","Kansas City","MO","64120","USA","True"
+"3","WH-WEST","West Regional Distribution Center","980 Commerce Blvd","Reno","NV","89502","USA","True"

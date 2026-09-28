@@ -9,6 +9,12 @@ param(
 
   [securestring] $SqlAdministratorPassword,
 
+  [Parameter(Mandatory)]
+  [string] $SqlEntraAdministratorLogin,
+
+  [Parameter(Mandatory)]
+  [string] $SqlEntraAdministratorObjectId,
+
   [string] $AppServicePlanSkuTier = 'Basic',
   [string] $AppServicePlanSkuName = 'B1',
   [string] $DatabaseSkuName = 'HS_Gen5_2',
@@ -78,6 +84,20 @@ function Invoke-RegionalFallback {
   throw "$Name could not be deployed in any candidate location: $($CandidateLocations -join ', ')."
 }
 
+function Assert-SqlAdministratorPassword {
+  param([securestring] $Password, [string] $Login)
+  $plainText = [System.Net.NetworkCredential]::new('', $Password).Password
+  $categories = @(
+    $plainText -cmatch '[A-Z]'
+    $plainText -cmatch '[a-z]'
+    $plainText -match '\d'
+    $plainText -match '[^A-Za-z0-9]'
+  ) | Where-Object { $_ }
+  if ($plainText.Length -lt 8 -or $categories.Count -lt 3 -or $plainText.IndexOf($Login, [StringComparison]::OrdinalIgnoreCase) -ge 0) {
+    throw 'SQL_ADMINISTRATOR_PASSWORD must be at least 8 characters, contain at least three character categories (uppercase, lowercase, number, special), and not contain SQL_ADMINISTRATOR_LOGIN.'
+  }
+}
+
 if (-not (Get-Command az -ErrorAction SilentlyContinue)) {
   throw 'Azure CLI is required. Install it and run az login before executing this script.'
 }
@@ -122,6 +142,7 @@ else {
 if (-not $SqlAdministratorPassword) {
   $SqlAdministratorPassword = Read-Host 'Enter the SQL administrator password' -AsSecureString
 }
+Assert-SqlAdministratorPassword -Password $SqlAdministratorPassword -Login $SqlAdministratorLogin
 $passwordText = [System.Net.NetworkCredential]::new('', $SqlAdministratorPassword).Password
 
 # These dependency groups must be co-located: web app + plan, database + server,
@@ -137,7 +158,7 @@ $appLocation = Invoke-RegionalFallback -Name 'App Service plan and web app' -Can
 
 $sqlLocation = Invoke-RegionalFallback -Name 'SQL server and database' -Deploy {
   param($location)
-  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "sql-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/sql.bicep'), '--parameters', "location=$location", "sqlServerName=$sqlServerName", "administratorLogin=$SqlAdministratorLogin", "administratorLoginPassword=$passwordText", "databaseSkuName=$DatabaseSkuName")
+  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "sql-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/sql.bicep'), '--parameters', "location=$location", "sqlServerName=$sqlServerName", "administratorLogin=$SqlAdministratorLogin", "administratorLoginPassword=$passwordText", "entraAdministratorLogin=$SqlEntraAdministratorLogin", "entraAdministratorObjectId=$SqlEntraAdministratorObjectId", "databaseSkuName=$DatabaseSkuName")
 } -Cleanup {
   param($location)
   & az sql server delete --resource-group $ResourceGroupName --name $sqlServerName --yes 2>$null
