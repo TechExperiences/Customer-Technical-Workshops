@@ -2,18 +2,23 @@
 
 
 ### Whiteboarding
+Whiteboarding helps technical teams align **Caldova’s business goals, current application and data challenges, modernization priorities, and future-state architecture**. It transforms modernization ideas into a shared visual plan and helps identify where Microsoft technologies and Solution Accelerators can accelerate the journey.
 
-Whiteboarding helps technical teams to quickly align on business goals, current challenges, future-state architecture, and solution priorities. It turns abstract ideas into a shared visual plan and helps accelerate decisions for Microsoft IQ Solution Accelerators.
+For the **Caldova scenario**, start by exploring the current environment and identifying applications, databases, dependencies, integration points, scalability concerns, and modernization opportunities.
 
-Let’s consider a common retail use case. Supply chain disruptions can quickly lead to stockouts, revenue loss, and poor customer experiences. Critical data is often spread across disconnected systems, making it difficult to identify risks, understand their business impact, and respond in time.
+Use whiteboarding to architect a future-state solution that helps Caldova:
 
-You will start with whiteboarding to architect a future state of an intelligent solution which can:
-- Detect supply chain disruptions early
-- Identify impacted products, stores, and regions
-- Recommend alternative sourcing options
-- Coordinate decisions across teams
-- Reduce stockouts and protect revenue
-- Accelerate business value with Microsoft Fabric, Foundry, Power BI, and AI working together
+- Assess the current application and database landscape
+- Identify modernization priorities and dependencies
+- Modernize applications and databases with confidence
+- Introduce AI capabilities into modernized applications
+- Improve scalability, reliability, security, and operational efficiency
+- Create a connected future\-state architecture across applications, data, and AI
+- Accelerate implementation using Microsoft technologies and Solution Accelerators
+
+### Whiteboarding Outcome
+
+By the end of the session, the team has a shared view of **Caldova’s current\-state challenges, modernization priorities, target business outcomes, and future\-state architecture**, providing a clear path from envisioning to rapid prototyping and implementation.
 
 ### How to copy the Whiteboard using an existing template URL
 
