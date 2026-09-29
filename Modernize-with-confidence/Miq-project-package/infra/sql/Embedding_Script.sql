@@ -31,24 +31,37 @@ JOIN dbo.ProductCategories c ON c.CategoryID = p.CategoryID
 WHERE pd.LanguageCode = 'en-US' AND p.IsActive = 1
 AND NOT EXISTS (SELECT 1 FROM dbo.ProductDescriptionEmbeddings e WHERE e.ProductDescriptionID = pd.ProductDescriptionID);
 
-DECLARE @ProductDescriptionID INT, @ProductID INT, @ContentText NVARCHAR(MAX), @Payload NVARCHAR(MAX), @Response NVARCHAR(MAX), @Ret INT, @Processed INT = 0, @Failed INT = 0;
+DECLARE @ProductDescriptionID INT, @ProductID INT, @ContentText NVARCHAR(MAX), @Payload NVARCHAR(MAX), @Response NVARCHAR(MAX), @Ret INT, @Processed INT = 0, @Failed INT = 0, @Attempt INT;
 DECLARE embed_cursor CURSOR LOCAL FAST_FORWARD FOR SELECT ProductDescriptionID, ProductID, ContentText FROM #Queue;
 OPEN embed_cursor;
 FETCH NEXT FROM embed_cursor INTO @ProductDescriptionID, @ProductID, @ContentText;
 WHILE @@FETCH_STATUS = 0
 BEGIN
+  SET @Attempt = 0;
+  WHILE @Attempt < 4
   BEGIN TRY
     SET @Payload = (SELECT @ContentText AS [input] FOR JSON PATH, WITHOUT_ARRAY_WRAPPER);
+    SET @Response = NULL;
     EXEC @Ret = sp_invoke_external_rest_endpoint @url = @Url, @method = N'POST', @headers = @Headers, @payload = @Payload, @response = @Response OUTPUT;
     DECLARE @EmbeddingJson NVARCHAR(MAX) = CASE WHEN @Ret = 0 THEN JSON_QUERY(@Response, '$.result.data[0].embedding') END;
     IF @EmbeddingJson IS NULL THROW 50001, 'Azure OpenAI did not return an embedding.', 1;
     DECLARE @Embedding VECTOR(1536) = CAST(@EmbeddingJson AS VECTOR(1536));
     INSERT dbo.ProductDescriptionEmbeddings (ProductID, ProductDescriptionID, ContentText, Embedding) VALUES (@ProductID, @ProductDescriptionID, @ContentText, @Embedding);
     SET @Processed += 1;
+    IF @Processed % 10 = 0 PRINT CONCAT('Embedding progress: ', @Processed, ' generated.');
+    -- Avoid the low request-per-minute limit common on demo Azure OpenAI quotas.
+    WAITFOR DELAY '00:00:06';
+    BREAK;
   END TRY
   BEGIN CATCH
-    SET @Failed += 1;
-    PRINT CONCAT('Embedding failure for ProductDescriptionID ', @ProductDescriptionID, ': ', ERROR_MESSAGE());
+    SET @Attempt += 1;
+    IF @Attempt = 4
+    BEGIN
+      SET @Failed += 1;
+      PRINT CONCAT('Embedding failure for ProductDescriptionID ', @ProductDescriptionID, ': ', ERROR_MESSAGE());
+    END
+    ELSE
+      WAITFOR DELAY '00:00:20';
   END CATCH;
   FETCH NEXT FROM embed_cursor INTO @ProductDescriptionID, @ProductID, @ContentText;
 END;

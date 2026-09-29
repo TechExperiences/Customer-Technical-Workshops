@@ -59,20 +59,20 @@ function Wait-CaldovaEmbeddingDeployment {
   }
 }
 
-Write-Host "Phase 1/3 complete: infrastructure is provisioned."
-Write-Host "Opening temporary SQL firewall access for $clientIp..."
+Write-Host '[MIQ 2/6] Preparing the SQL migration connection...'
+Write-Host "[MIQ 2/6] Opening temporary SQL firewall access for $clientIp..."
 Invoke-AzChecked @('sql', 'server', 'firewall-rule', 'create', '--resource-group', $resourceGroup, '--server', $sqlServerName, '--name', $firewallRuleName, '--start-ip-address', $clientIp, '--end-ip-address', $clientIp, '--output', 'none')
 Start-Sleep -Seconds 15
 
 try {
   $connection = New-CaldovaSqlConnection -ServerName $sqlServerName -DatabaseName $databaseName
   try {
-    Write-Host 'Phase 2/3: creating schema and importing the 11 simulated on-prem CSV exports.'
+    Write-Host '[MIQ 3/6] Creating schema and importing the 11 simulated on-prem CSV exports...'
     & (Join-Path $PSScriptRoot 'Import-CaldovaCsvData.ps1') -Connection $connection -DataPath (Join-Path $projectRoot 'data') -SchemaPath (Join-Path $projectRoot 'infra\sql\InitialSchema.sql')
 
     $openAiKey = (& az cognitiveservices account keys list --resource-group $resourceGroup --name $openAiAccountName --query key1 --output tsv).Trim()
     if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($openAiKey)) { throw 'Unable to retrieve the Azure OpenAI key required for embedding generation.' }
-    Write-Host 'Waiting for text-embedding-ada-002 before generating the 12th table...'
+    Write-Host '[MIQ 4/6] Waiting for text-embedding-ada-002 before generating the 12th table...'
     Wait-CaldovaEmbeddingDeployment -AccountName $openAiAccountName -ApiKey $openAiKey
     $embeddingScriptPath = Join-Path $projectRoot 'infra\sql\Embedding_Script.sql'
     $runtimeScriptPath = Join-Path $projectRoot 'infra\sql\.embedding-runtime.sql'
@@ -83,7 +83,7 @@ try {
       $embeddingScript = $embeddingScript.Replace('__AZURE_OPENAI_EMBEDDING_DEPLOYMENT__', 'text-embedding-ada-002')
       $embeddingScript = $embeddingScript.Replace('__AZURE_OPENAI_EMBEDDING_API_VERSION__', '2023-05-15')
       Set-Content -LiteralPath $runtimeScriptPath -Value $embeddingScript -Encoding utf8 -NoNewline
-      Write-Host 'Phase 3/3: generating the 12th table from Azure OpenAI embeddings.'
+      Write-Host '[MIQ 4/6] Generating the 12th table from Azure OpenAI embeddings (progress is reported every 10 records)...'
       Invoke-CaldovaSqlNonQuery -Connection $connection -Sql $embeddingScript -CommandTimeout 1800 | Out-Null
     }
     finally {
@@ -91,20 +91,38 @@ try {
     }
 
     $embeddingCount = [int](Invoke-CaldovaSqlScalar -Connection $connection -Sql 'SELECT COUNT(*) FROM dbo.ProductDescriptionEmbeddings;')
-    if ($embeddingCount -le 0) { throw 'Embedding generation completed without creating any embeddings.' }
+    $expectedEmbeddingCount = [int](Invoke-CaldovaSqlScalar -Connection $connection -Sql "SELECT COUNT(*) FROM dbo.ProductDescriptions pd JOIN dbo.ProductCatalog p ON p.ProductID=pd.ProductID WHERE pd.LanguageCode='en-US' AND p.IsActive=1;")
+    if ($embeddingCount -ne $expectedEmbeddingCount) { throw "Embedding generation is incomplete: expected $expectedEmbeddingCount embeddings but found $embeddingCount." }
     Write-Host "Pipeline verification succeeded: 11 source tables imported and $embeddingCount generated embeddings stored in dbo.ProductDescriptionEmbeddings."
   }
   finally {
     $connection.Dispose()
   }
 
+  Write-Host '[MIQ 5/6] Configuring App Service identity, SQL access, OpenAI access, and network rules...'
   $openAiScope = (& az cognitiveservices account show --resource-group $resourceGroup --name $openAiAccountName --query id --output tsv).Trim()
   $appPrincipalId = (& az webapp identity show --resource-group $resourceGroup --name $webAppName --query principalId --output tsv).Trim()
   if ($openAiScope -and $appPrincipalId) {
     & az role assignment create --assignee-object-id $appPrincipalId --assignee-principal-type ServicePrincipal --role 'Cognitive Services OpenAI User' --scope $openAiScope --output none 2>$null
     if ($LASTEXITCODE -ne 0) { Write-Warning 'Unable to assign Cognitive Services OpenAI User to the web app identity. Assign it manually if the deployment identity lacks role-assignment permission.' }
   }
-  & az webapp config appsettings set --resource-group $resourceGroup --name $webAppName --settings "AZURE_OPENAI_ENDPOINT=https://$openAiAccountName.openai.azure.com" --output none
+  if ([string]::IsNullOrWhiteSpace($appPrincipalId)) { throw 'Web app managed identity was not created.' }
+  $appSid = $appPrincipalId.Replace('-', '')
+  $appConnection = New-CaldovaSqlConnection -ServerName $sqlServerName -DatabaseName $databaseName
+  try {
+    $grantSql = "IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = N'$webAppName') CREATE USER [$webAppName] WITH SID = 0x$appSid, TYPE = E; IF NOT EXISTS (SELECT 1 FROM sys.database_role_members m JOIN sys.database_principals r ON r.principal_id=m.role_principal_id JOIN sys.database_principals u ON u.principal_id=m.member_principal_id WHERE r.name=N'db_datareader' AND u.name=N'$webAppName') ALTER ROLE db_datareader ADD MEMBER [$webAppName]; IF NOT EXISTS (SELECT 1 FROM sys.database_role_members m JOIN sys.database_principals r ON r.principal_id=m.role_principal_id JOIN sys.database_principals u ON u.principal_id=m.member_principal_id WHERE r.name=N'db_datawriter' AND u.name=N'$webAppName') ALTER ROLE db_datawriter ADD MEMBER [$webAppName];"
+    Invoke-CaldovaSqlNonQuery -Connection $appConnection -Sql $grantSql | Out-Null
+  }
+  finally { $appConnection.Dispose() }
+  $outboundIps = ((& az webapp show --resource-group $resourceGroup --name $webAppName --query outboundIpAddresses --output tsv).Trim() -split ',') | Where-Object { $_ }
+  for ($index = 0; $index -lt $outboundIps.Count; $index++) {
+    $ip = $outboundIps[$index].Trim()
+    Invoke-AzChecked @('sql', 'server', 'firewall-rule', 'create', '--resource-group', $resourceGroup, '--server', $sqlServerName, '--name', "Allow-App-Service-$index", '--start-ip-address', $ip, '--end-ip-address', $ip, '--output', 'none')
+  }
+  Invoke-AzChecked @('webapp', 'config', 'appsettings', 'set', '--resource-group', $resourceGroup, '--name', $webAppName, '--settings', "AZURE_OPENAI_ENDPOINT=https://$openAiAccountName.openai.azure.com", "SQL_SERVER_NAME=$sqlServerName", 'ASPNETCORE_ENVIRONMENT=Production', '--output', 'none')
+  Write-Host '[MIQ 6/6] Building and deploying the Caldova web UI...'
+  & (Join-Path $PSScriptRoot 'Publish-WebApp.ps1') -ResourceGroup $resourceGroup -WebAppName $webAppName
+  Write-Host '[MIQ 6/6] Deployment complete. The App Service URL is shown above.'
 }
 finally {
   Write-Host 'Removing temporary SQL migration firewall access...'

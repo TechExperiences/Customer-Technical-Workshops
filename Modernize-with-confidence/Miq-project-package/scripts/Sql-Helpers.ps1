@@ -12,6 +12,7 @@ function New-CaldovaSqlConnection {
 
   $connection = [System.Data.SqlClient.SqlConnection]::new("Server=tcp:$ServerName.database.windows.net,1433;Initial Catalog=$DatabaseName;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;")
   $connection.AccessToken = $token
+  $connection.add_InfoMessage({ param($sender, $event) Write-Host "[MIQ SQL] $($event.Message)" })
   $connection.Open()
   return $connection
 }

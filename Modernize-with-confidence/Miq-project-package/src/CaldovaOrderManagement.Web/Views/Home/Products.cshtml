@@ -1,0 +1,2 @@
+@model IReadOnlyList<ProductVm>
+@{ViewData["Title"]="Product Availability";}<div class="title"><h1>Product Availability</h1></div><form><input name="q" value="@ViewBag.Query" placeholder="Search product, SKU, or category"/><button>Search</button></form><partial name="_Products" model="Model"/>
