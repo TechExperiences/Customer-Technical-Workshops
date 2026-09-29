@@ -226,8 +226,6 @@ Follow below instructions to migrate On-prem web application to Azure app servic
 
 1. In migrated application you can see **Traditional Sql Search Page** page got added.
 
-   ![](../Sandbox-Environment-Guides/Images/newapp.png)
-
 1. Click on **Traditional Sql Search Page** and paste the below prompt in search area and click on **search** button.
 
    ``` 
