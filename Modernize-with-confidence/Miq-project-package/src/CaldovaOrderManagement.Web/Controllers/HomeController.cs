@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CaldovaOrderManagement.Web.Controllers;
 
-public class HomeController(CaldovaRepository data) : Controller
+public class HomeController(CaldovaRepository data, ILogger<HomeController> logger) : Controller
 {
-    public async Task<IActionResult> Index() => View(await data.Dashboard());
+    public async Task<IActionResult> Index() { try { return View(await data.Dashboard()); } catch (Exception ex) { logger.LogError(ex, "Dashboard database query failed."); throw; } }
     public async Task<IActionResult> Products(string? q) { ViewBag.Query=q; return View(await data.Products(q)); }
     public async Task<IActionResult> TraditionalSearch(string? q) { ViewBag.Query=q; return View(await data.Traditional(q)); }
-    public async Task<IActionResult> SemanticSearch(string? q) => View(await data.Semantic(q ?? ""));
     public async Task<IActionResult> Customers(string? q) { ViewBag.Query=q; return View(await data.Customers(q)); }
     public async Task<IActionResult> Orders(string? q) { ViewBag.Query=q; return View(await data.Orders(q)); }
     [HttpGet] public IActionResult NewOrder() => View(new NewOrderVm());

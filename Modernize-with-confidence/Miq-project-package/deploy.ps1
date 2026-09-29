@@ -19,7 +19,8 @@ param(
   [string] $AppServicePlanSkuName = 'B1',
   [string] $DatabaseSkuName = 'HS_Gen5_2',
   [string] $ChatModelVersion = '2025-08-07',
-  [string] $EmbeddingModelVersion = '2'
+  [string] $EmbeddingModelVersion = '2',
+  [int] $EmbeddingModelCapacity = 10
 )
 
 $ErrorActionPreference = 'Stop'
@@ -172,7 +173,7 @@ $sqlLocation = Invoke-RegionalFallback -Name 'SQL server and database' -Deploy {
 
 $openAiLocation = Invoke-RegionalFallback -Name 'Azure OpenAI account and model deployments' -CandidateLocations $openAiCandidateLocations -MaxAttemptsPerLocation 12 -RetryDelaySeconds 30 -Deploy {
   param($location)
-  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "openai-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/openai.bicep'), '--parameters', "location=$location", "openAiAccountName=$openAiAccountName", "chatModelVersion=$ChatModelVersion", "embeddingModelVersion=$EmbeddingModelVersion")
+  Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "openai-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/openai.bicep'), '--parameters', "location=$location", "openAiAccountName=$openAiAccountName", "chatModelVersion=$ChatModelVersion", "embeddingModelVersion=$EmbeddingModelVersion", "embeddingModelCapacity=$EmbeddingModelCapacity")
 } -Cleanup {
   param($location)
   & az cognitiveservices account delete --resource-group $ResourceGroupName --name $openAiAccountName --yes 2>$null

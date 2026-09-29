@@ -8,6 +8,8 @@ param chatDeploymentName string = 'gpt-5-mini'
 param chatModelVersion string = '2025-08-07'
 param embeddingDeploymentName string = 'text-embedding-ada-002'
 param embeddingModelVersion string = '2'
+@description('Standard capacity units for text-embedding-ada-002. One unit is normally 1K TPM.')
+param embeddingModelCapacity int = 10
 
 var commonTags = {
   managedBy: 'miq-bicep-fallback'
@@ -56,7 +58,7 @@ resource embeddingDeployment 'Microsoft.CognitiveServices/accounts/deployments@2
   ]
   sku: {
     name: 'Standard'
-    capacity: 1
+    capacity: embeddingModelCapacity
   }
   properties: {
     model: {

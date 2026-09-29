@@ -10,7 +10,7 @@ This package provisions the Caldova modernization demo and runs the full local-C
 4. Verifies the relational schema and source-table counts.
 5. Waits until the `text-embedding-ada-002` data-plane endpoint accepts an embedding request, then runs `infra/sql/Embedding_Script.sql`, which creates `dbo.ProductDescriptionEmbeddings` and generates native `VECTOR(1536)` embeddings.
 6. Verifies generated embeddings, grants the web app identity Azure OpenAI access when permitted, then removes the temporary SQL firewall rule.
-7. Grants the App Service managed identity database access, permits its outbound IPs through SQL firewall rules, and publishes the live ASP.NET Core MVC UI to the generated App Service.
+7. Grants the App Service managed identity database access, permits its active and potential outbound IPs through SQL firewall rules (public endpoints, no VNet), and publishes the live ASP.NET Core MVC UI to the generated App Service.
 
 `data/ProductDescriptionEmbeddings.csv` is deliberately excluded from initial import. The 12th table is generated from the imported product, category, and description data so the demo clearly shows the AI modernization phase.
 
@@ -18,7 +18,7 @@ The local CSVs are a **simulated on-premises export**. The package does not conn
 
 ## Web UI
 
-After a successful run, open `https://app-caldova-ordermgmt-<deployment-suffix>.azurewebsites.net`. The ASP.NET Core MVC UI provides a live dashboard, product availability, keyword search, semantic search, customer lookup, new-order creation, and order lookup. Semantic search embeds the question with `text-embedding-ada-002`, ranks `ProductDescriptionEmbeddings` with cosine distance in Azure SQL, and asks `gpt-5-mini` for a concise catalog-grounded answer. The App Service uses its managed identity; no SQL or OpenAI secret is stored in the application.
+After a successful run, open `https://app-caldova-ordermgmt-<deployment-suffix>.azurewebsites.net`. The ASP.NET Core MVC UI provides a live dashboard, product availability, keyword search, semantic search, customer lookup, stock-validated new-order creation, and order lookup. The Semantic Search page compares traditional SQL keyword matches with meaning-based matches side by side. It embeds the question with `text-embedding-ada-002`, ranks `ProductDescriptionEmbeddings` with cosine distance in Azure SQL, and asks `gpt-5-mini` for a concise catalog-grounded answer. The deployment does not use a VNet: SQL remains on its public endpoint, narrowed to App Service outbound IP rules. The App Service uses its managed identity; no SQL or OpenAI secret is stored in the application. Deployment fails if the live semantic route cannot be validated end to end.
 
 ## Resources
 
@@ -49,6 +49,8 @@ Every deployment run generates a fresh random eight-character suffix for the App
 2. The azd identity must be the Microsoft Entra SQL administrator configured in `.env`, or otherwise be authorized to connect as an Azure SQL Entra administrator.
 3. Permission to create resource groups/resources, list Azure OpenAI keys, and create role assignments if app OpenAI RBAC is required.
 4. An Azure OpenAI quota/model offer for `gpt-5-mini` and `text-embedding-ada-002` in West US.
+
+The template requests 10 Standard capacity units (normally 10K TPM) for `text-embedding-ada-002`. Azure must have that quota available in West US; Bicep cannot create or increase subscription quota.
 
 Azure OpenAI model deployments are created serially because the Azure OpenAI control plane permits only one deployment operation at a time per account. If Azure reports a transient in-progress operation, the deployment retries West US for up to six minutes before failing.
 5. A local `.env` copied from `.env.example`; it must contain the subscription ID, SQL admin password, and Entra SQL administrator values. Do not commit it.
