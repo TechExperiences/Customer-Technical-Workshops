@@ -1,262 +1,236 @@
+# Ground and Extend Agents with Shared Intelligence
 
-# Microsoft IQ Solution Accelerator
+Explore the Microsoft IQ Solution Accelerator through **Caldova Pharmaceutical's NextGen Pharma launch**. This walkthrough follows the first two modules of the demo script: ground an existing Supply Chain Intelligence Agent, then reuse the foundation for a CMO Evaluation Agent.
 
-Now that you have deployed the generated template with GitHub Copilot, let’s explore a similar, pre\-deployed solution built using a **Microsoft Solution Accelerator**. Solution Accelerators provide a ready\-to\-use foundation that can help you rapidly prototype, customize, and validate intelligent solutions for your business scenarios.
+Use the prototype from [AYI02](AYI02.md) or the facilitator's prepared environment. The original accelerator walkthrough used retail data and resources. The activities below describe the Caldova adaptation; perform each hands-on step only after its required sources and configuration have been supplied and validated. If a dependency remains unresolved, review that part of the simulated demo with the facilitator and record it as not yet validated in the lab.
 
-1. Navigate to the Azure portal. Click on **Resource group**.
+## Open the prepared environment
+
+1. Open the Azure portal and select **Resource groups**.
 
    ![](../Sandbox-Environment-Guides/Images/amp52.png)
 
-1. Select the pre deployed **rg-miqsolution** resource group.
+1. Open the facilitator-confirmed resource group. The existing accelerator guide uses **rg-miqsolution**.
 
    ![](../Sandbox-Environment-Guides/Images/amp53.png)
 
-1. Here you can view the pre-deployed Microsoft IQ Solution Accelerator resources.
+1. Review the deployed resources.
 
    ![](../Sandbox-Environment-Guides/Images/amp54.png)
 
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Environment mapping and images:** Confirm the Caldova resource group, Fabric workspace, lakehouse, ontology, agents, knowledge sources, and document locations. The old guide references `Microsoft IQ - miqsolution{suffix}`, `miqsadata`, `RetailSupplyChainOntologyModel`, `RetailSC Ontology Agent`, and `ChatAgent`. Map these to the prepared Caldova resources and refresh the relevant screenshots, including `amp53.png` and `amp54.png`, if the environment changes. Renaming instructions alone does not convert the retail accelerator or its data.
 
-# Post deployment Guide - Fabric IQ and Microsoft Foundry
+## Module 1 — Ground the Supply Chain Intelligence Agent
 
-## Fabric IQ
+### 1. Establish the starting point
 
-1. Click on the **App launcher (1)** and select **Microsoft fabric** icon.
+In the story, Jordan's Supply Chain Intelligence Agent is already built in Microsoft Foundry and published to Microsoft 365 Copilot. It has enterprise GMP knowledge and Work IQ organizational context, but lacks the manufacturing and competitive information needed by Sam, the Operations Lead.
+
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Starting state and reset:** Supply the prepared agent, its existing enterprise knowledge and Work IQ connections, its Microsoft 365 Copilot access, and a repeatable lab reset procedure. Identify how facilitators provide the before-grounding state without disrupting other participants. If the prototype already has all sources connected, use a recorded or simulated baseline rather than disconnecting shared resources ad hoc.
+
+1. Open the prepared Supply Chain Intelligence Agent in Microsoft 365 Copilot.
+1. Ask the two questions used in the story and save the responses for comparison:
+
+   ```text
+   What is our current capacity position — committed production versus maximum
+   capacity by plant?
+   ```
+
+   ```text
+   What is our competitor's announced launch timeline for their product, and how
+   does it compare to our NextGen Pharma product launch schedule?
+   ```
+
+1. Discuss the missing evidence. In the simulated story, the agent cannot give a grounded plant-level capacity answer or identify a competitor launch date at this stage.
+
+### 2. Inspect the manufacturing context in Fabric IQ
+
+1. Open **Microsoft Fabric** from the app launcher.
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
 
-1. Close the **Welcome to the Fabric view** pop up.  
+1. Open the facilitator-confirmed workspace, lakehouse, and manufacturing ontology.
+1. Inspect the supplied data for capacity by plant, committed production, batch schedules, equipment qualification windows, fill-finish availability, and competitive products.
+1. Review how the approved entity relationships represent that business context. Compare the records with the capacity calculation supplied for the lab.
 
-   ![](../Sandbox-Environment-Guides/Images/a35.png)
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Manufacturing data and ontology:** Provide the Caldova tables, entity types, relationships, source bindings, refresh procedure, and reconciliation of the 7% shortfall to approximately 18,900 units with Plant 3 as the constraint. The script does not supply a deployable schema and loadable lab data package. Add the tested Fabric navigation and Caldova screenshots once these assets exist. The old retail tables and screenshots retained below cannot validate the new scenario.
 
-1. In the left navigation, select **Workspaces (1)** and then select the created workspcae **Microsoft IQ - miqsolution{suffix} (2)**
+### 3. Extend the existing knowledge foundation
 
-   ![](../Sandbox-Environment-Guides/Images/amp56.png)
-
-1. You'll land on the workspace's item list, organized into folders:
-
-   - **dashboards:**	Power BI reports (Sales Overview, Supply Chain Management) built on the semantic models
-   - **data_agent:**	The `RetailSC Ontology Agent` — a Fabric Data Agent you can query in natural language over the ontology
-   - **lakehouses:**	The `miqsadata` lakehouse, containing all ingested sample tables
-   - **notebooks:**	Data pipeline notebooks — pipeline_main (the orchestrator that ingests data), pipeline_update, and per-domain loaders
-   - **ontology:**	The `RetailSupplyChainOntologyModel`, defining how the underlying data entities relate to each other
-
-   - Click into any folder to open its items. Start with the notebooks folder if you want to see how data flows in, or data_agent if you want to jump straight to asking questions in natural language.   
-
-     ![](../Sandbox-Environment-Guides/Images/amp57.png)
-
-1. Click on the **Dashboards**. This folder documents Power BI reports shipped with the Microsoft IQ Solution Accelerator. Click on the **Report** to view the Summary.
-
-   ![](../Sandbox-Environment-Guides/Images/amp65.png)
-
-1. Navigate back to Workspace, open the **Lakehouse** folder. From the accelerator's own structure, your workspace has a single lakehouse: **miqsadata**.    
-
-   ![](../Sandbox-Environment-Guides/Images/amp67.png)
-
-1. Inside, you'll find two areas.
-
-   - **Tables:** Structured, queryable data organized into six business domains: customer, finance, inventory, product, sales, and supplychain. Each of these holds real tables of data that the rest of the system (ontology, reports, and the data agent) reads from.
-   - **Files:** Supporting files and raw data drops, including a short summary document (sample_inventory_data_summary.md).
-
-     ![](../Sandbox-Environment-Guides/Images/amp68.png)   
-
-1. Navigate back to Workspace, open the **Ontology** folder. This defines a semantic layer over your lakehouse data. Open **RetailSupplyChainOntologyModel**.
-
-   ![](../Sandbox-Environment-Guides/Images/amp66.png)
-
-   - Confirm the entities and relationships are populated (e.g. products, suppliers, inventory, sales, tied together via keys) — this is the semantic layer that lets the agent translate natural language into meaningful queries rather than raw SQL guessing.
-
-1. Navigate back to Workspace, open the **data_agent** folder. Open the already created **RetailSC Ontology Agent**
-
-   ![](../Sandbox-Environment-Guides/Images/amp69.png)  
-
-1. Confirm its data source is set to the ontology model **RetailSupplyChainOntologyModel**.
-
-   ![](../Sandbox-Environment-Guides/Images/amp70.png)
-
-1. Click **Agent Instructions (1)**. Review the instructions and understand how they guide the agent **(2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/agenti1.png)
-
-1. Close the **Agent Instructions (1)** and open the **Test data Agent (2)**.
-
-    ![](../Sandbox-Environment-Guides/Images/a21.png)
-
-1. In the query input area, ask questions using natural language, for example:
-
-   ```
-   List all product categories.
-   ```    
-
-1. Submit the query and review the response generated by the Data Agent.
-
-    ![](../Sandbox-Environment-Guides/Images/a17.png)
-
-1. Observe how the agent:
-   - Interprets the question  
-   - Queries the underlying data using the ontology  
-   - Provides insights in a readable format  
-
-1. Try multiple queries and refine your questions to explore additional insights.
-
-   ```
-   What is the current stock of Alpine Explorer Tent?
-   ```
-
-    ![](../Sandbox-Environment-Guides/Images/a19.png)    
-
-   ```
-   Which product categories generate the most revenue and have the highest profit margins?
-   ```
-
-   ```
-   Show me products with inventory status LowStock and show results in tabular format.
-   ```
-
-   ```
-   Show all products in the category Backpacks.
-   ```
-
-   ```
-   Can you show me inventory levels for just the sleeping bag products.
-   ```   
-
-    ![](../Sandbox-Environment-Guides/Images/a37.png)    
-
-   ```
-   Based on current inventory and our reorder policy, when should we place the next order?
-   ```     
-
-    ![](../Sandbox-Environment-Guides/Images/a36.png)    
-
-     > **Note:**  
-     > - Clear and specific questions provide more accurate results.  
-     > - Responses may vary depending on how the question is framed.  
-     > - The Data Agent uses the Ontology to translate natural language into meaningful queries.   
-
-1. Select **Publish**.
-   ![](../Sandbox-Environment-Guides/Images/a38.png)
-
-1. Click on **Publish** again to Publish the data agent.
-
-   ![](../Sandbox-Environment-Guides/Images/a16.png)   
-
-
-## Microsoft Foundry
-
-1. Navigate back to the Azure portal.
-
-1. Select the Foundry project.
-
-   ![](../Sandbox-Environment-Guides/Images/amp58.png)
-
-1. Click on **Go to Foundry portal**.
+1. In the Azure portal, open the prepared Foundry project and select **Go to Foundry portal**.
 
    ![](../Sandbox-Environment-Guides/Images/amp59.png)
 
-1. Click on **Build (1)**, then select **Agents (2)** and make sure that **ChatAgent (3)** has been created.
+1. Open **Knowledge** and the existing shared knowledge base. The simulated script calls it **unified-knowledgebase**.
+1. Review the existing enterprise source: GMP SOPs and scheduling guidelines, Compressed Changeover Guidance, and Regulatory Change Control Procedures.
+1. Follow the facilitator's validated procedure to add the manufacturing context from **Fabric IQ**, including competitive-product data, and save the configuration.
+1. Connect **Web IQ** using the validated procedure so competitor announcements and market information are available alongside enterprise knowledge.
+1. Check that the existing **Work IQ** organizational context is available for escalation questions.
+1. Republish the updated Supply Chain Intelligence Agent to Microsoft 365 Copilot using the prepared lab instructions.
 
-   ![](../Sandbox-Environment-Guides/Images/amp60.png)
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Source connections and publishing:** Document the exact Fabric IQ, Web IQ, and Work IQ setup, authentication, permissions, and publishing steps supported in this tenant. The script shows Fabric IQ added through the shared knowledge base, whereas the old lab attached a Fabric Data Agent under the agent's Tools. Confirm the chosen lab implementation and explain any difference from the simulation. Add verified screenshots of the source connections and the Foundry publishing flow; the existing retail tool screenshots remain reference material only.
 
-1. Navigate to **Tools (1)**, it shows the **{suffix}-kb-mcp-connection (2)** MCP tool attached
+### 4. Compare grounded responses
 
-   ![](../Sandbox-Environment-Guides/Images/amp61.png)
+Repeat the original two questions, then ask the GMP, escalation, and launch-readiness questions below. Open the supporting citations and compare the answer with the connected sources.
 
-1. Navigate to **Models / Deployments (1)**, you can see **gpt-5-mini** (chat) and **text-embedding-3-small** (embeddings) **(2)**.
+| Question | Expected behavior in the simulated story | Evidence to inspect in the workshop |
+| --- | --- | --- |
+| What is our competitor's announced launch timeline, and how does it compare to our NextGen Pharma launch? | The agent identifies Helios Biopharma's VEXA and cites its announced November 2026 launch, the same month as Caldova's launch. | Competitive-product records plus the dated external announcement. |
+| What is our current capacity position — committed production versus maximum capacity by plant? | The agent reports a 7% network shortfall, approximately 18,900 units, with Plant 3 as the constraint. | Plant-level records, the calculation period, and the reconciled network calculation. |
+| What do the GMP guidelines say about compressing changeover windows to accelerate production? | The response cites the manufacturing guidance and required Plant Operations Manager and QA sign-offs. | The supplied GMP/changeover document and its relevant passage. |
+| Who should I escalate to if Plant 3 pushes back on the proposed schedule change? | The agent identifies Dana Reyes, VP of Manufacturing, then Morgan Ellis, COO, if unresolved. | The organizational structure and escalation information available through Work IQ. |
+| Can we close the 7% capacity gap in time for the November NextGen Pharma product launch? | The agent concludes that internal capacity alone cannot close the gap and external manufacturing capacity is needed. | The manufacturing constraint and relevant policy evidence supporting the conclusion. |
 
-   ![](../Sandbox-Environment-Guides/Images/amp62.png)
+These expectations describe the demo's results. Do not insert the target figures or names into agent instructions as a substitute for source data. If the lab response differs, inspect its evidence and record the source or configuration gap.
 
-1. Navigate to **Knowledge (1)** to see the Knowledge base created **{suffix}-kb** and Status Ready, listing **{suffix}-ks** as its source **(2)**.
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Reproducible validation sources:** Supply the competitor records and approved dated web sources, GMP document passages, organizational records for Dana Reyes and Morgan Ellis, and expected-result evidence. The narrative and screenshots illustrate these results but do not supply a deployable source package or directory configuration for the workshop. Add a validated response capture for each question after rehearsal.
 
-   ![](../Sandbox-Environment-Guides/Images/amp63.png)
+### Module 1 checkpoint
 
-1. Click on **Manage (1)** from the top navigation bar. Select **Connected resources (2)** to see the connected resources **(3)**.
+Explain how each source changed the answer: Fabric IQ supplied manufacturing and competitive-product context; Web IQ supplied external announcements; Foundry IQ grounded enterprise knowledge; and Work IQ supplied organizational context. Record which parts were demonstrated and which were verified in the live sandbox.
 
-   ![](../Sandbox-Environment-Guides/Images/amp64.png)
+## Module 2 — Reuse the foundation for CMO evaluation
 
-1. Navigate to  **Agents (1)** and select **ChatAgent (2)**.
+The capacity decision leads to the next business question: **Which Contract Manufacturing Organizations can help close the gap fast?** Jordan creates a CMO Evaluation Agent that uses the same shared foundation, then adds the pre-qualified CMO supplier database.
 
-   ![](../Sandbox-Environment-Guides/Images/a27.png)
+### 1. Reuse the existing knowledge and connections
 
-1. Make sure **gpt-5-mini** model selected.
+1. In Microsoft Foundry, create or open the prepared **CMO Evaluation Agent**. The script shows `cmo-evaluation-agent`.
+1. Configure it to use the existing shared knowledge base and manufacturing ontology, following the validated lab procedure.
+1. Confirm its access to the enterprise GMP documents, Work IQ organizational context, and Web IQ external context.
+1. Record the reused sources and connections. Verify access under the configured identity before proceeding.
 
-   ![](../Sandbox-Environment-Guides/Images/a22.png)
+> [!IMPORTANT]
+> **&lt;TODO&gt; — CMO agent configuration:** Provide the tested creation steps, model deployment, agent instructions, identity, and source/connection bindings for the CMO Evaluation Agent. The script describes reuse but does not supply a deployable agent definition. Document how permissions are verified for the new agent rather than assuming that attaching a shared source grants the correct access automatically.
 
-1. Verify that Knowledge base is added.
+### 2. Extend the ontology with CMO supplier data
 
-   ![](../Sandbox-Environment-Guides/Images/a23.png)
+1. Inspect the facilitator-provided pre-qualified CMO supplier database. In the story, this data comes from **Oracle**.
+1. Follow the validated ingestion procedure to load it into the Fabric Lakehouse.
+1. Open the existing manufacturing ontology. The script shows **Operations Intelligence**, followed by **Add Entity Type** and **CMO_Evaluation**.
+1. Review the new entity's supplied properties, relationships, and data bindings.
+1. As a workshop validation step, rerun a capacity question in the original Supply Chain Intelligence Agent after the extension to check that the existing workflow still works.
 
-    >**Note:** In case we are updating anything in the Agent, we need to click **Save**.
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Oracle ingestion and CMO_Evaluation:** Provide the source connection, access requirements, loading procedure, supplier records, schema, entity properties, relationships, and refresh configuration. The script names Oracle and `CMO_Evaluation` but does not provide those implementation details. If an approved sample extract is used instead of Oracle, label that as a workshop adaptation and document it here. Add screenshots for ingestion, the new entity, and the shared-source validation.
 
-1. In that **Chat** playground, use the example questions to explore the Azure AI Foundry Agent's capabilities. It will provide the response based on the knowledge base documents along with that citiation will also be added.
+### 3. Validate and publish the CMO Evaluation Agent
 
-   ```
-   Show me the supplier onboarding process.
-   ```   
+1. In the Foundry playground, ask the capacity and GMP changeover questions from Module 1. Check that the agent retrieves the shared manufacturing data and enterprise guidance.
+1. Publish the configured agent to Microsoft 365 Copilot using the validated lab procedure.
+1. As Sam, ask the following question, adapted from the script:
 
-   ![](../Sandbox-Environment-Guides/Images/a24.png)
-   ![](../Sandbox-Environment-Guides/Images/a40.png)   
-
-1. Try some other prompts:
-
-   ```
-   What training is provided to suppliers?
-   ```   
-
-   ![](../Sandbox-Environment-Guides/Images/b83.png)  
-
-   ```
-   What performance metrics are used for supplier monitoring?
-   ```     
-
-   ![](../Sandbox-Environment-Guides/Images/b84.png) 
-
-   ```
-   Visualize the approval workflow steps.
-   ```   
-
-   ![](../Sandbox-Environment-Guides/Images/b85.png)   
-
-
-1. Now lets connect the Fabric Data Agent as a Tool in ChatAgent. We can add the Fabric Data Agent (**RetailSCOntologyAgent**) as a tool inside **ChatAgent**.
-
-1. Scroll down to **Tools**, click on **Add** drop down **(1)** and then **Add tools (2)**. A tool is simply a capability we plug into an agent so it can reach outside its own knowledge and pull in something it couldn't otherwise access — in this case, live data from our Fabric ontology.
-
-   ![](../Sandbox-Environment-Guides/Images/a28.png)   
-
-1. Select **Fabric IQ(OneLake Catalog) (1)** and then **Add tool (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a32.png)   
-
-1. Select **RetailSC Ontology Agent (1)** data agent and then **Add (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a30.png)   
-
-1. Update the Instructions as below.
-
-   ```
-   You have two knowledge sources:
-   1. A document knowledge base — for policies, contracts, supplier terms, and procedures.
-   2. A Fabric IQ data agent (RetailSCOntologyAgent) — for structured, live data questions about products, inventory, suppliers, purchase orders, and demand forecasts.
-
-   Route each question to the appropriate source. If a question needs both (e.g. "which supplier had disruptions, and what does our risk policy say about that"), use both tools and synthesize the answer, citing each source clearly.
-   ```   
-
-   ![](../Sandbox-Environment-Guides/Images/a31.png)  
-
-1. Try sending a atleast one of the below prompt to test the Fabric IQ Data agent.  
-
-   ```
-   Which products are supplied by Fabrikam?
+   ```text
+   Review prior touchpoints across emails, Teams, SharePoint, and OneDrive.
+   Score each pre-qualified CMO on responsiveness, quality, and speed.
+   Recommend which CMOs can fast-track to 3–6 months under GMP validation
+   for our NextGen Pharma product launch, and assess whether they can
+   close our capacity gap. Cite the evidence for your recommendation.
    ```
 
-   ![](../Sandbox-Environment-Guides/Images/a34.png)
+1. Inspect the cited supplier records and collaboration history. Discuss which evidence supports the recommendation and which uncertainties remain. The script's response screenshot lists **Meridian, Astoria, and Cobalt** as fast-track eligible, identifies **Meridian Biologics** as the best overall choice, and says each of the three can close the approximately 18,900-unit gap. Treat these as simulated results to substantiate with the approved lab data.
+1. Record the intelligence reused by the second agent and the additional source introduced by the CMO extension.
 
-   ```
-   Given that shortfall, what do our supplier terms say about delayed-delivery penalties or remediation, and what's Tailwind Textiles' typical lead time is expediting realistic before the stockout hits?
+> [!IMPORTANT]
+> **&lt;TODO&gt; — CMO evaluation evidence:** Supply the pre-qualified CMO list, collaboration history, evaluation rubric, capacity and timing evidence, and the GMP validation material needed to assess the 3–6 month question. The response screenshot references `GUID-PROC-009` for qualification, `GUID-QA-018` for the fast-track standard, and `GUID-PROC-012` for weighted scoring. Supply those source documents and the underlying supplier records; the screenshot alone does not provide their complete rules, scoring weights, or a reproducible lab dataset. Do not invent scores or treat the requested timeline as a guaranteed outcome.
 
-   ```
-  
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Product naming in source screenshots:** The script's narrative uses NextGen Pharma, while the CMO prompt screenshot uses ZAVA IL2 and the response refers to a V2 launch. This walkthrough follows the narrative's NextGen Pharma name. Confirm the intended product identifiers in the supplied data and replace inconsistent screenshots before delivery; do not silently treat the names as interchangeable records.
 
-   >**Note**: If it asks any follow-up or clarification questions without providing an answer, please respond to the question based on what is required and proceed.
+### Module 2 checkpoint
 
-### Now, click on **`Next >>`** from the lower right corner to move on to **`Post deployment Guide - Work IQ`**.   
+The story illustrates how adding a supplier source can extend a foundation used by multiple agents. For this workshop, retain evidence of source reuse, cited recommendations, access checks, and the original agent's behavior after the extension. The demo's claims about deployment speed and reduced effort are narrative outcomes, not measured lab results.
+
+## Existing screenshots awaiting collaborator review
+
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Screenshot refresh:** The images below are retained from the previous lab so collaborators can replace them after the Caldova configuration is validated. They may show retail names, sample data, older setup choices, or the email-triggered workflow. They are reference material, not evidence of the Caldova results or instructions to execute the old workflow. Keep the current image files until replacements are available, then update the relevant Markdown references and remove obsolete reference entries. New Web IQ, CMO, and governance steps also need verified screenshots where applicable.
+
+<details>
+<summary>Previous lab screenshots retained for collaborators</summary>
+
+**Earlier lab section: Fabric IQ**
+
+![](../Sandbox-Environment-Guides/Images/a35.png)
+
+![](../Sandbox-Environment-Guides/Images/amp56.png)
+
+![](../Sandbox-Environment-Guides/Images/amp57.png)
+
+![](../Sandbox-Environment-Guides/Images/amp65.png)
+
+![](../Sandbox-Environment-Guides/Images/amp67.png)
+
+![](../Sandbox-Environment-Guides/Images/amp68.png)
+
+![](../Sandbox-Environment-Guides/Images/amp66.png)
+
+![](../Sandbox-Environment-Guides/Images/amp69.png)
+
+![](../Sandbox-Environment-Guides/Images/amp70.png)
+
+![](../Sandbox-Environment-Guides/Images/agenti1.png)
+
+![](../Sandbox-Environment-Guides/Images/a21.png)
+
+![](../Sandbox-Environment-Guides/Images/a17.png)
+
+![](../Sandbox-Environment-Guides/Images/a19.png)
+
+![](../Sandbox-Environment-Guides/Images/a37.png)
+
+![](../Sandbox-Environment-Guides/Images/a36.png)
+
+![](../Sandbox-Environment-Guides/Images/a38.png)
+
+![](../Sandbox-Environment-Guides/Images/a16.png)
+
+**Earlier lab section: Microsoft Foundry**
+
+![](../Sandbox-Environment-Guides/Images/amp58.png)
+
+![](../Sandbox-Environment-Guides/Images/amp60.png)
+
+![](../Sandbox-Environment-Guides/Images/amp61.png)
+
+![](../Sandbox-Environment-Guides/Images/amp62.png)
+
+![](../Sandbox-Environment-Guides/Images/amp63.png)
+
+![](../Sandbox-Environment-Guides/Images/amp64.png)
+
+![](../Sandbox-Environment-Guides/Images/a27.png)
+
+![](../Sandbox-Environment-Guides/Images/a22.png)
+
+![](../Sandbox-Environment-Guides/Images/a23.png)
+
+![](../Sandbox-Environment-Guides/Images/a24.png)
+
+![](../Sandbox-Environment-Guides/Images/a40.png)
+
+![](../Sandbox-Environment-Guides/Images/b83.png)
+
+![](../Sandbox-Environment-Guides/Images/b84.png)
+
+![](../Sandbox-Environment-Guides/Images/b85.png)
+
+![](../Sandbox-Environment-Guides/Images/a28.png)
+
+![](../Sandbox-Environment-Guides/Images/a32.png)
+
+![](../Sandbox-Environment-Guides/Images/a30.png)
+
+![](../Sandbox-Environment-Guides/Images/a31.png)
+
+![](../Sandbox-Environment-Guides/Images/a34.png)
+
+</details>
+
+### Now, click on **`Next >>`** to continue with **`Work IQ, CMO RFP Tracking, and Governance`**.

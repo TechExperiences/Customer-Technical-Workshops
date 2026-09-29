@@ -1,456 +1,348 @@
-# Post deployment Guide - Work IQ
+# Work IQ, CMO RFP Tracking, and Governance
 
-The third component of the accelerator is Work IQ (the Copilot Studio email-triggered agent that orchestrates Fabric IQ and Foundry IQ from a single conversational ingress)
+Continue Caldova's story after the Supply Chain Intelligence Agent identifies the need for external capacity and the CMO Evaluation Agent assesses potential manufacturing partners. Alex, the Procurement Manager, now uses a lightweight **CMO RFP Tracking Agent** built in Copilot Studio. The final part follows the IT Compliance Lead as the agent portfolio grows.
 
-### Steps that need to be performed:
+In this story, **Work IQ** supplies organizational and collaboration context. The Copilot Studio agent consumes shared intelligence to support procurement; Work IQ itself is not the email-triggered flow described in the previous retail lab.
 
-- **Import the solution:** Import the Power Platform zip solution file inside the solution file folder into your Power Platform environment
-- **Configure connections:** Sign in to and authorize the Work IQ, Microsoft Teams, Copilot Studio, Office 365 Outlook, Fabric Data Agent, and Foundry Agent connections. 
-- **Configure the email trigger** in the Power Automate flow — select the target inbox/folder to monitor and (optionally) add a subject filter such as IQ Request.
-- **Publish the agent** in Copilot Studio and enable the Microsoft Teams channel.
+The activities below adapt the demo story into a workshop. Collaborator TODOs identify the setup and evidence the script does not supply. Complete each dependent hands-on activity only after those prerequisites are available. Otherwise, review the corresponding simulated-demo sequence with the facilitator and record it as demonstration-only.
 
-## Step 0: Create a Power Platform Environment with Dataverse enabled
+## Before you begin
 
->**Note:** If you have already completed this step during the **Rapid Prototyping – Work IQ** section, skip to **Step 3**. Otherwise, proceed with the steps below to create the Power Platform environment.
+Confirm the shared knowledge foundation and CMO evaluation work from [AYI03](AYI03.md). Identify the available Copilot Studio environment and Microsoft 365 Copilot/Teams access. Record any remaining source or publishing gaps.
 
-1. Right click on the [make.powerapps.com](https://make.powerapps.com) link then **Copy link** and then paste it on your VM browser tab.
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Copilot Studio environment and solution package:** Confirm the environment, access requirements, connections, and agent creation procedure for Caldova. The previous guide created `Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>` with Dataverse and imported `C:\Files\MicrosoftIQAccelerator.zip`. The script does not provide or validate a Caldova version of that package. If the lab retains it, supply the updated solution and verified import steps; otherwise, document the tested creation path. Avoid importing the old retail workflow as though it already implements the CMO scenario.
 
-1. On the **Welcome to Power Apps** page, click **Get started**.
+## Complete Module 2 — Build the CMO RFP Tracking Agent
 
-   ![](../Sandbox-Environment-Guides/Images/a41.png)
+### 1. Create the procurement agent
 
-1. Click on the **Settings (1)** from the top left and then select **Admin center**.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com) in the VM browser and select the facilitator-confirmed environment.
+1. Open **Agents**, then create or open the prepared **CMO RFP Tracking Agent** using the validated lab instructions.
+1. Review the intended business task: report the status of requests for proposals across the shortlisted pre-qualified CMOs.
+1. Connect the agent to the same intelligence foundation used by the Foundry agents, following the prepared configuration.
 
-   ![](../Sandbox-Environment-Guides/Images/a42.png)
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Shared intelligence connection:** Supply the exact Copilot Studio connection method, agent/tool identifiers, descriptions, authentication settings, and access scope. The script shows reuse and an **Add to agent** action but does not provide the configuration behind that action. Confirm whether the old accelerator's external-agent connections and Work IQ tools apply. Do not use an agent's display name as its identifier unless the validated connector procedure explicitly requires it.
 
-1. On the **Power Platform admin center**, click on **Manage (1)** then **Environments (2)** and then click **+ New (3)**.
+### 2. Ground the agent in RFP records
 
-   ![](../Sandbox-Environment-Guides/Images/a43.png)
+1. Inspect the facilitator-provided shortlist and RFP status records.
+1. Identify how the agent obtains that information and how Work IQ collaboration context contributes to the response.
+1. Review the agent's instructions. The following is a workshop draft to adapt after the actual connections are configured:
 
-1. On the **New environment** page, provide the following details to create a new environment.
+   ```text
+   Help Caldova Procurement track RFP status for the shortlisted CMOs supporting
+   the NextGen Pharma launch. Use the configured shared intelligence and
+   approved RFP records. Report the status supported by those records and cite
+   the evidence. Use available collaboration context where relevant.
 
-    - **Type:** Choose **Developer (1)**
-    - **Region:** Leave default
-    - **Name:** Enter **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** **(2)**
-    - Then Scroll down to **Change default settings**
+   If a supplier, request, or status cannot be verified, state what information
+   is missing. Do not infer that an RFP was sent from the fact that a CMO was
+   shortlisted. This exercise asks for a status report, not for sending RFPs.
+   ```
 
-      ![](../Sandbox-Environment-Guides/Images/b77.png)
+> [!IMPORTANT]
+> **&lt;TODO&gt; — RFP source and expected results:** Supply the actual RFP records, supplier shortlist, status definitions, source location, and retrieval procedure. The script says requests are already out to the top three fast-track CMOs and the rest are on hold or not yet engaged, but does not supply reusable RFP source data or an end-to-end retrieval configuration. Its response screenshot names Meridian, Astoria, and Cobalt as active RFPs, Helix and Vanta as gated, and Northwind as excluded. Reconcile the narrative and screenshot status wording in the approved lab records. Confirm the use of RFP versus RFQ terminology: the narrative mentions RFQs, while the agent and status question are named RFP. Use the approved workshop terminology consistently once clarified.
 
-1. Expand **Change default settings (1)** and then **Turn On (2)** setting **Add a Dataverse data  store?** and then click on **Next (3)**.
+### 3. Publish and test
 
-   ![](../Sandbox-Environment-Guides/Images/a45.png)
+1. Publish the configured agent to **Teams and Microsoft 365 Copilot** using the facilitator's validated steps.
+1. Open the agent in Microsoft 365 Copilot and ask:
 
-1. Then select **Save**.
+   ```text
+   What is the RFP status across the shortlisted CMOs for our NextGen Pharma
+   product launch? Cite the records supporting each status.
+   ```
 
-   ![](../Sandbox-Environment-Guides/Images/b78.png)
+1. Compare the response with the supplied records. The simulated story shows requests already sent to the top three fast-track CMOs, with the remaining CMOs on hold or not yet engaged.
+1. Confirm that the response uses the shared foundation and relevant evidence. Record missing or conflicting data instead of forcing the response to match the narrative.
 
-1. Please wait until your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** environment is **Ready** before proceeding.
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Publishing and screenshots:** Verify the publishing, channel configuration, user access, and installation steps for this tenant. Replace the old Microsoft IQ Agent screenshots with the CMO RFP Tracking Agent configuration and its verified response once available. Keep the existing images in the reference section until the replacements are ready.
 
-   ![](../Sandbox-Environment-Guides/Images/b80.png)
+### Procurement checkpoint
 
+Explain how Alex's agent reuses the intelligence foundation and identify the RFP evidence it needs. The earlier retail email-triggered Power Automate test is not part of this story's core sequence and has been removed from the active walkthrough.
 
-## Step 1: Import the Solution and configure the connections.
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Optional email extension:** If collaborators retain email-triggered orchestration as a separate workshop extension, provide a Caldova-specific business purpose, updated solution/flow, sample message, configured mailbox and connections, and verified result. The demo script does not describe this workflow. Do not present the previous camping-supplier email test as a Caldova story step.
 
-In this step, you will import the Power Platform zip solution file into your Power Platform environment.
+## Module 3 — Trust intelligence that drives scale
 
-1. Navigate back to **Power Apps** portal. Refresh the portal.
+Six weeks into the accelerated launch, the script introduces a broader agent portfolio and asks: **Can Caldova prove every agent is operating within policy before leadership relies on it for critical decisions?** The IT Compliance Lead examines agent inventory, policy violations, identity-scoped responses, restricted-content handling, and identity controls.
 
-1. Click on the **default Environment (1)** and then select your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/> (2)** Environment.
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Governance lab prerequisites:** Supply the prepared tenant, admin/test access, required services, agent registrations, policies, labeled documents, and test identities needed below. The script demonstrates configured controls; it does not provide their deployment instructions. Document the tested setup and exact navigation before treating this section as an executable security lab. Where unavailable, use the simulated demonstration and mark the live validation as pending.
 
-   ![](../Sandbox-Environment-Guides/Images/a50.png)
+### 1. Inspect the agent portfolio in Agent 365
 
-1. Make sure your in your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
+1. In the prepared Microsoft 365 Admin Center, follow the script's **AI Agents** entry to Agent 365.
+1. Inspect the registry and **Map** views. Discuss agent ownership, status, identity, and platform grouping.
+1. Examine the Supply Chain Intelligence Agent and CMO Evaluation Agent. The script also shows demand sensing and manufacturing quality in its later fleet, and discusses Copilot Studio, Microsoft 365 Agent Toolkit, Foundry, and shadow agents in the portfolio view.
+1. Record what is actually present in the lab and which entries are supplied for demonstration only.
 
-   ![](../Sandbox-Environment-Guides/Images/a51.png)
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Agent inventory and fleet continuity:** Provide the registrations, owners, platform assignments, and screenshots used in this exercise. The script's later four-agent fleet names supply chain intelligence, CMO evaluation, demand sensing, and manufacturing quality; it does not explain how the earlier CMO RFP Tracking Agent is represented in that count. Confirm the intended workshop inventory rather than inventing an additional deployment or silently changing the fleet count. Building demand sensing or manufacturing quality agents is not specified by the script.
 
-1. Go to **Solutions (1)** and then select **Import solution (2)**.
+### 2. Review the Foundry policy alert
 
-   ![](../Sandbox-Environment-Guides/Images/a52.png)
+1. In the prepared Foundry environment, open the **Operate** view and inspect the demonstrated out-of-compliance alert.
+1. Follow the alert to **Compliance** and the **Policies** tab.
+1. Review the guardrail compliance policy, the evaluated assets, and the recorded violation. The simulated story shows **four assets evaluated and one in violation**.
+1. Record the policy and affected asset shown by the lab. Review the displayed cost and token-usage information as part of the operational context.
 
-1. Click on **Browse** to select the solution file to import.
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Reproducible policy alert:** Supply the policy definition, prepared test asset, alert-generation procedure, and expected evidence. The script does not supply a deployable guardrail policy configuration or a remediation procedure. Add those instructions and screenshots after rehearsal; do not deliberately alter workshop policies or introduce a violation based only on this narrative.
 
-   ![](../Sandbox-Environment-Guides/Images/a53.png)
+### 3. Compare identity-scoped capacity answers
 
-1. Navigate to **C:\Files (1)**, then select **MicrosoftIQAccelerator (2)** zip file and then **Open (3)**.
+1. Use the two facilitator-provided test identities representing the **Plant 3 Operations Manager** and the **VP of Manufacturing**.
+1. Ask the same Supply Chain Intelligence Agent the same question under each identity:
 
-   ![](../Sandbox-Environment-Guides/Images/a54.png)
+   ```text
+   What is our current capacity position — committed production versus maximum
+   capacity by plant?
+   ```
 
-1. Once the Solution file is imported, click on **Next**.
+1. Compare the answers with the configured access assignments. In the story, the Plant 3 manager sees Plant 3 information, while the VP sees all three plants.
+1. Check the supporting access evidence. The workshop should test the configured permissions, rather than rely on an agent instruction asking it to hide certain plants.
 
-   ![](../Sandbox-Environment-Guides/Images/a55.png)
+> [!IMPORTANT]
+> **&lt;TODO&gt; — User access and identity propagation:** Provide the two test identities, source-level access configuration, assignments, and the tested end-to-end identity flow for this agent. The script attributes the scoped responses to Entra-based permissions but does not specify how the lab implements them. Supply expected allowed/denied evidence and screenshots before claiming the exercise proves access isolation.
 
-1. Click on **Next** again.
+### 4. Check restricted-content exclusion and audit evidence
 
-   ![](../Sandbox-Environment-Guides/Images/a56.png)
+1. Inspect the prepared restricted launch-planning document in the Caldova R&D SharePoint site. The story describes regulated manufacturing production plans and supplier agreements.
+1. As the IT Compliance Lead, ask the Supply Chain Intelligence Agent:
 
-1. Make sure you signed in / green check mark is showing up for all the services **(1)** and then **Import (2)**.
+   ```text
+   Prepare an executive briefing on supplier readiness and manufacturing
+   constraints, including any relevant launch-planning documents.
+   ```
 
-   ![](../Sandbox-Environment-Guides/Images/a57.png)
+1. Inspect the response. In the simulation, Purview blocks the restricted content from being used; the briefing includes a note about its exclusion and does not reproduce the protected content.
+1. Follow the related DLP rule match in **Purview Activity Explorer**, including its association with the agent identity.
+1. Review the corresponding at-risk alert in **Agent 365** and match it to the demonstrated event.
 
-1. Wait for the Solution to import successfully.
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Purview policy and restricted source:** Provide the approved test document/site, sensitivity label configuration, DLP policy and scope, retrieval connection, and role/access setup. The script describes the restricted content and resulting block but does not supply a deployable policy. Confirm which configured control enforces the exclusion and verify the content is absent from the answer; a label or an agent statement alone is not sufficient evidence.
 
-   ![](../Sandbox-Environment-Guides/Images/a58.png)
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Audit and alert correlation:** Supply the tested event-generation steps, Activity Explorer filters, agent identity mapping, expected log fields, and Agent 365 alert evidence. Document any observed event/alert delay during rehearsal instead of assigning an unsupported timing guarantee. Add screenshots that connect the prompt, exclusion, DLP event, and agent alert.
 
-1. After importing has completed, click **Publish all customizations** in the top menu.    
+### 5. Inspect agent identity and network controls
 
-   ![](../Sandbox-Environment-Guides/Images/a59.png)
+1. Open the Supply Chain Intelligence Agent's details in Foundry. The script's **Identity and Access** card shows an **Entra Agent identity** and an **Entra Agent Blueprint**.
+1. In the prepared Microsoft Entra Admin Center, open **Agents** and inspect the corresponding identity, owner, object ID, and applicable Conditional Access policies.
+1. Review the facilitator-provided configuration evidence for the private endpoints, managed identities, and network isolation described in the story.
+1. Record which controls have been verified and which are represented only by the simulated demonstration.
 
-1. Wait for publishing to complete. 
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Identity and network implementation:** Provide the agent identity/blueprint setup, owner assignments, applicable Conditional Access policies, resource-specific managed identities, private endpoint and network configuration, and validation steps. The script does not define the topology or prove a configured lab's security boundary. Add the relevant screenshots and evidence before claiming that the workshop's data remains within that boundary.
 
-   ![](../Sandbox-Environment-Guides/Images/a60.png)
+## Workshop review
 
-1. When the import is complete, the solution will be available in the environment.
+Review the three story outcomes with the facilitator:
 
-## Step 2: Configure the Email Trigger
+| Outcome | Evidence to review |
+| --- | --- |
+| Ground an existing agent | Before-and-after capacity and competitor responses, cited GMP guidance, and the organizational escalation answer. |
+| Reuse shared intelligence | The CMO Evaluation Agent's shared sources, the `CMO_Evaluation` extension, and RFP status grounded in procurement records. |
+| Govern the agent portfolio | Ownership and identity records, role-scoped answers, the restricted-content exclusion, and the related policy/audit evidence. |
 
-Once connections are set, configure the Power Automate flow to monitor the correct inbox:
+For each outcome, distinguish what was validated hands-on from what was reviewed in the simulated story. Record unresolved collaborator TODOs before declaring the corresponding lab capability complete.
 
-1. Navigate to **Solutions (1)** then select the imported **Microsoft IQ Accelerator (2)** solution.
+The script illustrates faster decisions, reuse, and governed scale. It does not establish measured workshop timings, guaranteed cost savings, or regulatory certification for the lab.
 
-   ![](../Sandbox-Environment-Guides/Images/a61.png)
+## Existing screenshots awaiting collaborator review
 
-1. Select the **When a new email arrives (V3)** trigger.
+> [!IMPORTANT]
+> **&lt;TODO&gt; — Screenshot refresh:** The images below are retained from the previous lab so collaborators can replace them after the Caldova configuration is validated. They may show retail names, sample data, older setup choices, or the email-triggered workflow. They are reference material, not evidence of the Caldova results or instructions to execute the old workflow. Keep the current image files until replacements are available, then update the relevant Markdown references and remove obsolete reference entries. New Web IQ, CMO, and governance steps also need verified screenshots where applicable.
 
-   ![](../Sandbox-Environment-Guides/Images/a62.png)
+<details>
+<summary>Previous lab screenshots retained for collaborators</summary>
 
-1. Click on **Edit**.
+**Earlier lab section: Step 0: Create a Power Platform Environment with Dataverse enabled**
 
-   ![](../Sandbox-Environment-Guides/Images/a63.png)
+![](../Sandbox-Environment-Guides/Images/a41.png)
 
-1. Click on **When a new email arrives (V3)** trigger.
+![](../Sandbox-Environment-Guides/Images/a42.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a64.png)
+![](../Sandbox-Environment-Guides/Images/a43.png)
 
-1. Delete the **Inbox** folder.
+![](../Sandbox-Environment-Guides/Images/b77.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a65.png)
+![](../Sandbox-Environment-Guides/Images/a45.png)
 
-1. Once it is deleted, click on the **folder (1)** icon and then select the **Inbox (2)** again. We deleted and selected the folder again because `Even though the Folder field shows 'Inbox,' this solution was imported from a different environment, so it may still be pointing at the wrong mailbox behind the scenes. Delete the value and re-select 'Inbox' from the picker to force it to re-link to your own mailbox.`
+![](../Sandbox-Environment-Guides/Images/b78.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a66.png)
+![](../Sandbox-Environment-Guides/Images/b80.png)
 
-1. Expand the **Show advanced options** drop down.
+**Earlier lab section: Step 1: Import the Solution and configure the connections.**
 
-   ![](../Sandbox-Environment-Guides/Images/a67.png)
+![](../Sandbox-Environment-Guides/Images/a50.png)
 
-1. Click the **X** next to that email address to remove it entirely, it is a stale leftover from wherever this solution was originally built/tested. 
+![](../Sandbox-Environment-Guides/Images/a51.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a68.png)
+![](../Sandbox-Environment-Guides/Images/a52.png)
 
-1. Optionally add a `Subject Filter` to limit which emails trigger the flow as **IQ Request (1)* and then **Save (2)** the flow.   
+![](../Sandbox-Environment-Guides/Images/a53.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a69.png)
+![](../Sandbox-Environment-Guides/Images/a54.png)
 
-## Step 3: Add the External Agents in Copilot Studio   
+![](../Sandbox-Environment-Guides/Images/a55.png)
 
-After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fabric for data questions and Foundry for document questions. If they do not appear yet, finish deploying Fabric and Foundry first, then return to Copilot Studio and refresh the agent list.
+![](../Sandbox-Environment-Guides/Images/a56.png)
 
-### 3.1 Add the Foundry Chat Agent
- 
-1. Right click on [Copilot Studio](https://copilotstudio.microsoft.com), then **Copy link** and then paste it on your VM browser tab to open the Copilot Studio.
+![](../Sandbox-Environment-Guides/Images/a57.png)
 
-1. Click on the default environment **(1)** and then select your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/> (2)**.
+![](../Sandbox-Environment-Guides/Images/a58.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a70.png)
+![](../Sandbox-Environment-Guides/Images/a59.png)
 
-1. Make sure your in **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
+![](../Sandbox-Environment-Guides/Images/a60.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a71.png)
+**Earlier lab section: Step 2: Configure the Email Trigger**
 
-1. Click on **Agents (1)** and then select the **Microsoft IQ Agent (2)**. It's a pre-configured component that came bundled inside the solution package we imported in the Power apps.
+![](../Sandbox-Environment-Guides/Images/a61.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a72.png)
+![](../Sandbox-Environment-Guides/Images/a62.png)
 
-1. On the **Welocome to Microsoft Copilot Studio** page, click on **Get Started**.
+![](../Sandbox-Environment-Guides/Images/a63.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a73.png)
+![](../Sandbox-Environment-Guides/Images/a64.png)
 
-    >**Note:** If you get any error like the below **(1)**, go back the previous tab **(2)**. Refresh the browser and then open the agent again.
+![](../Sandbox-Environment-Guides/Images/a65.png)
 
-     ![](../Sandbox-Environment-Guides/Images/a103.png)    
+![](../Sandbox-Environment-Guides/Images/a66.png)
 
-1. Click **Skip** to skip the **Welcome to Copilot Studio** pop up.
+![](../Sandbox-Environment-Guides/Images/a67.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a74.png)
+![](../Sandbox-Environment-Guides/Images/a68.png)
 
-1. Navigate to **Agents (1)** and the sleect **Microsoft IQ Agent (2)**.   
+![](../Sandbox-Environment-Guides/Images/a69.png)
 
-   ![](../Sandbox-Environment-Guides/Images/b67.png)   
+**Earlier lab section: 3.1 Add the Foundry Chat Agent**
 
-1. Make sure your in **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
+![](../Sandbox-Environment-Guides/Images/a70.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a75.png)
+![](../Sandbox-Environment-Guides/Images/a71.png)
 
-1. Click on **+6 (1)** and then select **Agents (2)**.
+![](../Sandbox-Environment-Guides/Images/a72.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a76.png)
+![](../Sandbox-Environment-Guides/Images/a73.png)
 
-1. Click on **+Add** to add Agent.
+![](../Sandbox-Environment-Guides/Images/a103.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a77.png)
+![](../Sandbox-Environment-Guides/Images/a74.png)
 
-1. Click on **Connect to an External agent (1)** drop down and select **Microsoft Foundry (2)**.
+![](../Sandbox-Environment-Guides/Images/b67.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a78.png)
+![](../Sandbox-Environment-Guides/Images/a75.png)
 
-1. Click on **Not connected (1)** drop down and then click **Create new connections (2)**.
+![](../Sandbox-Environment-Guides/Images/a76.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a79.png)
+![](../Sandbox-Environment-Guides/Images/a77.png)
 
-1. Before proceeding to the next step, navigate back to the **Microsoft Foundry Portal.** Click on the Project name, if prompted **Save** the Agent.
+![](../Sandbox-Environment-Guides/Images/a78.png)
 
-1. Copy and paste the **Project endpoint** in a notepad.
+![](../Sandbox-Environment-Guides/Images/a79.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a80.png)
+![](../Sandbox-Environment-Guides/Images/a80.png)
 
-1. Navigate back to the **Copilot Studio**.   
+![](../Sandbox-Environment-Guides/Images/a81.png)
 
-1. On the **Azure AI Foundry Agent Service**,
+![](../Sandbox-Environment-Guides/Images/a82.png)
 
-   - **Authentication Type:** Select **Microsoft Entra ID User Login (1)**
-   - **Azure AI Project Endpoint:** Paste the Project endpoint you copied in the previous step **(2)** 
-   - Then click **Create (3)**
+![](../Sandbox-Environment-Guides/Images/a83.png)
 
-     ![](../Sandbox-Environment-Guides/Images/a81.png)
+![](../Sandbox-Environment-Guides/Images/a84.png)
 
-1. If prompted, select the user account **<inject key="AzureAdUserEmail"></inject>**.
+![](../Sandbox-Environment-Guides/Images/a85.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a82.png)
+**Earlier lab section: 3.2: Add the Fabric Data Agent**
 
-1. Make sure the connection is established **(1)** and then click **Next (2)**.
+![](../Sandbox-Environment-Guides/Images/a86.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a83.png)
+![](../Sandbox-Environment-Guides/Images/a87.png)
 
-1. On the **Connect Microsft Foundry agent** page, provide the following details:
+![](../Sandbox-Environment-Guides/Images/a88.png)
 
-   - **Name**: Enter **ChatAgent (1)**
-   - **Description**: `You are a data analyst assistant for Microsoft IQ with access to documents and reference materials.` **(2)**
-   - **Agent Id**: Enter **ChatAgent (3)**
-     - This is the same name as the agent in Foundry.
-   - Then select **Add and configure (4)**  
+![](../Sandbox-Environment-Guides/Images/a89.png)
 
-     ![](../Sandbox-Environment-Guides/Images/a84.png)
+![](../Sandbox-Environment-Guides/Images/a82.png)
 
-1. Click **Back**.
+![](../Sandbox-Environment-Guides/Images/a90.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a85.png)
+![](../Sandbox-Environment-Guides/Images/a91.png)
 
-### 3.2: Add the Fabric Data Agent   
+![](../Sandbox-Environment-Guides/Images/a92.png)
 
-1. Confirm the Foundry agent appears in the connected-agent list **(1)** and then click **+ Add an agent (2)**.
+![](../Sandbox-Environment-Guides/Images/a93.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a86.png)
+![](../Sandbox-Environment-Guides/Images/a94.png)
 
-1. Click on **Connect to an External agent (1)** drop down and select **Microsoft Fabric (2)**.
+**Earlier lab section: Step 4: Verify Work IQ connections and MCP tools are connected and enabled**
 
-   ![](../Sandbox-Environment-Guides/Images/a87.png)
+![](../Sandbox-Environment-Guides/Images/a95.png)
 
-1. Click on **Not connected (1)** drop down and then click **Create new connections (2)**.
+![](../Sandbox-Environment-Guides/Images/a96.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a88.png)
+**Earlier lab section: Step 5: Publish the Agent**
 
-1. Click on **Create**.
+![](../Sandbox-Environment-Guides/Images/a97.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a89.png)
+![](../Sandbox-Environment-Guides/Images/a98.png)
 
-1. If prompted, select the user account **<inject key="AzureAdUserEmail"></inject>**.
+![](../Sandbox-Environment-Guides/Images/a99.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a82.png)
+![](../Sandbox-Environment-Guides/Images/a100.png)
 
-1. Make sure the connection is established **(1)** and then click **Next (2)**.
+![](../Sandbox-Environment-Guides/Images/a101.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a90.png)
+![](../Sandbox-Environment-Guides/Images/a102.png)
 
-1. On the **Select agent to connect** page, select the Ontology model **(1)** and then **Next (2)**.
+![](../Sandbox-Environment-Guides/Images/a104.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a91.png)
+![](../Sandbox-Environment-Guides/Images/a105.png)
 
-1. On the Ontology Agent page, provide the name as **RetailSC Ontology Agent (1)** and then **Add and Configure (2)**.
+![](../Sandbox-Environment-Guides/Images/a106.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a92.png)
+![](../Sandbox-Environment-Guides/Images/a107.png)
 
-1. Click **Back**.
+**Earlier lab section: Step 1: Prepare Your Environment**
 
-   ![](../Sandbox-Environment-Guides/Images/a93.png)
+![](../Sandbox-Environment-Guides/Images/a107.png)
 
-1. Make sure the Fabric agent now shows up in the list of connected agents.
+**Earlier lab section: Example: Supply Chain Disruption**
 
-   ![](../Sandbox-Environment-Guides/Images/a94.png)
+![](../Sandbox-Environment-Guides/Images/a108.png)
 
-## Step 4: Verify Work IQ connections and MCP tools are connected and enabled
- 
-1. Click on **+6 (1)** and then open the **Tools (2)** tab.
+![](../Sandbox-Environment-Guides/Images/a109.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a95.png)
+![](../Sandbox-Environment-Guides/Images/a110.png)
 
-1. Click the **Model Context Protocol (1)** filter chip.
+**Earlier lab section: Step 3: Monitor the Flow**
 
-1. Confirm that you can see these three tools **(2)**:
- 
-   | Tool name | Type | Available to | Trigger |
-   |---|---|---|---|
-   | Work IQ Copilot (Preview) | Model Context Protocol | Microsoft IQ Agent | By agent |
-   | Work IQ Mail (Preview) | Model Context Protocol | Microsoft IQ Agent | By agent |
-   | Work IQ User (Preview) | Model Context Protocol | Microsoft IQ Agent | By agent |
+![](../Sandbox-Environment-Guides/Images/a111.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a96.png)    
- 
-   - For each tool, confirm that:
+![](../Sandbox-Environment-Guides/Images/a112.png)
 
-     - The **Enabled** toggle is set to **On**.
-     - The **Errors** column is empty.
-     - The **Blocked** column is empty.
+![](../Sandbox-Environment-Guides/Images/a113.png)
 
-## Step 5: Publish the Agent
+![](../Sandbox-Environment-Guides/Images/a114.png)
 
-1. Click on the **Overview (1)** tab and then **Publish (2)**.
+**Earlier lab section: Step 4: Review Response in Teams**
 
-   ![](../Sandbox-Environment-Guides/Images/a97.png)
+![](../Sandbox-Environment-Guides/Images/b57.png)
 
-1. Click on **Publish** to **Publish the agent.**
+![](../Sandbox-Environment-Guides/Images/a116.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a98.png)
- 
-1. Wait for publishing to complete (1-2 minutes).
+![](../Sandbox-Environment-Guides/Images/agentprompt.png)
 
-   ![](../Sandbox-Environment-Guides/Images/a99.png)
+![](../Sandbox-Environment-Guides/Images/Agentresponse.png)
 
-1. Once the Agent is published, click on **+6 (1)** and then select **Channels (2)**.
+</details>
 
-   ![](../Sandbox-Environment-Guides/Images/a100.png)
-
-1. Select **Microsoft 365 and Microsoft Teams** to configure Teams as a channel.
-
-   ![](../Sandbox-Environment-Guides/Images/a101.png)
-
-1. On the **Microsoft 365 and Microsoft Teams** page, select **See agent in Teams**.
-
-   ![](../Sandbox-Environment-Guides/Images/a102.png)  
-
-1. Select **Use the web app instead**.
-
-   ![](../Sandbox-Environment-Guides/Images/a104.png)
-
-1. Click on **Add** to add the agent.
-
-   ![](../Sandbox-Environment-Guides/Images/a105.png)
-
-1. Once the Agent added, click **Open** to open the agent in Teams.
-
-   ![](../Sandbox-Environment-Guides/Images/a106.png)
-
-1. Make sure you can see the agent.
-
-   ![](../Sandbox-Environment-Guides/Images/a107.png)
-
-## Testing Flow   
-
-
-### Step 1: Prepare Your Environment
-
-1. **Open Microsoft Teams** with the agent chat visible.
-
-   ![](../Sandbox-Environment-Guides/Images/a107.png)
-
-1. **Open your email client** (Outlook/Office 365) that's monitored by the flow 
-
-1. Right click on [make.powerautomate.com](https://make.powerautomate.com), then **Copy link** and then paste it on your VM browser tab to open **Power Automate**  to monitor the flow run history.
-
-### Step 2: Send a Test Email
-
-Send an email to trigger the agent. Use the below example scenarios that test both data retrieval (Fabric) and knowledge base search (Foundry):
-
-#### Example: Supply Chain Disruption
-
-1. Right click on [Outlook](https://outlook.com/) then **Copy link** and and then paste it on your VM browser tab to open **Outlook**.
-
-1. If prompted, select **Sign in**.
-
-1. Click on **Continue**.
-
-   ![](../Sandbox-Environment-Guides/Images/a108.png)
-
-1. Click on **New mail (1)** drop down and then **Mail (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a109.png)
-
-1. Draft the below mail:
-
-   - **TO:** Provide the email address as **<inject key="AzureAdUserEmail"></inject> (1)**
-
-   - **Subject**: `IQ Request - Urgent: Supplier Delivery Delay Concern` **(2)**
-
-   - **Body (3)**:
-      ```
-      Hi Team,
-
-      I just received notification that our primary camping tent supplier, 
-      Mountain Peak Manufacturing, is experiencing production delays due to 
-      material shortages. This could impact our inventory levels significantly.
-
-      Can you provide:
-      1. Current inventory levels for all tent products from this supplier
-      2. Our alternative supplier options based on our supplier qualification policy
-      3. Recommended actions to mitigate supply chain risk
-
-      This is urgent as we're heading into peak season.
-
-      Thanks,
-      [Your Name]
-      ```
-
-      - Click **Send (4)**
-
-      ![](../Sandbox-Environment-Guides/Images/a110.png)
-
-### Step 3: Monitor the Flow
-
-After sending the email:
-
-1. Navigate back to **Power Automate** [make.powerautomate.com](https://make.powerautomate.com). 
-
-1. Click on the **default Environment (1)** and then select **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/> (2)** to switch the environment.
-
-   ![](../Sandbox-Environment-Guides/Images/a111.png)
-
-1. Navigate to **My flows (1)** and then click on **When a new email arrives (v3) (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a112.png)
-
-1. Within 1-2 minutes, a new flow run should appear in Power Automate's run history (if monitoring). Click on it.
-
-   ![](../Sandbox-Environment-Guides/Images/a113.png)
-
-1. Typical execution time: 30 seconds to 2 minutes. Status should progress from **Running** to **Succeeded**
-
-   ![](../Sandbox-Environment-Guides/Images/a114.png)
-
-### Step 4: Review Response in Teams
-
-1. Within 1-3 minutes of sending the email, you should receive a message from the agent in Teams. Navigate back to **Teams**.
-
-   ![](../Sandbox-Environment-Guides/Images/b57.png)
-
-1. The response should look similar to this. Including detials regarding the triggered mail.
-
-   ![](../Sandbox-Environment-Guides/Images/a116.png)
-
-1. Copy any follow-up Question and paste it in chat window
-
-1. It will ask for **Allow**, Please click on **Allow**
-
-   ![](../Sandbox-Environment-Guides/Images/agentprompt.png)
-
-    >Note: click on **Allow** for every Connect pop up.
-
-1. Then Type **Allow** in chat window, then you will get response from agent
-
-    ![](../Sandbox-Environment-Guides/Images/Agentresponse.png)
-
-
-### Congratulations, You have successfully completed the Workshop!
-
-
-   
-
-
+### This completes the workshop walkthrough. Review any remaining prerequisites and validation items with the facilitator.
