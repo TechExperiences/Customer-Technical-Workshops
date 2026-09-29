@@ -247,9 +247,9 @@ Follow below instructions to migrate On-prem web application to Azure app servic
 
    >  "medicine used to reduce fever"
 
-   a traditional SQL `LIKE` search may not return the product because the exact phrase **"medicine used to reduce fever"** does not appear in the product description.
+   - a traditional SQL `LIKE` search may not return the product because the exact phrase **"medicine used to reduce fever"** does not appear in the product description.
 
-   This creates a limitation for users because they often search using natural language, synonyms, or different words that express the same meaning.
+   - This creates a limitation for users because they often search using natural language, synonyms, or different words that express the same meaning.
 
 1. To overcome this limitation, we will enhance the migrated application with **vector/semantic search** using Azure SQL Database Hyperscale and Azure OpenAI embeddings.
 
