@@ -21,6 +21,18 @@ try {
   Write-Host '[MIQ 6/6] Uploading ZIP to Azure App Service...'
   & az webapp deploy --resource-group $ResourceGroup --name $WebAppName --src-path $zipPath --type zip --output none
   if ($LASTEXITCODE -ne 0) { throw 'Azure App Service ZIP deployment failed.' }
+  $url = "https://$WebAppName.azurewebsites.net"
+  $healthy = $false
+  for ($attempt = 1; $attempt -le 18; $attempt++) {
+    try {
+      $response = Invoke-WebRequest -Uri $url -TimeoutSec 30 -UseBasicParsing
+      if ($response.StatusCode -eq 200) { $healthy = $true; break }
+    }
+    catch { }
+    Write-Host "[MIQ 6/6] Waiting for App Service Dashboard to become healthy ($attempt/18)..."
+    Start-Sleep -Seconds 10
+  }
+  if (-not $healthy) { throw "Web UI health check failed. Dashboard did not return HTTP 200: $url" }
   Write-Host "Web UI deployed: https://$WebAppName.azurewebsites.net"
 }
 finally {
