@@ -1,7 +1,8 @@
 namespace CaldovaOrderManagement.Web.Models;
 
-public record DashboardVm(int Products, int AvailableProducts, int OpenOrders, int PendingShipments, int Searches, IReadOnlyList<TrendPoint> Trend);
+public record DashboardVm(int Products, int AvailableProducts, int OpenOrders, int PendingShipments, int Searches, IReadOnlyList<TrendPoint> Trend, IReadOnlyList<MetricPoint> OrderStatuses);
 public record TrendPoint(DateTime Date, decimal Score);
+public record MetricPoint(string Label, int Value);
 public record ProductVm(int ProductId, string Sku, string Name, string Category, decimal Price, int Available);
 public record CustomerVm(int Id, string Code, string Company, string? Contact, string? Email, string? Phone);
 public record OrderVm(int Id, string Number, string Customer, DateTime Date, string Status, decimal Total);

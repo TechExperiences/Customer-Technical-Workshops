@@ -20,11 +20,12 @@ public sealed class CaldovaRepository(IConfiguration config, IHttpClientFactory 
     }
     public async Task CheckDatabaseReadiness() { _ = await Scalar<int>("SELECT 1;"); }
     public async Task<DashboardVm> Dashboard() {
-        const string sql = "SELECT COUNT(*) FROM dbo.ProductCatalog WHERE IsActive=1; SELECT COUNT(*) FROM dbo.Inventory WHERE QuantityAvailable>0; SELECT COUNT(*) FROM dbo.Orders WHERE OrderStatus NOT IN ('Delivered','Cancelled'); SELECT COUNT(*) FROM dbo.Shipments WHERE ShipmentStatus <> 'Delivered'; SELECT COUNT(*) FROM dbo.SemanticSearchLog; SELECT TOP(10) SearchDate, TopScore FROM dbo.SemanticSearchLog ORDER BY SearchDate DESC;";
+        const string sql = "SELECT COUNT(*) FROM dbo.ProductCatalog WHERE IsActive=1; SELECT COUNT(*) FROM dbo.Inventory WHERE QuantityAvailable>0; SELECT COUNT(*) FROM dbo.Orders WHERE OrderStatus NOT IN ('Delivered','Cancelled'); SELECT COUNT(*) FROM dbo.Shipments WHERE ShipmentStatus <> 'Delivered'; SELECT COUNT(*) FROM dbo.SemanticSearchLog; SELECT TOP(10) SearchDate, TopScore FROM dbo.SemanticSearchLog ORDER BY SearchDate DESC; SELECT OrderStatus,COUNT(*) FROM dbo.Orders GROUP BY OrderStatus ORDER BY OrderStatus;";
         await using var cn=Connection(); await cn.OpenAsync(); await using var cmd=new SqlCommand(sql,cn); await using var r=await cmd.ExecuteReaderAsync();
         var values=new List<int>(); for(var i=0;i<5;i++){await r.ReadAsync(); values.Add(r.GetInt32(0)); await r.NextResultAsync();}
         var trend=new List<TrendPoint>(); while(await r.ReadAsync()) trend.Add(new TrendPoint(r.GetDateTime(0),r.GetDecimal(1))); trend.Reverse();
-        return new DashboardVm(values[0],values[1],values[2],values[3],values[4],trend);
+        await r.NextResultAsync(); var statuses=new List<MetricPoint>(); while(await r.ReadAsync()) statuses.Add(new MetricPoint(r.GetString(0),r.GetInt32(1)));
+        return new DashboardVm(values[0],values[1],values[2],values[3],values[4],trend,statuses);
     }
     public async Task<IReadOnlyList<ProductVm>> Products(string? query) {
         const string sql="SELECT TOP(100) p.ProductID,p.SKU,p.ProductName,c.CategoryName,p.UnitPrice,ISNULL(SUM(i.QuantityAvailable),0) Available FROM dbo.ProductCatalog p JOIN dbo.ProductCategories c ON c.CategoryID=p.CategoryID LEFT JOIN dbo.Inventory i ON i.ProductID=p.ProductID WHERE p.IsActive=1 AND (@q='' OR p.ProductName LIKE '%'+@q+'%' OR p.SKU LIKE '%'+@q+'%' OR c.CategoryName LIKE '%'+@q+'%') GROUP BY p.ProductID,p.SKU,p.ProductName,c.CategoryName,p.UnitPrice ORDER BY p.ProductName";
