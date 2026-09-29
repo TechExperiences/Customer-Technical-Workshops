@@ -3,8 +3,8 @@ metadata:
   template: caldova-order-management@0.0.1
 
 # The preprovision hook owns the deployment because ARM/Bicep cannot itself catch
-# a regional failure and retry another location. The no-op module prevents azd
-# from creating an additional resource group after that hook succeeds.
+# a regional failure and retry another location. The marker module gives azd a
+# valid resource-bearing provision phase without creating another resource group.
 infra:
   provider: bicep
   path: infra

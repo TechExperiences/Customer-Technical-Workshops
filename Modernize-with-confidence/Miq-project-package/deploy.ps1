@@ -26,21 +26,15 @@ $ErrorActionPreference = 'Stop'
 $scriptRoot = $PSScriptRoot
 $candidateLocations = @('westus2', 'westus', 'eastus', 'eastus2')
 $appServiceCandidateLocations = @('westus2', 'westcentralus', 'westus', 'eastus', 'eastus2')
+$openAiCandidateLocations = @('westus')
 $deploymentStatePath = Join-Path $scriptRoot '.deployment-state.json'
 
 # App Service, SQL logical-server, and Azure OpenAI account names must be globally
-# unique. Generate one suffix per deployment and persist it so retries reuse the same
-# resources instead of creating duplicates.
-if (Test-Path -LiteralPath $deploymentStatePath -PathType Leaf) {
-  $deploymentSuffix = (Get-Content -LiteralPath $deploymentStatePath -Raw | ConvertFrom-Json).deploymentSuffix
-  if ([string]::IsNullOrWhiteSpace($deploymentSuffix) -or $deploymentSuffix -notmatch '^[a-z0-9]{8}$') {
-    throw "Invalid deployment state file: $deploymentStatePath"
-  }
-}
-else {
-  $deploymentSuffix = [guid]::NewGuid().ToString('N').Substring(0, 8)
-  @{ deploymentSuffix = $deploymentSuffix } | ConvertTo-Json | Set-Content -LiteralPath $deploymentStatePath -Encoding utf8
-}
+# unique. Generate a fresh suffix for every run so an earlier failed or soft-deleted
+# resource can never block a subsequent deployment. The state file communicates this
+# run's names to postprovision; it is not reused on a later run.
+$deploymentSuffix = [guid]::NewGuid().ToString('N').Substring(0, 8)
+@{ deploymentSuffix = $deploymentSuffix } | ConvertTo-Json | Set-Content -LiteralPath $deploymentStatePath -Encoding utf8
 
 $webAppName = "app-caldova-ordermgmt-$deploymentSuffix"
 $sqlServerName = "sql-caldova-$deploymentSuffix"
@@ -62,23 +56,35 @@ function Invoke-RegionalFallback {
     [Parameter(Mandatory)][string] $Name,
     [Parameter(Mandatory)][scriptblock] $Deploy,
     [scriptblock] $Cleanup,
-    [string[]] $CandidateLocations = $candidateLocations
+    [string[]] $CandidateLocations = $candidateLocations,
+    [int] $MaxAttemptsPerLocation = 1,
+    [int] $RetryDelaySeconds = 30
   )
 
   foreach ($location in $CandidateLocations) {
-    Write-Host "Trying $Name in $location..."
-    try {
-      & $Deploy $location
-      Write-Host "$Name deployed in $location."
-      return $location
-    }
-    catch {
-      Write-Warning "$Name failed in ${location}: $($_.Exception.Message)"
-      if ($Cleanup) {
-        # A failed ARM deployment can leave an earlier, dependent resource behind.
-        # Cleanup is limited to names preflight verified as absent before this run.
-        try { & $Cleanup $location } catch { Write-Warning "Cleanup after $Name failed in ${location} also failed: $($_.Exception.Message)" }
+    for ($attempt = 1; $attempt -le $MaxAttemptsPerLocation; $attempt++) {
+      Write-Host "Trying $Name in $location..."
+      try {
+        & $Deploy $location
+        Write-Host "$Name deployed in $location."
+        return $location
       }
+      catch {
+        $failureMessage = $_.Exception.Message
+        $isTransientConflict = $failureMessage -match 'RequestConflict|Another operation is being performed|OperationInProgress'
+        if ($isTransientConflict -and $attempt -lt $MaxAttemptsPerLocation) {
+          Write-Warning "$Name has an in-progress Azure operation in ${location}; retrying in $RetryDelaySeconds seconds ($attempt/$MaxAttemptsPerLocation)."
+          Start-Sleep -Seconds $RetryDelaySeconds
+          continue
+        }
+
+        Write-Warning "$Name failed in ${location}: $failureMessage"
+        break
+      }
+    }
+    if ($Cleanup) {
+      # A failed ARM deployment can leave an earlier, dependent resource behind.
+      try { & $Cleanup $location } catch { Write-Warning "Cleanup after $Name failed in ${location} also failed: $($_.Exception.Message)" }
     }
   }
   throw "$Name could not be deployed in any candidate location: $($CandidateLocations -join ', ')."
@@ -164,7 +170,7 @@ $sqlLocation = Invoke-RegionalFallback -Name 'SQL server and database' -Deploy {
   & az sql server delete --resource-group $ResourceGroupName --name $sqlServerName --yes 2>$null
 }
 
-$openAiLocation = Invoke-RegionalFallback -Name 'Azure OpenAI account and model deployments' -Deploy {
+$openAiLocation = Invoke-RegionalFallback -Name 'Azure OpenAI account and model deployments' -CandidateLocations $openAiCandidateLocations -MaxAttemptsPerLocation 12 -RetryDelaySeconds 30 -Deploy {
   param($location)
   Invoke-AzChecked @('deployment', 'group', 'create', '--resource-group', $ResourceGroupName, '--name', "openai-$location-$([guid]::NewGuid().ToString('N').Substring(0, 8))", '--template-file', (Join-Path $scriptRoot 'infra/components/openai.bicep'), '--parameters', "location=$location", "openAiAccountName=$openAiAccountName", "chatModelVersion=$ChatModelVersion", "embeddingModelVersion=$EmbeddingModelVersion")
 } -Cleanup {

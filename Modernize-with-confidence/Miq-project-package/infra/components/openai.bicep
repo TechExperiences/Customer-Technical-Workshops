@@ -33,7 +33,8 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-0
   parent: openAi
   name: chatDeploymentName
   sku: {
-    name: 'Standard'
+    // gpt-5-mini version 2025-08-07 is offered as GlobalStandard in West US.
+    name: 'GlobalStandard'
     capacity: 1
   }
   properties: {
@@ -48,6 +49,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-0
 resource embeddingDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-06-01' = {
   parent: openAi
   name: embeddingDeploymentName
+  // Azure OpenAI serializes account-level deployment operations. Do not submit
+  // this child deployment until the gpt-5-mini deployment has completed.
+  dependsOn: [
+    chatDeployment
+  ]
   sku: {
     name: 'Standard'
     capacity: 1

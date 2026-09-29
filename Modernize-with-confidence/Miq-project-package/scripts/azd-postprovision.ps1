@@ -26,6 +26,39 @@ function Invoke-AzChecked {
   if ($LASTEXITCODE -ne 0) { throw "Azure CLI command failed: az $($Arguments -join ' ')" }
 }
 
+function Wait-CaldovaEmbeddingDeployment {
+  param(
+    [Parameter(Mandatory)][string] $AccountName,
+    [Parameter(Mandatory)][string] $ApiKey,
+    [string] $DeploymentName = 'text-embedding-ada-002',
+    [int] $MaxAttempts = 80,
+    [int] $DelaySeconds = 15
+  )
+
+  # ARM can report the OpenAI deployment complete a little before the data-plane
+  # endpoint accepts embedding requests. Probe the actual endpoint so phase 3
+  # begins only when the model that generates the 12th table is usable.
+  $endpoint = "https://$AccountName.openai.azure.com/openai/deployments/$DeploymentName/embeddings?api-version=2023-05-15"
+  $body = @{ input = @('Caldova deployment readiness check') } | ConvertTo-Json -Compress
+  for ($attempt = 1; $attempt -le $MaxAttempts; $attempt++) {
+    try {
+      $response = Invoke-RestMethod -Uri $endpoint -Method Post -Headers @{ 'api-key' = $ApiKey } -ContentType 'application/json' -Body $body
+      if ($null -ne $response.data -and $response.data.Count -gt 0) {
+        Write-Host "Embedding deployment '$DeploymentName' is ready."
+        return
+      }
+      throw 'The embedding endpoint returned no vectors.'
+    }
+    catch {
+      if ($attempt -eq $MaxAttempts) {
+        throw "Embedding deployment '$DeploymentName' did not become available after $($MaxAttempts * $DelaySeconds / 60) minutes. Last error: $($_.Exception.Message)"
+      }
+      Write-Host "Waiting for embedding deployment '$DeploymentName' to become available ($attempt/$MaxAttempts)..."
+      Start-Sleep -Seconds $DelaySeconds
+    }
+  }
+}
+
 Write-Host "Phase 1/3 complete: infrastructure is provisioned."
 Write-Host "Opening temporary SQL firewall access for $clientIp..."
 Invoke-AzChecked @('sql', 'server', 'firewall-rule', 'create', '--resource-group', $resourceGroup, '--server', $sqlServerName, '--name', $firewallRuleName, '--start-ip-address', $clientIp, '--end-ip-address', $clientIp, '--output', 'none')
@@ -39,6 +72,8 @@ try {
 
     $openAiKey = (& az cognitiveservices account keys list --resource-group $resourceGroup --name $openAiAccountName --query key1 --output tsv).Trim()
     if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($openAiKey)) { throw 'Unable to retrieve the Azure OpenAI key required for embedding generation.' }
+    Write-Host 'Waiting for text-embedding-ada-002 before generating the 12th table...'
+    Wait-CaldovaEmbeddingDeployment -AccountName $openAiAccountName -ApiKey $openAiKey
     $embeddingScriptPath = Join-Path $projectRoot 'infra\sql\Embedding_Script.sql'
     $runtimeScriptPath = Join-Path $projectRoot 'infra\sql\.embedding-runtime.sql'
     try {
