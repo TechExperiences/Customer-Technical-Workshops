@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<CaldovaRepository>();
+builder.Services.AddSingleton<SemanticSearchService>();
 var app = builder.Build();
 app.UseExceptionHandler("/Home/Error");
 app.UseStaticFiles();

@@ -7,4 +7,5 @@ public record CustomerVm(int Id, string Code, string Company, string? Contact, s
 public record OrderVm(int Id, string Number, string Customer, DateTime Date, string Status, decimal Total);
 public record SemanticResult(int ProductId, string Name, string Category, string Content, decimal Score);
 public record SemanticVm(string Query, string Answer, IReadOnlyList<SemanticResult> Results);
+public record SemanticComparisonVm(string Query, string Answer, IReadOnlyList<ProductVm> TraditionalResults, IReadOnlyList<SemanticResult> SemanticResults);
 public class NewOrderVm { public int CustomerId { get; set; } public int ProductId { get; set; } public int Quantity { get; set; } = 1; public string? Message { get; set; } }

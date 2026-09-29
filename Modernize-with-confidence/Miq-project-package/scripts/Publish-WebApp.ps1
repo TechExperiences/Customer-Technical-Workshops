@@ -33,6 +33,19 @@ try {
     Start-Sleep -Seconds 10
   }
   if (-not $healthy) { throw "Web UI health check failed. Dashboard did not return HTTP 200: $url" }
+  $semanticUrl = "$url/SemanticSearch?query=medicine%20used%20to%20reduce%20fever"
+  $semanticHealthy = $false
+  for ($attempt = 1; $attempt -le 12; $attempt++) {
+    try {
+      $response = Invoke-WebRequest -Uri $semanticUrl -TimeoutSec 60 -UseBasicParsing
+      if ($response.StatusCode -eq 200 -and $response.Content -match 'Meaning-based matches') { $semanticHealthy = $true; break }
+    }
+    catch { }
+    Write-Host "[MIQ 6/6] Waiting for live semantic search validation ($attempt/12)..."
+    Start-Sleep -Seconds 15
+  }
+  if (-not $semanticHealthy) { throw "Semantic-search validation failed. The app could not complete the Azure OpenAI and Azure SQL vector-search path: $semanticUrl" }
+  Write-Host 'Semantic-search validation passed: Azure OpenAI embedding, Azure SQL vector ranking, and dashboard logging are working.'
   Write-Host "Web UI deployed: https://$WebAppName.azurewebsites.net"
 }
 finally {

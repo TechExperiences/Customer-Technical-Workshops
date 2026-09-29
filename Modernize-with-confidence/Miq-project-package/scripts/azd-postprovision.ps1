@@ -113,13 +113,17 @@ try {
     Invoke-CaldovaSqlNonQuery -Connection $appConnection -Sql $grantSql | Out-Null
   }
   finally { $appConnection.Dispose() }
-  $outboundIps = ((& az webapp show --resource-group $resourceGroup --name $webAppName --query outboundIpAddresses --output tsv).Trim() -split ',') | Where-Object { $_ }
+  # No VNet is used for this accelerator. Allow both active and potential outbound
+  # App Service addresses so a platform scale/rebalance does not break SQL access.
+  $activeOutboundIps = ((& az webapp show --resource-group $resourceGroup --name $webAppName --query outboundIpAddresses --output tsv).Trim() -split ',') | Where-Object { $_ }
+  $possibleOutboundIps = ((& az webapp show --resource-group $resourceGroup --name $webAppName --query possibleOutboundIpAddresses --output tsv).Trim() -split ',') | Where-Object { $_ }
+  $outboundIps = @($activeOutboundIps + $possibleOutboundIps | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Sort-Object -Unique)
   for ($index = 0; $index -lt $outboundIps.Count; $index++) {
     $ip = $outboundIps[$index].Trim()
     Invoke-AzChecked @('sql', 'server', 'firewall-rule', 'create', '--resource-group', $resourceGroup, '--server', $sqlServerName, '--name', "Allow-App-Service-$index", '--start-ip-address', $ip, '--end-ip-address', $ip, '--output', 'none')
   }
   Invoke-AzChecked @('webapp', 'config', 'appsettings', 'set', '--resource-group', $resourceGroup, '--name', $webAppName, '--settings', "AZURE_OPENAI_ENDPOINT=https://$openAiAccountName.openai.azure.com", "SQL_SERVER_NAME=$sqlServerName", 'ASPNETCORE_ENVIRONMENT=Production', '--output', 'none')
-  Invoke-AzChecked @('webapp', 'log', 'config', '--resource-group', $resourceGroup, '--name', $webAppName, '--application-logging', 'filesystem', '--level', 'information', '--detailed-error-messages', 'true')
+  Invoke-AzChecked @('webapp', 'log', 'config', '--resource-group', $resourceGroup, '--name', $webAppName, '--application-logging', 'filesystem', '--level', 'information', '--detailed-error-messages', 'true', '--failed-request-tracing', 'true', '--web-server-logging', 'filesystem')
   Write-Host '[MIQ 6/6] Building and deploying the Caldova web UI...'
   & (Join-Path $PSScriptRoot 'Publish-WebApp.ps1') -ResourceGroup $resourceGroup -WebAppName $webAppName
   Write-Host '[MIQ 6/6] Deployment complete. The App Service URL is shown above.'
