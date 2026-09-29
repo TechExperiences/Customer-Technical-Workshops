@@ -224,7 +224,50 @@ Follow below instructions to migrate On-prem web application to Azure app servic
 
    ![](../Sandbox-Environment-Guides/Images/appDB.png)
 
+1. In update application you can see **Semantic/Vector search** page got added.
+
+   ![](../Sandbox-Environment-Guides/Images/newapp.png)
+
+1. Click on **Traditional Sql Search Page** and paste the below prompt in search area and click on **search** button.
+
+   ``` 
+   medicine used to reduce fever
+   ```
+   ![](../Sandbox-Environment-Guides/Images/traditional.png)
+
+1. You can observe it will return no results.
+
+1. The migrated application currently uses traditional SQL search to find products based on exact text matches. Traditional SQL search typically relies on conditions such as `LIKE`, where the user's search terms need to closely match the words stored in the product description.
+
+   >  For example, if a product description contains:
+
+   "Paracetamol is used to relieve mild pain."
+
+   and the user searches for:
+
+   >  "medicine used to reduce fever"
+
+   a traditional SQL `LIKE` search may not return the product because the exact phrase **"medicine used to reduce fever"** does not appear in the product description.
+
+   This creates a limitation for users because they often search using natural language, synonyms, or different words that express the same meaning.
+
+1. To overcome this limitation, we will enhance the migrated application with **vector/semantic search** using Azure SQL Database Hyperscale and Azure OpenAI embeddings.
+
+1. Vector search converts product descriptions and user search queries into numerical **embeddings** that represent their meaning. The application can then compare the similarity between the user's query and product descriptions instead of relying only on exact keyword matches.
+
    >**Note:** Will do Semantic search validation once next deployment(Vector embedding) is done.
+
+1. In this Next Section, we will:
+
+   - Generate embeddings for the existing product descriptions using **Azure OpenAI**.
+   - Store the generated embeddings in **Azure SQL Database Hyperscale** using the native `VECTOR` data type.
+   - Generate an embedding for the user's natural-language search query.
+   - Compare the query embedding with product-description embeddings using vector similarity.
+   - Add a **Semantic/Vector Search** page to the migrated web application.
+   - Display matching products along with their similarity/probability scores.
+   - Add a visualization to demonstrate product search trends based on the vector-search results.
+
+This allows us to demonstrate how the migrated application can move from **keyword-based search** to **meaning-based search** using Azure AI capabilities.
 
 ## Implementation of Vector/Semantic Search in Azure SQL Database Hyperscale
 
@@ -286,18 +329,7 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
 1. Navigate Azure Portal and Open Migrated Application
 
-1. In update application you can see **Semantic/Vector search** page got added.
-
-   ![](../Sandbox-Environment-Guides/Images/newapp.png)
-
-1. Click on **Traditional Sql Search Page** and paste the below prompt in search area and click on **search** button.
-
-   ``` 
-   medicine used to reduce fever
-   ```
-   ![](../Sandbox-Environment-Guides/Images/traditional.png)
-
-1. You can observe it will return no results.
+1. In the updated application, you can see the **Semantic/Vector Search** page that has been added.
 
 1. Click on **Semantic/Vector search** page and paste the same prompt in search area and click on **search** button. 
 
@@ -306,7 +338,7 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
    ```
    ![](../Sandbox-Environment-Guides/Images/vector.png)
 
-1. It will provide all matching results.
+1. The semantic/vector search can identify products based on the meaning and semantic similarity of the query and product descriptions, even when the exact keywords are not present.
 
 
 
