@@ -1,5 +1,8 @@
 # Modernize with confidence CAIP Customer Workshops
-
+*Caldova representative customer journey*
+ 
+ ![](../Sandbox-Environment-Guides/Images/MWCNew.png)
+ 
 In this workshop, you will explore an end-to-end modernization journey from **legacy .NET Framework and on\-premises SQL Server to .NET 10 on Azure App Service and Azure SQL Database Hyperscale**.
 
 Using **whiteboarding and rapid prototyping**, participants assess the current environment, envision the target architecture, validate priority modernization scenarios, and build an actionable roadmap and three\-year business case.
