@@ -224,7 +224,7 @@ Follow below instructions to migrate On-prem web application to Azure app servic
 
    ![](../Sandbox-Environment-Guides/Images/appDB.png)
 
-1. In update application you can see **Semantic/Vector search** page got added.
+1. In migrated application you can see **Traditional Sql Search Page** page got added.
 
    ![](../Sandbox-Environment-Guides/Images/newapp.png)
 
