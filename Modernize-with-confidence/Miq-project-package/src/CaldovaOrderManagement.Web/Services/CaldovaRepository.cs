@@ -18,6 +18,7 @@ public sealed class CaldovaRepository(IConfiguration config, IHttpClientFactory 
         await using var cn = Connection(); await cn.OpenAsync(); await using var cmd = new SqlCommand(sql, cn); cmd.Parameters.AddRange(parameters);
         var value = await cmd.ExecuteScalarAsync(); return (T)Convert.ChangeType(value!, typeof(T));
     }
+    public async Task CheckDatabaseReadiness() { _ = await Scalar<int>("SELECT 1;"); }
     public async Task<DashboardVm> Dashboard() {
         const string sql = "SELECT COUNT(*) FROM dbo.ProductCatalog WHERE IsActive=1; SELECT COUNT(*) FROM dbo.Inventory WHERE QuantityAvailable>0; SELECT COUNT(*) FROM dbo.Orders WHERE OrderStatus NOT IN ('Delivered','Cancelled'); SELECT COUNT(*) FROM dbo.Shipments WHERE ShipmentStatus <> 'Delivered'; SELECT COUNT(*) FROM dbo.SemanticSearchLog; SELECT TOP(10) SearchDate, TopScore FROM dbo.SemanticSearchLog ORDER BY SearchDate DESC;";
         await using var cn=Connection(); await cn.OpenAsync(); await using var cmd=new SqlCommand(sql,cn); await using var r=await cmd.ExecuteReaderAsync();

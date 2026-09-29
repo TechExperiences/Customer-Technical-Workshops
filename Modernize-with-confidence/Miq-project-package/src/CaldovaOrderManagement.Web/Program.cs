@@ -5,6 +5,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<CaldovaRepository>();
 builder.Services.AddSingleton<SemanticSearchService>();
+builder.Logging.AddAzureWebAppDiagnostics();
 var app = builder.Build();
 app.UseExceptionHandler("/Home/Error");
 app.UseStaticFiles();

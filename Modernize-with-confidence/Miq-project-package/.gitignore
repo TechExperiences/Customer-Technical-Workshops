@@ -4,3 +4,5 @@
 .deployment-state.json
 .artifacts/
 infra/sql/.embedding-runtime.sql
+src/CaldovaOrderManagement.Web/bin/
+src/CaldovaOrderManagement.Web/obj/
