@@ -67,7 +67,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Navigate to **`C:\`** path **(1)**, then select the **Unifydata** folder **(2)** and then **Select folder (3)**.
 
-   ![](../Sandbox-Environment-Guides/Images/vscode.png)
+   ![](../Sandbox-Environment-Guides/Images/unifyvscode.png)
 
 1. From the **GitHub Copilot Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
 
@@ -93,62 +93,57 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Select the **Future-State-Architecture.png**.
 
-   ![](../Sandbox-Environment-Guides/Images/b88.png)
+   ![](../Sandbox-Environment-Guides/Images/unifyfolder.png)
 
 1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
 
-   ![](../Sandbox-Environment-Guides/Images/b89.png)
+   ![](../Sandbox-Environment-Guides/Images/unifyattach.png)
 
-### Fabric IQ
 
 1. Along with the attached **Solution Architecture** (1), please paste the below prompt (2).
 
    ```
-   You are my smart agent to read my attached architecture design for Zava Retail and create bicep/ARM template based on the identified resources.
- 
-   Please follow these below instructions for Fabric IQ section:
-   1. List down all the Azure resources from the attached architecture diagram.
-   2. Create a new resource group.
-   3. Create a new Fabric Capacity using **SKU F16** for the **West US 3** region.
-   4. Create a new Fabric Workspace attaching with above newly created capacity. 
-   5. Create Lakehouse and store sample data into tables(Tables should be as per architecture design)
-   6. Create Fabric Ontology using above Lakehouse tables with proper relationship and generate Ontology Graph View
-   7. Create Data Agent using above Ontology as a data source and prepare proper Agent Instruction based on these Ontology Entities.
-   
-   Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment(create workspace, create lakehouse, table creation, sample data insertion, ontology creation, data agent creation)
+   You are my smart agent to understand below are the problem statement and planned solution architecture design which will help to build Prototype.
+
+   Problem Statement: Caldova’s Operational, Analytical, and Business   Application data is fragmented across on-premises systems, cloud    platforms, and departmental applications. This creates data silos,   inconsistent business information, manual data preparation, and limited   visibility, making it difficult to establish a trusted enterprise view    and deliver timely business insights, cross-functional analytics, and   AI-driven decision-making as Caldova expands its products and markets.
+
+   Requirements: Pharmaceutical manufacturing industry needs to unify   operational and analytical data from multiple sources into a governed  data platform. It should integrate application data, transform and    enrich it for analytics, and provide a consistent business view through    Power BI semantic models. The solution should support trusted reporting    and AI-driven insights while maintaining security, governance, and   interoperability.
+   Planned Solution Architecture Design (Future-state-Architecture.png):   Attached.
+   Instructions to be followed:
+   1.	Use existing Resource Group (rg-unified) and proceed further.
+   2.	Use existing storage account(storage2417136) and container inside    this.
+   3.	Use existing Fabric Capacity (fabriccapacity2417136) and create a    new Fabric Workspace and attach capacity.
+   4.	Please provide access to the UPN (odl_user_2407136@sandboxailabs1002.   onmicrosoft.com) to see the fabric workspace.
+   5.	Create New Lakehouse in the above created fabric workspace.
+   6.	Use the existing Azure Blob Storage account (storage2417136) to   retrieve analytical data from the Data/Analytical path and ingest it   into the newly created Fabric Lakehouse using a Shortcut.  
+   7.	Use Fabric Mirroring (Mirrored Database) to ingest data from the  Azure SQL Database (OperationalData) into the newly created Fabric    Lakehouse.
+   8.	Validate the Fabric Lakehouse and its created tables to ensure that  all source data has been successfully ingested and is available and   accessible.
+
    ```
 
    - Then **Send (3)**.
 
-    ![](../Sandbox-Environment-Guides/Images/b12.png)
+    ![](../Sandbox-Environment-Guides/Images/unify_prompt.png)
    
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
-1. If Copilot Asks below question to create new Resource Group, please select the option similar to the one marked below.
+1. If Copilot Asks to aunthenticate like below, please click on provided link and provide the code which was given by copilot 
 
-   ![](../Sandbox-Environment-Guides/Images/Prompt-followup.png)
+   ![](../Sandbox-Environment-Guides/Images/Login.png)
+
+1. Click on Yes, completed and then click on **Submit** button
+    
+    ![](../Sandbox-Environment-Guides/Images/Login2.png)
 
 1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
-
-1. Select **Yes**, if any question prompts you to respond related to `F16` deployment.
-
-   ![](../Sandbox-Environment-Guides/Images/b13.png)
-
-1. If prompted to provide the UPN for assigning **Fabric Administrator access**, enter **<inject key="AzureAdUserEmail"></inject> (1)** and then select **Submit (2)**. 
-
-    ![](../Sandbox-Environment-Guides/Images/b14.png)
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
+   
+   >Wait for the deployment to complete. This may take approximately `20–30` minutes.
 
-1. Wait for the deployment to complete. This may take approximately `20–30` minutes. Once completed, you will see a Summary/Conclusion similar to the example below, although the details may vary **(1)** and select **Keep (2)** to keep the created files.
-
-   ![](../Sandbox-Environment-Guides/Images/b15.png)
-
-    >**Note:** The **Summary/Conclusion** may look different for you. Once the deployment is completed, you will be able to view the results in the chat.
-
-1. Once the deployment is complete, you can verify the deployed resources by navigating to the newly created resource group.
+1. Once the deployment is complete, you can verify the deployed resources by navigating to the resource group.
 
 1. Navigate to the Azure portal. Click on **Resource group**.
 
