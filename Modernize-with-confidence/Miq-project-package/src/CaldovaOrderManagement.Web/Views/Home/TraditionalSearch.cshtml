@@ -1,0 +1,2 @@
+@model IReadOnlyList<ProductVm>
+@{ViewData["Title"]="Traditional SQL Search";}<div class="title"><h1>Traditional SQL Search</h1><span>Keyword matching across product data</span></div><form><input name="q" value="@ViewBag.Query" placeholder="Try: fever, tablet, medicine"/><button>Search</button></form><partial name="_Products" model="Model"/>

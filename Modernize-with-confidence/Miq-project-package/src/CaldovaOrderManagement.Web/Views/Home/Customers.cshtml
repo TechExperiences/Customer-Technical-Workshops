@@ -1,0 +1,2 @@
+@model IReadOnlyList<CustomerVm>
+@{ViewData["Title"]="Customer Lookup";}<div class="title"><h1>Customer Lookup</h1></div><form><input name="q" value="@ViewBag.Query" placeholder="Company, customer code, or email"/><button>Search</button></form><table><tr><th>Code</th><th>Company</th><th>Contact</th><th>Email</th><th>Phone</th></tr>@foreach(var x in Model){<tr><td>@x.Code</td><td>@x.Company</td><td>@x.Contact</td><td>@x.Email</td><td>@x.Phone</td></tr>}</table>

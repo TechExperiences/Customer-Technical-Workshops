@@ -2,4 +2,5 @@
 .env
 .azure/
 .deployment-state.json
+.artifacts/
 infra/sql/.embedding-runtime.sql

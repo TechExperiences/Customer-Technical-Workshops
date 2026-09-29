@@ -104,7 +104,21 @@ try {
     & az role assignment create --assignee-object-id $appPrincipalId --assignee-principal-type ServicePrincipal --role 'Cognitive Services OpenAI User' --scope $openAiScope --output none 2>$null
     if ($LASTEXITCODE -ne 0) { Write-Warning 'Unable to assign Cognitive Services OpenAI User to the web app identity. Assign it manually if the deployment identity lacks role-assignment permission.' }
   }
-  & az webapp config appsettings set --resource-group $resourceGroup --name $webAppName --settings "AZURE_OPENAI_ENDPOINT=https://$openAiAccountName.openai.azure.com" --output none
+  if ([string]::IsNullOrWhiteSpace($appPrincipalId)) { throw 'Web app managed identity was not created.' }
+  $appSid = $appPrincipalId.Replace('-', '')
+  $appConnection = New-CaldovaSqlConnection -ServerName $sqlServerName -DatabaseName $databaseName
+  try {
+    $grantSql = "IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = N'$webAppName') CREATE USER [$webAppName] WITH SID = 0x$appSid, TYPE = E; IF NOT EXISTS (SELECT 1 FROM sys.database_role_members m JOIN sys.database_principals r ON r.principal_id=m.role_principal_id JOIN sys.database_principals u ON u.principal_id=m.member_principal_id WHERE r.name=N'db_datareader' AND u.name=N'$webAppName') ALTER ROLE db_datareader ADD MEMBER [$webAppName]; IF NOT EXISTS (SELECT 1 FROM sys.database_role_members m JOIN sys.database_principals r ON r.principal_id=m.role_principal_id JOIN sys.database_principals u ON u.principal_id=m.member_principal_id WHERE r.name=N'db_datawriter' AND u.name=N'$webAppName') ALTER ROLE db_datawriter ADD MEMBER [$webAppName];"
+    Invoke-CaldovaSqlNonQuery -Connection $appConnection -Sql $grantSql | Out-Null
+  }
+  finally { $appConnection.Dispose() }
+  $outboundIps = ((& az webapp show --resource-group $resourceGroup --name $webAppName --query outboundIpAddresses --output tsv).Trim() -split ',') | Where-Object { $_ }
+  for ($index = 0; $index -lt $outboundIps.Count; $index++) {
+    $ip = $outboundIps[$index].Trim()
+    Invoke-AzChecked @('sql', 'server', 'firewall-rule', 'create', '--resource-group', $resourceGroup, '--server', $sqlServerName, '--name', "Allow-App-Service-$index", '--start-ip-address', $ip, '--end-ip-address', $ip, '--output', 'none')
+  }
+  Invoke-AzChecked @('webapp', 'config', 'appsettings', 'set', '--resource-group', $resourceGroup, '--name', $webAppName, '--settings', "AZURE_OPENAI_ENDPOINT=https://$openAiAccountName.openai.azure.com", "SQL_SERVER_NAME=$sqlServerName", 'ASPNETCORE_ENVIRONMENT=Production', '--output', 'none')
+  & (Join-Path $PSScriptRoot 'Publish-WebApp.ps1') -ResourceGroup $resourceGroup -WebAppName $webAppName
 }
 finally {
   Write-Host 'Removing temporary SQL migration firewall access...'

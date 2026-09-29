@@ -10,10 +10,15 @@ This package provisions the Caldova modernization demo and runs the full local-C
 4. Verifies the relational schema and source-table counts.
 5. Waits until the `text-embedding-ada-002` data-plane endpoint accepts an embedding request, then runs `infra/sql/Embedding_Script.sql`, which creates `dbo.ProductDescriptionEmbeddings` and generates native `VECTOR(1536)` embeddings.
 6. Verifies generated embeddings, grants the web app identity Azure OpenAI access when permitted, then removes the temporary SQL firewall rule.
+7. Grants the App Service managed identity database access, permits its outbound IPs through SQL firewall rules, and publishes the live ASP.NET Core MVC UI to the generated App Service.
 
 `data/ProductDescriptionEmbeddings.csv` is deliberately excluded from initial import. The 12th table is generated from the imported product, category, and description data so the demo clearly shows the AI modernization phase.
 
 The local CSVs are a **simulated on-premises export**. The package does not connect to an on-premises VM and does not store any source-system credentials.
+
+## Web UI
+
+After a successful run, open `https://app-caldova-ordermgmt-<deployment-suffix>.azurewebsites.net`. The ASP.NET Core MVC UI provides a live dashboard, product availability, keyword search, semantic search, customer lookup, new-order creation, and order lookup. Semantic search embeds the question with `text-embedding-ada-002`, ranks `ProductDescriptionEmbeddings` with cosine distance in Azure SQL, and asks `gpt-5-mini` for a concise catalog-grounded answer. The App Service uses its managed identity; no SQL or OpenAI secret is stored in the application.
 
 ## Resources
 
@@ -40,7 +45,7 @@ Every deployment run generates a fresh random eight-character suffix for the App
 
 ## Prerequisites
 
-1. Azure CLI, Azure Developer CLI, and PowerShell 7.
+1. Azure CLI, Azure Developer CLI, PowerShell 7, and the .NET 10 SDK (the UI is published during `azd up`).
 2. The azd identity must be the Microsoft Entra SQL administrator configured in `.env`, or otherwise be authorized to connect as an Azure SQL Entra administrator.
 3. Permission to create resource groups/resources, list Azure OpenAI keys, and create role assignments if app OpenAI RBAC is required.
 4. An Azure OpenAI quota/model offer for `gpt-5-mini` and `text-embedding-ada-002` in West US.
