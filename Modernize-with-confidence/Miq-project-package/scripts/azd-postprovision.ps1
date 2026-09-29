@@ -91,7 +91,8 @@ try {
     }
 
     $embeddingCount = [int](Invoke-CaldovaSqlScalar -Connection $connection -Sql 'SELECT COUNT(*) FROM dbo.ProductDescriptionEmbeddings;')
-    if ($embeddingCount -le 0) { throw 'Embedding generation completed without creating any embeddings.' }
+    $expectedEmbeddingCount = [int](Invoke-CaldovaSqlScalar -Connection $connection -Sql "SELECT COUNT(*) FROM dbo.ProductDescriptions pd JOIN dbo.ProductCatalog p ON p.ProductID=pd.ProductID WHERE pd.LanguageCode='en-US' AND p.IsActive=1;")
+    if ($embeddingCount -ne $expectedEmbeddingCount) { throw "Embedding generation is incomplete: expected $expectedEmbeddingCount embeddings but found $embeddingCount." }
     Write-Host "Pipeline verification succeeded: 11 source tables imported and $embeddingCount generated embeddings stored in dbo.ProductDescriptionEmbeddings."
   }
   finally {
