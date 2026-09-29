@@ -19,6 +19,8 @@ $openAiAccountName = "openai-caldova-$suffix"
 $databaseName = 'CaldovaOrderManagement'
 $firewallRuleName = 'Allow-Azd-Migration-Client'
 $clientIp = if ([string]::IsNullOrWhiteSpace($env:SQL_MIGRATION_CLIENT_IP)) { (Invoke-RestMethod -Uri 'https://api.ipify.org').Trim() } else { $env:SQL_MIGRATION_CLIENT_IP }
+$deploymentRevision = (& git -C $projectRoot rev-parse --short HEAD).Trim()
+if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($deploymentRevision)) { throw 'Unable to determine the Git revision being deployed.' }
 
 function Invoke-AzChecked {
   param([string[]] $Arguments)
@@ -129,7 +131,7 @@ try {
     $ip = $outboundIps[$index].Trim()
     Invoke-AzChecked @('sql', 'server', 'firewall-rule', 'create', '--resource-group', $resourceGroup, '--server', $sqlServerName, '--name', "Allow-App-Service-$index", '--start-ip-address', $ip, '--end-ip-address', $ip, '--output', 'none')
   }
-  Invoke-AzChecked @('webapp', 'config', 'appsettings', 'set', '--resource-group', $resourceGroup, '--name', $webAppName, '--settings', "AZURE_OPENAI_ENDPOINT=https://$openAiAccountName.openai.azure.com", "SQL_SERVER_NAME=$sqlServerName", 'ASPNETCORE_ENVIRONMENT=Production', '--output', 'none')
+  Invoke-AzChecked @('webapp', 'config', 'appsettings', 'set', '--resource-group', $resourceGroup, '--name', $webAppName, '--settings', "AZURE_OPENAI_ENDPOINT=https://$openAiAccountName.openai.azure.com", "SQL_SERVER_NAME=$sqlServerName", "CALDOVA_DEPLOYMENT_REVISION=$deploymentRevision", 'ASPNETCORE_ENVIRONMENT=Production', '--output', 'none')
   Invoke-AzChecked @('webapp', 'log', 'config', '--resource-group', $resourceGroup, '--name', $webAppName, '--application-logging', 'filesystem', '--level', 'information', '--detailed-error-messages', 'true', '--failed-request-tracing', 'true', '--web-server-logging', 'filesystem')
   Write-Host '[MIQ 6/6] Building and deploying the Caldova web UI...'
   & (Join-Path $PSScriptRoot 'Publish-WebApp.ps1') -ResourceGroup $resourceGroup -WebAppName $webAppName

@@ -14,7 +14,7 @@ if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) { throw '.NET 10 SD
 function Save-CaldovaAppServiceDiagnostics {
   param([Parameter(Mandatory)][string] $Group, [Parameter(Mandatory)][string] $App)
   $diagnosticDirectory = Join-Path $projectRoot '.artifacts'
-  $diagnosticZip = Join-Path $diagnosticDirectory 'appservice-diagnostics.zip'
+  $diagnosticZip = Join-Path $diagnosticDirectory "appservice-diagnostics-$App.zip"
   New-Item -ItemType Directory -Path $diagnosticDirectory -Force | Out-Null
   if (Test-Path -LiteralPath $diagnosticZip) { Remove-Item -LiteralPath $diagnosticZip -Force }
   try {
