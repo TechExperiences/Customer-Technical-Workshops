@@ -48,6 +48,7 @@ BEGIN
     DECLARE @Embedding VECTOR(1536) = CAST(@EmbeddingJson AS VECTOR(1536));
     INSERT dbo.ProductDescriptionEmbeddings (ProductID, ProductDescriptionID, ContentText, Embedding) VALUES (@ProductID, @ProductDescriptionID, @ContentText, @Embedding);
     SET @Processed += 1;
+    IF @Processed % 10 = 0 PRINT CONCAT('Embedding progress: ', @Processed, ' generated.');
     -- Avoid the low request-per-minute limit common on demo Azure OpenAI quotas.
     WAITFOR DELAY '00:00:06';
     BREAK;

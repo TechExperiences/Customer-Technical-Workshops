@@ -14,7 +14,9 @@ foreach ($name in @('AZURE_SUBSCRIPTION_ID', 'SQL_ADMINISTRATOR_PASSWORD', 'SQL_
 $sqlPassword = ConvertTo-SecureString $env:SQL_ADMINISTRATOR_PASSWORD -AsPlainText -Force
 $sqlLogin = if ([string]::IsNullOrWhiteSpace($env:SQL_ADMINISTRATOR_LOGIN)) { 'sqladmincaldova' } else { $env:SQL_ADMINISTRATOR_LOGIN }
 
+Write-Host '[MIQ 1/6] Provisioning resource group, App Service, Azure SQL, and Azure OpenAI...'
 & (Join-Path $PSScriptRoot '..\deploy.ps1') -SubscriptionId $env:AZURE_SUBSCRIPTION_ID -SqlAdministratorLogin $sqlLogin -SqlAdministratorPassword $sqlPassword -SqlEntraAdministratorLogin $env:SQL_ENTRA_ADMIN_LOGIN -SqlEntraAdministratorObjectId $env:SQL_ENTRA_ADMIN_OBJECT_ID
 if ($LASTEXITCODE -ne 0) {
   throw "The fallback infrastructure deployment failed with exit code $LASTEXITCODE."
 }
+Write-Host '[MIQ 1/6] Infrastructure provisioning complete.'
