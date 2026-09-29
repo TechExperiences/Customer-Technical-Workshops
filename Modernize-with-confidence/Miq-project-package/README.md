@@ -50,6 +50,8 @@ Every deployment run generates a fresh random eight-character suffix for the App
 3. Permission to create resource groups/resources, list Azure OpenAI keys, and create role assignments if app OpenAI RBAC is required.
 4. An Azure OpenAI quota/model offer for `gpt-5-mini` and `text-embedding-ada-002` in West US.
 
+The template requests 10 Standard capacity units (normally 10K TPM) for `text-embedding-ada-002`. Azure must have that quota available in West US; Bicep cannot create or increase subscription quota.
+
 Azure OpenAI model deployments are created serially because the Azure OpenAI control plane permits only one deployment operation at a time per account. If Azure reports a transient in-progress operation, the deployment retries West US for up to six minutes before failing.
 5. A local `.env` copied from `.env.example`; it must contain the subscription ID, SQL admin password, and Entra SQL administrator values. Do not commit it.
 
