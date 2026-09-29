@@ -1,2 +1,11 @@
 @model NewOrderVm
-@{ViewData["Title"]="New Order";}<div class="title"><h1>New Order</h1><span>Create an order against the migrated Azure SQL data.</span></div><form method="post" class="order"><label>Customer ID<input asp-for="CustomerId" type="number"/></label><label>Product ID<input asp-for="ProductId" type="number"/></label><label>Quantity<input asp-for="Quantity" type="number" min="1"/></label><button>Create order</button></form>@if(Model.Message is not null){<p class="answer">@Model.Message</p>}<p class="hint">Use Customer Lookup and Product Availability to find IDs.</p>
+@{ ViewData["Title"] = "New Order"; }
+<div class="title"><div><h1>New Order</h1><span>Create an order against the live migrated Azure SQL data.</span></div></div>
+@if (Model.Message is not null) { <p class="answer">@Model.Message</p> }
+<form method="post" class="order order-card">
+  <label>Customer<select asp-for="CustomerId"><option value="">-- Select a customer --</option>@foreach (var customer in Model.Customers) { <option value="@customer.Id">@customer.Company (@customer.Code)</option> }</select></label>
+  <label>Product<select asp-for="ProductId"><option value="">-- Select a product --</option>@foreach (var product in Model.Products) { <option value="@product.ProductId">@product.Sku — @product.Name (available: @product.Available)</option> }</select></label>
+  <label>Quantity<input asp-for="Quantity" type="number" min="1" step="1"/></label>
+  <button type="submit">Create order</button>
+</form>
+<p class="hint">Only available stock can be ordered. The saved order, inventory, Order Lookup, and Dashboard are read from Azure SQL immediately.</p>
