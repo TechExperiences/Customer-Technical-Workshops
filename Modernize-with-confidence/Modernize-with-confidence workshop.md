@@ -4,7 +4,7 @@ In this workshop, you will explore an end-to-end modernization journey from **le
 
 Using **whiteboarding and rapid prototyping**, participants assess the current environment, envision the target architecture, validate priority modernization scenarios, and build an actionable roadmap and three\-year business case.
 
-## Customer Scenario: Caldova
+## Caldova Scenario:
 Caldova, an industrial equipment and spare-parts distributor, plans to expand into new markets and launch a customer portal for **product availability, ordering, and delivery tracking**.
 The current legacy application and database platform is slowing change, increasing operational effort, creating performance challenges, and limiting Caldova's ability to support future growth.
 
@@ -34,20 +34,15 @@ The workshop helps Caldova define and validate a practical modernization journey
 3. **GitHub Copilot** assists developers with code assessment, dependency updates, targeted refactoring, test generation, and developer review.
 
 ### Workshop Outcomes
-
-Customers leave the workshop with:
-
+You'll leave the workshop with:
 - Agreed target-state architecture
 - Application and database modernization readiness findings
 - Prioritized modernization backlog
 - Prototype-based technical validation
 - Execution roadmap with owners, decisions, and next steps
-
 ---
 
 ## Accessing your Sandbox Environment
-
-
 1. Once you're ready to dive in, your Virtual machine and Guide will be right at your fingertips within your web browser.
 
     >**Note**: If prompted, click on **Accept** to Proceed.
