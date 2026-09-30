@@ -12,7 +12,7 @@ param embeddingModelVersion string = '2'
 param embeddingModelCapacity int = 10
 
 var commonTags = {
-  managedBy: 'miq-bicep-fallback'
+  managedBy: 'mwc-bicep-fallback'
   workload: 'caldova-order-management'
 }
 
