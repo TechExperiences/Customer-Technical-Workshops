@@ -15,7 +15,7 @@ param entraAdministratorObjectId string
 param databaseSkuName string = 'HS_Gen5_2'
 
 var commonTags = {
-  managedBy: 'miq-bicep-fallback'
+  managedBy: 'mwc-bicep-fallback'
   workload: 'caldova-order-management'
 }
 
