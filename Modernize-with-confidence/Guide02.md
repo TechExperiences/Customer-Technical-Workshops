@@ -275,7 +275,7 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
 1. In **Visual Studio Code**, open the `.env` file from the project explorer.
 
-   ![](../Sandbox-Environment-Guides/Images/envdetails.png)
+   ![](../Sandbox-Environment-Guides/Images/amwc.png)
 
 1. Under the **Azure OpenAI Configuration** section, update the following variables with corresponding values:
 
