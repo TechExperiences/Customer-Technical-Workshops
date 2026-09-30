@@ -10,7 +10,7 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-03-01' = {
   name: resourceGroupName
   location: resourceGroupLocation
   tags: {
-    managedBy: 'miq-bicep-fallback'
+    managedBy: 'mwc-bicep-fallback'
     deploymentPurpose: 'caldova-order-management'
   }
 }
