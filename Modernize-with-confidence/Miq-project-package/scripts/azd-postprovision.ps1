@@ -12,7 +12,7 @@ if (-not (Test-Path -LiteralPath $statePath -PathType Leaf)) { throw 'Deployment
 $suffix = (Get-Content -LiteralPath $statePath -Raw | ConvertFrom-Json).deploymentSuffix
 if ([string]::IsNullOrWhiteSpace($suffix)) { throw 'Deployment state does not contain a deployment suffix.' }
 
-$resourceGroup = 'rg-caldova'
+$resourceGroup = 'rg-MWC'
 $webAppName = "app-caldova-ordermgmt-$suffix"
 $sqlServerName = "sql-caldova-$suffix"
 $openAiAccountName = "openai-caldova-$suffix"
