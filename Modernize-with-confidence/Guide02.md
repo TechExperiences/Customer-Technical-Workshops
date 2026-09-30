@@ -98,7 +98,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b89.png)
 
-## Migration From On-Prem SQl to Azure SQL DB Hyperscale
+## Migration From On-Prem SQL to Azure SQL DB Hyperscale
 
 Migrate the pharmaceutical manufacturing database from on-premises SQL Server to Azure SQL Database Hyperscale to provide scalable, highly available, and cloud-based data management. The migration preserves critical manufacturing, product, inventory, production, and operational data while enabling improved performance, scalability, and integration with modern Azure analytics and AI services.
 
