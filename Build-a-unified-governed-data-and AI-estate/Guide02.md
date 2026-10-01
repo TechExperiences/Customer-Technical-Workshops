@@ -212,7 +212,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    
    >Wait for the deployment to complete.
 
-1. Once the deployment is complete, you can verify the craeted Lakehouse in fabric workspace.
+1. Once the deployment is complete, you can verify the created Lakehouse in fabric workspace.
 
 1. Navigate to the **Microsoft Fabric** portal and Open the **Caldova_Lakehouse** lakehouse from the workspace.
 
@@ -247,6 +247,134 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ```
 
+1. Once the deployment is complete, you can verify the Created tables in the same Lakehouse.
+
+   ![](../Sandbox-Environment-Guides/Images/LH-operational.png)
+
+
+### Step 3: Loading Business Application Data into Fabric SQL Database:
+
+The business application data is currently stored as files in the **Azure Storage Account**. In this step, we will make this application data available in **Fabric SQL Database** so that it can be used by downstream applications, reporting, analytics, and AI workloads.
+
+The data movement will be orchestrated using an **Azure Logic App**. The Logic App will act as the integration layer between Azure Storage and Fabric SQL Database.
+
+1. Navigate back to Github Copilot 
+
+1. Copy the below prompt and paste it in the chat window 
+
+   ```
+   Great, you have brought all data. Please follow below instructions to bring Business application data to Fabric SQL Database.
+ 
+   Instructions:
+   
+   1. Use existing Resource Group: rg-unified.
+   
+   2. Create a new Fabric SQL Database in the existing Fabric Workspace    (Caldova-Pharma).
+   
+   3. Create a new Azure Integration Service in the above resource group.
+   
+   4. Create an Azure Logic App to read Application data from:    storage2410878→ Application folder under data contrainer and load it into  the Fabric SQL Database.
+
+   ```
+
+1. When the terminal prompts you to install the required extension, review the message displayed.
+
+1. If you see the following prompt:
+
+   ```text
+   The command requires the extension logic.
+   Do you want to install it now?
+   The command will continue to run after the extension is installed. (Y/n):
+
+1. Enter Y and press Enter to allow the required Azure CLI extension to be installed.
+
+   ![](../Sandbox-Environment-Guides/Images/LogicApp-Extension.png)
+
+1. Once the deployment is complete, you can verify the Created tables in Fabric SQL Database
+
+1. Open the **Caldova_BusinessApp_SQLDB** from the **Caldova-Pharma** workspace.
+
+1. In the **Explorer** pane, expand **dbo** and then expand **Tables**.
+
+1. Verify that the business application tables have been loaded successfully. For example:
+   - **CustomerAddress**
+   - **CustomerDetails**
+
+   ![](../Sandbox-Environment-Guides/Images/Fabric-SQLDB.png)
+
+1. Next, navigate to the **Azure Portal** and open the **rg-Unified** resource group.
+
+1. Under **Resources**, verify that the integration components created for the data-loading process are available:
+   - **caldova-blob-connection** – API connection used to connect to the Azure Storage account.
+   - **caldova-businessapp-ingest** – Logic App responsible for orchestrating the data ingestion.
+   - **caldova-fabricsql-connection** – API connection used to connect to the Fabric SQL Database.
+   - **caldova-integration-account** – Integration Account used as part of the integration workflow.
+
+   ![](../Sandbox-Environment-Guides/Images/LogicApp-Int.png)
+
+### Step 4: 
+
+1. Navigate back to Github Copilot 
+
+1. Copy the below prompt and paste it in the chat window 
+
+   ```
+   Great, You have loaded all data, please follow below instructions to create semantic model and Data agent in fabric workspace
+ 
+   1. Create ONE Semantic Model using Direct Lake mode.  
+   
+   Add ALL tables from the existing Fabric Lakehouse and Fabric SQL Database.
+   
+   Create and validate proper relationships between related tables.
+   
+   Ensure all tables and relationships are visible, connected, and usable in  the Semantic Model.
+   
+   2. Create one Data Agent using the Semantic Model and add concise instructions based on the available tables.
+
+   ```
+1. Navigate to Fabric Portal
+
+1. Open the created **semantic model** and review the configured table relationships to ensure the data model is correctly connected.
+
+   ![](../Sandbox-Environment-Guides/Images/Semantic-Model.png)
+
+1. Locate the created **semantic model** and Select the **More options (...)** menu for the semantic model and Select **Create report**.
+
+   ![](../Sandbox-Environment-Guides/Images/Create-Report.png)
+
+1. Click on **Copilot** icon on top and paste the below prompt and click send button to create Report 
+
+   ```
+   Create a Caldova Pharma Operations Report using only the attached semantic model. Build a clean single-page dashboard with 5 KPI cards at the top (Orders, Revenue/Sales, Products, Customers, Inventory/Stock), followed by 3–4 visuals including a donut chart, bar chart, line chart, and trend chart. Use relevant fields and measures from the model without inventing data, and apply a professional, consistent blue theme with clear titles, proper formatting, and an executive-friendly layout.
+
+   ```
+
+   ![](../Sandbox-Environment-Guides/Images/PowerBI-Prompt.png)
+
+1. Once Copilot finishes creating the report, review the generated report.
+
+   ![](../Sandbox-Environment-Guides/Images/Report.png)
+
+1. Navigate to the created **Data Agent**.
+
+1. Open the **Data** section and verify that the tables are selected and available to the Data Agent.
+
+   - If the tables are not selected, select the tables.
+
+   ![](../Sandbox-Environment-Guides/Images/DataAgent.png)
+
+1. Open the **Test Agent** option.
+
+1. Copy the following prompt and paste it into the test chat: 
+
+   ```
+   What is our average supplier lead time by supplier, and which supplier has the best quality rating?
+
+   ```
+
+1. Review the response provided by the **Data Agent**
+
+   ![](../Sandbox-Environment-Guides/Images/DA-Response.png)
 
 
 
