@@ -21,6 +21,8 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
 1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQCgG6cKI3xwSon2DSEbtOmxAUc7nM9jphqv7ozbt4RC8aU?e=5Vyzra), then select **Copy link** and then paste it on the browser tab.
 
+   > **&lt;TODO&gt;:** Update this link to the Whiteboard for the finalized Caldova architecture.
+
 1. If prompted, sign in with your ODL user credentials.
 
 1. Once you login, you will get a pop-up message to create the new Whiteboard. Read the message and click **Got it**.
@@ -31,8 +33,7 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
    ![](../Sandbox-Environment-Guides/Images/cd35.png)
 
-   > [!IMPORTANT]
-   > **&lt;TODO&gt;:** Update the linked Whiteboard and this screenshot once we finalize the Caldova story and future-state architecture. Keep the current link and image until the revised versions are ready.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Whiteboard for the finalized Caldova architecture.
 
 1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a Future-state solution architecture.
 
