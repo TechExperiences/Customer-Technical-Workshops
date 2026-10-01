@@ -69,6 +69,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b56.png)
 
+   > **&lt;TODO&gt;:** If the project folder name changes, update it in this step and screenshot.
+
 1. From the **GitHub Copilot Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b6.png)
@@ -80,6 +82,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 1. Click **Auto (1)** and then set the model to **Claude Sonnet 5 (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b7.png)
+
+   > **&lt;TODO&gt;:** Confirm the model, thinking effort, and context window in the VM, then update this step and screenshot.
 
     >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
 
