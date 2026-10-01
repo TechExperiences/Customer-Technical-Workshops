@@ -140,15 +140,21 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/Prompt-followup.png)
 
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova deployment choice in Copilot.
+
 1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
 
 1. Select **Yes**, if any question prompts you to respond related to `F16` deployment.
 
    ![](../Sandbox-Environment-Guides/Images/b13.png)
 
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova F16 deployment confirmation using Fable 5.1.
+
 1. If prompted to provide the UPN for assigning **Fabric Administrator access**, enter **<inject key="AzureAdUserEmail"></inject> (1)** and then select **Submit (2)**. 
 
     ![](../Sandbox-Environment-Guides/Images/b14.png)
+
+    > **&lt;TODO&gt;:** Replace this screenshot with the Caldova deployment and lab user access prompt using Fable 5.1.
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
 
@@ -157,6 +163,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 1. Wait for the deployment to complete. This may take approximately `20–30` minutes. Once completed, you will see a Summary/Conclusion similar to the example below, although the details may vary **(1)** and select **Keep (2)** to keep the created files.
 
    ![](../Sandbox-Environment-Guides/Images/b15.png)
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova deployment summary and created items.
 
     >**Note:** The **Summary/Conclusion** may look different for you. Once the deployment is completed, you will be able to view the results in the chat.
 
@@ -185,13 +193,19 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b16.png)
 
+   > **&lt;TODO&gt;:** Replace this screenshot with the resource group list showing the Caldova deployment.
+
 1. Select the newly created Resource Group, excluding the **resource groups** highlighted below.
 
    ![](../Sandbox-Environment-Guides/Images/b55.png)
 
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova resource group selection.
+
 1. You should see the deployed Fabric capacity.
 
    ![](../Sandbox-Environment-Guides/Images/b17.png)
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the deployed Caldova Fabric capacity and resource group.
 
 1. Click on the **App launcher (1)** and select **Microsoft fabric** icon.
 
@@ -213,13 +227,19 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
     ![](../Sandbox-Environment-Guides/Images/b19.png)   
 
+    > **&lt;TODO&gt;:** Replace this screenshot with the Caldova workspace-access recovery prompt.
+
 1. Wait for the process to complete and then **Keep** the file.
 
    ![](../Sandbox-Environment-Guides/Images/b20.png)
 
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova workspace-access verification result.
+
 1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace which starts with something similar to `Zava Retail`.
 
    ![](../Sandbox-Environment-Guides/Images/b21.png)
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the visible Caldova workspace.
 
 1. Open the **Zava Retail** workspace.
 
@@ -227,11 +247,15 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b22.png)
 
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova workspace items.
+
 1. Please open each item and verify that it has been created correctly. If anything is missing, go back to the **GitHub Copilot Chat** and provide a follow-up prompt to address the missing item.  
 
 1. In this case, when I opened the workspace. There are no tables created in the Lakehouse.
 
    ![](../Sandbox-Environment-Guides/Images/b23.png)
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova Lakehouse and its actual table state.
 
 1. Navigate back to the **GitHub Copilot Chat** to send the follow up prompt.
 
@@ -245,25 +269,37 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
     ![](../Sandbox-Environment-Guides/Images/b25.png)
 
+    > **&lt;TODO&gt;:** Replace this screenshot with the follow-up prompt for any issues found in the Caldova deployment.
+
 1. Wait for the process to complete and click **Keep** to keep the file.
 
    ![](../Sandbox-Environment-Guides/Images/b24.png)
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the actual Caldova repair and verification results.
 
 1. Navigate back to the Fabric workspace, refresh the Lakehouse, and verify that the tables have been created and the sample data has been loaded successfully.
 
    ![](../Sandbox-Environment-Guides/Images/b26.png)
 
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova tables and generated data.
+
 1. Open the **Ontology** item and verify that the entities and relationships have been created successfully.
 
    ![](../Sandbox-Environment-Guides/Images/b27.png)
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology entities and relationships.
 
 1. Select **Product** Entity **(1)** and then click on **View Entity Type details (2)**.   
 
    ![](../Sandbox-Environment-Guides/Images/b60.png)
 
+   > **&lt;TODO&gt;:** Replace this screenshot with entity selection in the Caldova ontology.
+
 1. Click on **Overview**.
 
    ![](../Sandbox-Environment-Guides/Images/b61.png)
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the selected Caldova entity details and property bindings.
 
 1. Set the `Time range` to **Last 30 minutes (1)**,
 
@@ -277,6 +313,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/graph.png)
 
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology relationship graph.
+
 1. Close the **Ontology** page.
 
 1. Open the **Data Agent** from the workspace and verify that the **Ontology** is configured as the Data Source.
@@ -289,19 +327,27 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
      ![](../Sandbox-Environment-Guides/Images/b28.png)
 
+     > **&lt;TODO&gt;:** Replace this screenshot with the Caldova data agent and its data sources.
+
    - Click **Yes, remove**. 
 
    - Select **Add data (1)** drop down and then **Data source (2)**.
 
      ![](../Sandbox-Environment-Guides/Images/b30.png)   
 
+     > **&lt;TODO&gt;:** Replace this screenshot with the Add data menu in the Caldova data agent.
+
    - Select the **Ontology (1)** and then **Add (2)**.
 
      ![](../Sandbox-Environment-Guides/Images/b31.png)        
 
+     > **&lt;TODO&gt;:** Replace this screenshot with selection of the Caldova ontology.
+
 1. Make sure Ontology is added.
 
    ![](../Sandbox-Environment-Guides/Images/b32.png)
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology attached to the data agent.
 
 1. Navigate to **Test data agent (1)**, send the following prompts in Data agent input box **(2)**:
 
@@ -311,19 +357,27 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b58.png)   
 
+   > **&lt;TODO&gt;:** Replace this screenshot with a Caldova capacity question and its grounded response.
+
    ```
    List all suppliers and their lead times.
    ```
 
    ![](../Sandbox-Environment-Guides/Images/b59.png)    
 
+   > **&lt;TODO&gt;:** Replace this screenshot with a Caldova supplier or CMO question and its grounded response.
+
 1. Click on **Publish**.
 
    ![](../Sandbox-Environment-Guides/Images/b65.png)  
 
+   > **&lt;TODO&gt;:** Replace this screenshot with publication of the Caldova data agent and current test results.
+
 1. Click on **Publish** again to publish the data agent.
 
    ![](../Sandbox-Environment-Guides/Images/b66.png)  
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova data agent publication dialog.
 
 ### Foundry IQ    
 
