@@ -200,10 +200,19 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
       >**Note:** Not the one which starts with **Microsoft IQ**.
 
-1. From the **GitHub Copilot Chat**, send the the below prompt to make the UPN **<inject key="AzureAdUserEmail"></inject>** as Fabric admin **(1)** and then **Send (2)**.
+1. **Optional: Fix workspace access.** If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. Replace `<LAB_USER_UPN>` with your lab user UPN: **<inject key="AzureAdUserEmail"></inject>**. If the workspace is already accessible, skip this step and the next access-fix completion step.
 
    ```
-   Please provide Fabric admin access to the UPN <inject key="AzureAdUserEmail"></inject> to see the fabric workspace
+   I cannot see the Caldova workspace created by the previous deployment in the Fabric portal.
+
+   Using deployment-output.json and the existing deployment identity:
+   1. Verify that the workspace exists through the Fabric API and report its workspace ID and tenant ID.
+   2. Resolve the lab user <LAB_USER_UPN> to the correct user object ID in that tenant.
+   3. Grant this user Admin access to the existing workspace, preserving existing access.
+   4. Verify the user's workspace role assignment and confirm the workspace is attached to the deployed F16 capacity.
+   5. Provide the direct workspace URL and report the actual API verification results.
+
+   Reuse the existing resources. Do not recreate the workspace, reload data, or rerun the full deployment. This request is for workspace access, not a tenant-wide Fabric Administrator role.
    ```
 
     ![](../Sandbox-Environment-Guides/Images/b19.png)   
