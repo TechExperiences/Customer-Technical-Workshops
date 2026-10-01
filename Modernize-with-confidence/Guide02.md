@@ -64,9 +64,9 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp27.png)
 
-1. Navigate to **`C:\`** path **(1)**, then select the **miq-project** folder **(2)** and then **Select folder (3)**.
+1. Navigate to **`C:\`** path **(1)**, then select the **mwc-project** folder **(2)** and then **Select folder (3)**.
 
-   ![](../Sandbox-Environment-Guides/Images/b56.png)
+   ![](../Modernize-with-confidence/Images/m1.png)
 
 1. From the **GitHub Copilot Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
 
