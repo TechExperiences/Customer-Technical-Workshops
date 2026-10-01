@@ -312,7 +312,7 @@ The data movement will be orchestrated using an **Azure Logic App**. The Logic A
 
    ![](../Sandbox-Environment-Guides/Images/LogicApp-Int.png)
 
-### Step 4: 
+### Step 4: Building Semantic Model using Fabric Lakehouse and SQL Database to generate PowerBI report
 
 1. Navigate back to Github Copilot 
 
@@ -355,6 +355,8 @@ The data movement will be orchestrated using an **Azure Logic App**. The Logic A
 
    ![](../Sandbox-Environment-Guides/Images/Report.png)
 
+### Building Data Agent using Sementic Model.
+
 1. Navigate to the created **Data Agent**.
 
 1. Open the **Data** section and verify that the tables are selected and available to the Data Agent.
@@ -377,5 +379,27 @@ The data movement will be orchestrated using an **Azure Logic App**. The Logic A
    ![](../Sandbox-Environment-Guides/Images/DA-Response.png)
 
 
+### Govern & Secure - Caldova Operation
+Use OneLake Catalog to provide centralized governance and security for Caldova Pharma’s Fabric workspaces, enabling visibility and management of data assets, access permissions, sensitivity, lineage, ownership, and compliance policies across the unified data platform.
 
-### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session and validated the Microsoft IQ solution across` Fabric IQ, Foundry IQ`, and `Work IQ`.
+1. Click **OneLake Catalog** and navigate to catalog page.
+
+   ![](../Sandbox-Environment-Guides/Images/OneLake-Catalog.png)
+
+1. Landing page of OneLake Catalog with show items and sub-items for all the workspaces.
+
+   ![](../Sandbox-Environment-Guides/Images/Cat-Exp.png)
+
+1. Click the **Govern** tab to view key insights about the content you've created in Microsoft Fabric.
+
+   ![](../Sandbox-Environment-Guides/Images/Govern.png)
+
+1. Click the **Secure** tab where all users will be managed under one space and add, remove, and manage access accross all the domains and workspaces.
+
+
+   ![](../Sandbox-Environment-Guides/Images/Secure.png)
+
+   > **Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
+
+
+#### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session and validated the Unified governed Data&AI estate.
