@@ -17,12 +17,12 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    ![](../Sandbox-Environment-Guides/Images/RG.png)
 
 1.  Confirm that the resource group contains the following resources:
-   - **Fabric Capacity**
-   - **SQL Database** 
-   - **SQL Server** 
-   - **Storage Account**
+      - **Fabric Capacity**
+      - **SQL Database** 
+      - **SQL Server** 
+      - **Storage Account**
 
-   ![](../Sandbox-Environment-Guides/Images/rg-resource.png)
+      ![](../Sandbox-Environment-Guides/Images/rg-resource.png)
 
 1. Verify that the resources are available in their respective Azure regions and that the migration environment has been provisioned successfully.
 
