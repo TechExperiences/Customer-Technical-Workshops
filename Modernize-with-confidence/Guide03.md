@@ -1,1 +1,1 @@
-# Modernize with confidence Package
+# Modernize with Confidence Package
