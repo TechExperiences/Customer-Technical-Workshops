@@ -14,7 +14,11 @@
       {
         "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Customer-Technical-Workshops/refs/heads/main/Modernize-with-confidence/Guide02.md",
         "Order": 3
-      }
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Customer-Technical-Workshops/refs/heads/main/Modernize-with-confidence/Guide03.md",
+        "Order": 4
+      }      
     ]  
   }
 ]
