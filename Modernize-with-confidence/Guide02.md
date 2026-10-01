@@ -276,6 +276,8 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
    - `AZURE_OPENAI_ENDPOINT` > <inject key="openaiEndpoint" enableCopy="false"/>
    - `AZURE_OPENAI_API_KEY` > <inject key="openaiPrimaryKey" enableCopy="false"/>
 
+1. Save the file.   
+
 1. Copy the below prompt and paste it in chat window
 
    ```
