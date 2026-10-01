@@ -79,11 +79,11 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp30.png)
 
-1. Click **Auto (1)** and then set the model to **Claude Sonnet 5 (2)**.
+1. Click **Auto (1)** and then set the model to **Claude Fable 5.1 (2)** with **High** thinking effort and **1M** context.
 
    ![](../Sandbox-Environment-Guides/Images/b7.png)
 
-   > **&lt;TODO&gt;:** Update this step and screenshot to show Claude Fable 5.1 with High thinking effort and 1M context.
+   > **&lt;TODO&gt;:** Update this screenshot to show Claude Fable 5.1 with High thinking effort and 1M context.
 
     >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
 
@@ -95,15 +95,17 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp33.png)
 
-1. Select the **Future-State-Architecture.png**.
+1. Select the approved **Caldova-Future-State-Architecture.png** image.
 
    ![](../Sandbox-Environment-Guides/Images/b88.png)
 
    > **&lt;TODO&gt;:** Update this screenshot to show the approved Caldova future-state architecture image.
 
-1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
+1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the approved **Caldova-Future-State-Architecture.png (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b89.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the approved Caldova architecture attachment.
 
 ### Fabric IQ
 
@@ -129,6 +131,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    - Then **Send (3)**.
 
     ![](../Sandbox-Environment-Guides/Images/b12.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova Fabric IQ prompt.
    
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
@@ -155,6 +159,25 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    ![](../Sandbox-Environment-Guides/Images/b15.png)
 
     >**Note:** The **Summary/Conclusion** may look different for you. Once the deployment is completed, you will be able to view the results in the chat.
+
+1. **Optional: Resolve workspace access after deployment.** If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. Replace `<LAB_USER_UPN>` with your lab user UPN: **<inject key="AzureAdUserEmail"></inject>**.
+
+   > **Note:** Deployment may run as a service principal that is the only workspace admin. Your lab user needs access to that workspace. Use the existing deployment; do not rerun the initial prompt.
+
+   ```
+   I cannot see the Caldova workspace created by the previous deployment in the Fabric portal.
+
+   Using deployment-output.json and the existing deployment identity:
+   1. Verify that the workspace exists through the Fabric API and report its workspace ID and tenant ID.
+   2. Resolve the lab user <LAB_USER_UPN> to the correct user object ID in that tenant.
+   3. Grant this user Admin access to the existing workspace, preserving existing access.
+   4. Verify the user's workspace role assignment and confirm the workspace is attached to the deployed F16 capacity.
+   5. Provide the direct workspace URL and report the actual API verification results.
+
+   Reuse the existing resources. Do not recreate the workspace, reload data, or rerun the full deployment. This request is for workspace access, not a tenant-wide Fabric Administrator role.
+   ```
+
+   - After access is confirmed, refresh the Fabric portal while signed in with the same lab user and tenant, then open the Caldova workspace using the returned URL. If needed, sign out and sign back in to refresh your session.
 
 1. Once the deployment is complete, you can verify the deployed resources by navigating to the newly created resource group.
 
