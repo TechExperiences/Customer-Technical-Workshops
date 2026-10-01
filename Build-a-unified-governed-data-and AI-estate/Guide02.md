@@ -379,7 +379,7 @@ The data movement will be orchestrated using an **Azure Logic App**. The Logic A
    ![](../Sandbox-Environment-Guides/Images/DA-Response.png)
 
 
-### Govern & Secure - Caldova Operation
+### Step 5: Govern & Secure - Caldova Operation
 Use OneLake Catalog to provide centralized governance and security for Caldova Pharma’s Fabric workspaces, enabling visibility and management of data assets, access permissions, sensitivity, lineage, ownership, and compliance policies across the unified data platform.
 
 1. Click **OneLake Catalog** and navigate to catalog page.
