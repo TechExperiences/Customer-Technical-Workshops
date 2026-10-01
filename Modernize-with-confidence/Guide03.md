@@ -36,6 +36,8 @@ Migrate the pharmaceutical manufacturing web application (Order Management) from
 
 ### Validation - Azure App Service
 
+Navigate back to Azure portal to validate the migrated web application and search for `rg-MWC` Resource Group. you can see App service resources along with SQL Database.
+
 1. Navigate back to **rg-MWC** RG. Select the App Service named Click on **app-caldova-ordermanagement-xxxx**.
 
    ![](../Modernize-with-confidence/Images/m6.png)
