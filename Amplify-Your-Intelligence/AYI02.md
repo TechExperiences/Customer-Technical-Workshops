@@ -110,16 +110,18 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 1. Along with the attached **Solution Architecture** (1), please paste the below prompt (2).
 
    ```
-   You are my smart agent to read my attached architecture design for Zava Retail and create bicep/ARM template based on the identified resources.
+   You are my smart agent to read my attached architecture design for Caldova Pharmaceutical and its November NextGen Pharma product launch and create bicep/ARM template based on the identified Fabric resources.
  
    Please follow these below instructions for Fabric IQ section:
-   1. List down all the Azure resources from the attached architecture diagram.
+   1. List down all the Azure resources required for the Fabric IQ section of the attached architecture diagram.
    2. Create a new resource group.
    3. Create a new Fabric Capacity using **SKU F16** for the **West US 3** region.
    4. Create a new Fabric Workspace attaching with above newly created capacity. 
-   5. Create Lakehouse and store sample data into tables(Tables should be as per architecture design)
+   5. Create Lakehouse and use GitHub Copilot to generate and store sample data into tables for the Fabric data sources shown in the architecture: Plant Capacity & Commitments, Batch Schedules & Changeovers, Equipment & Fill-Finish Availability, Product & Inventory Data, Demand Forecasts, Supplier & CMO Capacity, Quality & CMO Evaluation Records, Launch & Competitive Products, and RFP Status. Keep these as tables in the same Lakehouse; no external database connections are required.
+      Keep shared IDs, dates and production units consistent across tables. Include required launch production, committed production, maximum plant capacity, equipment qualification windows, fill-finish availability and feasible internal schedule recovery.
+      Generate data for the same November launch planning period across three plants, with a 7% network production shortfall (about 18,900 units), Plant 3 as the binding constraint, and insufficient internal recovery to fully close the gap. Document and validate the shortfall calculation using required launch production as the denominator. Include available capacity and qualification records for pre-qualified CMOs to support evaluating external manufacturing options.
    6. Create Fabric Ontology using above Lakehouse tables with proper relationship and generate Ontology Graph View
-   7. Create Data Agent using above Ontology as a data source and prepare proper Agent Instruction based on these Ontology Entities.
+   7. Create Data Agent using above Ontology as a data source and prepare proper Agent Instruction based on these Ontology Entities. Instruct it to calculate committed production versus maximum capacity by plant, the network shortfall and feasible internal recovery from the tables, identify the constrained plant, and assess whether external CMO capacity is needed for the November launch. Show the calculation, units and planning period; do not hard-code the answers.
    
    Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment(create workspace, create lakehouse, table creation, sample data insertion, ontology creation, data agent creation)
    ```
