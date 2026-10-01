@@ -83,7 +83,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b7.png)
 
-   > **&lt;TODO&gt;:** Confirm the model, thinking effort, and context window in the VM, then update this step and screenshot.
+   > **&lt;TODO&gt;:** Update this step and screenshot to show Claude Fable 5.1 with High thinking effort and 1M context.
 
     >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
 
