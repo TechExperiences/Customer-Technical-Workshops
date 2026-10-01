@@ -10,8 +10,26 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
 
-### Sign in to GitHub Copilot Chat
+### Step1: Verify Resources in the Azure Resource Group
 
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
+
+   ![](../Sandbox-Environment-Guides/Images/RG.png)
+
+1.  Confirm that the resource group contains the following resources:
+   - **Fabric Capacity**
+   - **SQL Database** 
+   - **SQL Server** 
+   - **Storage Account**
+
+   ![](../Sandbox-Environment-Guides/Images/rg-resource.png)
+
+1. Verify that the resources are available in their respective Azure regions and that the migration environment has been provisioned successfully.
+
+
+## Sign in to GitHub Copilot Chat
+
+### Step 1: Creation Of Fabric Workspace
 
 1. Click on the **Visual Studio Code** from the VM desktop.
 
@@ -91,33 +109,25 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp33.png)
 
-1. Select the **Future-State-Architecture.png**.
 
-   ![](../Sandbox-Environment-Guides/Images/unifyfolder.png)
-
-1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/unifyattach.png)
-
-
-1. Along with the attached **Solution Architecture** (1), please paste the below prompt (2).
+1. Please copy the below prompt and paste it in the copilot chat win
 
    ```
-   You are my smart agent to understand below are the problem statement and planned solution architecture design which will help to build Prototype.
-
-   Problem Statement: Caldova’s Operational, Analytical, and Business   Application data is fragmented across on-premises systems, cloud    platforms, and departmental applications. This creates data silos,   inconsistent business information, manual data preparation, and limited   visibility, making it difficult to establish a trusted enterprise view    and deliver timely business insights, cross-functional analytics, and   AI-driven decision-making as Caldova expands its products and markets.
-
-   Requirements: Pharmaceutical manufacturing industry needs to unify   operational and analytical data from multiple sources into a governed  data platform. It should integrate application data, transform and    enrich it for analytics, and provide a consistent business view through    Power BI semantic models. The solution should support trusted reporting    and AI-driven insights while maintaining security, governance, and   interoperability.
-   Planned Solution Architecture Design (Future-state-Architecture.png):   Attached.
-   Instructions to be followed:
-   1.	Use existing Resource Group (rg-unified) and proceed further.
-   2.	Use existing storage account(storage2417136) and container inside    this.
-   3.	Use existing Fabric Capacity (fabriccapacity2417136) and create a    new Fabric Workspace and attach capacity.
-   4.	Please provide access to the UPN (odl_user_2407136@sandboxailabs1002.   onmicrosoft.com) to see the fabric workspace.
-   5.	Create New Lakehouse in the above created fabric workspace.
-   6.	Use the existing Azure Blob Storage account (storage2417136) to   retrieve analytical data from the Data/Analytical path and ingest it   into the newly created Fabric Lakehouse using a Shortcut.  
-   7.	Use Fabric Mirroring (Mirrored Database) to ingest data from the  Azure SQL Database (OperationalData) into the newly created Fabric    Lakehouse.
-   8.	Validate the Fabric Lakehouse and its created tables to ensure that  all source data has been successfully ingested and is available and   accessible.
+   You are my Smart Agent supporting Caldova Pharma. I am planning to build a unified solution to improve business operations and decision-making.
+ 
+   Please follow the instructions below to build Fabric Workspace:
+   
+   Instructions:
+   
+   Use existing Resource Group (rg-unified) and proceed further.
+   
+   Use existing storage account(storage2410878) and container inside this.
+   
+   Use existing Fabric Capacity (fabriccapacity2410878).
+   
+   Create a new Fabric Workspace (Caldova-Pharma) and attach capacity.
+   
+   Please provide Fabric admin access to the UPN (odl_user_2410878@sandboxailabs1002.onmicrosoft.com) to see the fabric workspace (Caldova-Pharma)
 
    ```
 
@@ -141,694 +151,103 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
    
-   >Wait for the deployment to complete. This may take approximately `20–30` minutes.
+   >Wait for the deployment to complete.
 
 1. Once the deployment is complete, you can verify the deployed resources by navigating to the resource group.
 
-1. Navigate to the Azure portal. Click on **Resource group**.
-
-   ![](../Sandbox-Environment-Guides/Images/b16.png)
-
-1. Select the newly created Resource Group, excluding the **resource groups** highlighted below.
-
-   ![](../Sandbox-Environment-Guides/Images/b55.png)
-
-1. You should see the deployed Fabric capacity.
-
-   ![](../Sandbox-Environment-Guides/Images/b17.png)
-
-1. Click on the **App launcher (1)** and select **Microsoft fabric** icon.
+1. Navigate back to the Azure portal and Click on the **App launcher (1)** and select **Microsoft fabric** icon.
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
 
-1. Navigate to **Workspaces**, there should be workspace created with the name similar to **Zava Retail**. 
+1. Navigate to **Workspaces**, there should be workspace created with the name similar to **Caldova-Pharma**. 
 
-   - If your unable to see. Please go back to the **GitHub Copilot Chat**.
+   ![](../Sandbox-Environment-Guides/Images/workspace-created.png)
 
-     ![](../Sandbox-Environment-Guides/Images/b18.png)
 
-      >**Note:** Not the one which starts with **Microsoft IQ**.
+### Step 2: Loading Of Required Delta Tables Into Lakehouse 
 
-1. From the **GitHub Copilot Chat**, send the the below prompt to make the UPN **<inject key="AzureAdUserEmail"></inject>** as Fabric admin **(1)** and then **Send (2)**.
+1. Navigate back to Github Copilot 
 
-   ```
-   Please provide Fabric admin access to the UPN <inject key="AzureAdUserEmail"></inject> to see the fabric workspace
-   ```
+1. Copy the below prompt and paste it in the chat window 
 
-    ![](../Sandbox-Environment-Guides/Images/b19.png)   
-
-1. Wait for the process to complete and then **Keep** the file.
-
-   ![](../Sandbox-Environment-Guides/Images/b20.png)
-
-1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace which starts with something similar to `Zava Retail`.
-
-   ![](../Sandbox-Environment-Guides/Images/b21.png)
-
-1. Open the **Zava Retail** workspace.
-
-1. Make sure that all the workspace items mentioned in the prompt are created. 
-
-   ![](../Sandbox-Environment-Guides/Images/b22.png)
-
-1. Please open each item and verify that it has been created correctly. If anything is missing, go back to the **GitHub Copilot Chat** and provide a follow-up prompt to address the missing item.  
-
-1. In this case, when I opened the workspace. There are no tables created in the Lakehouse.
-
-   ![](../Sandbox-Environment-Guides/Images/b23.png)
-
-1. Navigate back to the **GitHub Copilot Chat** to send the follow up prompt.
-
-   ```
-   Issues identified with the workspace items, please fix this issue.
-
-   No table has been created in the Lakehouse, and no sample data has been loaded.
-   The Ontology was created, but no entities or relationships have been added.
-   The Ontology has not been configured as the Data Source for the Data Agent.
-   ```
-
-    ![](../Sandbox-Environment-Guides/Images/b25.png)
-
-1. Wait for the process to complete and click **Keep** to keep the file.
-
-   ![](../Sandbox-Environment-Guides/Images/b24.png)
-
-1. Navigate back to the Fabric workspace, refresh the Lakehouse, and verify that the tables have been created and the sample data has been loaded successfully.
-
-   ![](../Sandbox-Environment-Guides/Images/b26.png)
-
-1. Open the **Ontology** item and verify that the entities and relationships have been created successfully.
-
-   ![](../Sandbox-Environment-Guides/Images/b27.png)
-
-1. Select **Product** Entity **(1)** and then click on **View Entity Type details (2)**.   
-
-   ![](../Sandbox-Environment-Guides/Images/b60.png)
-
-1. Click on **Overview**.
-
-   ![](../Sandbox-Environment-Guides/Images/b61.png)
-
-1. Set the `Time range` to **Last 30 minutes (1)**,
-
-   - `Time granularity`: **1 hr (2)**
-   - `Aggregation`: **Sum (3)**
-   - Then **Apply (4)**
-
-     ![](../Sandbox-Environment-Guides/Images/b76.png) 
-
-1. Wait until you see the **Relationship graph**.
-
-   ![](../Sandbox-Environment-Guides/Images/graph.png)
-
-1. Close the **Ontology** page.
-
-1. Open the **Data Agent** from the workspace and verify that the **Ontology** is configured as the Data Source.
-
-1. If not please go back to **GitHub Copilot Chat** and explain the issue and ask to fix.
-
-   - Navigate back to the **Fabric workspace** and open the **Data Agent**. If the error persists, remove the existing Data Source and manually add the **Ontology** as the Data Source.
-
-   - Click on the **elipses (1)** and then **Remove (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/b28.png)
-
-   - Click **Yes, remove**. 
-
-   - Select **Add data (1)** drop down and then **Data source (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/b30.png)   
-
-   - Select the **Ontology (1)** and then **Add (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/b31.png)        
-
-1. Make sure Ontology is added.
-
-   ![](../Sandbox-Environment-Guides/Images/b32.png)
-
-1. Navigate to **Test data agent (1)**, send the following prompts in Data agent input box **(2)**:
-
-   ```
-   Which products are below their reorder level?
-   ```
-
-   ![](../Sandbox-Environment-Guides/Images/b58.png)   
-
-   ```
-   List all suppliers and their lead times.
-   ```
-
-   ![](../Sandbox-Environment-Guides/Images/b59.png)    
-
-1. Click on **Publish**.
-
-   ![](../Sandbox-Environment-Guides/Images/b65.png)  
-
-1. Click on **Publish** again to publish the data agent.
-
-   ![](../Sandbox-Environment-Guides/Images/b66.png)  
-
-### Foundry IQ    
-
-1. Navigate back to the **GitHub Copilot Chat** to deploy the **Foundry resources**.
-
-1. Navigate back to the **GitHub Copilot Chat** 
-
-1. Copy the prompt below into the chat and send.
-
-   ```
-   You are my smart agent to read my attached architecture design for Zava Retail and create bicep/ARM template based on the identified resources.
-
-   Please follow these below instructions for Foundry IQ section in the same Resource group.
-   1. List down all the Azure Foundry related resources from the architecture diagram.
-   2. Create Foundry resources in Azure(Please use same Resource Group created for the above Fabric Resources) and use Sweden Central region. 
-   3. In Foundry Project, create two models(1. gpt-5-mini, 2. text-embedding-3-small)
-   4. In Foundry Project, create knowledge base and having one knowledge source which should point to the Azure resource > Resource group (rg-miqsolution)-> Container -> All files(PDFs) using Azure AI Search Service.
-   5. Create Foundry Agent("Retail-Agent") and use "Fabric Data Agent" using tool calling and use above knowledge base as attaching knowledge.
-   6. Once "Retail-Agent" get created, please validate(prompt should work and return valid results) and provide confirmation.
-
-   Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment.
-   ```
-
-1. Wait for the deployment to complete and the **Keep** the file.
-
-   ![](../Sandbox-Environment-Guides/Images/b38.png)  
-
-1. Navigate back to the Resource group. Select the **Foundry Project**.
-
-   ![](../Sandbox-Environment-Guides/Images/b39.png)  
-
-1. Click On **Go to Foundry portal**.
-
-   ![](../Sandbox-Environment-Guides/Images/b40.png)  
-
-1. Click on **Build**.
-
-   ![](../Sandbox-Environment-Guides/Images/b41.png)  
-
-1. Navigate to **Models (1)** and make sure 2  models are deployed **(2)**,
-
-   ![](../Sandbox-Environment-Guides/Images/b42.png)  
-
-1. Navigate to **Agents (1)** and click on the **Retail-Agent (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/b43.png)  
-
-1. Make sure the model is set to **gpt-5-mini (1)**. If you get any error in the **Tools (2)** section as below:
-
-   ![](../Sandbox-Environment-Guides/Images/b44.png)  
-
-   - From the **Model** drop down, switch to **gpt-5** model.
-
-     ![](../Sandbox-Environment-Guides/Images/b45.png)  
-
-   - Then again select the **gpt-5-mini** model.
-
-   - Scroll down to **Tools**. Click on **Add (1)** drop down and then select **Add tools (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/b46.png)  
-
-   - Select **Fabric IQ(OneLake Catalog) (1)** and then **Add tool (2)**.
-
-     ![](../Sandbox-Environment-Guides/Images/a32.png)      
-
-   - Select the **Zava Retail** Ontology **(1)** and then **Add (2)**. 
-
-     ![](../Sandbox-Environment-Guides/Images/b47.png)          
-
-1. Scroll down to **Knowledge**, verify that the Knowledge source has been added.
-
-   ![](../Sandbox-Environment-Guides/Images/b48.png)  
-
-1. Lets test the Agent by providing some prompts related to documents and agent.
-
-1. For getting the prompts, you can go back to **GitHub Copilot Chat**, and send the below query:
-
-   ```
-   Can you please provide some of the prompts to test the foundry agent.
-   ```
-
-   ![](../Sandbox-Environment-Guides/Images/b49.png) 
-
-1. Once the prompts are generated, you can go back to the Foundry Agent **Chat** section and paste the prompts to see the results.
-
-   ![](../Sandbox-Environment-Guides/Images/b51.png)  
-
-   ![](../Sandbox-Environment-Guides/Images/b52.png)  
-
-   ![](../Sandbox-Environment-Guides/Images/b53.png)     
-
-## Work IQ
-
-The third component of the accelerator is Work IQ (the Copilot Studio email-triggered agent that orchestrates Fabric IQ and Foundry IQ from a single conversational ingress)
-
-### Steps that need to be performed:
-
-- **Import the solution:** Import the Power Platform zip solution file inside the solution file folder into your Power Platform environment
-- **Configure connections:** Sign in to and authorize the Work IQ, Microsoft Teams, Copilot Studio, Office 365 Outlook, Fabric Data Agent, and Foundry Agent connections. 
-- **Configure the email trigger** in the Power Automate flow — select the target inbox/folder to monitor and (optionally) add a subject filter such an IQ Request.
-- **Publish the agent** in Copilot Studio and enable the Microsoft Teams channel.
-
-### Step 0: Create a Power Platoform Environment with Dataverse enabled
-
-1. Right click on the [make.powerapps.com](https://make.powerapps.com) link then **Copy link** and then paste it on your VM browser tab.
-
-1. On the **Welcome to Power Apps** page, click **Get started**.
-
-   ![](../Sandbox-Environment-Guides/Images/a41.png)
-
-1. Click on the **Settings (1)** from the top left and then select **Admin center**.
-
-   ![](../Sandbox-Environment-Guides/Images/a42.png)
-
-1. On the **Power Platform admin center**, click on **Manage (1)** then **Environments (2)** and then click **+ New (3)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a43.png)
-
-1. On the **New environment** page, provide the following details to create a new environment.
-
-    - **Type:** Choose **Developer (1)**
-    - **Region:** Leave default
-    - **Name:** Enter **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** **(2)**
-    - Then Scroll down to **Change default settings**
-
-      ![](../Sandbox-Environment-Guides/Images/b77.png)
-
-1. Expand **Change default settings (1)** and then **Turn On (2)** setting **Add a Dataverse data  store?** and then click on **Next (3)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a45.png)
-
-1. Then select **Save**.
-
-   ![](../Sandbox-Environment-Guides/Images/b78.png)
-
-1. Please wait until your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** environment is **Ready** before proceeding.
-
-   ![](../Sandbox-Environment-Guides/Images/b80.png)
-
-
-### Step 1: Import the Solution and configure the connections.
-
-In this step, you will import the Power Platform zip solution file into your Power Platform environment.
-
-1. Navigate back to **Power Apps** portal.
-
-1. Click on the **default Environment (1)** and then select your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/> (2)** Environment.
-
-   ![](../Sandbox-Environment-Guides/Images/a50.png)
-
-1. Make sure you are in your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
-
-   ![](../Sandbox-Environment-Guides/Images/a51.png)
-
-1. Go to **Solutions (1)** and then select **Import solution (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a52.png)
-
-1. Click on **Browse** to select the solution file to import.
-
-   ![](../Sandbox-Environment-Guides/Images/a53.png)
-
-1. Navigate to **C:\Files (1)**, then select **MicrosoftIQAccelerator (2)** zip file and then **Open (3)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a54.png)
-
-1. Once the Solution file is imported, click on **Next**.
-
-   ![](../Sandbox-Environment-Guides/Images/a55.png)
-
-1. Click on **Next** again.
-
-   ![](../Sandbox-Environment-Guides/Images/a56.png)
-
-1. Make sure you are signed in and a green check mark is showing up for all the services **(1)** and then click on **Import (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a57.png)
-
-1. Wait for the Solution to import successfully, it may take `2-3 minutes`.
-
-   ![](../Sandbox-Environment-Guides/Images/a58.png)
-
-1. After importing has completed, click **Publish all customizations** in the top menu.    
-
-   ![](../Sandbox-Environment-Guides/Images/a59.png)
-
-1. Wait for publishing to complete. 
-
-   ![](../Sandbox-Environment-Guides/Images/a60.png)
-
-1. When the import is complete, the solution will be available in the environment.
-
-### Step 2: Configure the Email Trigger
-
-Once connections are set, configure the Power Automate flow to monitor the correct inbox:
-
-1. Navigate to **Solutions (1)** then select the imported **Microsoft IQ Accelerator (2)** solution.
-
-   ![](../Sandbox-Environment-Guides/Images/a61.png)
-
-1. Select the **When a new email arrives (V3)** trigger.
-
-   ![](../Sandbox-Environment-Guides/Images/a62.png)
-
-1. Click on **Edit**.
-
-   ![](../Sandbox-Environment-Guides/Images/a63.png)
-
-1. Click on **When a new email arrives (V3)** trigger.
-
-   ![](../Sandbox-Environment-Guides/Images/a64.png)
-
-1. Remove the **Inbox** folder by clicking on the backspace.
-
-   ![](../Sandbox-Environment-Guides/Images/a65.png)
-
-1. Once it is deleted, click on the **folder (1)** icon and then select the **Inbox (2)** again. We deleted and selected the folder again because `Even though the Folder field shows 'Inbox,' this solution was imported from a different environment, so it may still be pointing at the wrong mailbox behind the scenes. Delete the value and re-select 'Inbox' from the picker to force it to re-link to your own mailbox.`
-
-   ![](../Sandbox-Environment-Guides/Images/a66.png)
-
-1. Expand the **Show advanced options** drop down.
-
-   ![](../Sandbox-Environment-Guides/Images/a67.png)
-
-1. Click the **X** next to that email address to remove it entirely, it is a stale leftover from wherever this solution was originally built/tested. 
-
-   ![](../Sandbox-Environment-Guides/Images/a68.png)
-
-1. Optionally add a `Subject Filter` to limit which emails trigger the flow. You can provide **IQ Request** **(1)** and then **Save (2)** the flow.   
-
-   ![](../Sandbox-Environment-Guides/Images/a69.png)
-
-### Step 3: Add the External Agents in Copilot Studio   
-
-After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fabric for data questions and Foundry for document questions. If they do not appear yet, finish deploying Fabric and Foundry first, then return to Copilot Studio and refresh the agent list.
-
-### 3.1 Add the Foundry Agent
+   ``` 
+   Great. You have created Fabric Workspace (Caldova-Pharma). Now follow below instructions to create Lakehouse and delta table for Analytical data.
  
-1. Right click on [Copilot Studio](https://copilotstudio.microsoft.com), then **Copy link** and then paste it on your VM browser tab to open the Copilot Studio.
-
-1. Click on the default environment **(1)** and then select your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/> (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a70.png)
-
-1. Make sure you are in **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
-
-   ![](../Sandbox-Environment-Guides/Images/a71.png)
-
-1. Click on **Agents (1)** and then select the **Microsoft IQ Agent (2)**. It's a pre-configured component that came bundled inside the solution package we imported in the Power apps.
-
-   ![](../Sandbox-Environment-Guides/Images/a72.png)
-
-1. On the **Welocome to Microsoft Copilot Studio** page, click on **Get Started**.
-
-   ![](../Sandbox-Environment-Guides/Images/a73.png)
-
-    >**Note:** If you get any error like the below **(1)**, go back the previous tab **(2)**. Refresh the browser and then open the agent again.
-
-     ![](../Sandbox-Environment-Guides/Images/a103.png)    
-
-1. Click **Skip** to skip the **Welcome to Copilot Studio** pop up.
-
-   ![](../Sandbox-Environment-Guides/Images/a74.png)
-
-1. Navigate to **Agents (1)** and the select **Microsoft IQ Agent (2)**.   
-
-   ![](../Sandbox-Environment-Guides/Images/b67.png)
-
-1. Make sure you are in **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
-
-   ![](../Sandbox-Environment-Guides/Images/a75.png)
-
-1. Click on **+6 (1)** and then select **Agents (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a76.png)
-
-1. Click on **+Add** to add Agent.
-
-   ![](../Sandbox-Environment-Guides/Images/a77.png)
-
-1. Click on **Connect to an External agent (1)** drop down and select **Microsoft Foundry (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a78.png)
-
-1. Click on **Not connected (1)** drop down and then click **Create new connections (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a79.png)
-
-1. Before proceeding to the next step, navigate back to the **Microsoft Foundry Portal.** Click on **Home**.
-
-   -  If prompted **Save** the Agent.
-
-      ![](../Sandbox-Environment-Guides/Images/b68.png)   
-
-1. Copy and paste the **Project endpoint** in a notepad.
-
-   ![](../Sandbox-Environment-Guides/Images/a80.png)
-
-1. Navigate back to the **Copilot Studio**.   
-
-1. On the **Azure AI Foundry Agent Service**,
-
-   - **Authentication Type:** Select **Microsoft Entra ID User Login (1)**
-   - **Azure AI Project Endpoint:** Paste the Project endpoint you copied in the previous step **(2)** 
-   - Then click **Create (3)**
-
-     ![](../Sandbox-Environment-Guides/Images/a81.png)
-
-1. If prompted, select the user account **<inject key="AzureAdUserEmail"></inject>**.
-
-   ![](../Sandbox-Environment-Guides/Images/a82.png)
-
-1. Make sure the connection is established **(1)** and then click **Next (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a83.png)
-
-1. On the **Connect Microsoft Foundry agent** page, provide the following details:
-
-   - **Name**: Enter **Retail Agent (1)**
-   - **Description**: `You are a data analyst assistant for Microsoft IQ with access to documents and reference materials.` **(2)**
-   - **Agent Id**: Enter **Retail Agent (3)**
-     - This is the same name as the agent in Foundry.
-   - Then select **Add and configure (4)**  
-
-     ![](../Sandbox-Environment-Guides/Images/b69.png)
-
-1. Click **Back**.
-
-   ![](../Sandbox-Environment-Guides/Images/b70.png)
-
-### 3.2: Add the Fabric Data Agent   
-
-1. Confirm the Foundry agent appears in the connected-agent list **(1)** and then click **+ Add an agent (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/b71.png)
-
-1. Click on **Connect to an External agent (1)** drop down and select **Microsoft Fabric (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a87.png)
-
-1. Click on **Not connected (1)** drop down and then click **Create new connections (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a88.png)
-
-1. Click on **Create**.
-
-   ![](../Sandbox-Environment-Guides/Images/a89.png)
-
-1. If prompted, select the user account **<inject key="AzureAdUserEmail"></inject>**.
-
-   ![](../Sandbox-Environment-Guides/Images/a82.png)
-
-1. Make sure the connection is established **(1)** and then click **Next (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a90.png)
-
-1. On the **Select agent to connect** page, select the Ontology model **(1)** and then **Next (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/b72.png)
-
-1. On the Ontology Agent page, provide the name as **SupplyChainDataAgent (1)** and then **Add and Configure (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/b73.png)
-
-1. Click **Back**.
-
-   ![](../Sandbox-Environment-Guides/Images/b74.png)
-
-1. Make sure the Fabric agent now shows up in the list of connected agents.
-
-   ![](../Sandbox-Environment-Guides/Images/b75.png)
-
-### Step 4: Verify Work IQ connections and MCP tools are connected and enabled
+   Instructions:  
+   
+   Use above Resource Group, Azure Blob storage account, Fabric capacity, and Fabric Workspace.
+   
+   Create New Lakehouse (Caldova-Lakehouse) in the above Fabric workspace.  
+   
+   After Lakehouse is created, ingest data from Azure Blob and follow the steps below.
+   
+   Connect storage account(storage2410878) and Container (data)  
+   
+          a. Extract/Read analytical data from the Analytical folder exist under above container. 
+
+          b. Load data (csv files) into the above created (Caldova-Lakehouse) using Shortcut technique.
+   
+   After completing above steps, please validate Lakehouse and all delta tables are created successfully.
+   
+   Great. Now you have created Fabric Lakehouse in the Workspace (Caldova-Pharma) and ingested data from Azure Blob  storage. Now follow the instructions below to ingest operational data from Azure SQL Database.
+   
+   Instructions:  
+   
+   Use the above Resource Group, Azure Blob storage account, Fabric capacity, Fabric Workspace, and Lakehouse  (Caldova-Lakehouse).  
+   
+   Connect to Azure SQL Server (sql-operational-2410878.database.windows.net) and its Database (OperationalData)  
+   
+   Use UPN: odl_user_2410878@sandboxailabs1002.onmicrosoft.com to connect above SQL Server and Database to read/  ingest Operational data into Lakehouse  
+   
+   Create Fabric Mirrored Database and connect to Azure SQL Server for Operational Data.
+   
+   Ingest data and create delta tables in the above created Lakehouse using shortcut pointing to Mirrored database.
+   
+   After completing the above steps, please validate Lakehouse. All delta tables are created successfully and data moved from Azure SQL Database.  
+   ```
+
+1. Monitor the process to understand how it generates the response and handles or resolves errors.  
+
+   >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
+   
+   >Wait for the deployment to complete.
+
+1. Once the deployment is complete, you can verify the craeted Lakehouse in fabric workspace.
+
+1. Navigate to the **Microsoft Fabric** portal and Open the **Caldova_Lakehouse** lakehouse from the workspace.
+
+1. In the **Explorer** pane, expand **Tables**.
+
+1. Verify that the required tables are available in the lakehouse.
+
+1. Select the **DimDate** table to open and review the table data. 
+
+   ![](../Sandbox-Environment-Guides/Images/LH-Analyticaldata.png)
+
+1. Navigate back to Github Copilot 
+
+1. Copy the below prompt and paste it in the chat window 
+
+   ```
+   Great. Now you have created Fabric Lakehouse in the Workspace (Caldova-Pharma) and ingested data from Azure Blob storage. Now follow the instructions below to ingest operational data from Azure SQL Database.
  
-1. Click on **+6 (1)** and then open the **Tools (2)** tab.
+   Instructions:  
+   
+   Use the above Resource Group, Azure Blob storage account, Fabric capacity, Fabric Workspace, and Lakehouse (Caldova-Lakehouse).  
+   
+   Connect to Azure SQL Server (sql-operational-2410878.database.windows.net)    and its Database (OperationalData)  
+   
+   Use UPN: odl_user_2410878@sandboxailabs1002.onmicrosoft.com to connect  above SQL Server and Database to read/ingest Operational data into    Lakehouse  
+   
+   Create Fabric Mirrored Database and connect to Azure SQL Server for  Operational Data.
+   
+   Ingest data and create delta tables in the above created Lakehouse using   shortcut pointing to Mirrored database.
+   
+   After completing the above steps, please validate Lakehouse. All delta  tables are created successfully and data moved from Azure SQL Database.  
+
+   ```
 
-   ![](../Sandbox-Environment-Guides/Images/a95.png)
 
-1. Click the **Model Context Protocol (1)** filter chip.
-
-1. Confirm that you can see these three tools **(2)**:
- 
-   | Tool name | Type | Available to | Trigger |
-   |---|---|---|---|
-   | Work IQ Copilot (Preview) | Model Context Protocol | Microsoft IQ Agent | By agent |
-   | Work IQ Mail (Preview) | Model Context Protocol | Microsoft IQ Agent | By agent |
-   | Work IQ User (Preview) | Model Context Protocol | Microsoft IQ Agent | By agent |
-
-   ![](../Sandbox-Environment-Guides/Images/a96.png)    
- 
-   - For each tool, confirm that:
-
-     - The **Enabled** toggle is set to **On**.
-     - The **Errors** column is empty.
-     - The **Blocked** column is empty.
-
-## Step 5: Publish the Agent
-
-1. Click on the **Overview (1)** tab and then **Publish (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a97.png)
-
-1. Click on **Publish** to **Publish the agent.**
-
-   ![](../Sandbox-Environment-Guides/Images/a98.png)
- 
-1. Wait for publishing to complete (1-2 minutes).
-
-   ![](../Sandbox-Environment-Guides/Images/a99.png)
-
-1. Once the Agent is published, click on **+6 (1)** and then select **Channels (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a100.png)
-
-1. Select **Microsoft 365 and Microsoft Teams** to configure Teams as a channel.
-
-   ![](../Sandbox-Environment-Guides/Images/a101.png)
-
-1. On the **Microsoft 365 and Microsoft Teams** page, select **See agent in Teams**.
-
-   ![](../Sandbox-Environment-Guides/Images/a102.png)  
-
-1. Select **Use the web app instead**.
-
-   ![](../Sandbox-Environment-Guides/Images/a104.png)
-
-1. Click on **Add** to add the agent.
-
-   ![](../Sandbox-Environment-Guides/Images/a105.png)
-
-1. Once the Agent added, click **Open** to open the agent in Teams.
-
-   ![](../Sandbox-Environment-Guides/Images/a106.png)
-
-1. Make sure you can see the agent.
-
-   ![](../Sandbox-Environment-Guides/Images/a107.png)
-
-## Testing Flow   
-
-
-### Step 1: Prepare Your Environment
-
-1. **Open Microsoft Teams** with the agent chat visible.
-
-   ![](../Sandbox-Environment-Guides/Images/a107.png)
-
-1. **Open your email client** (Outlook/Office 365) that's monitored by the flow 
-
-1. Right click on [make.powerautomate.com](https://make.powerautomate.com), then **Copy link** and then paste it on your VM browser tab to open **Power Automate**  to monitor the flow run history.
-
-### Step 2: Send a Test Email
-
-Send an email to trigger the agent. Use the below example scenarios that test both data retrieval (Fabric) and knowledge base search (Foundry):
-
-#### Example: Supply Chain Disruption
-
-1. Right click on [Outlook](https://outlook.com/) then **Copy link** and then paste it on your VM browser tab to open **Outlook**.
-
-1. If prompted, select **Sign in**.
-
-1. Click on **Continue**.
-
-   ![](../Sandbox-Environment-Guides/Images/a108.png)
-
-1. Click on **New mail (1)** drop down and then **Mail (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a109.png)
-
-1. Draft the below mail:
-
-   - **TO:** Provide the email address as **<inject key="AzureAdUserEmail"></inject> (1)**
-
-   - **Subject**: `IQ Request - Urgent: Supplier Delivery Delay Concern` **(2)**
-
-   - **Body (3)**:
-      ```
-      Hi Team,
-
-      I just received notification that our primary camping tent supplier, 
-      Mountain Peak Manufacturing, is experiencing production delays due to 
-      material shortages. This could impact our inventory levels significantly.
-
-      Can you provide:
-      1. Current inventory levels for all tent products from this supplier
-      2. Our alternative supplier options based on our supplier qualification policy
-      3. Recommended actions to mitigate supply chain risk
-
-      This is urgent as we're heading into peak season.
-
-      Thanks,
-      [Your Name]
-      ```
-
-      - Click **Send (4)**
-
-      ![](../Sandbox-Environment-Guides/Images/a110.png)
-
-### Step 3: Monitor the Flow
-
-After sending the email:
-
-1. Navigate back to **Power Automate** [make.powerautomate.com](https://make.powerautomate.com).
-
-1. Click on the **default Environment (1)** and then select **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/> (2)** to switch the environment.
-
-   ![](../Sandbox-Environment-Guides/Images/a111.png)
-
-1. Navigate to **My flows (1)** and then click on **When a new email arrives (v3) (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/a112.png)
-
-1. Within 1-2 minutes, a new flow run should appear in Power Automate's run history (if monitoring). Click on it.
-
-   ![](../Sandbox-Environment-Guides/Images/a113.png)
-
-1. Typical execution time: 30 seconds to 2 minutes. Status should progress from **Running** to **Succeeded**
-
-   ![](../Sandbox-Environment-Guides/Images/a114.png)
-
-### Step 4: Review Response in Teams
-
-1. Within 1-3 minutes of sending the email, you should receive a message from the agent in Teams. Navigate back to **Teams**.
-
-   ![](../Sandbox-Environment-Guides/Images/b57.png)
-
-1. The response should look similar to this. Including details regarding the triggered mail.
-
-   ![](../Sandbox-Environment-Guides/Images/Agent2.png)
-
-1. Copy any follow-up Question and paste it in chat window
-
-1. It will ask for **Allow**, Please click on **Allow**
-
-   ![](../Sandbox-Environment-Guides/Images/agentprompt.png)
-
-    >Note: click on **Allow** for every Connect pop up.
-
-1. Type **Allow** in chat window, then you will get response from agent
-
-    ![](../Sandbox-Environment-Guides/Images/agent1.png)
 
 
 ### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session and validated the Microsoft IQ solution across` Fabric IQ, Foundry IQ`, and `Work IQ`.
