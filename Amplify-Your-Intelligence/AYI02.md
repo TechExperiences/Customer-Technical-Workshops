@@ -168,25 +168,6 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
     >**Note:** The **Summary/Conclusion** may look different for you. Once the deployment is completed, you will be able to view the results in the chat.
 
-1. **Optional: Resolve workspace access after deployment.** If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. Replace `<LAB_USER_UPN>` with your lab user UPN: **<inject key="AzureAdUserEmail"></inject>**.
-
-   > **Note:** Deployment may run as a service principal that is the only workspace admin. Your lab user needs access to that workspace. Use the existing deployment; do not rerun the initial prompt.
-
-   ```
-   I cannot see the Caldova workspace created by the previous deployment in the Fabric portal.
-
-   Using deployment-output.json and the existing deployment identity:
-   1. Verify that the workspace exists through the Fabric API and report its workspace ID and tenant ID.
-   2. Resolve the lab user <LAB_USER_UPN> to the correct user object ID in that tenant.
-   3. Grant this user Admin access to the existing workspace, preserving existing access.
-   4. Verify the user's workspace role assignment and confirm the workspace is attached to the deployed F16 capacity.
-   5. Provide the direct workspace URL and report the actual API verification results.
-
-   Reuse the existing resources. Do not recreate the workspace, reload data, or rerun the full deployment. This request is for workspace access, not a tenant-wide Fabric Administrator role.
-   ```
-
-   - After access is confirmed, refresh the Fabric portal while signed in with the same lab user and tenant, then open the Caldova workspace using the returned URL. If needed, sign out and sign back in to refresh your session.
-
 1. Once the deployment is complete, you can verify the deployed resources by navigating to the newly created resource group.
 
 1. Navigate to the Azure portal. Click on **Resource group**.
