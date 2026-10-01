@@ -10,6 +10,12 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
    ![](../Modernize-with-confidence/Images/m2.png)
 
+## Migration From On-Prem SQL to Azure SQL DB Hyperscale
+
+Migrate the pharmaceutical manufacturing database from on-premises SQL Server to Azure SQL Database Hyperscale to provide scalable, highly available, and cloud-based data management. The migration preserves critical manufacturing, product, inventory, production, and operational data while enabling improved performance, scalability, and integration with modern Azure analytics and AI services.
+
+### Validation - Azure SQL DB Hyperscale
+
 1. You can see all the resources and click on **Azure SQL Database Hyperscale**.
 
    ![](../Modernize-with-confidence/Images/m3.png)
@@ -23,6 +29,12 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 1. Expand **Schema(dbo) (1)** -> **Tables (2)** -> and Click any table **(3)** to see data **(4)**.
 
    ![](../Modernize-with-confidence/Images/m5.png)
+
+## Migration From On-Prem Web Application to Azure App Service 
+
+Migrate the pharmaceutical manufacturing web application (Order Management) from on-premises infrastructure to Azure App Service to provide a scalable, secure, and highly available cloud-hosted platform. The migration enables improved application performance, simplified infrastructure management, and seamless integration with Azure services and the modernized Azure SQL Database backend.
+
+### Validation - Azure App Service
 
 1. Navigate back to **rg-MWC** RG. Select the App Service named Click on **app-caldova-ordermanagement-xxxx**.
 
@@ -95,3 +107,6 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 1. The semantic/vector search can identify products based on the meaning and semantic similarity of the query and product descriptions, even when the exact keywords are not present.
 
    ![](../Modernize-with-confidence/Images/m12.png) 
+
+
+### Congratulations! You have successfully completed the Workshop.  
