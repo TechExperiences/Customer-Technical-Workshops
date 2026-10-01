@@ -233,29 +233,23 @@ Follow below instructions to migrate On-prem web application to Azure app servic
    ```
    ![](../Sandbox-Environment-Guides/Images/traditional.png)
 
-1. You can observe it will return no results.
+1. `You can observe it will return no results.`
 
-1. The migrated application currently uses traditional SQL search to find products based on exact text matches. Traditional SQL search typically relies on conditions such as `LIKE`, where the user's search terms need to closely match the words stored in the product description.
+   The migrated application currently uses traditional SQL search to find products based on exact text matches. Traditional SQL search typically relies on conditions such as LIKE, where the user's search terms need to closely match the words stored in the product description.
 
-   >  For example, if a product description contains:
+   For example, if a product description contains: `"Paracetamol is used to relieve mild pain."` and the user searches for: `"medicine used to reduce fever"`.
 
-   "Paracetamol is used to relieve mild pain."
-
-   and the user searches for:
-
-   >  "medicine used to reduce fever"
-
-   - a traditional SQL `LIKE` search may not return the product because the exact phrase **"medicine used to reduce fever"** does not appear in the product description.
+   - A traditional SQL `LIKE` search may not return the product because the exact phrase `"medicine used to reduce fever"` does not appear in the product description.
 
    - This creates a limitation for users because they often search using natural language, synonyms, or different words that express the same meaning.
 
 1. To overcome this limitation, we will enhance the migrated application with **vector/semantic search** using Azure SQL Database Hyperscale and Azure OpenAI embeddings.
 
-1. Vector search converts product descriptions and user search queries into numerical **embeddings** that represent their meaning. The application can then compare the similarity between the user's query and product descriptions instead of relying only on exact keyword matches.
+   - `Vector search` converts product descriptions and user search queries into numerical **embeddings** that represent their meaning. The application can then compare the similarity between the user's query and product descriptions instead of relying only on exact keyword matches.
 
-   >**Note:** Will do Semantic search validation once next deployment(Vector embedding) is done.
+     >**Note:** Will do Semantic search validation once next deployment(Vector embedding) is done.
 
-1. In this Next Section, we will:
+1. In the next Section, we will:
 
    - Generate embeddings for the existing product descriptions using **Azure OpenAI**.
    - Store the generated embeddings in **Azure SQL Database Hyperscale** using the native `VECTOR` data type.
