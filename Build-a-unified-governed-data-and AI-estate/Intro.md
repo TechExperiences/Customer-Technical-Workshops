@@ -1,5 +1,7 @@
-# Build a Unified, Governed data and AI estate
-### Overview about Build a Unified, Governed data and AI estate
+# Build a Unified, Governed data and AI estate CAIP Customer Workshops
+*Overview about Build a Unified, Governed data and AI estate*
+
+![](../Sandbox-Environment-Guides/Images/unifiedHome.png)
 
 # Workshop Overview
 
