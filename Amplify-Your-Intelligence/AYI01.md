@@ -29,7 +29,7 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
 1. Use the **Zoom out** option to view the Whiteboard template clearly.
 
-   ![](../Sandbox-Environment-Guides/Images/cd35.png)
+   ![](../Sandbox-Environment-Guides/Images/AYIWhiteboardNew1.png)
 
 1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a Future-state solution architecture.
 
