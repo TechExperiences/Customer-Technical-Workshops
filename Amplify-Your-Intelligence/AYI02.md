@@ -193,7 +193,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
 
-1. Navigate to **Workspaces**, there should be workspace created with the name similar to **Zava Retail**. 
+1. Navigate to **Workspaces**, there should be workspace created with the name similar to **Caldova**.
 
    - If your unable to see. Please go back to the **GitHub Copilot Chat**.
 
@@ -226,13 +226,13 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    > **&lt;TODO&gt;:** Replace this screenshot with the Caldova workspace-access verification result.
 
-1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace which starts with something similar to `Zava Retail`.
+1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace which starts with something similar to `Caldova`.
 
    ![](../Sandbox-Environment-Guides/Images/b21.png)
 
    > **&lt;TODO&gt;:** Replace this screenshot with the visible Caldova workspace.
 
-1. Open the **Zava Retail** workspace.
+1. Open the **Caldova** workspace.
 
 1. Make sure that all the workspace items mentioned in the prompt are created. 
 
