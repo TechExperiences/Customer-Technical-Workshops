@@ -355,7 +355,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 1. Navigate to **Test data agent (1)**, send the following prompts in Data agent input box **(2)**:
 
    ```
-   Which products are below their reorder level?
+   For the November NextGen Pharma launch, show required production, committed production and maximum capacity by plant. Calculate the network shortfall in units and as a percentage of required production. Which plant is the main constraint, how much can feasible internal recovery close, and what gap remains? Show the calculation, planning period and units from the data.
    ```
 
    ![](../Sandbox-Environment-Guides/Images/b58.png)   
@@ -363,7 +363,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    > **&lt;TODO&gt;:** Replace this screenshot with a Caldova capacity question and its grounded response.
 
    ```
-   List all suppliers and their lead times.
+   Which pre-qualified CMOs have available capacity to help close the remaining November NextGen Pharma launch gap? List their available capacity, qualification status and current RFP status. Compare capacity with the remaining gap using the same planning period and units. If a required value is missing, state that rather than assuming it.
    ```
 
    ![](../Sandbox-Environment-Guides/Images/b59.png)    
