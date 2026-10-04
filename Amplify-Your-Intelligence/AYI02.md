@@ -589,7 +589,7 @@ The third component of the accelerator is Work IQ (the Copilot Studio email-trig
 
 - **Import the solution:** Import the Power Platform zip solution file inside the solution file folder into your Power Platform environment
 - **Configure connections:** Sign in to and authorize the Work IQ, Microsoft Teams, Copilot Studio, Office 365 Outlook, Fabric Data Agent, and Foundry Agent connections. 
-- **Configure the email trigger** in the Power Automate flow — select the target inbox/folder to monitor and (optionally) add a subject filter such an IQ Request.
+- **Configure the email trigger** in the Power Automate flow — select the target inbox/folder to monitor and (optionally) add a subject filter such as **Caldova Request**.
 - **Publish the agent** in Copilot Studio and enable the Microsoft Teams channel.
 
 ### Step 0: Create a Power Platoform Environment with Dataverse enabled
@@ -654,7 +654,7 @@ In this step, you will import the Power Platform zip solution file into your Pow
 
    > **&lt;TODO&gt;:** Update this screenshot to show browsing for the actual workshop solution ZIP.
 
-1. Navigate to **C:\Files (1)**, then select **MicrosoftIQAccelerator (2)** zip file and then **Open (3)**.
+1. Navigate to **C:\Files (1)**, then select the supplied workshop solution ZIP (**MicrosoftIQAccelerator (2)** in the current screenshot, or its renamed filename) and then **Open (3)**.
 
    ![](../Sandbox-Environment-Guides/Images/a54.png)
 
@@ -700,9 +700,11 @@ In this step, you will import the Power Platform zip solution file into your Pow
 
 Once connections are set, configure the Power Automate flow to monitor the correct inbox:
 
-1. Navigate to **Solutions (1)** then select the imported **Microsoft IQ Accelerator (2)** solution.
+1. Navigate to **Solutions (1)** then select the imported workshop solution (**Microsoft IQ Accelerator (2)** in the current screenshot, or its renamed solution name).
 
    ![](../Sandbox-Environment-Guides/Images/a61.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the renamed imported workshop solution.
 
 1. Select the **When a new email arrives (V3)** trigger.
 
@@ -732,9 +734,11 @@ Once connections are set, configure the Power Automate flow to monitor the corre
 
    ![](../Sandbox-Environment-Guides/Images/a68.png)
 
-1. Optionally add a `Subject Filter` to limit which emails trigger the flow. You can provide **IQ Request** **(1)** and then **Save (2)** the flow.   
+1. Optionally add a `Subject Filter` to limit which emails trigger the flow. You can provide **Caldova Request** **(1)** and then **Save (2)** the flow.
 
    ![](../Sandbox-Environment-Guides/Images/a69.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show Caldova Request in the Subject Filter.
 
 ### Step 3: Add the External Agents in Copilot Studio   
 
