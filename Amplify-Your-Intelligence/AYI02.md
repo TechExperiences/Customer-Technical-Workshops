@@ -391,18 +391,24 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 1. Copy the prompt below into the chat and send.
 
    ```
-   You are my smart agent to read my attached architecture design for Zava Retail and create bicep/ARM template based on the identified resources.
+   You are my smart agent to read my attached architecture design for Caldova Pharmaceutical and its November NextGen Pharma product launch and create bicep/ARM template based on the identified Foundry resources.
 
    Please follow these below instructions for Foundry IQ section in the same Resource group.
    1. List down all the Azure Foundry related resources from the architecture diagram.
-   2. Create Foundry resources in Azure(Please use same Resource Group created for the above Fabric Resources) and use Sweden Central region. 
+   2. Create Foundry resources in Azure(Please use same Resource Group created for the above Fabric Resources) and use Sweden Central region.
    3. In Foundry Project, create two models(1. gpt-5-mini, 2. text-embedding-3-small)
-   4. In Foundry Project, create knowledge base and having one knowledge source which should point to the Azure resource > Resource group (rg-miqsolution)-> Container -> All files(PDFs) using Azure AI Search Service.
-   5. Create Foundry Agent("Retail-Agent") and use "Fabric Data Agent" using tool calling and use above knowledge base as attaching knowledge.
-   6. Once "Retail-Agent" get created, please validate(prompt should work and return valid results) and provide confirmation.
+   4. In Foundry Project, create a shared knowledge base with a knowledge source pointing to the existing workshop PDFs in Azure Storage using Azure AI Search Service. Identify the actual storage account and container rather than assuming the old rg-miqsolution name. Reuse the supplied documents and ingestion pattern for Supplier Terms & CMO Qualification and GMP & Manufacturing Guidance. If required Caldova content is missing, record a TODO for the missing document; do not invent company policies or qualification requirements.
+      Add Web IQ through a supported web knowledge source or web-grounding tool, scoped to a small set of verified public URLs for basic manufacturing/GMP information, with source citations. Keep Caldova-specific capacity, CMO, launch and competitor facts grounded in the Fabric data rather than public-web assumptions.
+   5. Create the four Foundry agents shown in the architecture: Supplier Terms Agent, CMO Evaluation Agent, Demand Sensing Agent and Manufacturing Quality Agent. Reuse the same model deployments, knowledge base and existing working Caldova Fabric Data Agent through tool calling; the Fabric Data Agent now uses the Lakehouse. Do not recreate Fabric resources or require ontology graph materialization.
+      Give each agent focused instructions: supplier terms and qualification documents; CMO capacity and evaluation records; demand forecasts and launch/competitive products; manufacturing quality, equipment availability and GMP guidance, respectively. Use the shared knowledge and public-web grounding when relevant; do not hard-code answers.
+   6. Once the agents are created, validate each with one relevant question and test one public-URL question. Verify actual Fabric Data Agent tool responses and document/web citations, then provide confirmation and the agent names/IDs. Perform basic automated checks, record failures or checks not performed, and do not wait for manual UI verification.
 
    Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment.
    ```
+
+   > **&lt;TODO&gt;:** Confirm the supplied PDFs cover Caldova supplier terms, CMO qualification and GMP/manufacturing guidance; add any missing workshop documents.
+
+   > **&lt;TODO&gt;:** Update the following Foundry screenshots and agent-selection labels to show the four Caldova agents and their shared Fabric, knowledge-base and Web IQ connections.
 
 1. Wait for the deployment to complete and the **Keep** the file.
 
