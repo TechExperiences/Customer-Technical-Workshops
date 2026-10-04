@@ -517,15 +517,15 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    > **&lt;TODO&gt;:** Add screenshots of the Supplier Terms Agent's document and Fabric answers.
 
-1. **Check and test Web IQ for supplier-terms-agent.** In **Tools**, look for the configured web-grounding tool, or in **Knowledge**, open the shared knowledge-base configuration and confirm it includes a web knowledge source. Check its scope against the FDA/EMA URLs in step 3. A PDF knowledge source alone does not confirm Web IQ is connected. If missing, ask Copilot to attach the existing step 3 Web IQ source/tool to this agent, then save. Run:
+1. In **supplier-terms-agent**, run this Web IQ prompt:
 
    ```
    Use the connected public-web source to explain the purpose of a quality agreement between a drug owner and a contract manufacturer, based on the FDA Contract Manufacturing Arrangements for Drugs guidance. Cite the public URL. Keep this general explanation separate from Caldova's fictional supplier terms and do not infer that any Caldova CMO is approved.
    ```
 
-   Confirm an allowed public URL is cited and the response activity shows the web source/tool was used. If it is unavailable, record the test as not verified rather than treating a general model answer as a grounded result.
+   Confirm the answer cites the FDA public source.
 
-   > **&lt;TODO&gt;:** Add screenshots of the Web IQ connection and cited public-source answer.
+   > **&lt;TODO&gt;:** Add a screenshot of the Supplier Terms Agent's cited Web IQ answer.
 
 1. Open **cmo-evaluation-agent**. For its capacity, qualification and RFP questions, confirm **Caldova_Launch_Readiness_Agent** is connected under **Tools**. If missing, repeat the connection in step 10 as done for **supplier-terms-agent**, retaining this agent's CMO evaluation instructions. Check its shared document knowledge as in step 11, save, and run:
 
@@ -537,13 +537,13 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    > **&lt;TODO&gt;:** Add a screenshot of the CMO Evaluation Agent's grounded comparison.
 
-1. **Check and test Web IQ for cmo-evaluation-agent.** Repeat the connection/scope check in step 16 for this agent, then run:
+1. In **cmo-evaluation-agent**, run this Web IQ prompt:
 
    ```
    Using the connected public-web source and the FDA quality-agreements guidance, summarize the general quality responsibilities an owner and contract manufacturer should document when establishing a manufacturing arrangement. Cite the public URL. Do not change Caldova's CMO qualification status, capacity or RFP results.
    ```
 
-   Confirm a public-web retrieval and an allowed source citation.
+   Confirm the answer cites the FDA public source.
 
    > **&lt;TODO&gt;:** Add a screenshot of the CMO Evaluation Agent's cited Web IQ answer.
 
@@ -553,7 +553,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    Use Caldova_Launch_Readiness_Agent to compare required and committed production for the November NextGen Pharma launch across the three plants. Calculate the shortfall in units and as a percentage of required production, showing the formula and planning period. Identify the main constrained plant and summarize relevant launch/competitive-product records from the data. If market impact cannot be calculated from the available fields, state what is missing rather than inventing it.
    ```
 
-   Confirm a Fabric tool call and data-derived calculations. Public-web data is not needed for this test; if this agent also has Web IQ, repeat step 16 to check the connection and run the basic GMP question from step 3 solely to test public grounding.
+   Confirm a Fabric tool call and data-derived calculations.
 
    > **&lt;TODO&gt;:** Add a screenshot of the Demand Sensing Agent's calculated launch shortfall.
 
@@ -567,7 +567,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    > **&lt;TODO&gt;:** Add a screenshot of the Manufacturing Quality Agent's grounded constraint and recovery answer.
 
-1. **Check and test Web IQ for manufacturing-quality-agent.** Repeat the connection/scope check in step 16, then run these prompts separately:
+1. In **manufacturing-quality-agent**, run these Web IQ prompts separately:
 
    ```
    Use the connected public-web source to explain what GMP is and why it matters in drug manufacturing, based on the FDA CGMP overview. Cite the public URL and do not claim that Caldova's plants or CMOs are compliant.
@@ -577,7 +577,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    Use the connected public-web source to summarize the purpose of change management in a pharmaceutical quality system, based on EMA's ICH Q10 guidance. Cite the public URL. Keep the explanation separate from Caldova's fictional changeover process and do not introduce new launch constraints.
    ```
 
-   Confirm web retrieval and the corresponding FDA/EMA citations. These tests provide general context; Caldova's launch-gap and recovery conclusions must still come from Fabric and its demo documents.
+   Confirm the answers cite the corresponding FDA/EMA public sources.
 
    > **&lt;TODO&gt;:** Add screenshots of the Manufacturing Quality Agent's cited FDA and EMA answers.
 
