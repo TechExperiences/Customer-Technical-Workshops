@@ -439,37 +439,49 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b42.png)  
 
-1. Navigate to **Agents (1)** and click on the **Retail-Agent (2)**.
+1. Navigate to **Agents** and confirm these four agents appear: **supplier-terms-agent**, **cmo-evaluation-agent**, **demand-sensing-agent**, and **manufacturing-quality-agent**. Open **supplier-terms-agent** first.
 
    ![](../Sandbox-Environment-Guides/Images/b43.png)  
 
-1. Make sure the model is set to **gpt-5-mini (1)**. If you get any error in the **Tools (2)** section as below:
+   > **&lt;TODO&gt;:** Update this screenshot to show the four Caldova agents and selection of supplier-terms-agent.
+
+1. Make sure the model is set to **gpt-5-mini**. Check whether the published **Caldova_Launch_Readiness_Agent** is already connected under **Tools**; if it is, keep that connection. Otherwise, add it below.
 
    ![](../Sandbox-Environment-Guides/Images/b44.png)  
 
-   - From the **Model** drop down, switch to **gpt-5** model.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova agent's model and Fabric Data Agent tool.
+
+   - In **Instructions**, retain the supplier-terms guidance and ensure it tells the agent to use **Caldova_Launch_Readiness_Agent** for capacity, qualification status and RFP data, and document knowledge for fictional supplier terms. Do not hard-code answers.
 
      ![](../Sandbox-Environment-Guides/Images/b45.png)  
 
-   - Then again select the **gpt-5-mini** model.
+     > **&lt;TODO&gt;:** Replace this screenshot with the Caldova agent instructions; the old model-switch workaround is no longer part of this step.
 
-   - Scroll down to **Tools**. Click on **Add (1)** drop down and then select **Add tools (2)**.
+   - To add the missing connection, scroll to **Tools**, select **Add**, then **Browse all tools** (or **Add tools**).
 
      ![](../Sandbox-Environment-Guides/Images/b46.png)  
 
-   - Select **Fabric IQ(OneLake Catalog) (1)** and then **Add tool (2)**.
+     > **&lt;TODO&gt;:** Update this screenshot to show the current Add tools menu.
+
+   - Select **Fabric IQ (OneLake Catalog)**, then **Add tool**.
 
      ![](../Sandbox-Environment-Guides/Images/a32.png)      
 
-   - Select the **Zava Retail** Ontology **(1)** and then **Add (2)**. 
+     > **&lt;TODO&gt;:** Update this screenshot to show the current Fabric IQ tool selection.
+
+   - In the catalog, filter **Type** to **Data agent**, select the published **Caldova_Launch_Readiness_Agent** from your Caldova workspace, and click **Add**. Complete any sign-in with the same lab account used in Fabric, then **Save** the Foundry agent.
 
      ![](../Sandbox-Environment-Guides/Images/b47.png)          
 
-1. Scroll down to **Knowledge**, verify that the Knowledge source has been added.
+     > **&lt;TODO&gt;:** Replace this screenshot with selection of the published Caldova Data Agent instead of the old retail ontology.
+
+1. Scroll down to **Knowledge** and verify that the shared knowledge source for the Caldova demo PDFs is attached. Also confirm the configured public-Web IQ source/tool is present in **Knowledge** or **Tools**, as appropriate for the deployed integration.
 
    ![](../Sandbox-Environment-Guides/Images/b48.png)  
 
-1. Lets test the Agent by providing some prompts related to documents and agent.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova document knowledge and configured public-web grounding.
+
+1. Test **supplier-terms-agent** with questions about its documents and Fabric data. Confirm document answers include citations and data answers use **Caldova_Launch_Readiness_Agent**. After testing it, repeat the relevant tool, knowledge and response checks for **cmo-evaluation-agent**, **demand-sensing-agent**, and **manufacturing-quality-agent**, keeping each agent's focused instructions.
 
 1. For getting the prompts, you can go back to **GitHub Copilot Chat**, and send the below query:
 
