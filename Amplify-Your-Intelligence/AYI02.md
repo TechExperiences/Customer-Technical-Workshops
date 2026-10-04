@@ -742,10 +742,20 @@ Once connections are set, configure the Power Automate flow to monitor the corre
 
 ### Step 3: Add the External Agents in Copilot Studio   
 
-After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fabric for data questions and Foundry for document questions. If they do not appear yet, finish deploying Fabric and Foundry first, then return to Copilot Studio and refresh the agent list.
+After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fabric for operational data questions and the four Foundry specialists for Caldova supplier terms, CMO evaluation, demand sensing and manufacturing quality. If they do not appear yet, finish deploying Fabric and Foundry first, then return to Copilot Studio and refresh the agent list.
 
-### 3.1 Add the Foundry Agent
- 
+### 3.1 Add the Foundry Agents
+
+Connect the four agents already deployed in the **caldova-nextgen-launch** Foundry project. Start with **Supplier Terms Agent**, then repeat the connection steps for the other three using the same project connection.
+
+1. Before connecting the agents, run the following prompt in **GitHub Copilot on the VM**, in your existing **Caldova-v1** folder. This checks the Activity protocol required by the [Copilot Studio Foundry connector](https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-agent-foundry-agent).
+
+   ```text
+   Prepare the existing Caldova Foundry agents for connection from Copilot Studio: supplier-terms-agent, cmo-evaluation-agent, demand-sensing-agent and manufacturing-quality-agent. Use the project endpoint and resource IDs from FOUNDRY-DEPLOYMENT.md. Read each agent's stable endpoint configuration and enable the Activity protocol only if missing, following https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/configure-agent using the supported REST API or SDK. Preserve all existing protocols, authentication settings, active versions, instructions and tools. Do not recreate agents or redeploy resources. Read back the configuration to verify the update and report any failures. Output the project endpoint and the exact agent identifiers to enter in Copilot Studio's Agent Id field, and record them in FOUNDRY-DEPLOYMENT.md.
+   ```
+
+   > **Note:** The Foundry portal may still display only Responses and A2A endpoints after Activity is enabled. Use the configuration read-back and the Copilot Studio test below to verify the connection.
+
 1. Right click on [Copilot Studio](https://copilotstudio.microsoft.com), then **Copy link** and then paste it on your VM browser tab to open the Copilot Studio.
 
 1. Click on the default environment **(1)** and then select your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/> (2)**.
@@ -756,11 +766,13 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a71.png)
 
-1. Click on **Agents (1)** and then select the **Microsoft IQ Agent (2)**. It's a pre-configured component that came bundled inside the solution package we imported in the Power apps.
+1. Click on **Agents (1)** and then select the **Microsoft IQ Agent (2)**. It's the pre-configured agent included in the solution imported into Power Apps. If you renamed it, select its updated name. Reuse this agent and its existing Work IQ tools and email flow.
 
    ![](../Sandbox-Environment-Guides/Images/a72.png)
 
-1. On the **Welocome to Microsoft Copilot Studio** page, click on **Get Started**.
+   > **&lt;TODO&gt;:** Update this screenshot if the imported agent has been renamed for Caldova.
+
+1. On the **Welcome to Microsoft Copilot Studio** page, click on **Get Started**.
 
    ![](../Sandbox-Environment-Guides/Images/a73.png)
 
@@ -772,15 +784,17 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a74.png)
 
-1. Navigate to **Agents (1)** and the select **Microsoft IQ Agent (2)**.   
+1. Navigate to **Agents (1)** and select **Microsoft IQ Agent (2)**, or its renamed equivalent.
 
    ![](../Sandbox-Environment-Guides/Images/b67.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the imported agent used for Caldova.
 
 1. Make sure you are in **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
 
    ![](../Sandbox-Environment-Guides/Images/a75.png)
 
-1. Click on **+6 (1)** and then select **Agents (2)**.
+1. Open the **Agents** tab. If it is hidden, use the **+6 (1)** / more-tabs menu and select **Agents (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a76.png)
 
@@ -792,29 +806,35 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a78.png)
 
-1. Click on **Not connected (1)** drop down and then click **Create new connections (2)**.
+1. In the connection dropdown, select an existing connection to the Caldova Foundry project, if available. Otherwise, click **Not connected (1)** and then **Create new connections (2)** and follow the connection-creation steps below.
 
    ![](../Sandbox-Environment-Guides/Images/a79.png)
 
-1. Before proceeding to the next step, navigate back to the **Microsoft Foundry Portal.** Click on **Home**.
+1. For a new connection, navigate back to the **Microsoft Foundry Portal**, select the **caldova-nextgen-launch** project and click **Home**.
 
    -  If prompted **Save** the Agent.
 
-      ![](../Sandbox-Environment-Guides/Images/b68.png)   
+      ![](../Sandbox-Environment-Guides/Images/b68.png)
 
-1. Copy and paste the **Project endpoint** in a notepad.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova Foundry project.
+
+1. Copy the **Project endpoint** into Notepad. Use the project endpoint, not the browser address or an individual agent endpoint. Confirm it matches the endpoint recorded by Copilot.
 
    ![](../Sandbox-Environment-Guides/Images/a80.png)
 
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova project endpoint.
+
 1. Navigate back to the **Copilot Studio**.   
 
-1. On the **Azure AI Foundry Agent Service**,
+1. When creating a new connection, on the **Azure AI Foundry Agent Service** dialog,
 
    - **Authentication Type:** Select **Microsoft Entra ID User Login (1)**
    - **Azure AI Project Endpoint:** Paste the Project endpoint you copied in the previous step **(2)** 
    - Then click **Create (3)**
 
      ![](../Sandbox-Environment-Guides/Images/a81.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova project connection.
 
 1. If prompted, select the user account **<inject key="AzureAdUserEmail"></inject>**.
 
@@ -824,19 +844,59 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a83.png)
 
+   > **&lt;TODO&gt;:** Update this screenshot to show the established Caldova connection.
+
 1. On the **Connect Microsoft Foundry agent** page, provide the following details:
 
-   - **Name**: Enter **Retail Agent (1)**
-   - **Description**: `You are a data analyst assistant for Microsoft IQ with access to documents and reference materials.` **(2)**
-   - **Agent Id**: Enter **Retail Agent (3)**
-     - This is the same name as the agent in Foundry.
+   - **Name**: Enter **Supplier Terms Agent (1)**.
+   - **Description**: `Answers questions about Caldova supplier terms, contract obligations and qualification requirements using the demo documents; uses public sources only for general GMP and quality-agreement information.` **(2)**
+   - **Agent Id**: Enter the exact identifier reported by Copilot for **supplier-terms-agent (3)**. For the new Foundry agent, use its stable agent name, not the Copilot Studio display label. Verify it against your deployment output.
    - Then select **Add and configure (4)**  
 
      ![](../Sandbox-Environment-Guides/Images/b69.png)
 
+   > **&lt;TODO&gt;:** Replace the Retail Agent details in this screenshot with Supplier Terms Agent and its actual Agent Id.
+
 1. Click **Back**.
 
    ![](../Sandbox-Environment-Guides/Images/b70.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the connected Supplier Terms Agent.
+
+1. Repeat **+ Add an agent → Connect to an external agent → Microsoft Foundry** for the other three agents. Select the **same Caldova project connection**, click **Next**, and use the details below. Verify each Agent Id against Copilot's output before adding it.
+
+   | Name in Copilot Studio | Foundry agent name / Agent Id | Description |
+   |---|---|---|
+   | CMO Evaluation Agent | `cmo-evaluation-agent` | Evaluates external CMO options for the November launch using Caldova qualification documents, quality evaluations, available capacity and RFP status. Uses the Fabric Data Agent for operational figures. |
+   | Demand Sensing Agent | `demand-sensing-agent` | Analyzes Caldova launch demand, competitive-product data and required versus committed production across the three plants. Uses the Fabric Data Agent to calculate the launch shortfall and its percentage. |
+   | Manufacturing Quality Agent | `manufacturing-quality-agent` | Explains Caldova manufacturing-quality requirements and equipment, fill-finish and changeover constraints using demo guidance and the Fabric Data Agent. Uses public sources for general GMP information. |
+
+   > **Note:** These connections reuse the agents and their existing Fabric Data Agent, document knowledge and Web IQ tools. No additional Foundry agents or Web IQ connections are needed here.
+
+1. On the main agent's **Agents** tab, confirm all four Caldova Foundry agents are listed and **Enabled**.
+
+   > **&lt;TODO&gt;:** Add a screenshot showing all four connected Caldova Foundry agents.
+
+1. Open the main agent's **Overview → Instructions**. Replace only obsolete references to the previous **Retail Agent / Foundry Chat Agent** with the routing guidance below. Keep the existing Work IQ, Fabric and email-flow instructions. Use **/** in the instruction editor to select each connected agent by its actual name.
+
+   ```text
+   For Caldova November launch questions, use Supplier Terms Agent for supplier terms and contract or qualification requirements; CMO Evaluation Agent for comparing qualified external CMOs, available capacity and RFP status; Demand Sensing Agent for demand forecasts and the required-versus-committed production gap; and Manufacturing Quality Agent for equipment, fill-finish, changeover and quality constraints. For questions spanning these areas, combine the relevant agents' findings. Show the units, planning period and calculations for operational figures, retain source links, and distinguish Caldova demo evidence from general public guidance. If a required source or tool fails, state what could not be verified instead of inventing an answer.
+   ```
+
+   > **&lt;TODO&gt;:** Add a screenshot of the updated Caldova routing instructions.
+
+1. Open **Test your agent** and try each prompt below in a new test conversation. Check the activity map to confirm the intended Foundry agent was called, then review its answer and source references.
+
+   | Agent | Test prompt |
+   |---|---|
+   | Supplier Terms Agent | `Use Supplier Terms Agent to summarize Caldova's supplier contract and qualification requirements for the November launch. Cite the demo documents used.` |
+   | CMO Evaluation Agent | `Use CMO Evaluation Agent to compare the qualified CMO options for Caldova's November launch. Show available capacity, quality evaluation and RFP status from the Fabric Data Agent, and cite qualification documents. Identify any missing evidence.` |
+   | Demand Sensing Agent | `Use Demand Sensing Agent to calculate Caldova's November required and committed production across the three plants, the shortfall in units and the shortfall as a percentage of required production. Show the planning period, formula and plant-level breakdown from the Fabric Data Agent.` |
+   | Manufacturing Quality Agent | `Use Manufacturing Quality Agent to explain the equipment, fill-finish and changeover constraints affecting Caldova's November launch. Use operational data and cite the demo manufacturing-quality guidance. Separately explain GMP using an approved public FDA or EMA source and include its URL.` |
+
+   > **Note:** A successful connection must return an answer through Copilot Studio, not just appear in the list. For an **endpoint does not support activity** error, rerun the preparation prompt. For **404 / Version not found**, confirm the project endpoint and Agent Id belong to the deployed agent in the new Foundry portal. If a Fabric tool returns **Workspace ID and artifact ID are required**, test that agent in the Foundry playground with your lab-user account and verify its existing Fabric tool connection before retrying; document and Web IQ answers alone do not verify the Fabric route.
+
+   > **&lt;TODO&gt;:** Add screenshots of successful Caldova agent calls and responses in the Copilot Studio test panel.
 
 ### 3.2: Add the Fabric Data Agent   
 
