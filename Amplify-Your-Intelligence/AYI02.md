@@ -680,13 +680,19 @@ In this step, you will import the Power Platform zip solution file into your Pow
 
    ![](../Sandbox-Environment-Guides/Images/a58.png)
 
+   > **&lt;TODO&gt;:** Update this screenshot to show import completion with the renamed solution.
+
 1. After importing has completed, click **Publish all customizations** in the top menu.    
 
    ![](../Sandbox-Environment-Guides/Images/a59.png)
 
+   > **&lt;TODO&gt;:** Update this screenshot to show Publish all customizations with the renamed solution.
+
 1. Wait for publishing to complete. 
 
    ![](../Sandbox-Environment-Guides/Images/a60.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show publication completion with the renamed solution.
 
 1. When the import is complete, the solution will be available in the environment.
 
