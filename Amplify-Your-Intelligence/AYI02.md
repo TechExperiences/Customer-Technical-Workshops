@@ -274,13 +274,13 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    > **&lt;TODO&gt;:** Replace this screenshot with the Caldova tables and generated data.
 
-   > **&lt;TODO&gt;:** Fabric IQ steps 25–30 can be removed: this walkthrough does not match the updated ontology experience, and graph materialization remains unresolved in our deployment. Keep the ontology item for displaying the business model.
-
 1. Open the **Ontology** item and verify that the entities and relationships have been created successfully.
 
    ![](../Sandbox-Environment-Guides/Images/b27.png)
 
    > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology entities and relationships.
+
+   > **&lt;TODO&gt;:** Step 25 can be removed with the outdated ontology walkthrough (steps 25–30).
 
 1. Select **Product** Entity **(1)** and then click on **View Entity Type details (2)**.   
 
@@ -288,11 +288,15 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    > **&lt;TODO&gt;:** Replace this screenshot with entity selection in the Caldova ontology.
 
+   > **&lt;TODO&gt;:** Step 26 can be removed with the outdated ontology walkthrough (steps 25–30).
+
 1. Click on **Overview**.
 
    ![](../Sandbox-Environment-Guides/Images/b61.png)
 
    > **&lt;TODO&gt;:** Replace this screenshot with the selected Caldova entity details and property bindings.
+
+   > **&lt;TODO&gt;:** Step 27 can be removed with the outdated ontology walkthrough (steps 25–30).
 
 1. Set the `Time range` to **Last 30 minutes (1)**,
 
@@ -302,19 +306,25 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
      ![](../Sandbox-Environment-Guides/Images/b76.png) 
 
+   > **&lt;TODO&gt;:** Step 28 can be removed with the outdated ontology walkthrough (steps 25–30).
+
 1. Wait until you see the **Relationship graph**.
 
    ![](../Sandbox-Environment-Guides/Images/graph.png)
 
    > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology relationship graph.
 
+   > **&lt;TODO&gt;:** Step 29 can be removed with the outdated ontology walkthrough (steps 25–30).
+
 1. Close the **Ontology** page.
 
-1. Open the **Data Agent** from the workspace and verify that the **Ontology** is configured as the Data Source.
+   > **&lt;TODO&gt;:** Step 30 can be removed with the outdated ontology walkthrough (steps 25–30).
 
-1. If not please go back to **GitHub Copilot Chat** and explain the issue and ask to fix.
+1. Open the **Data Agent** from the workspace. If the **Ontology** can be added as the Data Source and the Data Agent queries work, keep it. Otherwise, use the existing **Lakehouse** as the Data Source in the next step.
 
-   - Navigate back to the **Fabric workspace** and open the **Data Agent**. If the error persists, remove the existing Data Source and manually add the **Ontology** as the Data Source.
+1. If adding the ontology fails or the Data Agent queries do not work with it, use the existing **Caldova Lakehouse** as the Data Source. You can ask **GitHub Copilot Chat** to update the existing Data Agent, or follow the steps below.
+
+   - Navigate back to the **Fabric workspace** and open the **Data Agent**. Remove the failing **Ontology** Data Source and add the existing **Lakehouse**; select all nine Caldova story tables. Keep the ontology item in the workspace.
 
    - Click on the **elipses (1)** and then **Remove (2)**.
 
@@ -330,17 +340,17 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
      > **&lt;TODO&gt;:** Replace this screenshot with the Add data menu in the Caldova data agent.
 
-   - Select the **Ontology (1)** and then **Add (2)**.
+   - Select the existing **Caldova Lakehouse (1)** and then **Add (2)**. Select all nine story tables and include their join keys and calculation guidance in the Data Agent instructions.
 
      ![](../Sandbox-Environment-Guides/Images/b31.png)        
 
-     > **&lt;TODO&gt;:** Replace this screenshot with selection of the Caldova ontology.
+     > **&lt;TODO&gt;:** If ontology addition does not work, replace this screenshot with selection of the Caldova Lakehouse as the Data Source.
 
-1. Make sure Ontology is added.
+1. Confirm the working Data Source is added: keep the **Ontology** if it works; otherwise, confirm the **Caldova Lakehouse** and all nine story tables are selected.
 
    ![](../Sandbox-Environment-Guides/Images/b32.png)
 
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology attached to the data agent.
+   > **&lt;TODO&gt;:** Keep an ontology-source screenshot if it works; otherwise, replace it with the Caldova Lakehouse and selected tables attached to the Data Agent.
 
 1. Navigate to **Test data agent (1)**, send the following prompts in Data agent input box **(2)**:
 
