@@ -485,6 +485,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. For getting the prompts, you can go back to **GitHub Copilot Chat**, and send the below query:
 
+   > **&lt;TODO&gt;:** Remove this generic prompt-generation step; use the Caldova agent tests below.
+
    ```
    Can you please provide some of the prompts to test the foundry agent.
    ```
@@ -493,11 +495,91 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Once the prompts are generated, you can go back to the Foundry Agent **Chat** section and paste the prompts to see the results.
 
+   > **&lt;TODO&gt;:** Remove this old testing step and replace its screenshots with the Caldova agent tests below.
+
    ![](../Sandbox-Environment-Guides/Images/b51.png)  
 
    ![](../Sandbox-Environment-Guides/Images/b52.png)  
 
    ![](../Sandbox-Environment-Guides/Images/b53.png)     
+
+1. With **supplier-terms-agent** open, use its **Chat/Playground** to run these prompts separately. The published **Caldova_Launch_Readiness_Agent** was connected in step 10; keep that connection and the shared document knowledge.
+
+   ```
+   From the Caldova demo documents, summarize the supplier terms and CMO qualification/evaluation process relevant to supporting the November NextGen Pharma launch. Cite the documents and distinguish fictional workshop terms from public guidance. State any missing information.
+   ```
+
+   ```
+   Use Caldova_Launch_Readiness_Agent to list the pre-qualified CMOs, their available capacity and current RFP status for the November NextGen Pharma launch. Show the planning period and units from the data. Do not assume missing values or replace data with document examples.
+   ```
+
+   Confirm document citations in the first answer and a Fabric Data Agent tool call in the second, using the response activity/trace where available.
+
+   > **&lt;TODO&gt;:** Add screenshots of the Supplier Terms Agent's document and Fabric answers.
+
+1. **Check and test Web IQ for supplier-terms-agent.** In **Tools**, look for the configured web-grounding tool, or in **Knowledge**, open the shared knowledge-base configuration and confirm it includes a web knowledge source. Check its scope against the FDA/EMA URLs in step 3. A PDF knowledge source alone does not confirm Web IQ is connected. If missing, ask Copilot to attach the existing step 3 Web IQ source/tool to this agent, then save. Run:
+
+   ```
+   Use the connected public-web source to explain the purpose of a quality agreement between a drug owner and a contract manufacturer, based on the FDA Contract Manufacturing Arrangements for Drugs guidance. Cite the public URL. Keep this general explanation separate from Caldova's fictional supplier terms and do not infer that any Caldova CMO is approved.
+   ```
+
+   Confirm an allowed public URL is cited and the response activity shows the web source/tool was used. If it is unavailable, record the test as not verified rather than treating a general model answer as a grounded result.
+
+   > **&lt;TODO&gt;:** Add screenshots of the Web IQ connection and cited public-source answer.
+
+1. Open **cmo-evaluation-agent**. For its capacity, qualification and RFP questions, confirm **Caldova_Launch_Readiness_Agent** is connected under **Tools**. If missing, repeat the connection in step 10 as done for **supplier-terms-agent**, retaining this agent's CMO evaluation instructions. Check its shared document knowledge as in step 11, save, and run:
+
+   ```
+   Use Caldova_Launch_Readiness_Agent to calculate the remaining November NextGen Pharma production gap after feasible internal recovery. Compare it with available capacity from pre-qualified CMOs for the same period and units, including qualification/evaluation records and RFP status. Use the Caldova CMO demo documents to explain the evaluation process with citations. Distinguish available capacity from capacity already committed, and state missing evidence before recommending an option.
+   ```
+
+   Confirm the numbers come from a Fabric tool response and process explanations cite the demo documents.
+
+   > **&lt;TODO&gt;:** Add a screenshot of the CMO Evaluation Agent's grounded comparison.
+
+1. **Check and test Web IQ for cmo-evaluation-agent.** Repeat the connection/scope check in step 16 for this agent, then run:
+
+   ```
+   Using the connected public-web source and the FDA quality-agreements guidance, summarize the general quality responsibilities an owner and contract manufacturer should document when establishing a manufacturing arrangement. Cite the public URL. Do not change Caldova's CMO qualification status, capacity or RFP results.
+   ```
+
+   Confirm a public-web retrieval and an allowed source citation.
+
+   > **&lt;TODO&gt;:** Add a screenshot of the CMO Evaluation Agent's cited Web IQ answer.
+
+1. Open **demand-sensing-agent**. It requires **Caldova_Launch_Readiness_Agent** for forecast and launch data. If the tool is missing, repeat step 10, retaining its demand-sensing instructions, then save. Run:
+
+   ```
+   Use Caldova_Launch_Readiness_Agent to compare required and committed production for the November NextGen Pharma launch across the three plants. Calculate the shortfall in units and as a percentage of required production, showing the formula and planning period. Identify the main constrained plant and summarize relevant launch/competitive-product records from the data. If market impact cannot be calculated from the available fields, state what is missing rather than inventing it.
+   ```
+
+   Confirm a Fabric tool call and data-derived calculations. Public-web data is not needed for this test; if this agent also has Web IQ, repeat step 16 to check the connection and run the basic GMP question from step 3 solely to test public grounding.
+
+   > **&lt;TODO&gt;:** Add a screenshot of the Demand Sensing Agent's calculated launch shortfall.
+
+1. Open **manufacturing-quality-agent**. Confirm **Caldova_Launch_Readiness_Agent** is connected for equipment, production and quality records. If missing, repeat step 10, retaining its manufacturing-quality instructions. Check the shared Caldova manufacturing/quality document knowledge as in step 11, save, and run:
+
+   ```
+   Use Caldova_Launch_Readiness_Agent to identify the plant and equipment constraints affecting November NextGen Pharma production and feasible internal recovery, considering batch schedules/changeovers, equipment fill-finish availability and available quality records. Use the Caldova demo guidance to explain any documented changeover review or sign-off steps, with citations. Separate data-supported recovery from assumptions and state missing information; do not invent downtime, approval status or additional capacity.
+   ```
+
+   Confirm a Fabric tool call and document citations for any process/sign-off explanation.
+
+   > **&lt;TODO&gt;:** Add a screenshot of the Manufacturing Quality Agent's grounded constraint and recovery answer.
+
+1. **Check and test Web IQ for manufacturing-quality-agent.** Repeat the connection/scope check in step 16, then run these prompts separately:
+
+   ```
+   Use the connected public-web source to explain what GMP is and why it matters in drug manufacturing, based on the FDA CGMP overview. Cite the public URL and do not claim that Caldova's plants or CMOs are compliant.
+   ```
+
+   ```
+   Use the connected public-web source to summarize the purpose of change management in a pharmaceutical quality system, based on EMA's ICH Q10 guidance. Cite the public URL. Keep the explanation separate from Caldova's fictional changeover process and do not introduce new launch constraints.
+   ```
+
+   Confirm web retrieval and the corresponding FDA/EMA citations. These tests provide general context; Caldova's launch-gap and recovery conclusions must still come from Fabric and its demo documents.
+
+   > **&lt;TODO&gt;:** Add screenshots of the Manufacturing Quality Agent's cited FDA and EMA answers.
 
 ## Work IQ
 
