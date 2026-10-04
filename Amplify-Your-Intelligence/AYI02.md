@@ -652,17 +652,25 @@ In this step, you will import the Power Platform zip solution file into your Pow
 
    ![](../Sandbox-Environment-Guides/Images/a53.png)
 
+   > **&lt;TODO&gt;:** Update this screenshot to show browsing for the actual workshop solution ZIP.
+
 1. Navigate to **C:\Files (1)**, then select **MicrosoftIQAccelerator (2)** zip file and then **Open (3)**.
 
    ![](../Sandbox-Environment-Guides/Images/a54.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the actual solution ZIP filename and folder path.
 
 1. Once the Solution file is imported, click on **Next**.
 
    ![](../Sandbox-Environment-Guides/Images/a55.png)
 
+   > **&lt;TODO&gt;:** Update this screenshot to show the solution details for the actual workshop ZIP.
+
 1. Click on **Next** again.
 
    ![](../Sandbox-Environment-Guides/Images/a56.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the next import screen for the actual workshop ZIP.
 
 1. Make sure you are signed in and a green check mark is showing up for all the services **(1)** and then click on **Import (2)**.
 
