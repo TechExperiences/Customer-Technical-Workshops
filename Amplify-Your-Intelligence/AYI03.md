@@ -1,236 +1,336 @@
-# Ground and Extend Agents with Shared Intelligence
+# Microsoft IQ Solution Accelerator
 
-Explore the Microsoft IQ Solution Accelerator through **Caldova Pharmaceutical's NextGen Pharma launch**. This walkthrough follows the first two modules of the demo script: ground an existing Supply Chain Intelligence Agent, then reuse the foundation for a CMO Evaluation Agent.
+Now that you have completed AYI02, explore the existing **Caldova November launch** deployment using the Microsoft IQ Solution Accelerator walkthrough below. Reuse the resources, published Fabric Data Agent and four Foundry agents you already configured. Confirm actual resource names in **Caldova-v1/DEPLOYMENT.md** and **FOUNDRY-DEPLOYMENT.md**; your deployment may use different names.
 
-Use the prototype from [AYI02](AYI02.md) or the facilitator's prepared environment. The original accelerator walkthrough used retail data and resources. The activities below describe the Caldova adaptation; perform each hands-on step only after its required sources and configuration have been supplied and validated. If a dependency remains unresolved, review that part of the simulated demo with the facilitator and record it as not yet validated in the lab.
+> **Note:** The retained screenshots show the original accelerator. Follow the Caldova names and prompts in the text. Screenshot replacements are marked below.
 
-## Open the prepared environment
-
-1. Open the Azure portal and select **Resource groups**.
+1. Navigate to the Azure portal. Click on **Resource group**.
 
    ![](../Sandbox-Environment-Guides/Images/amp52.png)
 
-1. Open the facilitator-confirmed resource group. The existing accelerator guide uses **rg-miqsolution**.
+1. Select **rg-caldova-fabric-iq**, or the resource group recorded in your deployment guide.
 
    ![](../Sandbox-Environment-Guides/Images/amp53.png)
 
-1. Review the deployed resources.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+1. Review the existing Caldova resources. This walkthrough does not redeploy them.
 
    ![](../Sandbox-Environment-Guides/Images/amp54.png)
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — Environment mapping and images:** Confirm the Caldova resource group, Fabric workspace, lakehouse, ontology, agents, knowledge sources, and document locations. The old guide references `Microsoft IQ - miqsolution{suffix}`, `miqsadata`, `RetailSupplyChainOntologyModel`, `RetailSC Ontology Agent`, and `ChatAgent`. Map these to the prepared Caldova resources and refresh the relevant screenshots, including `amp53.png` and `amp54.png`, if the environment changes. Renaming instructions alone does not convert the retail accelerator or its data.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-## Module 1 — Ground the Supply Chain Intelligence Agent
 
-### 1. Establish the starting point
+# Post deployment Guide - Fabric IQ and Microsoft Foundry
 
-In the story, Jordan's Supply Chain Intelligence Agent is already built in Microsoft Foundry and published to Microsoft 365 Copilot. It has enterprise GMP knowledge and Work IQ organizational context, but lacks the manufacturing and competitive information needed by Sam, the Operations Lead.
+## Fabric IQ
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — Starting state and reset:** Supply the prepared agent, its existing enterprise knowledge and Work IQ connections, its Microsoft 365 Copilot access, and a repeatable lab reset procedure. Identify how facilitators provide the before-grounding state without disrupting other participants. If the prototype already has all sources connected, use a recorded or simulated baseline rather than disconnecting shared resources ad hoc.
-
-1. Open the prepared Supply Chain Intelligence Agent in Microsoft 365 Copilot.
-1. Ask the two questions used in the story and save the responses for comparison:
-
-   ```text
-   What is our current capacity position — committed production versus maximum
-   capacity by plant?
-   ```
-
-   ```text
-   What is our competitor's announced launch timeline for their product, and how
-   does it compare to our NextGen Pharma product launch schedule?
-   ```
-
-1. Discuss the missing evidence. In the simulated story, the agent cannot give a grounded plant-level capacity answer or identify a competitor launch date at this stage.
-
-### 2. Inspect the manufacturing context in Fabric IQ
-
-1. Open **Microsoft Fabric** from the app launcher.
+1. Click on the **App launcher (1)** and select **Microsoft fabric** icon.
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
 
-1. Open the facilitator-confirmed workspace, lakehouse, and manufacturing ontology.
-1. Inspect the supplied data for capacity by plant, committed production, batch schedules, equipment qualification windows, fill-finish availability, and competitive products.
-1. Review how the approved entity relationships represent that business context. Compare the records with the capacity calculation supplied for the lab.
+1. Close the **Welcome to the Fabric view** pop up.
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — Manufacturing data and ontology:** Provide the Caldova tables, entity types, relationships, source bindings, refresh procedure, and reconciliation of the 7% shortfall to approximately 18,900 units with Plant 3 as the constraint. The script does not supply a deployable schema and loadable lab data package. Add the tested Fabric navigation and Caldova screenshots once these assets exist. The old retail tables and screenshots retained below cannot validate the new scenario.
+   ![](../Sandbox-Environment-Guides/Images/a35.png)
 
-### 3. Extend the existing knowledge foundation
+1. In the left navigation, select **Workspaces (1)** and then select the created workspace **Caldova Fabric IQ - NextGen Launch (2)**
 
-1. In the Azure portal, open the prepared Foundry project and select **Go to Foundry portal**.
+   ![](../Sandbox-Environment-Guides/Images/amp56.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+1. Review the workspace's item list. Items may be listed directly or organized into folders:
+
+   - **Data agent:** `Caldova_Launch_Readiness_Agent`, published in AYI02.
+   - **Lakehouse:** `caldova_supply_lakehouse`, containing the nine business data domains.
+   - **Ontology:** `Caldova_NovemberLaunch_Ontology`, showing the entities and relationships.
+   - **Reports and notebooks:** Review these if they were created by your deployment.
+
+   Open the Lakehouse to inspect the data, or the Data Agent to ask questions.
+
+   ![](../Sandbox-Environment-Guides/Images/amp57.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+1. If a **Supply Chain Dashboard** report was deployed, open it and review the November launch capacity and readiness summary.
+
+   > **&lt;TODO&gt;:** Confirm the Power BI report in the Caldova architecture has been deployed and replace this screenshot. If the report is absent, record it as a pending dashboard task; workspace visibility does not verify report deployment.
+
+   ![](../Sandbox-Environment-Guides/Images/amp65.png)
+
+1. Navigate back to the workspace and open **caldova_supply_lakehouse**.
+
+   ![](../Sandbox-Environment-Guides/Images/amp67.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+1. Inside, you'll find two areas.
+
+   - **Tables:** Review the nine domains: plant capacity and commitments; batch schedules and changeovers; equipment and fill-finish availability; product and inventory; demand forecasts; supplier and CMO capacity; quality and CMO evaluations; launch and competitive products; and RFP status. Open a table and confirm its columns and rows are visible.
+   - **Files:** Review any source files generated during deployment. Foundry reference PDFs are stored separately in Azure Blob Storage.
+
+     ![](../Sandbox-Environment-Guides/Images/amp68.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+1. For a visual review, open **Caldova_NovemberLaunch_Ontology** from the workspace.
+
+   ![](../Sandbox-Environment-Guides/Images/amp66.png)
+
+   - Review the nine entity types and their relationships for the Caldova story. The ontology is retained for visual exploration; the tested Data Agent route uses the Lakehouse. **Manage graph** eligibility and materialization are not prerequisites for this walkthrough.
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology view; this optional ontology review can be removed if the updated experience no longer supports the workshop.
+
+1. Navigate back to the workspace and open the existing **Caldova_Launch_Readiness_Agent**.
+
+   ![](../Sandbox-Environment-Guides/Images/amp69.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+1. Confirm its data source is **caldova_supply_lakehouse** and the required tables are selected. Reuse the working Lakehouse connection from AYI02.
+
+   > **&lt;TODO&gt;:** Replace this screenshot with the Lakehouse selected as the Data Agent source.
+
+   ![](../Sandbox-Environment-Guides/Images/amp70.png)
+
+1. Click **Agent Instructions (1)**. Review the instructions and understand how they guide the agent **(2)**.
+
+   ![](../Sandbox-Environment-Guides/Images/agenti1.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+1. Close the **Agent Instructions (1)** and open the **Test data Agent (2)**.
+
+    ![](../Sandbox-Environment-Guides/Images/a21.png)
+
+1. In the query input area, ask questions using natural language, for example:
+
+   ```
+   List the three Caldova plants and their required and committed production for the November launch. Show the planning period and units.
+   ```
+
+1. Submit the query and review the response generated by the Data Agent.
+
+    ![](../Sandbox-Environment-Guides/Images/a17.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+1. Observe how the agent:
+   - Interprets the question
+   - Queries the selected Lakehouse tables
+   - Provides insights in a readable format
+
+1. Try multiple queries and refine your questions to explore additional insights.
+
+   ```
+   What is the current inventory for the products in the Caldova November launch? Break it down by product and plant.
+   ```
+
+    ![](../Sandbox-Environment-Guides/Images/a19.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+   ```
+   Calculate Caldova's November production shortfall across the three plants. Show required production, committed production, the gap in units and the gap as a percentage of required production. Verify whether the data supports the stated 7% gap.
+   ```
+
+   ```
+   Which plants have insufficient committed production for the November launch? Show the plant-level figures in a table.
+   ```
+
+   ```
+   Which equipment, fill-finish or changeover constraints limit internal production recovery for the November launch?
+   ```
+
+   ```
+   Which qualified external CMOs have available capacity for the November launch? Include quality evaluation and RFP status, and identify any missing records.
+   ```
+
+    ![](../Sandbox-Environment-Guides/Images/a37.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+   ```
+   Based on the recorded plant commitments, demand forecasts and supplier capacity, which recovery options could reduce the November shortfall? Distinguish available capacity from confirmed commitments.
+   ```
+
+    ![](../Sandbox-Environment-Guides/Images/a36.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+     > **Note:**
+     > - Clear and specific questions provide more accurate results.
+     > - Responses may vary depending on how the question is framed.
+     > - Use the Lakehouse records as the source of operational figures; show units, planning period and calculations, and do not assume the expected gap is already proven.
+
+1. If you changed the Data Agent, select **Publish**. If the unchanged agent is already published from AYI02, continue to Microsoft Foundry.
+   ![](../Sandbox-Environment-Guides/Images/a38.png)
+
+1. Confirm **Publish** to make your changes available to connected agents.
+
+   ![](../Sandbox-Environment-Guides/Images/a16.png)
+
+
+## Microsoft Foundry
+
+1. Navigate back to the Azure portal.
+
+1. Select the existing **caldova-nextgen-launch** Foundry project, or the project recorded in **FOUNDRY-DEPLOYMENT.md**.
+
+   ![](../Sandbox-Environment-Guides/Images/amp58.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+1. Click on **Go to Foundry portal**.
 
    ![](../Sandbox-Environment-Guides/Images/amp59.png)
 
-1. Open **Knowledge** and the existing shared knowledge base. The simulated script calls it **unified-knowledgebase**.
-1. Review the existing enterprise source: GMP SOPs and scheduling guidelines, Compressed Changeover Guidance, and Regulatory Change Control Procedures.
-1. Follow the facilitator's validated procedure to add the manufacturing context from **Fabric IQ**, including competitive-product data, and save the configuration.
-1. Connect **Web IQ** using the validated procedure so competitor announcements and market information are available alongside enterprise knowledge.
-1. Check that the existing **Work IQ** organizational context is available for escalation questions.
-1. Republish the updated Supply Chain Intelligence Agent to Microsoft 365 Copilot using the prepared lab instructions.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — Source connections and publishing:** Document the exact Fabric IQ, Web IQ, and Work IQ setup, authentication, permissions, and publishing steps supported in this tenant. The script shows Fabric IQ added through the shared knowledge base, whereas the old lab attached a Fabric Data Agent under the agent's Tools. Confirm the chosen lab implementation and explain any difference from the simulation. Add verified screenshots of the source connections and the Foundry publishing flow; the existing retail tool screenshots remain reference material only.
+1. Click on **Build (1)**, then **Agents (2)**. Confirm the four agents are listed: **supplier-terms-agent**, **cmo-evaluation-agent**, **demand-sensing-agent** and **manufacturing-quality-agent**.
 
-### 4. Compare grounded responses
+   ![](../Sandbox-Environment-Guides/Images/amp60.png)
 
-Repeat the original two questions, then ask the GMP, escalation, and launch-readiness questions below. Open the supporting citations and compare the answer with the connected sources.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-| Question | Expected behavior in the simulated story | Evidence to inspect in the workshop |
-| --- | --- | --- |
-| What is our competitor's announced launch timeline, and how does it compare to our NextGen Pharma launch? | The agent identifies Helios Biopharma's VEXA and cites its announced November 2026 launch, the same month as Caldova's launch. | Competitive-product records plus the dated external announcement. |
-| What is our current capacity position — committed production versus maximum capacity by plant? | The agent reports a 7% network shortfall, approximately 18,900 units, with Plant 3 as the constraint. | Plant-level records, the calculation period, and the reconciled network calculation. |
-| What do the GMP guidelines say about compressing changeover windows to accelerate production? | The response cites the manufacturing guidance and required Plant Operations Manager and QA sign-offs. | The supplied GMP/changeover document and its relevant passage. |
-| Who should I escalate to if Plant 3 pushes back on the proposed schedule change? | The agent identifies Dana Reyes, VP of Manufacturing, then Morgan Ellis, COO, if unresolved. | The organizational structure and escalation information available through Work IQ. |
-| Can we close the 7% capacity gap in time for the November NextGen Pharma product launch? | The agent concludes that internal capacity alone cannot close the gap and external manufacturing capacity is needed. | The manufacturing constraint and relevant policy evidence supporting the conclusion. |
+1. Navigate to **Tools (1)** and review the existing **caldova-kb-mcp** connection used for document and approved public-source retrieval.
 
-These expectations describe the demo's results. Do not insert the target figures or names into agent instructions as a substitute for source data. If the lab response differs, inspect its evidence and record the source or configuration gap.
+   ![](../Sandbox-Environment-Guides/Images/amp61.png)
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — Reproducible validation sources:** Supply the competitor records and approved dated web sources, GMP document passages, organizational records for Dana Reyes and Morgan Ellis, and expected-result evidence. The narrative and screenshots illustrate these results but do not supply a deployable source package or directory configuration for the workshop. Add a validated response capture for each question after rehearsal.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-### Module 1 checkpoint
+1. Navigate to **Models / Deployments (1)**, you can see **gpt-5-mini** (chat) and **text-embedding-3-small** (embeddings) **(2)**.
 
-Explain how each source changed the answer: Fabric IQ supplied manufacturing and competitive-product context; Web IQ supplied external announcements; Foundry IQ grounded enterprise knowledge; and Work IQ supplied organizational context. Record which parts were demonstrated and which were verified in the live sandbox.
+   ![](../Sandbox-Environment-Guides/Images/amp62.png)
 
-## Module 2 — Reuse the foundation for CMO evaluation
+1. Navigate to **Knowledge (1)** and review **caldova-launch-kb**. Confirm the document source **caldova-documents-ks** is ready and contains the four Caldova PDFs. Review the existing public web source **caldova-public-gmp-web-ks**; no additional Web IQ connection is needed.
 
-The capacity decision leads to the next business question: **Which Contract Manufacturing Organizations can help close the gap fast?** Jordan creates a CMO Evaluation Agent that uses the same shared foundation, then adds the pre-qualified CMO supplier database.
+   ![](../Sandbox-Environment-Guides/Images/amp63.png)
 
-### 1. Reuse the existing knowledge and connections
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-1. In Microsoft Foundry, create or open the prepared **CMO Evaluation Agent**. The script shows `cmo-evaluation-agent`.
-1. Configure it to use the existing shared knowledge base and manufacturing ontology, following the validated lab procedure.
-1. Confirm its access to the enterprise GMP documents, Work IQ organizational context, and Web IQ external context.
-1. Record the reused sources and connections. Verify access under the configured identity before proceeding.
+1. Click on **Manage (1)** from the top navigation bar. Select **Connected resources (2)** to see the connected resources **(3)**.
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — CMO agent configuration:** Provide the tested creation steps, model deployment, agent instructions, identity, and source/connection bindings for the CMO Evaluation Agent. The script describes reuse but does not supply a deployable agent definition. Document how permissions are verified for the new agent rather than assuming that attaching a shared source grants the correct access automatically.
+   ![](../Sandbox-Environment-Guides/Images/amp64.png)
 
-### 2. Extend the ontology with CMO supplier data
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-1. Inspect the facilitator-provided pre-qualified CMO supplier database. In the story, this data comes from **Oracle**.
-1. Follow the validated ingestion procedure to load it into the Fabric Lakehouse.
-1. Open the existing manufacturing ontology. The script shows **Operations Intelligence**, followed by **Add Entity Type** and **CMO_Evaluation**.
-1. Review the new entity's supplied properties, relationships, and data bindings.
-1. As a workshop validation step, rerun a capacity question in the original Supply Chain Intelligence Agent after the extension to check that the existing workflow still works.
+1. Navigate to **Agents (1)** and select **supplier-terms-agent (2)** first.
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — Oracle ingestion and CMO_Evaluation:** Provide the source connection, access requirements, loading procedure, supplier records, schema, entity properties, relationships, and refresh configuration. The script names Oracle and `CMO_Evaluation` but does not provide those implementation details. If an approved sample extract is used instead of Oracle, label that as a workshop adaptation and document it here. Add screenshots for ingestion, the new entity, and the shared-source validation.
+   ![](../Sandbox-Environment-Guides/Images/a27.png)
 
-### 3. Validate and publish the CMO Evaluation Agent
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-1. In the Foundry playground, ask the capacity and GMP changeover questions from Module 1. Check that the agent retrieves the shared manufacturing data and enterprise guidance.
-1. Publish the configured agent to Microsoft 365 Copilot using the validated lab procedure.
-1. As Sam, ask the following question, adapted from the script:
+1. Make sure **gpt-5-mini** model selected.
 
-   ```text
-   Review prior touchpoints across emails, Teams, SharePoint, and OneDrive.
-   Score each pre-qualified CMO on responsiveness, quality, and speed.
-   Recommend which CMOs can fast-track to 3–6 months under GMP validation
-   for our NextGen Pharma product launch, and assess whether they can
-   close our capacity gap. Cite the evidence for your recommendation.
+   ![](../Sandbox-Environment-Guides/Images/a22.png)
+
+1. Verify the existing knowledge-base MCP tool is attached. Keep the deployed specialist instructions and tools.
+
+   ![](../Sandbox-Environment-Guides/Images/a23.png)
+
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+
+    >**Note:** In case we are updating anything in the Agent, we need to click **Save**.
+
+1. In the **Chat** playground, test Supplier Terms Agent using the prompts below. Check that company-specific answers use the Caldova documents and retain the returned source references.
+
+   ```
+   Summarize Caldova's supplier onboarding and qualification requirements for the November launch. Cite the supporting Caldova documents.
    ```
 
-1. Inspect the cited supplier records and collaboration history. Discuss which evidence supports the recommendation and which uncertainties remain. The script's response screenshot lists **Meridian, Astoria, and Cobalt** as fast-track eligible, identifies **Meridian Biologics** as the best overall choice, and says each of the three can close the approximately 18,900-unit gap. Treat these as simulated results to substantiate with the approved lab data.
-1. Record the intelligence reused by the second agent and the additional source introduced by the CMO extension.
+   ![](../Sandbox-Environment-Guides/Images/a24.png)
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — CMO evaluation evidence:** Supply the pre-qualified CMO list, collaboration history, evaluation rubric, capacity and timing evidence, and the GMP validation material needed to assess the 3–6 month question. The response screenshot references `GUID-PROC-009` for qualification, `GUID-QA-018` for the fast-track standard, and `GUID-PROC-012` for weighted scoring. Supply those source documents and the underlying supplier records; the screenshot alone does not provide their complete rules, scoring weights, or a reproducible lab dataset. Do not invent scores or treat the requested timeline as a guaranteed outcome.
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — Product naming in source screenshots:** The script's narrative uses NextGen Pharma, while the CMO prompt screenshot uses ZAVA IL2 and the response refers to a V2 launch. This walkthrough follows the narrative's NextGen Pharma name. Confirm the intended product identifiers in the supplied data and replace inconsistent screenshots before delivery; do not silently treat the names as interchangeable records.
+   ![](../Sandbox-Environment-Guides/Images/a40.png)
 
-### Module 2 checkpoint
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-The story illustrates how adding a supplier source can extend a foundation used by multiple agents. For this workshop, retain evidence of source reuse, cited recommendations, access checks, and the original agent's behavior after the extension. The demo's claims about deployment speed and reduced effort are narrative outcomes, not measured lab results.
+1. Try some other prompts:
 
-## Existing screenshots awaiting collaborator review
+   ```
+   What contract obligations and quality-agreement requirements apply to Caldova suppliers and CMOs? Use the Caldova reference PDFs and identify any missing information.
+   ```
 
-> [!IMPORTANT]
-> **&lt;TODO&gt; — Screenshot refresh:** The images below are retained from the previous lab so collaborators can replace them after the Caldova configuration is validated. They may show retail names, sample data, older setup choices, or the email-triggered workflow. They are reference material, not evidence of the Caldova results or instructions to execute the old workflow. Keep the current image files until replacements are available, then update the relevant Markdown references and remove obsolete reference entries. New Web IQ, CMO, and governance steps also need verified screenshots where applicable.
+   ![](../Sandbox-Environment-Guides/Images/b83.png)
 
-<details>
-<summary>Previous lab screenshots retained for collaborators</summary>
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-**Earlier lab section: Fabric IQ**
+   ```
+   What do the Caldova supplier terms say about delivery delays, escalation and remediation? Cite the relevant document sections.
+   ```
 
-![](../Sandbox-Environment-Guides/Images/a35.png)
+   ![](../Sandbox-Environment-Guides/Images/b84.png)
 
-![](../Sandbox-Environment-Guides/Images/amp56.png)
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-![](../Sandbox-Environment-Guides/Images/amp57.png)
+   ```
+   Explain the general purpose of a pharmaceutical quality agreement using the approved public FDA or EMA sources. Include the source URL and distinguish this guidance from Caldova-specific contract terms.
+   ```
 
-![](../Sandbox-Environment-Guides/Images/amp65.png)
+   ![](../Sandbox-Environment-Guides/Images/b85.png)
 
-![](../Sandbox-Environment-Guides/Images/amp67.png)
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-![](../Sandbox-Environment-Guides/Images/amp68.png)
 
-![](../Sandbox-Environment-Guides/Images/amp66.png)
+1. Review the existing Fabric Data Agent tool on **supplier-terms-agent**. If you already connected it in AYI02, keep that connection. Otherwise, add **Caldova_Launch_Readiness_Agent** using the steps below. Repeat only for another specialist whose Fabric tool is missing.
 
-![](../Sandbox-Environment-Guides/Images/amp69.png)
+1. Scroll down to **Tools**, click on **Add** drop down **(1)** and then **Add tools (2)**. This tool retrieves operational data through the published Lakehouse-backed Fabric Data Agent.
 
-![](../Sandbox-Environment-Guides/Images/amp70.png)
+   ![](../Sandbox-Environment-Guides/Images/a28.png)
 
-![](../Sandbox-Environment-Guides/Images/agenti1.png)
+1. Select **Fabric IQ(OneLake Catalog) (1)** and then **Add tool (2)**.
 
-![](../Sandbox-Environment-Guides/Images/a21.png)
+   ![](../Sandbox-Environment-Guides/Images/a32.png)
 
-![](../Sandbox-Environment-Guides/Images/a17.png)
+1. Select the published **Caldova_Launch_Readiness_Agent (1)** Data Agent and then **Add (2)**.
 
-![](../Sandbox-Environment-Guides/Images/a19.png)
+   ![](../Sandbox-Environment-Guides/Images/a30.png)
 
-![](../Sandbox-Environment-Guides/Images/a37.png)
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-![](../Sandbox-Environment-Guides/Images/a36.png)
+1. Review the existing specialist instructions. If source guidance is missing, add the following without replacing the agent's role or its existing instructions:
 
-![](../Sandbox-Environment-Guides/Images/a38.png)
+   ```
+   Use the Caldova document knowledge base for supplier terms, qualification requirements and manufacturing or quality guidance.
+   Use Caldova_Launch_Readiness_Agent for operational figures from the Lakehouse: plant commitments, batch schedules, equipment, inventory, forecasts, supplier/CMO capacity, quality evaluations, launch products and RFP status.
+   Use the existing Web IQ knowledge source only for general GMP and quality-agreement guidance. Public sources do not establish facts about fictional Caldova suppliers or products.
+   Combine the relevant tool results, retain returned source references and state missing evidence. Do not invent operational figures or treat available capacity as a confirmed commitment.
+   ```
 
-![](../Sandbox-Environment-Guides/Images/a16.png)
+   ![](../Sandbox-Environment-Guides/Images/a31.png)
 
-**Earlier lab section: Microsoft Foundry**
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-![](../Sandbox-Environment-Guides/Images/amp58.png)
+1. Try the following prompts to test the Fabric Data Agent route from Supplier Terms Agent. Check that the tool is called and operational figures come from its response.
 
-![](../Sandbox-Environment-Guides/Images/amp60.png)
+   ```
+   Which Caldova suppliers or CMOs have available capacity for the November launch? Retrieve their capacity and RFP status through the Fabric Data Agent.
+   ```
 
-![](../Sandbox-Environment-Guides/Images/amp61.png)
+   ![](../Sandbox-Environment-Guides/Images/a34.png)
 
-![](../Sandbox-Environment-Guides/Images/amp62.png)
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
-![](../Sandbox-Environment-Guides/Images/amp63.png)
+   ```
+   For a supplier or CMO returned in the previous answer, combine its recorded capacity and RFP status with the Caldova contract and qualification requirements. Explain the next steps and flag evidence that is missing.
 
-![](../Sandbox-Environment-Guides/Images/amp64.png)
+   ```
 
-![](../Sandbox-Environment-Guides/Images/a27.png)
 
-![](../Sandbox-Environment-Guides/Images/a22.png)
+   >**Note**: If it asks any follow-up or clarification questions without providing an answer, please respond to the question based on what is required and proceed.
 
-![](../Sandbox-Environment-Guides/Images/a23.png)
+1. Repeat the playground test for the other three existing agents:
 
-![](../Sandbox-Environment-Guides/Images/a24.png)
+   | Agent | Test prompt |
+   |---|---|
+   | `cmo-evaluation-agent` | Compare qualified CMO options for Caldova's November launch using recorded capacity, quality evaluation and RFP status. Cite the Caldova qualification documents and identify missing evidence. |
+   | `demand-sensing-agent` | Calculate November required and committed production across the three plants, the shortfall in units and its percentage of required production. Show the planning period and plant-level breakdown. |
+   | `manufacturing-quality-agent` | Explain equipment, fill-finish and changeover constraints for the November launch using Fabric data and Caldova manufacturing guidance. Separately explain GMP using an approved public source and include its URL. |
 
-![](../Sandbox-Environment-Guides/Images/a40.png)
+   > **&lt;TODO&gt;:** Add screenshots of the three specialist responses, including the public-source answer where applicable.
 
-![](../Sandbox-Environment-Guides/Images/b83.png)
+### Now, click on **`Next >>`** from the lower right corner to move on to **`Post deployment Guide - Work IQ`**.
 
-![](../Sandbox-Environment-Guides/Images/b84.png)
-
-![](../Sandbox-Environment-Guides/Images/b85.png)
-
-![](../Sandbox-Environment-Guides/Images/a28.png)
-
-![](../Sandbox-Environment-Guides/Images/a32.png)
-
-![](../Sandbox-Environment-Guides/Images/a30.png)
-
-![](../Sandbox-Environment-Guides/Images/a31.png)
-
-![](../Sandbox-Environment-Guides/Images/a34.png)
-
-</details>
-
-### Now, click on **`Next >>`** to continue with **`Work IQ, CMO RFP Tracking, and Governance`**.
+You can also open [AYI04 – Work IQ](AYI04.md) to review the existing Copilot Studio orchestration and test it in Teams.
