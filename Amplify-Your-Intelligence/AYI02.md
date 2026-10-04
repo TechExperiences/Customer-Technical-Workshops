@@ -411,21 +411,25 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment.
    ```
 
-   > **&lt;TODO&gt;:** Review the generated Caldova demo PDFs for consistency with the story and loaded data.
-
    > **&lt;TODO&gt;:** Update the following Foundry screenshots and agent-selection labels to show the four Caldova agents and their shared Fabric, knowledge-base and Web IQ connections.
 
 1. Wait for the deployment to complete and the **Keep** the file.
 
    ![](../Sandbox-Environment-Guides/Images/b38.png)  
 
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova Foundry deployment results and Keep action.
+
 1. Navigate back to the Resource group. Select the **Foundry Project**.
 
    ![](../Sandbox-Environment-Guides/Images/b39.png)  
 
+   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource group and Foundry project.
+
 1. Click On **Go to Foundry portal**.
 
    ![](../Sandbox-Environment-Guides/Images/b40.png)  
+
+   > **&lt;TODO&gt;:** Update this screenshot to show Go to Foundry portal for the Caldova project.
 
 1. Click on **Build**.
 
