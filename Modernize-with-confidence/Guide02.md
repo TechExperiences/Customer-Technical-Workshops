@@ -9,6 +9,26 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
 
+### Verify Resources in the Azure Resource Group
+
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups (1)** and select  **Resource groups (2)**.
+
+   ![](../Modernize-with-confidence/Images/m18.png)
+
+1. Click on **rg-caldova-modernize** Resource Group.
+
+   ![](../Modernize-with-confidence/Images/m19.png)
+
+1. Confirm that the resource group contains the following resources:
+   
+   - **Azure OpenAI**
+   - **Azure SQL Database Hyperscale** 
+   - **SQL Server** 
+
+     ![](../Modernize-with-confidence/Images/m20.png)
+
+1. Once you have verified the resources, you can proceed with the next steps.
+
 ### Sign in to GitHub Copilot Chat
 
 
