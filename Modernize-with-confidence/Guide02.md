@@ -169,7 +169,7 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
    
-   >Wait for the deployment to complete. This may take approximately `20–30` minutes.
+   >Wait for the deployment to complete. This may take approximately `10–20` minutes.
 
 ### Validation - Azure SQL DB Hyperscale
 
@@ -232,32 +232,44 @@ Follow below instructions to migrate On-prem web application to Azure app servic
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
 
+1. Wait for the deployment to complete. This may take approximately `20–30` minutes.   
+
 ### Validation - Azure App Service
 
-1. Navigate back to Azure portal to validate the migrated web application and search for **rg-caldova-modernize** Resource Group. you can see app service resources along with SQL Database
+1. Once the deployment is completed, navigate back to **Azure portal** to validate the migrated Web application.
 
-1. Click on **app-caldova-ordermanagement.**
+1. Navigate to **rg-caldova-modernize** Resource Group. you can see `App service` resources along with `SQL Database Hyperscale`.
 
-   ![](../Sandbox-Environment-Guides/Images/appservice.png)
+1. Click on App service named **app-caldova-<inject key="Deployment-ID" enableCopy="false"/>**.
+
+   ![](../Modernize-with-confidence/Images/m27.png) 
 
 1. You can see all app related information and click on **default domain**
 
-   ![](../Sandbox-Environment-Guides/Images/applink.png)
+   ![](../Modernize-with-confidence/Images/m28.png) 
 
 1. It will open application in new tab and you can see migrated application. 
 
-   ![](../Sandbox-Environment-Guides/Images/appDB.png)
+   ![](../Modernize-with-confidence/Images/m29.png) 
 
-1. In migrated application you can see **Traditional Sql Search Page** page got added.
+1. In migrated application you can see **Traditional Sql Search** section got added.
 
-1. Click on **Traditional Sql Search Page** and paste the below prompt in search area and click on **search** button.
+1. Click on **Traditional Sql Search** section.
+
+   ![](../Modernize-with-confidence/Images/m30.png) 
+
+1. Paste the below prompt in search area **(1)** and click on **Search (2)** button.
 
    ``` 
    medicine used to reduce fever
    ```
-   ![](../Sandbox-Environment-Guides/Images/traditional.png)
+
+   ![](../Modernize-with-confidence/Images/m31.png) 
+
 
 1. `You can observe it will return no results.`
+
+   ![](../Modernize-with-confidence/Images/m32.png) 
 
    The migrated application currently uses traditional SQL search to find products based on exact text matches. Traditional SQL search typically relies on conditions such as LIKE, where the user's search terms need to closely match the words stored in the product description.
 
