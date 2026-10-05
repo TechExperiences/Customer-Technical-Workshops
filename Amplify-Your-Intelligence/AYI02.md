@@ -341,7 +341,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
       Include instructions to use the existing Lakehouse-backed Caldova Fabric Data Agent for operational data once manually connected. Do not attach or test it during deployment; I will connect it through Tools → Fabric IQ (OneLake Catalog). Do not recreate Fabric resources or require ontology graph materialization. Use relevant document/web sources without hard-coding answers or inventing operational figures when Fabric is not connected.
 
-   6. Run one quick PDF-grounded test per agent and one public-web test per web-enabled agent. Verify document/allowed-source citations and Web Search invocation. Example web question: "What is GMP and why does it matter in drug manufacturing?"
+   6. Perform one PDF-grounded test through Supplier Terms Agent and one Web Search test through Manufacturing Quality Agent. Confirm the relevant tool was called and the answer includes a document or allowed public-source citation. Check the remaining agents' model and knowledge/tool attachments from their saved configuration without running additional test questions.
 
       Do not attempt Fabric connections or queries. Record actual results, failures and the manual Fabric connection step in the deployment MD. Report deployment outcome and agent names/IDs. Do not create a separate verification script or wait for manual UI verification.
 
