@@ -303,7 +303,7 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
 1. Navigate to **Visual Studio Code**.
 
-1. In **Visual Studio Code**, open the `.env` file from the project explorer.
+1. In **Visual Studio Code**, open the `.env` file from the Project explorer.
 
    ![](../Sandbox-Environment-Guides/Images/amwc.png)
 
@@ -312,9 +312,9 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
    - `AZURE_OPENAI_ENDPOINT` > <inject key="openaiEndpoint" enableCopy="false"/>
    - `AZURE_OPENAI_API_KEY` > <inject key="openaiPrimaryKey" enableCopy="false"/>
 
-1. Save the file.   
+1. Save the file using **Ctrl+S**.   
 
-1. Copy the below prompt and paste it in chat window
+1. Copy the below prompt and paste it in **GitHub Copilot Chat**.
 
    ```
    Great, both SQL Database and Web application migration were completed successfully.
@@ -357,30 +357,25 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
 ### Validation - Traditional SQL Search Vs Vector Semantic Search
 
-1. Navigate Azure Portal and Open Migrated Application
+1. Navigate **Azure Portal** and Open Migrated Application.
 
-1. In the updated application, you can see the **Semantic/Vector Search** page that has been added.
+1. In the updated application, you can see the **Semantic Vector Search** section that has been added.
 
-1. Click on **Semantic/Vector search** page and paste the same prompt in search area and click on **search** button. 
+   ![](../Modernize-with-confidence/Images/m33.png) 
+
+1. Click on **Semantic Vector search** section.
+
+1. Paste the below same prompt in search area **(1)** and click on **Semantic search (2)** button. 
 
    ``` 
    medicine used to reduce fever
    ```
-   ![](../Sandbox-Environment-Guides/Images/vector.png)
 
-1. The semantic/vector search can identify products based on the meaning and semantic similarity of the query and product descriptions, even when the exact keywords are not present.
+   ![](../Modernize-with-confidence/Images/m34.png) 
 
+1. The Semantic vector search can identify products based on the meaning and semantic similarity of the query and product descriptions, even when the exact keywords are not present.
 
-
-
-
+   ![](../Modernize-with-confidence/Images/m35.png) 
 
 
-
-
-
-
-
-
-
-### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session
+### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session.
