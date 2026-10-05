@@ -201,7 +201,7 @@ Migrate the pharmaceutical manufacturing web application (Order Management) from
  
 Follow below instructions to migrate On-prem web application to Azure app service.
 
-1. Navigate to VScode and paste the below prompt in chat window
+1. Navigate back to **VS Code** and paste the below prompt in **GitHub Copilot Chat**.
 
    ```
    Great, you have completed OnPrem SQL migration to Azure SQL Database Hyperscale. Now we need to migrate OnPrem Web Application to Azure Web App Service and modernize. 
@@ -225,6 +225,8 @@ Follow below instructions to migrate On-prem web application to Azure app servic
 
    ```
    - Then click **Send** button.
+
+     ![](../Modernize-with-confidence/Images/m25.png)    
 
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
