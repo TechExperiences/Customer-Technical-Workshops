@@ -113,6 +113,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    You are my smart agent to read my attached architecture design for Caldova Pharmaceutical and its November NextGen Pharma product launch and create bicep/ARM template based on the identified Fabric resources.
  
    Please follow these below instructions for Fabric IQ section:
+   0. Before deployment, detect the existing Python interpreter and verify pip is available. Install only the dependencies required by the generated scripts through the terminal, using the same interpreter for installation and execution. Reuse an existing virtual environment if available; creating one is optional. Verify the required imports before continuing. If installation fails, inspect the actual pip error and attempt a targeted fix instead of repeatedly retrying VS Code's Python Environments tool.
    1. List down all the Azure resources required for the Fabric IQ section of the attached architecture diagram.
    2. Use existing Resource Group (rg-caldova-iq) and proceed further.
    3. Use existing Fabric Capacity (fabriccapacity<inject key="Deployment-ID" enableCopy="false"/>).
