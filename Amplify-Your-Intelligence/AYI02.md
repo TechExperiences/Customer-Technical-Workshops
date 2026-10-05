@@ -119,12 +119,13 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    2. Use existing Resource Group (rg-caldova-iq) and proceed further.
    3. Use existing Fabric Capacity (fabriccapacity<inject key="Deployment-ID" enableCopy="false"/>).
    4. Create a new Fabric Workspace (Caldova-Pharma) and attach capacity.
-   5. Create Lakehouse and use GitHub Copilot to generate and store sample data into tables for the Fabric data sources shown in the architecture: Plant Capacity & Commitments, Batch Schedules & Changeovers, Equipment & Fill-Finish Availability, Product & Inventory Data, Demand Forecasts, Supplier & CMO Capacity, Quality & CMO Evaluation Records, Launch & Competitive Products, and RFP Status. Keep these as tables in the same Lakehouse; no external database connections are required.
+   5. Please provide Fabric admin access to the UPN <inject key="AzureAdUserEmail"></inject> to see the fabric workspace (Caldova-Pharma)
+   6. Create Lakehouse and use GitHub Copilot to generate and store sample data into tables for the Fabric data sources shown in the architecture: Plant Capacity & Commitments, Batch Schedules & Changeovers, Equipment & Fill-Finish Availability, Product & Inventory Data, Demand Forecasts, Supplier & CMO Capacity, Quality & CMO Evaluation Records, Launch & Competitive Products, and RFP Status. Keep these as tables in the same Lakehouse; no external database connections are required.
       Keep shared IDs, dates and production units consistent across tables. Include required launch production, committed production, maximum plant capacity, equipment qualification windows, fill-finish availability and feasible internal schedule recovery.
       Generate data for the same November launch planning period across three plants, with a 7% network production shortfall (about 18,900 units), Plant 3 as the binding constraint, and insufficient internal recovery to fully close the gap. Document and validate the shortfall calculation using required launch production as the denominator. Include available capacity and qualification records for pre-qualified CMOs to support evaluating external manufacturing options.
-   6. Create Fabric Ontology using above Lakehouse tables with proper entities and relationships to show the business model. Graph materialization is not required for this workshop.
-   7. Create Data Agent using above Ontology as a data source and prepare proper Agent Instruction based on these Ontology Entities. Instruct it to calculate committed production versus maximum capacity by plant, the network shortfall and feasible internal recovery from the tables, identify the constrained plant, and assess whether external CMO capacity is needed for the November launch. Show the calculation, units and planning period; do not hard-code the answers.
-   8. Perform basic verification using the existing deployment tooling and lightweight API/table queries. Check that the F16 capacity is active, the workspace is assigned to it, the lab user has workspace access, and all nine Lakehouse tables contain data. Confirm the ontology item contains the intended entities and relationships; skip Manage graph eligibility and materialization checks. Verify the November shortfall calculation from the loaded data and test the Data Agent with the shortfall and internal-recovery questions. Fix basic deployment or data issues found and record actual results and any checks not performed in the deployment MD. Do not wait for manual UI verification.
+   7. Create Fabric Ontology using above Lakehouse tables with proper entities and relationships to show the business model. Graph materialization is not required for this workshop.
+   8. Create Data Agent using above Ontology as a data source and prepare proper Agent Instruction based on these Ontology Entities. Instruct it to calculate committed production versus maximum capacity by plant, the network shortfall and feasible internal recovery from the tables, identify the constrained plant, and assess whether external CMO capacity is needed for the November launch. Show the calculation, units and planning period; do not hard-code the answers.
+   9. Perform basic verification using the existing deployment tooling and lightweight API/table queries. Check that the F16 capacity is active, the workspace is assigned to it, the lab user has workspace access, and all nine Lakehouse tables contain data. Confirm the ontology item contains the intended entities and relationships; skip Manage graph eligibility and materialization checks. Verify the November shortfall calculation from the loaded data and test the Data Agent with the shortfall and internal-recovery questions. Fix basic deployment or data issues found and record actual results and any checks not performed in the deployment MD. Do not wait for manual UI verification.
    
    Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment(create workspace, create lakehouse, table creation, sample data insertion, ontology creation, data agent creation)
    ```
@@ -201,14 +202,14 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
       >**Note:** Not the one which starts with **Microsoft IQ**.
 
-1. **Optional: Fix workspace access.** If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. Replace `<LAB_USER_UPN>` with your lab user UPN: **<inject key="AzureAdUserEmail"></inject>**. If the workspace is already accessible, skip this step and the next access-fix completion step.
+1. **Optional: Fix workspace access.** If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. If the workspace is already accessible, skip this step and the next access-fix completion step.
 
    ```
    I cannot see the Caldova workspace created by the previous deployment in the Fabric portal.
 
    Using deployment-output.json and the existing deployment identity:
    1. Verify that the workspace exists through the Fabric API and report its workspace ID and tenant ID.
-   2. Resolve the lab user <LAB_USER_UPN> to the correct user object ID in that tenant.
+   2. Resolve the lab user <inject key="AzureAdUserEmail"></inject> to the correct user object ID in that tenant.
    3. Grant this user Admin access to the existing workspace, preserving existing access.
    4. Verify the user's workspace role assignment and confirm the workspace is attached to the deployed F16 capacity.
    5. Provide the direct workspace URL and report the actual API verification results.
@@ -395,7 +396,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    Please follow these below instructions for Foundry IQ section in the same Resource group.
    1. List down all the Azure Foundry related resources from the architecture diagram.
-   2. Create Foundry resources in Azure(Please use same Resource Group created for the above Fabric Resources) and use Sweden Central region.
+   2. Create Foundry resources in Azure(Please use same Resource Group rg-caldova-iq) and use Sweden Central region for Foundry resources deployment.
    3. In Foundry Project, create two models(1. gpt-5-mini, 2. text-embedding-3-small)
    4. Generate four short, text-based Caldova workshop PDFs: Supplier Terms; CMO Qualification & Evaluation; GMP & Manufacturing Changeover Guidance; and Manufacturing Quality Guidance. Clearly label each as fictional demo content. Use company, product, plant and CMO names/IDs from the existing Caldova data, with simple illustrative terms and processes consistent with the launch story. Keep changing capacity, demand and RFP figures in Fabric rather than hard-coding them into the PDFs; do not present sample policies as real regulatory requirements.
       Reuse the existing deployment storage account, or create one in the same Resource Group if none exists. Upload the PDFs to a caldova-documents Blob container without replacing unrelated documents. In Foundry Project, create a shared knowledge base using Azure AI Search Service and a knowledge source pointing to these PDFs. Follow the original Blob Storage document-ingestion pattern; verify readable PDF text, successful upload/indexing and a retrieved answer with a document citation.
