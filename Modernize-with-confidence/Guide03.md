@@ -16,7 +16,7 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
 ### Validation - Azure SQL DB Hyperscale
 
-1. You can see all the resources and click on **Azure SQL Database Hyperscale**.
+1. You can see all the resources and click on *Azure SQL Database Hyperscale* named **CaldovaOrderManagement**.
 
    ![](../Modernize-with-confidence/Images/m3.png)
 
@@ -38,7 +38,7 @@ Migrate the pharmaceutical manufacturing web application (Order Management) from
 
 Navigate back to Azure portal to validate the migrated web application and search for `rg-MWC` Resource Group. you can see App service resources along with SQL Database.
 
-1. Navigate back to **rg-MWC** RG. Select the App Service named Click on **app-caldova-ordermanagement-xxxx**.
+1. Navigate back to **rg-MWC** RG. Select the App Service named Click on **app-caldova-ordermgmt-xxxx**.
 
    ![](../Modernize-with-confidence/Images/m6.png)
 
@@ -98,7 +98,7 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
 ### Validation - Traditional SQL Search Vs Vector Semantic Search
 
-1. Click on **Semantic/Vector Search (1)** section. Paste the same prompt in search area **(2)** and click on **search (3)** button. 
+1. Click on **Semantic Search (1)** section. Paste the same prompt in search area **(2)** and click on **search (3)** button. 
 
    ``` 
    medicine used to reduce fever

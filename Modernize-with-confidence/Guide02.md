@@ -354,6 +354,8 @@ Implement Vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
 
+1. Wait for the deployment to complete. Select **Keep** to keep the created files.   
+
 ### Validation - Traditional SQL Search Vs Vector Semantic Search
 
 1. Navigate **Azure Portal** and Open Migrated Application.
