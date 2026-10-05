@@ -380,3 +380,5 @@ Implement Vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
 
 ### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session.
+
+#### Click on `Next` to view the Pre deployed `Modernize with Confidence Package`.
