@@ -1,6 +1,6 @@
 # 2. Rapid Prototyping
 
-Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
+Now that you have completed the Envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
 ## Rapid Prototyping using GitHub Copilot
 
@@ -168,7 +168,7 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
    
-   >Wait for the deployment to complete. This may take approximately `10–20` minutes.
+   >Wait for the deployment to complete. This may take approximately `10–20` minutes. Select **Keep** to keep the created files.
 
 ### Validation - Azure SQL DB Hyperscale
 
@@ -198,7 +198,7 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
 Migrate the pharmaceutical manufacturing web application (Order Management) from on-premises infrastructure to Azure App Service to provide a scalable, secure, and highly available cloud-hosted platform. The migration enables improved application performance, simplified infrastructure management, and seamless integration with Azure services and the modernized Azure SQL Database backend.
  
-Follow below instructions to migrate On-prem web application to Azure app service.
+Follow below instructions to migrate On-prem Web application to Azure app service.
 
 1. Navigate back to **VS Code** and paste the below prompt in **GitHub Copilot Chat**.
 
@@ -231,7 +231,7 @@ Follow below instructions to migrate On-prem web application to Azure app servic
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
 
-1. Wait for the deployment to complete. This may take approximately `20–30` minutes.   
+1. Wait for the deployment to complete. This may take approximately `20–30` minutes. Select **Keep** to keep the created files.
 
 ### Validation - Azure App Service
 
@@ -278,7 +278,7 @@ Follow below instructions to migrate On-prem web application to Azure app servic
 
    - This creates a limitation for users because they often search using natural language, synonyms, or different words that express the same meaning.
 
-1. To overcome this limitation, we will enhance the migrated application with **vector/semantic search** using Azure SQL Database Hyperscale and Azure OpenAI embeddings.
+1. To overcome this limitation, we will enhance the migrated application with **Vector Semantic search** using Azure SQL Database Hyperscale and Azure OpenAI embeddings.
 
    - `Vector search` converts product descriptions and user search queries into numerical **embeddings** that represent their meaning. The application can then compare the similarity between the user's query and product descriptions instead of relying only on exact keyword matches.
 
@@ -290,7 +290,7 @@ Follow below instructions to migrate On-prem web application to Azure app servic
    - Store the generated embeddings in **Azure SQL Database Hyperscale** using the native `VECTOR` data type.
    - Generate an embedding for the user's natural-language search query.
    - Compare the query embedding with product-description embeddings using vector similarity.
-   - Add a **Semantic/Vector Search** page to the migrated web application.
+   - Add a **Semantic Vector Search** page to the migrated web application.
    - Display matching products along with their similarity/probability scores.
    - Add a visualization to demonstrate product search trends based on the vector-search results.
 
@@ -298,11 +298,11 @@ This allows us to demonstrate how the migrated application can move from **keywo
 
 ## Implementation of Vector/Semantic Search in Azure SQL Database Hyperscale
 
-Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embeddings and the native VECTOR data type to enable natural-language product searches. Query and product embeddings are compared using vector similarity to identify relevant products beyond exact keyword matching, improving search accuracy and product discovery.
+Implement Vector search in Azure SQL Database Hyperscale using Azure OpenAI embeddings and the native VECTOR data type to enable natural-language product searches. Query and product embeddings are compared using vector similarity to identify relevant products beyond exact keyword matching, improving search accuracy and product discovery.
 
 1. Navigate to **Visual Studio Code**.
 
-1. In **Visual Studio Code**, open the `.env` file from the Project explorer.
+1. In **Visual Studio Code**, open the `.env` file from the **Explorer**.
 
    ![](../Sandbox-Environment-Guides/Images/amwc.png)
 
