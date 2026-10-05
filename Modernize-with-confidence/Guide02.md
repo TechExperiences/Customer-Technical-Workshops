@@ -122,7 +122,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 Migrate the pharmaceutical manufacturing database from on-premises SQL Server to Azure SQL Database Hyperscale to provide scalable, highly available, and cloud-based data management. The migration preserves critical manufacturing, product, inventory, production, and operational data while enabling improved performance, scalability, and integration with modern Azure analytics and AI services.
 
-1. Along with the attached **Solution Architecture** (1), please paste the below prompt (2).
+1. Along with the attached **Solution Architecture**, please paste the below prompt in the Chat.
 
    ```
    You are my smart agent to understand below are the problem statement and planned solution architecture design which will help Caldova to overcome from their problems. After that, please prepare bicep/ARM template and deploy the resources in the respective environment.
@@ -147,9 +147,9 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
    ```
 
-   - Then click **Send (3)** button.
+   - Then click **Send** button.
 
-    ![](../Sandbox-Environment-Guides/Images/prompt.png)
+     ![](../Modernize-with-confidence/Images/m22.png)
    
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
@@ -157,11 +157,13 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
    ![](../Sandbox-Environment-Guides/Images/Login.png)
 
-1. Click on Yes, completed and then click on **Submit** button
+1. Click on **Yes (1)**, completed and then click on **Submit (2)** button.
     
     ![](../Sandbox-Environment-Guides/Images/Login2.png)
 
 1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
+
+1. If prompted for the SQL database password, please provide the existing password <inject key="sqlAdminPassword" enableCopy="false"/>.
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
 
