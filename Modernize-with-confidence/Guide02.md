@@ -139,8 +139,8 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
    3.	Make UPN - <inject key="AzureAdUserEmail"></inject> set as admin to the azure sql server and hyperscale databse
    4.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
    5.	Connect and Access the OnPrem SQL Sever using credentials
-   	User Name: caldova-admin
-   	Password: B!Admin@123
+      - User Name: caldova-admin
+      - Password: B!Admin@123
    6.	Access database CaldovaOrderManagement in this OnPrem server.
    7.	Migrate Tables and data into the created Azure SQL Hyperscale Database
    8.	Maintain a similar relationship among all tables.
