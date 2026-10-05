@@ -163,7 +163,7 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
 1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
 
-1. If prompted for the SQL database password, please provide the existing password <inject key="sqlAdminPassword" enableCopy="false"/>.
+1. If prompted for the SQL database password, please provide the existing password **<inject key="sqlAdminPassword" enableCopy="false"/>**.
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
 
@@ -173,23 +173,23 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
 ### Validation - Azure SQL DB Hyperscale
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Click on **Resource groups**. and Click on **rg-caldova-modernize** Resource Group.
+1. Navigate back to [Azure portal](https://portal.azure.com/).  Go to **Resource groups**. and Click on **rg-caldova-modernize** Resource Group.
 
-   ![](../Sandbox-Environment-Guides/Images/portal.png)
+   ![](../Modernize-with-confidence/Images/m23.png)
 
-1. You can see all the resources and click on **Azure SQL Database**
+1. You can see all the resources and click on *Azure SQL Database Hyperscale* named **CaldovaOrderManagement**.
 
-   ![](../Sandbox-Environment-Guides/Images/Database.png)
+   ![](../Modernize-with-confidence/Images/m26.png)
 
 1. Click on **Query Editor** to connect SQL Database and Validate databse objects.
 
-   ![](../Sandbox-Environment-Guides/Images/Queryeditor.png)
+   ![](../Modernize-with-confidence/Images/m24.png)
 
-1. To authorize user click on **Connect as odl_user_<inject key="Deployment-ID" enableCopy="false"/>**.
+1. From **Microsoft Entra authentication (1)** tab, to authorize user click on **Connect as odl_user_<inject key="Deployment-ID" enableCopy="false"/> (2)**.
 
-     ![](../Sandbox-Environment-Guides/Images/entra.png)
+   ![](../Modernize-with-confidence/Images/m21.png)
 
-1. Expand Schema(dbo) -> Tables -> and Click any table to see data.
+1. Expand **Schema(dbo) (1)** -> **Tables (2)** -> and Click any table to see data **(3)**.
 
     ![](../Sandbox-Environment-Guides/Images/Validation.png)   
 
