@@ -79,11 +79,13 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp30.png)
 
-1. Click **Auto (1)** and then set the model to **Claude Fable 5.1 (2)** with **High** thinking effort and **1M** context.
+1. Click **Auto (1)**, then click **Other Models (2)** to expand the list of available models.
 
-   ![](../Sandbox-Environment-Guides/Images/b7.png)
+   ![](../Amplify-Your-Intelligence/Images/14.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show Claude Fable 5.1 with High thinking effort and 1M context.
+1. Select **Claude Fable 5.1 (1)**, then set the thinking effort to **High (2)** and the context to **1M (3)**.
+
+   ![](../Amplify-Your-Intelligence/Images/15.png)
 
     >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
 
@@ -97,15 +99,11 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Select the approved **Caldova-Future-State-Architecture.png** image.
 
-   ![](../Sandbox-Environment-Guides/Images/b88.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the approved Caldova future-state architecture image.
+   ![](../Amplify-Your-Intelligence/Images/18.png)
 
 1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the approved **Caldova-Future-State-Architecture.png (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b89.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the approved Caldova architecture attachment.
 
 ### Fabric IQ
 
@@ -132,18 +130,19 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    - Then **Send (3)**.
 
-    ![](../Sandbox-Environment-Guides/Images/b12.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova Fabric IQ prompt.
+    ![](../Amplify-Your-Intelligence/Images/19.png)
    
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
-1. If Copilot Asks below question to create new Resource Group, please select the option similar to the one marked below.
+1. If Copilot asks you to choose how to proceed with the existing workspace, select the recommended option similar to the one marked below.
 
-   ![](../Sandbox-Environment-Guides/Images/Prompt-followup.png)
+   ![](../Amplify-Your-Intelligence/Images/20.png)
 
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova deployment choice in Copilot.
+1. If Copilot asks how to handle the ontology data source for the Data Agent, select the recommended option: **Keep Lakehouse fallback + document UI step**
 
+   - Then click **Submit** to continue.
+
+   ![](../Amplify-Your-Intelligence/Images/21.png)
 1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
 
 1. Select **Yes**, if any question prompts you to respond related to `F16` deployment.
@@ -164,31 +163,24 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Wait for the deployment to complete. This may take approximately `20–30` minutes. Once completed, you will see a Summary/Conclusion similar to the example below, although the details may vary **(1)** and select **Keep (2)** to keep the created files.
 
-   ![](../Sandbox-Environment-Guides/Images/b15.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova deployment summary and created items.
+   ![](../Amplify-Your-Intelligence/Images/21.png)
 
     >**Note:** The **Summary/Conclusion** may look different for you. Once the deployment is completed, you will be able to view the results in the chat.
 
-1. Once the deployment is complete, you can verify the deployed resources by navigating to the newly created resource group.
+1. Once the deployment is complete, you can verify the deployed resources by navigating to the existing **rg-Caldova-iq** resource group.
 
-1. Navigate to the Azure portal. Click on **Resource group**.
+1. Navigate to the Azure portal and click **Resource groups**. Open **rg-Caldova-iq** to verify the deployed resources.
 
-   ![](../Sandbox-Environment-Guides/Images/b16.png)
+   ![](../Amplify-Your-Intelligence/Images/23.png)
 
-   > **&lt;TODO&gt;:** Replace this screenshot with the resource group list showing the Caldova deployment.
 
-1. Select the newly created Resource Group, excluding the **resource groups** highlighted below.
+1. Select the **existing Resource Group used for the deployment**. Do not select the resource groups highlighted below.
 
-   ![](../Sandbox-Environment-Guides/Images/b55.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova resource group selection.
+   ![](../Amplify-Your-Intelligence/Images/24.png)
 
 1. You should see the deployed Fabric capacity.
 
-   ![](../Sandbox-Environment-Guides/Images/b17.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the deployed Caldova Fabric capacity and resource group.
+   ![](../Amplify-Your-Intelligence/Images/25.png)
 
 1. Click on the **App launcher (1)** and select **Microsoft fabric** icon.
 
@@ -217,37 +209,26 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    Reuse the existing resources. Do not recreate the workspace, reload data, or rerun the full deployment. This request is for workspace access, not a tenant-wide Fabric Administrator role.
    ```
 
-    ![](../Sandbox-Environment-Guides/Images/b19.png)   
+    ![](../Amplify-Your-Intelligence/Images/26.png)   
 
-    > **&lt;TODO&gt;:** Replace this screenshot with the Caldova workspace-access recovery prompt.
+1. Wait for the process to complete.
 
-1. Wait for the process to complete and then **Keep** the file.
-
-   ![](../Sandbox-Environment-Guides/Images/b20.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova workspace-access verification result.
 
 1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace which starts with something similar to `Caldova`.
 
-   ![](../Sandbox-Environment-Guides/Images/b21.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the visible Caldova workspace.
+   ![](../Amplify-Your-Intelligence/Images/27.png)
 
 1. Open the **Caldova** workspace.
 
 1. Make sure that all the workspace items mentioned in the prompt are created. 
 
-   ![](../Sandbox-Environment-Guides/Images/b22.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova workspace items.
+   ![](../Amplify-Your-Intelligence/Images/28.png)
 
 1. Please open each item and verify that it has been created correctly. If anything is missing, go back to the **GitHub Copilot Chat** and provide a follow-up prompt to address the missing item.  
 
 1. In this case, when I opened the workspace. There are no tables created in the Lakehouse.
 
-   ![](../Sandbox-Environment-Guides/Images/b23.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova Lakehouse and its actual table state.
+   ![](../Amplify-Your-Intelligence/Images/29.png)
 
 1. Navigate back to the **GitHub Copilot Chat** to send the follow up prompt.
 
@@ -258,68 +239,17 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    The Ontology was created, but no entities or relationships have been added.
    The Ontology has not been configured as the Data Source for the Data Agent.
    ```
-
-    ![](../Sandbox-Environment-Guides/Images/b25.png)
-
-    > **&lt;TODO&gt;:** Replace this screenshot with the follow-up prompt for any issues found in the Caldova deployment.
+    ![](../Amplify-Your-Intelligence/Images/30.png)
 
 1. Wait for the process to complete and click **Keep** to keep the file.
 
-   ![](../Sandbox-Environment-Guides/Images/b24.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the actual Caldova repair and verification results.
-
 1. Navigate back to the Fabric workspace, refresh the Lakehouse, and verify that the tables have been created and the sample data has been loaded successfully.
 
-   ![](../Sandbox-Environment-Guides/Images/b26.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova tables and generated data.
+   ![](../Amplify-Your-Intelligence/Images/31.png)
 
 1. Open the **Ontology** item and verify that the entities and relationships have been created successfully.
 
-   ![](../Sandbox-Environment-Guides/Images/b27.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology entities and relationships.
-
-   > **&lt;TODO&gt;:** Step 25 can be removed with the outdated ontology walkthrough (steps 25–30).
-
-1. Select **Product** Entity **(1)** and then click on **View Entity Type details (2)**.   
-
-   ![](../Sandbox-Environment-Guides/Images/b60.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with entity selection in the Caldova ontology.
-
-   > **&lt;TODO&gt;:** Step 26 can be removed with the outdated ontology walkthrough (steps 25–30).
-
-1. Click on **Overview**.
-
-   ![](../Sandbox-Environment-Guides/Images/b61.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the selected Caldova entity details and property bindings.
-
-   > **&lt;TODO&gt;:** Step 27 can be removed with the outdated ontology walkthrough (steps 25–30).
-
-1. Set the `Time range` to **Last 30 minutes (1)**,
-
-   - `Time granularity`: **1 hr (2)**
-   - `Aggregation`: **Sum (3)**
-   - Then **Apply (4)**
-
-     ![](../Sandbox-Environment-Guides/Images/b76.png) 
-
-   > **&lt;TODO&gt;:** Step 28 can be removed with the outdated ontology walkthrough (steps 25–30).
-
-1. Wait until you see the **Relationship graph**.
-
-   ![](../Sandbox-Environment-Guides/Images/graph.png)
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology relationship graph.
-
-   > **&lt;TODO&gt;:** Step 29 can be removed with the outdated ontology walkthrough (steps 25–30).
-
-1. Close the **Ontology** page.
-
-   > **&lt;TODO&gt;:** Step 30 can be removed with the outdated ontology walkthrough (steps 25–30).
+   ![](../Amplify-Your-Intelligence/Images/32.png)
 
 1. Open the **Data Agent** from the workspace. If the **Ontology** can be added as the Data Source and the Data Agent queries work, keep it. Otherwise, use the existing **Lakehouse** as the Data Source in the next step.
 
@@ -329,29 +259,21 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    - Click on the **elipses (1)** and then **Remove (2)**.
 
-     ![](../Sandbox-Environment-Guides/Images/b28.png)
-
-     > **&lt;TODO&gt;:** Replace this screenshot with the Caldova data agent and its data sources.
+     ![](../Amplify-Your-Intelligence/Images/33.png)
 
    - Click **Yes, remove**. 
 
    - Select **Add data (1)** drop down and then **Data source (2)**.
 
-     ![](../Sandbox-Environment-Guides/Images/b30.png)   
-
-     > **&lt;TODO&gt;:** Replace this screenshot with the Add data menu in the Caldova data agent.
+     ![](../Amplify-Your-Intelligence/Images/34.png)   
 
    - Select the existing **Caldova Lakehouse (1)** and then **Add (2)**. Select all nine story tables and include their join keys and calculation guidance in the Data Agent instructions.
 
-     ![](../Sandbox-Environment-Guides/Images/b31.png)        
-
-     > **&lt;TODO&gt;:** If ontology addition does not work, replace this screenshot with selection of the Caldova Lakehouse as the Data Source.
+     ![](../Amplify-Your-Intelligence/Images/36.png)        
 
 1. Confirm the working Data Source is added: keep the **Ontology** if it works; otherwise, confirm the **Caldova Lakehouse** and all nine story tables are selected.
 
-   ![](../Sandbox-Environment-Guides/Images/b32.png)
-
-   > **&lt;TODO&gt;:** Keep an ontology-source screenshot if it works; otherwise, replace it with the Caldova Lakehouse and selected tables attached to the Data Agent.
+   ![](../Amplify-Your-Intelligence/Images/37.png)
 
 1. Navigate to **Test data agent (1)**, send the following prompts in Data agent input box **(2)**:
 
@@ -359,17 +281,13 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    For the November NextGen Pharma launch, show required production, committed production and maximum capacity by plant. Calculate the network shortfall in units and as a percentage of required production. Which plant is the main constraint, how much can feasible internal recovery close, and what gap remains? Show the calculation, planning period and units from the data.
    ```
 
-   ![](../Sandbox-Environment-Guides/Images/b58.png)   
-
-   > **&lt;TODO&gt;:** Replace this screenshot with a Caldova capacity question and its grounded response.
+   ![](../Amplify-Your-Intelligence/Images/38.png)   
 
    ```
    Which pre-qualified CMOs have available capacity to help close the remaining November NextGen Pharma launch gap? List their available capacity, qualification status and current RFP status. Compare capacity with the remaining gap using the same planning period and units. If a required value is missing, state that rather than assuming it.
    ```
 
-   ![](../Sandbox-Environment-Guides/Images/b59.png)    
-
-   > **&lt;TODO&gt;:** Replace this screenshot with a Caldova supplier or CMO question and its grounded response.
+   ![](../Amplify-Your-Intelligence/Images/39.png)    
 
 1. Click on **Publish**.
 
