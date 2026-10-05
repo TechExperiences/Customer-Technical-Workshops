@@ -32,6 +32,10 @@ By the end of the session, the team has a shared view of **Caldova’s current\-
 
    ![](../Sandbox-Environment-Guides/Images/amp71.png)
 
+1. Click on **X** to close the pop up.
+
+   ![](../Modernize-with-confidence/Images/m13.png)
+
 1. Use the **Zoom out** option to view the Whiteboard template clearly.
 
    ![](../Sandbox-Environment-Guides/Images/MWCCus11.png)
