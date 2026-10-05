@@ -38,7 +38,7 @@ By the end of the session, the team has a shared view of **Caldova’s current\-
 
 1. Use the **Zoom out** option to view the Whiteboard template clearly.
 
-   ![](../Sandbox-Environment-Guides/Images/MWCCus11.png)
+   ![](../Modernize-with-confidence/Images/m14.png)
 
 1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a Future-state solution architecture.
 
