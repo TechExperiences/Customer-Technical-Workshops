@@ -214,12 +214,12 @@ Follow below instructions to migrate On-prem web application to Azure app servic
    3.	Access CaldovaOrderManagement(Caldova.OrderManagement) web application is already deployed in this above VM.
    4.	Migrate CaldovaOrderManagement web application to Azure Web App Service. 
    5.	Modernize the migrated web application and follow below modernization activities:
-   a.	Use latest .NET Framework (.NET 10) 
-   b.	Use CSS/Bootstrap etc. to make modernize look and feel
-   c.	Can use some visuals in the Dashboard page to enhance the look and feel
-   d.	Menu items should places at left side of the page. 
-   e.	Top banner with company details with optimized details/views
-   f.	Modernized Web App responsiveness
+      a.	Use latest .NET Framework (.NET 10) 
+      b.	Use CSS/Bootstrap etc. to make modernize look and feel
+      c.	Can use some visuals in the Dashboard page to enhance the look and feel
+      d.	Menu items should places at left side of the page. 
+      e.	Top banner with company details with optimized details/views
+      f.	Modernized Web App responsiveness
    6.	Migrated and Modernized web applications should integrate with Azure SQL Database (CaldovaOrderManagement) and integrate all functional pages to the respective tables. 
    7.	Please include one more page(in Web Application) for "Traditional SQL Search" where user will perform product based search.
 
