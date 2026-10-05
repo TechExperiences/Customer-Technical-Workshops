@@ -310,24 +310,40 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 1. Copy the prompt below into the chat and send.
 
    ```
-   You are my smart agent to read my attached architecture design for Caldova Pharmaceutical and its November NextGen Pharma product launch and create bicep/ARM template based on the identified Foundry resources.
+   Read the attached Caldova Pharmaceutical architecture for the November NextGen Pharma launch, generate the required Bicep/ARM templates, and deploy the Foundry IQ section.
 
-   Please follow these below instructions for Foundry IQ section in the same Resource group.
-   1. List down all the Azure Foundry related resources from the architecture diagram.
-   2. Create Foundry resources in Azure(Please use same Resource Group rg-caldova-iq) and use Sweden Central region for Foundry resources deployment.
-   3. In Foundry Project, create two models(1. gpt-5-mini, 2. text-embedding-3-small)
-   4. Generate four short, text-based Caldova workshop PDFs: Supplier Terms; CMO Qualification & Evaluation; GMP & Manufacturing Changeover Guidance; and Manufacturing Quality Guidance. Clearly label each as fictional demo content. Use company, product, plant and CMO names/IDs from the existing Caldova data, with simple illustrative terms and processes consistent with the launch story. Keep changing capacity, demand and RFP figures in Fabric rather than hard-coding them into the PDFs; do not present sample policies as real regulatory requirements.
-      Reuse the existing deployment storage account, or create one in the same Resource Group if none exists. Upload the PDFs to a caldova-documents Blob container without replacing unrelated documents. In Foundry Project, create a shared knowledge base using Azure AI Search Service and a knowledge source pointing to these PDFs. Follow the original Blob Storage document-ingestion pattern; verify readable PDF text, successful upload/indexing and a retrieved answer with a document citation.
-      Add Web IQ through a supported web knowledge source or web-grounding tool, scoped to these official public URLs for basic manufacturing/GMP information, with source citations:
-      - FDA CGMP overview: https://www.fda.gov/drugs/pharmaceutical-quality-resources/facts-about-current-good-manufacturing-practice-cgmp
-      - FDA contract manufacturing quality agreements: https://www.fda.gov/regulatory-information/search-fda-guidance-documents/contract-manufacturing-arrangements-drugs-quality-agreements-guidance-industry
-      - EMA ICH Q10 pharmaceutical quality system: https://www.ema.europa.eu/en/scientific-guidelines/ich-q10-pharmaceutical-quality-system
-      Use these sources only for general explanations of GMP, quality agreements and quality/change management. Keep Caldova's 7% gap, plant/CMO capacity, qualification status, launch dates, demand and competitor facts grounded in Fabric, and its fictional terms/processes in the generated demo PDFs. Public guidance must not introduce new scenario constraints or imply that a Caldova plant or CMO is approved/compliant. Verify a basic question such as "What is GMP and why does it matter in drug manufacturing?" returns a citation to an allowed public source.
-   5. Create the four Foundry agents shown in the architecture: Supplier Terms Agent, CMO Evaluation Agent, Demand Sensing Agent and Manufacturing Quality Agent. Reuse the same model deployments, knowledge base and existing working Caldova Fabric Data Agent through tool calling; the Fabric Data Agent now uses the Lakehouse. Do not recreate Fabric resources or require ontology graph materialization.
-      Give each agent focused instructions: supplier terms and qualification documents; CMO capacity and evaluation records; demand forecasts and launch/competitive products; manufacturing quality, equipment availability and GMP guidance, respectively. Use the shared knowledge and public-web grounding when relevant; do not hard-code answers.
-   6. Once the agents are created, validate each with one relevant question and test one public-URL question. Verify actual Fabric Data Agent tool responses and document/web citations, then provide confirmation and the agent names/IDs. Perform basic automated checks, record failures or checks not performed, and do not wait for manual UI verification.
+   1. List the Foundry-related resources required by the diagram.
 
-   Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment.
+   2. Deploy them in the existing rg-caldova-iq Resource Group, using Sweden Central.
+
+   3. Create model deployments for gpt-5-mini and text-embedding-3-small.
+
+   4. Generate four short, text-based PDFs: Supplier Terms; CMO Qualification & Evaluation; GMP & Manufacturing Changeover Guidance; and Manufacturing Quality Guidance. Label them fictional demo content. Use company, product, plant and CMO names/IDs from the existing Caldova data, with illustrative terms/processes consistent with the launch story. Keep changing capacity, demand and RFP figures in Fabric; do not present demo policies as regulatory requirements.
+
+      Reuse the deployment storage account, or create one in the same Resource Group if absent. Upload to a caldova-documents Blob container without replacing unrelated documents. Create a shared Azure AI Search-backed knowledge base for the PDFs using the original Blob ingestion pattern. Verify readable text and successful upload/indexing.
+
+      Configure Web IQ as Foundry's native Web Search tool directly in agent Tools, not as URL knowledge sources or through the knowledge-base MCP connection. Restrict search to these URLs using supported URL/site configuration, with Bing Custom Search where required:
+      - https://www.fda.gov/drugs/pharmaceutical-quality-resources/facts-about-current-good-manufacturing-practice-cgmp
+      - https://www.fda.gov/regulatory-information/search-fda-guidance-documents/contract-manufacturing-arrangements-drugs-quality-agreements-guidance-industry
+      - https://www.ema.europa.eu/en/scientific-guidelines/ich-q10-pharmaceutical-quality-system
+
+      Return source citations. Use public sources only for general GMP, quality agreements and quality/change management. Ground Caldova's 7% gap, plant/CMO capacity, qualification status, launch dates, demand and competitor facts in Fabric, and fictional terms/processes in the PDFs. Public guidance must not add scenario constraints or imply Caldova plant/CMO approval or compliance.
+
+   5. Create four agents sharing the model deployments and PDF knowledge base, with focused instructions:
+      - Supplier Terms Agent: supplier terms, contract obligations and qualification documents.
+      - CMO Evaluation Agent: CMO qualification, capacity, evaluation records and RFP status.
+      - Demand Sensing Agent: demand forecasts, required versus committed production and launch/competitive products.
+      - Manufacturing Quality Agent: quality, equipment availability, fill-finish/changeover constraints and GMP guidance.
+
+      Attach Web Search to Supplier Terms, CMO Evaluation and Manufacturing Quality agents only.
+
+      Include instructions to use the existing Lakehouse-backed Caldova Fabric Data Agent for operational data once manually connected. Do not attach or test it during deployment; I will connect it through Tools → Fabric IQ (OneLake Catalog). Do not recreate Fabric resources or require ontology graph materialization. Use relevant document/web sources without hard-coding answers or inventing operational figures when Fabric is not connected.
+
+   6. Run one quick PDF-grounded test per agent and one public-web test per web-enabled agent. Verify document/allowed-source citations and Web Search invocation. Example web question: "What is GMP and why does it matter in drug manufacturing?"
+
+      Do not attempt Fabric connections or queries. Record actual results, failures and the manual Fabric connection step in the deployment MD. Report deployment outcome and agent names/IDs. Do not create a separate verification script or wait for manual UI verification.
+
+   Note: Create a deployment MD with deployment instructions and post-deployment configuration, including how to manually connect the existing Fabric Data Agent to each Foundry agent.
    ```
 
    > **&lt;TODO&gt;:** Update the following Foundry screenshots and agent-selection labels to show the four Caldova agents and their shared Fabric, knowledge-base and Web IQ connections.
