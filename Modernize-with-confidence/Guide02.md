@@ -123,7 +123,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 Migrate the pharmaceutical manufacturing database from on-premises SQL Server to Azure SQL Database Hyperscale to provide scalable, highly available, and cloud-based data management. The migration preserves critical manufacturing, product, inventory, production, and operational data while enabling improved performance, scalability, and integration with modern Azure analytics and AI services.
 
 1. Along with the attached **Solution Architecture**, please paste the below prompt in the Chat.
-
+   
    ```
    You are my smart agent to understand below are the problem statement and planned solution architecture design which will help Caldova to overcome from their problems. After that, please prepare bicep/ARM template and deploy the resources in the respective environment.
 
@@ -134,17 +134,16 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
    First Migrate OnPrem SQL Database available in the VM to Azure SQL Server(Hyperscale) and modernize it with following below instructions:
 
    Instructions:
-   1.	Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
-   2.	Use Existing Azure SQL Server and one Azure SQL Hyperscale Database (CaldovaOrderManagement) which is available in same Resource Group
-   3.	Make UPN - <inject key="AzureAdUserEmail"></inject> set as admin to the azure sql server and hyperscale databse
-   4.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
-   5.	Connect and Access the OnPrem SQL Sever using credentials
-      - User Name: caldova-admin
-      - Password: B!Admin@123
-   6.	Access database CaldovaOrderManagement in this OnPrem server.
-   7.	Migrate Tables and data into the created Azure SQL Hyperscale Database
-   8.	Maintain a similar relationship among all tables.
-
+   1.Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
+   2.Use Existing Azure SQL Server and one Azure SQL Hyperscale Database (CaldovaOrderManagement) which is available in same Resource Group
+   3.Make UPN - <inject key="AzureAdUserEmail"></inject> set as admin to the azure sql server and hyperscale databse
+   4.Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
+   5.Connect and Access the OnPrem SQL Sever using credentials
+     - User Name: caldova-admin
+     - Password: B!Admin@123
+   6.Access database CaldovaOrderManagement in this OnPrem server.
+   7.Migrate Tables and data into the created Azure SQL Hyperscale Database
+   8.Maintain a similar relationship among all tables.
    ```
 
    - Then click **Send** button.
