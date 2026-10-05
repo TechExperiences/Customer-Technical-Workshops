@@ -20,19 +20,19 @@ Use whiteboarding to architect a future-state solution that helps Caldova:
 
 By the end of the session, the team has a shared view of **Caldova’s current\-state challenges, modernization priorities, target business outcomes, and future\-state architecture**, providing a clear path from envisioning to rapid prototyping and implementation.
 
-### How to copy the Whiteboard using an existing template URL
+### How to copy the Whiteboard Using an Existing Template URL
 
 1. Open a new browser tab in the Edge browser.
 
-1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1005-my.sharepoint.com/:wb:/g/personal/caipuser_sandboxailabs1005_onmicrosoft_com/IQBJ1isDhRDWTYbg7rG092znAa72B_R5ObN7AstWuoYDoEE?e=KyPa16), then select **Copy link** and then paste it on the browser tab.
+1. Right-click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1005-my.sharepoint.com/:wb:/g/personal/caipuser_sandboxailabs1005_onmicrosoft_com/IQBJ1isDhRDWTYbg7rG092znAa72B_R5ObN7AstWuoYDoEE?e=KyPa16), then select **"Copy link"** and then paste it on the browser tab.
 
 1. If prompted, sign in with your ODL user credentials.
 
-1. Once you login, you will get a pop-up message to create the new Whiteboard. Read the message and click **Got it**.
+1. Once you log in, a pop-up message will appear prompting you to create a new Whiteboard. Read the message and click **Got it**.
 
    ![](../Sandbox-Environment-Guides/Images/amp71.png)
 
-1. Click on **X** to close the pop up.
+1. Click on **X** to close the pop-up.
 
    ![](../Modernize-with-confidence/Images/m13.png)
 
@@ -40,7 +40,7 @@ By the end of the session, the team has a shared view of **Caldova’s current\-
 
    ![](../Modernize-with-confidence/Images/m16.png)
 
-1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a Future-state solution architecture.
+1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a future-state solution architecture.
 
 ### Activities
 
@@ -54,10 +54,10 @@ By the end of the session, the team has a shared view of **Caldova’s current\-
    - Current-state architecture
    - Systems
 
-1. Design the **Future State Architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
+1. Design the **Future-State Architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
 
 1. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
 
 ## This completes the Envisioning Session using Microsoft Whiteboarding.
 
-### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.
+### Now, click on **`Next >>`** in the lower-right corner to move on to **`Rapid Prototyping`**.
