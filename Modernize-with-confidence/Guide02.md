@@ -1,6 +1,6 @@
 # 2. Rapid Prototyping
 
-Now that you have completed the Envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
+Now that you have completed the Envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a Intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
 ## Rapid Prototyping using GitHub Copilot
 
@@ -136,9 +136,9 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
    Instructions:
    1.Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
    2.Use Existing Azure SQL Server and one Azure SQL Hyperscale Database (CaldovaOrderManagement) which is available in same Resource Group
-   3.Make UPN - <inject key="AzureAdUserEmail"></inject> set as admin to the azure sql server and hyperscale databse
+   3.Make UPN - <inject key="AzureAdUserEmail"></inject> set as admin to the azure sql server and hyperscale database
    4.Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
-   5.Connect and Access the OnPrem SQL Sever using credentials
+   5.Connect and Access the OnPrem SQL Server using credentials
       - User Name: caldova-admin
       - Password: B!Admin@123
    6.Access database CaldovaOrderManagement in this OnPrem server.
@@ -152,11 +152,11 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
    
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
-1. If Copilot Asks to aunthenticate like below, please click on provided link and provide the code which was given by copilot 
+1. If Copilot asks you to aunthenticate like below, please click the provided link and provide the code which was given by copilot 
 
    ![](../Sandbox-Environment-Guides/Images/Login.png)
 
-1. Click on **Yes (1)**, completed and then click on **Submit (2)** button.
+1. Click on **Yes, completed (1)** and then click on **Submit (2)** button.
     
     ![](../Sandbox-Environment-Guides/Images/Login2.png)
 
@@ -172,7 +172,7 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
 ### Validation - Azure SQL DB Hyperscale
 
-1. Navigate back to [Azure portal](https://portal.azure.com/).  Go to **Resource groups**. and Click on **rg-caldova-modernize** Resource Group.
+1. Navigate back to [Azure portal](https://portal.azure.com/).  Go to **Resource groups**. and click on **rg-caldova-modernize** Resource Group.
 
    ![](../Modernize-with-confidence/Images/m23.png)
 
@@ -180,15 +180,15 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
    ![](../Modernize-with-confidence/Images/m26.png)
 
-1. Click on **Query Editor** to connect SQL Database and Validate databse objects.
+1. Click on **Query Editor** to connect SQL Database and Validate database objects.
 
    ![](../Modernize-with-confidence/Images/m24.png)
 
-1. From **Microsoft Entra authentication (1)** tab, to authorize user click on **Connect as odl_user_<inject key="Deployment-ID" enableCopy="false"/> (2)**.
+1. From **Microsoft Entra authentication (1)** tab. To authorize the user, click on **Connect as odl_user_<inject key="Deployment-ID" enableCopy="false"/> (2)**.
 
    ![](../Modernize-with-confidence/Images/m21.png)
 
-1. Expand **Schema(dbo) (1)** -> **Tables (2)** -> and Click any table to see data **(3)**.
+1. Expand **Schema(dbo) (1)** -> **Tables (2)** -> and click any table to see data **(3)**.
 
     ![](../Sandbox-Environment-Guides/Images/Validation.png)   
 
@@ -198,18 +198,18 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
 Migrate the pharmaceutical manufacturing web application (Order Management) from on-premises infrastructure to Azure App Service to provide a scalable, secure, and highly available cloud-hosted platform. The migration enables improved application performance, simplified infrastructure management, and seamless integration with Azure services and the modernized Azure SQL Database backend.
  
-Follow below instructions to migrate On-prem Web application to Azure app service.
+Follow the below instructions to migrate On-prem Web application to Azure app service.
 
 1. Navigate back to **VS Code** and paste the below prompt in **GitHub Copilot Chat**.
 
    ```
-   Great, you have completed OnPrem SQL migration to Azure SQL Database Hyperscale. Now we need to migrate OnPrem Web Application to Azure Web App Service and modernize. 
+   Great, you have completed OnPrem SQL migration to Azure SQL Database Hyperscale. Now we need to migrate OnPrem Web Application to Azure App Service and modernize. 
 
    Follow the instructions below:
 
    Instructions:
    1.	Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
-   2.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
+   2.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, password: Password@123)
    3.	Access CaldovaOrderManagement(Caldova.OrderManagement) web application is already deployed in this above VM.
    4.	Migrate CaldovaOrderManagement web application to Azure Web App Service. 
    5.	Modernize the migrated web application and follow below modernization activities:
@@ -251,7 +251,7 @@ Follow below instructions to migrate On-prem Web application to Azure app servic
 
    ![](../Modernize-with-confidence/Images/m29.png) 
 
-1. In migrated application you can see **Traditional Sql Search** section got added.
+1. In migrated application you can see **Traditional SQL Search** section got added.
 
 1. Click on **Traditional Sql Search** section.
 
@@ -330,7 +330,7 @@ Implement Vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
    2. Please execute the attached script file (Embedding_Script.sql) for the below activities:
 
-       Read OpeanAI Configuration details (API Endpoint, Key, Models etc.) from .env file and use it in this SQL script file
+       Read OpenAI Configuration details (API Endpoint, Key, Models etc.) from .env file and use it in this SQL script file
       . Use Azure SQL Database (CaldovaOrderManagement) Hyperscale and generate embedding for all existing Products and its Descriptions.
       . Create a table dbo.ProductDescriptionEmbeddings with below columns and  store all embedding details
          1.ProductDescriptionEmbeddingID
@@ -381,4 +381,4 @@ Implement Vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
 ### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session.
 
-#### Click on `Next` to view the Pre deployed `Modernize with Confidence Package`.
+#### Click on `Next` to view the Pre-deployed `Modernize with Confidence Package`.
