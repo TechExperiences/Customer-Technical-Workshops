@@ -755,9 +755,7 @@ Connect the four agents already deployed in the **caldova-nextgen-launch** Found
    - **Azure AI Project Endpoint:** Paste the Project endpoint you copied in the previous step **(2)** 
    - Then click **Create (3)**
 
-     ![](../Sandbox-Environment-Guides/Images/a81.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova project connection.
+     ![](../Amplify-Your-Intelligence/Images/49.png)
 
 1. If prompted, select the user account **<inject key="AzureAdUserEmail"></inject>**.
 
@@ -776,15 +774,11 @@ Connect the four agents already deployed in the **caldova-nextgen-launch** Found
    - **Agent Id**: Enter the exact identifier reported by Copilot for **supplier-terms-agent (3)**. For the new Foundry agent, use its stable agent name, not the Copilot Studio display label. Verify it against your deployment output.
    - Then select **Add and configure (4)**  
 
-     ![](../Sandbox-Environment-Guides/Images/b69.png)
-
-   > **&lt;TODO&gt;:** Replace the Retail Agent details in this screenshot with Supplier Terms Agent and its actual Agent Id.
+     ![](../Amplify-Your-Intelligence/Images/51.png)
 
 1. Click **Back**.
 
-   ![](../Sandbox-Environment-Guides/Images/b70.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the connected Supplier Terms Agent.
+   ![](../Amplify-Your-Intelligence/Images/52.png)
 
 1. Repeat **+ Add an agent → Connect to an external agent → Microsoft Foundry** for the other three agents. Select the **same Caldova project connection**, click **Next**, and use the details below. Verify each Agent Id against Copilot's output before adding it.
 
@@ -919,7 +913,7 @@ Connect the four agents already deployed in the **caldova-nextgen-launch** Found
 
 1. Confirm the Foundry agent appears in the connected-agent list **(1)** and then click **+ Add an agent (2)**.
 
-   ![](../Sandbox-Environment-Guides/Images/b71.png)
+   ![](../Amplify-Your-Intelligence/Images/53.png)
 
 1. Click on **Connect to an External agent (1)** drop down and select **Microsoft Fabric (2)**.
 
