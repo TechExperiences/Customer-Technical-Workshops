@@ -8,6 +8,8 @@ param resourceGroupLocation string = 'westus2'
 param storageAccountName string = toLower('stcaldova${take(uniqueString(subscription().id, resourceGroupName), 14)}')
 @description('The location for Blob Storage.')
 param storageLocation string = 'westus3'
+@description('The location for the Fabric F16 capacity.')
+param fabricCapacityLocation string = 'westus3'
 @description('Globally unique Azure SQL logical-server name.')
 param sqlServerName string = toLower('sql-operational-${take(uniqueString(subscription().id, resourceGroupName), 12)}')
 @secure()
@@ -40,7 +42,7 @@ module estate './modules/estate.bicep' = {
     sqlAdministratorPassword: sqlAdministratorPassword
     sqlDatabaseName: sqlDatabaseName
     fabricCapacityName: fabricCapacityName
-    fabricCapacityLocation: resourceGroupLocation
+    fabricCapacityLocation: fabricCapacityLocation
     fabricCapacityAdministrators: fabricCapacityAdministrators
   }
 }
