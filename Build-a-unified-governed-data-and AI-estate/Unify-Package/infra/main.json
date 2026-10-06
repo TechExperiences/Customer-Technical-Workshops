@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.46.1.21595",
-      "templateHash": "4294033925813135110"
+      "templateHash": "5908123504869004675"
     }
   },
   "parameters": {
@@ -35,13 +35,6 @@
       "defaultValue": "westus3",
       "metadata": {
         "description": "The location for Blob Storage."
-      }
-    },
-    "fabricCapacityLocation": {
-      "type": "string",
-      "defaultValue": "westus3",
-      "metadata": {
-        "description": "The location for the Fabric F16 capacity."
       }
     },
     "sqlServerName": {
@@ -123,7 +116,7 @@
             "value": "[parameters('fabricCapacityName')]"
           },
           "fabricCapacityLocation": {
-            "value": "[parameters('fabricCapacityLocation')]"
+            "value": "westus2"
           },
           "fabricCapacityAdministrators": {
             "value": "[parameters('fabricCapacityAdministrators')]"

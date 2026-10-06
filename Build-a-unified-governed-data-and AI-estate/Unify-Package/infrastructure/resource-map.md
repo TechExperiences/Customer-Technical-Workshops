@@ -9,7 +9,7 @@
 | 3 | Blob container | `data` | Inherits storage account | Holds source data without modification. |
 | 4 | Azure SQL logical server | `sql-operational-<unique-suffix>` | West US 2 | Hosts the operational source database. |
 | 5 | Azure SQL database | `OperationalData` | West US 2 | Holds the eight operational tables before Fabric mirroring. |
-| 6 | Fabric capacity | `fabriccapacity<unique-suffix>` | West US 3 | F16 capacity, deployed inside `rg-Build-Unify`. |
+| 6 | Fabric capacity | `fabriccapacity<unique-suffix>` | West US 2 | F16 capacity, deployed inside `rg-Build-Unify`. |
 | 7 | Fabric license | `FABRIC_FREE` by default | Tenant level | Checked and assigned to the capacity administrator before workspace creation. |
 | 8 | Fabric workspace | `Caldova-unify` | Assigned to West US 2 capacity | Governs Fabric items and access. |
 | 8 | Fabric Lakehouse | `Caldova_Lakehouse` | Workspace capacity | Delta storage for the unified analytical estate. |
