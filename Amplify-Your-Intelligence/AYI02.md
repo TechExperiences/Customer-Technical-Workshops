@@ -69,7 +69,6 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b56.png)
 
-   > **&lt;TODO&gt;:** If the project folder name changes, update it in this step and screenshot.
 
 1. From the **GitHub Copilot Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
 
@@ -107,7 +106,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 ### Fabric IQ
 
-1. Along with the attached **Solution Architecture** (1), please paste the below prompt (2).
+1. Along with the attached **Future State Architecture** (1), please paste the below prompt (2).
 
    ```
    You are my smart agent to read my attached architecture design for Caldova Pharmaceutical and its November NextGen Pharma product launch and create bicep/ARM template based on the identified Fabric resources.
@@ -143,6 +142,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    - Then click **Submit** to continue.
 
    ![](../Amplify-Your-Intelligence/Images/21.png)
+
+<!--
 1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
 
 1. Select **Yes**, if any question prompts you to respond related to `F16` deployment.
@@ -156,6 +157,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
     ![](../Sandbox-Environment-Guides/Images/b14.png)
 
     > **&lt;TODO&gt;:** Replace this screenshot with the Caldova deployment and lab user access prompt using Fable 5.1.
+
+-->
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
 
@@ -193,8 +196,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
      ![](../Sandbox-Environment-Guides/Images/b18.png)
 
       >**Note:** Not the one which starts with **Microsoft IQ**.
-
-1. **Optional: Fix workspace access.** If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. If the workspace is already accessible, skip this step and the next access-fix completion step.
+     
+> **Optional: Fix workspace access.** If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. If the workspace is already accessible, skip this step and the next access-fix completion step.
 
    ```
    I cannot see the Caldova workspace created by the previous deployment in the Fabric portal.
@@ -293,7 +296,6 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b65.png)  
 
-   > **&lt;TODO&gt;:** Replace this screenshot with publication of the Caldova data agent and current test results.
 
 1. Click on **Publish** again to publish the data agent.
 
@@ -301,7 +303,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    > **&lt;TODO&gt;:** Replace this screenshot with the Caldova data agent publication dialog.
 
-### Foundry IQ    
+### Foundry IQ & Web IQ
 
 1. Navigate back to the **GitHub Copilot Chat** to deploy the **Foundry resources**.
 
@@ -354,7 +356,6 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b38.png)  
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova Foundry deployment results and Keep action.
 
 1. Navigate back to the Resource group. Select the **Foundry Project**.
 
