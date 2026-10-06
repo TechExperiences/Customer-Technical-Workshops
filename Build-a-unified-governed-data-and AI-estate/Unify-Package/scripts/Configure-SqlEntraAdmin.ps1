@@ -2,7 +2,7 @@
 param(
     [Parameter(Mandatory)] [string]$SqlServerName,
     [Parameter(Mandatory)] [string]$AdministratorUpn,
-    [string]$ResourceGroupName = 'rg-Unified'
+    [string]$ResourceGroupName = 'rg-Build-Unify'
 )
 
 Set-StrictMode -Version Latest

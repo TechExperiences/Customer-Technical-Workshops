@@ -1,7 +1,7 @@
 targetScope = 'subscription'
 
 @description('Name of the Azure resource group that contains the estate.')
-param resourceGroupName string = 'rg-Unified'
+param resourceGroupName string = 'rg-Build-Unify'
 @description('Region for the resource group, Azure SQL Server, and Fabric capacity.')
 param resourceGroupLocation string = 'westus2'
 @description('Globally unique, lowercase Storage Account name (3-24 alphanumeric characters).')

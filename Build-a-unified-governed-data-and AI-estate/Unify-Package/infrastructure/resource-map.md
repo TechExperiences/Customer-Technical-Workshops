@@ -4,7 +4,7 @@
 
 | Order | Resource | Proposed name | Region | Purpose |
 |---:|---|---|---|---|
-| 1 | Resource group | `rg-Unified` | West US 2 | Single lifecycle boundary for all Azure resources. |
+| 1 | Resource group | `rg-Build-Unify` | West US 2 | Single lifecycle boundary for all Azure resources. |
 | 2 | Storage account | `stcaldova<unique-suffix>` | West US 3 | Landing zone for the three local source domains. |
 | 3 | Blob container | `data` | Inherits storage account | Holds source data without modification. |
 | 4 | Azure SQL logical server | `sql-operational-<unique-suffix>` | West US 2 | Hosts the operational source database. |
@@ -46,4 +46,4 @@ All operational referential checks pass, including joins to the supplied analyti
 
 ## Provisioning prerequisite
 
-The Azure identity used for deployment must have **Contributor** (or equivalent resource-create permission) at the target subscription or `rg-Unified` scope. It also needs capacity-creation permission for `Microsoft.Fabric/capacities` and a Fabric tenant/capacity entitlement for F16.
+The Azure identity used for deployment must have **Contributor** (or equivalent resource-create permission) at the target subscription or `rg-Build-Unify` scope. It also needs capacity-creation permission for `Microsoft.Fabric/capacities` and a Fabric tenant/capacity entitlement for F16.

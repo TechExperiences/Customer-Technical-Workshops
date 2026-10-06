@@ -4,7 +4,7 @@ param()
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $packageRoot = Split-Path -Parent $PSScriptRoot
-$resourceGroup = 'rg-Unified'
+$resourceGroup = if ($env:AZURE_RESOURCE_GROUP) { $env:AZURE_RESOURCE_GROUP } else { 'rg-Build-Unify' }
 
 $storageAccount = az storage account list --resource-group $resourceGroup --query '[0].name' -o tsv
 $sqlServer = az sql server list --resource-group $resourceGroup --query '[0].name' -o tsv

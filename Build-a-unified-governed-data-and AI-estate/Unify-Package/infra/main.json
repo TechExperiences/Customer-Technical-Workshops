@@ -5,13 +5,13 @@
     "_generator": {
       "name": "bicep",
       "version": "0.46.1.21595",
-      "templateHash": "10210888035408017893"
+      "templateHash": "10599693303906860562"
     }
   },
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "rg-Unified",
+      "defaultValue": "rg-Build-Unify",
       "metadata": {
         "description": "Name of the Azure resource group that contains the estate."
       }
