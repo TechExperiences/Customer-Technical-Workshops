@@ -1,0 +1,14 @@
+name: caldova-unified-data-estate
+metadata:
+  template: caldova-unified-data-estate@0.1.0
+infra:
+  provider: bicep
+  path: infra
+  module: main
+hooks:
+  preprovision:
+    shell: pwsh
+    run: ./scripts/Ensure-AzureCliLogin.ps1; ./scripts/Prepare-AzdEnvironment.ps1; ./scripts/Test-SourceData.ps1
+  postprovision:
+    shell: pwsh
+    run: ./scripts/Post-Provision.ps1
