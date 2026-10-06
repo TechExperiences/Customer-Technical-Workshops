@@ -794,7 +794,7 @@ Connect the four agents already deployed in the **caldova-nextgen-launch** Found
 
    > **&lt;TODO&gt;:** Add a screenshot showing all four connected Caldova Foundry agents.
 
-1. Open the main agent's **Overview → Instructions**. Replace the existing instructions with the full Caldova instructions below, also saved in [Gap Analysis](../Amplify-Your-Intelligence/Gap%20Analysis/Caldova-Copilot-Studio-Instructions.md). Use **/** in the instruction editor to select each of the four connected Foundry agents by its actual name where its routing instruction appears. Save the instructions.
+1. Open the main agent's **Overview → Instructions**. Replace the existing instructions with the full Caldova instructions below. **Optional:** Use **/** in the instruction editor to select each of the four connected Foundry agents by its actual name where its routing instruction appears. Save the instructions.
 
    ```text
    ------#PURPOSE#------
