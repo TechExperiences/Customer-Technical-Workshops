@@ -31,8 +31,6 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
    ![](../Amplify-Your-Intelligence/Images/AYIWhiteboardNew123.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Whiteboard for the finalized Caldova architecture.
-
 1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a Future-state solution architecture.
 
 ### Activities
