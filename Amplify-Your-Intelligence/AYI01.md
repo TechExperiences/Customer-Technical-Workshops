@@ -21,8 +21,6 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
 1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQBftfOLwcofS510WIW-uVTSASac7l_pm9xMNdNF50ddwLw?e=FOospg), then select **Copy link** and then paste it on the browser tab.
 
-   > **&lt;TODO&gt;:** Update this link to the Whiteboard for the finalized Caldova architecture.
-
 1. If prompted, sign in with your ODL user credentials.
 
 1. Once you login, you will get a pop-up message to create the new Whiteboard. Read the message and click **Got it**.
