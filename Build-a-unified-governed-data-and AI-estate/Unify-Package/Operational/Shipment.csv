@@ -1,0 +1,61 @@
+ShipmentID,BatchID,ProductID,PlantID,DestinationLocationID,ShipDate,DeliveryDate,Quantity,Carrier,Status
+1,38,3,3,4,2026-07-02,2026-07-06,4751,Kuehne+Nagel,Delivered
+2,45,5,2,6,2026-08-24,2026-09-01,4528,FedEx Logistics,Delivered
+3,23,1,2,6,2026-07-27,2026-08-03,1356,DHL Pharma,Delivered
+4,14,1,1,6,2026-07-09,2026-07-15,3780,FedEx Logistics,Delivered
+5,22,5,1,1,2026-06-27,2026-07-04,3811,FedEx Logistics,Delivered
+6,31,1,3,2,2026-06-15,2026-06-17,4747,UPS Healthcare,Delivered
+7,28,1,1,2,2026-07-02,2026-07-04,2687,DHL Pharma,Delivered
+8,45,5,2,1,2026-08-24,2026-09-02,736,DHL Pharma,Delivered
+9,35,2,1,5,2026-08-28,2026-08-30,3842,FedEx Logistics,Delivered
+10,11,2,3,6,2026-07-19,2026-07-22,1761,Kuehne+Nagel,Delivered
+11,45,5,2,4,2026-08-24,2026-08-30,4452,Kuehne+Nagel,Delivered
+12,11,2,3,2,2026-07-22,2026-07-30,4663,DHL Pharma,Delivered
+13,42,3,2,3,2026-08-24,2026-09-01,4659,UPS Healthcare,Delivered
+14,41,4,2,5,2026-08-12,2026-08-18,4511,DHL Pharma,Delivered
+15,22,5,1,5,2026-07-01,2026-07-08,4951,Kuehne+Nagel,Delivered
+16,22,5,1,6,2026-06-29,,2456,Kuehne+Nagel,InTransit
+17,11,2,3,6,2026-07-22,2026-07-31,3623,Kuehne+Nagel,Delivered
+18,31,1,3,2,2026-06-12,2026-06-14,4614,UPS Healthcare,Delivered
+19,42,3,2,4,2026-08-24,,1316,Kuehne+Nagel,InTransit
+20,2,1,1,1,2026-07-31,2026-08-04,4346,UPS Healthcare,Delivered
+21,14,1,1,3,2026-07-10,2026-07-13,4871,Kuehne+Nagel,Delivered
+22,14,1,1,1,2026-07-09,,1060,DHL Pharma,InTransit
+23,29,2,2,6,2026-07-26,,1240,Kuehne+Nagel,Delayed
+24,6,3,1,1,2026-08-26,2026-09-01,876,UPS Healthcare,Delivered
+25,39,3,3,4,2026-08-12,2026-08-19,1692,DHL Pharma,Delivered
+26,24,4,2,2,2026-06-19,2026-06-23,1934,FedEx Logistics,Delivered
+27,28,1,1,4,2026-07-02,2026-07-07,1672,DHL Pharma,Delivered
+28,22,5,1,4,2026-06-29,2026-07-01,2856,DHL Pharma,Delivered
+29,5,5,2,5,2026-07-20,,2950,Kuehne+Nagel,Delayed
+30,35,2,1,2,2026-08-29,2026-09-04,3651,Kuehne+Nagel,Delivered
+31,6,3,1,5,2026-08-27,2026-09-03,2923,UPS Healthcare,Delivered
+32,2,1,1,5,2026-08-02,2026-08-04,4569,UPS Healthcare,Delivered
+33,38,3,3,2,2026-07-01,2026-07-08,2057,UPS Healthcare,Delivered
+34,31,1,3,3,2026-06-12,2026-06-14,4111,FedEx Logistics,Delivered
+35,27,2,2,1,2026-09-02,,2917,UPS Healthcare,InTransit
+36,36,5,1,5,2026-06-18,2026-06-22,3497,UPS Healthcare,Delivered
+37,41,4,2,3,2026-08-13,2026-08-22,3274,FedEx Logistics,Delivered
+38,22,5,1,6,2026-06-27,2026-07-02,3755,UPS Healthcare,Delivered
+39,5,5,2,1,2026-07-20,2026-07-30,4225,UPS Healthcare,Delivered
+40,31,1,3,1,2026-06-13,2026-06-20,2415,Kuehne+Nagel,Delivered
+41,2,1,1,5,2026-08-03,,3187,DHL Pharma,InTransit
+42,29,2,2,6,2026-07-24,2026-08-02,2975,Kuehne+Nagel,Delivered
+43,6,3,1,3,2026-08-27,2026-08-29,4535,FedEx Logistics,Delivered
+44,6,3,1,2,2026-08-27,,3683,Kuehne+Nagel,InTransit
+45,17,1,2,4,2026-07-09,2026-07-13,1311,Kuehne+Nagel,Delivered
+46,28,1,1,3,2026-07-02,,768,UPS Healthcare,Delayed
+47,9,5,2,3,2026-07-24,2026-07-29,1313,UPS Healthcare,Delivered
+48,26,3,2,2,2026-06-16,2026-06-22,1500,Kuehne+Nagel,Delivered
+49,5,5,2,1,2026-07-18,2026-07-20,3232,DHL Pharma,Delivered
+50,7,5,1,2,2026-08-24,2026-09-03,2269,DHL Pharma,Delivered
+51,14,1,1,5,2026-07-07,,523,UPS Healthcare,InTransit
+52,42,3,2,5,2026-08-25,,2553,DHL Pharma,Delayed
+53,6,3,1,2,2026-08-26,2026-09-02,3152,FedEx Logistics,Delivered
+54,8,5,3,5,2026-07-29,2026-08-06,1431,FedEx Logistics,Delivered
+55,23,1,2,5,2026-07-28,,1393,Kuehne+Nagel,InTransit
+56,24,4,2,1,2026-06-17,,4771,UPS Healthcare,Delayed
+57,22,5,1,4,2026-06-27,2026-07-06,3992,FedEx Logistics,Delivered
+58,23,1,2,3,2026-07-28,2026-07-31,1715,FedEx Logistics,Delivered
+59,7,5,1,6,2026-08-22,2026-09-01,3163,Kuehne+Nagel,Delivered
+60,28,1,1,5,2026-07-03,2026-07-13,4024,FedEx Logistics,Delivered

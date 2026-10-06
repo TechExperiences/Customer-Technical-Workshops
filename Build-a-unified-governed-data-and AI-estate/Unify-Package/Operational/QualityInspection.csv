@@ -1,0 +1,46 @@
+InspectionID,BatchID,InspectionDate,InspectorName,Result,DefectCount,Notes
+1,1,2026-07-05,A. Mueller,Pass,0,Within specification
+2,2,2026-07-30,M. Okafor,Conditional,24,Deviation under review
+3,3,2026-07-07,K. Chen,Conditional,15,Deviation under review
+4,4,2026-07-09,K. Chen,Conditional,11,Deviation under review
+5,5,2026-07-17,K. Chen,Conditional,14,Deviation under review
+6,6,2026-08-26,J. Alvarez,Pass,0,Within specification
+7,7,2026-08-20,J. Alvarez,Pass,0,Within specification
+8,8,2026-07-27,R. Singh,Pass,0,Within specification
+9,9,2026-07-21,K. Chen,Pass,0,Within specification
+10,10,2026-06-28,A. Mueller,Pass,0,Within specification
+11,11,2026-07-19,A. Mueller,Pass,0,Within specification
+12,12,2026-08-26,J. Alvarez,Pass,0,Within specification
+13,13,2026-06-19,M. Okafor,Conditional,2,Deviation under review
+14,14,2026-07-06,M. Okafor,Pass,0,Within specification
+15,15,2026-08-01,A. Mueller,Pass,0,Within specification
+16,16,2026-07-06,K. Chen,Pass,0,Within specification
+17,17,2026-07-05,A. Mueller,Conditional,10,Deviation under review
+18,18,2026-08-03,J. Alvarez,Pass,0,Within specification
+19,19,2026-08-06,M. Okafor,Pass,0,Within specification
+20,20,2026-07-06,K. Chen,Pass,0,Within specification
+21,21,2026-06-18,A. Mueller,Pass,0,Within specification
+22,22,2026-06-27,M. Okafor,Pass,0,Within specification
+23,23,2026-07-25,J. Alvarez,Pass,0,Within specification
+24,24,2026-06-16,K. Chen,Pass,0,Within specification
+25,25,2026-08-12,M. Okafor,Conditional,20,Deviation under review
+26,26,2026-06-14,M. Okafor,Pass,0,Within specification
+27,27,2026-08-31,J. Alvarez,Pass,0,Within specification
+28,28,2026-06-29,J. Alvarez,Pass,0,Within specification
+29,29,2026-07-24,J. Alvarez,Pass,0,Within specification
+30,30,2026-08-10,J. Alvarez,Conditional,1,Deviation under review
+31,31,2026-06-11,R. Singh,Pass,0,Within specification
+32,32,2026-06-17,K. Chen,Pass,0,Within specification
+33,33,2026-08-20,A. Mueller,Pass,0,Within specification
+34,34,2026-07-12,M. Okafor,Pass,0,Within specification
+35,35,2026-08-27,K. Chen,Pass,0,Within specification
+36,36,2026-06-15,R. Singh,Pass,0,Within specification
+37,37,2026-06-04,J. Alvarez,Pass,0,Within specification
+38,38,2026-06-30,M. Okafor,Pass,0,Within specification
+39,39,2026-08-12,A. Mueller,Pass,0,Within specification
+40,40,2026-07-29,M. Okafor,Pass,0,Within specification
+41,41,2026-08-12,A. Mueller,Pass,0,Within specification
+42,42,2026-08-24,K. Chen,Pass,0,Within specification
+43,43,2026-08-04,K. Chen,Pass,0,Within specification
+44,44,2026-06-20,R. Singh,Pass,0,Within specification
+45,45,2026-08-22,A. Mueller,Pass,0,Within specification

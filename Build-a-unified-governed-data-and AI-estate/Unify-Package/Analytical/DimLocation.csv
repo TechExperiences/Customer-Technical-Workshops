@@ -1,0 +1,7 @@
+LocationID,LocationName,City,Country,LocationType
+1,West Coast Distribution Center,Seattle,USA,Distributor
+2,East Coast Distribution Center,Newark,USA,Distributor
+3,Central Pharmacy Warehouse,Dallas,USA,Warehouse
+4,Berlin Regional Hub,Berlin,Germany,Distributor
+5,Toronto Warehouse,Toronto,Canada,Warehouse
+6,Mumbai Distribution Center,Mumbai,India,Distributor

@@ -1,0 +1,6 @@
+SupplierID,SupplierName,Country,ContactEmail,QualityRating,OnboardedDate
+1,PharmaChem Global,USA,contact@pharmachemglobal.com,9.2,2016-04-01
+2,EuroAPI Solutions,Germany,sales@euroapi.eu,8.7,2017-08-15
+3,Nordic Excipients AB,Sweden,info@nordicexcip.se,8.9,2018-02-20
+4,AsiaPack Materials,India,orders@asiapack.in,7.8,2019-11-05
+5,PureBulk Ingredients,USA,support@purebulk.com,9.0,2015-06-30

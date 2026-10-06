@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json.schemastore.org/fabric-source-manifest.json",
+  "solutionName": "Caldova Unified Governed Data Estate",
+  "targetSchema": "dbo",
+  "sources": {
+    "analytical": {
+      "path": "Analytical",
+      "format": "csv",
+      "tables": [
+        "DimDate", "DimLocation", "DimMaterial", "DimPlant", "DimProduct", "DimSupplier",
+        "FactInventory", "FactInventorySnapshot", "FactProduction", "FactQuality", "FactSales", "FactShipment", "FactSupplyChain"
+      ]
+    },
+    "businessApplication": {
+      "path": "BusinessApplication",
+      "format": "json",
+      "tables": ["CustomerDetails", "CustomerAddress"]
+    },
+    "operational": {
+      "path": "Operational",
+      "format": "csv",
+      "tables": [
+        "Inventory", "ManufacturingBatch", "Material", "PurchaseOrder",
+        "PurchaseOrderItem", "QualityInspection", "Shipment", "Supplier"
+      ]
+    }
+  },
+  "qualityPolicy": {
+    "onMissingDateDimensionMember": "extend_dimension",
+    "onSchemaDrift": "fail",
+    "onDuplicatePrimaryKey": "fail",
+    "onOrphanForeignKey": "fail"
+  }
+}

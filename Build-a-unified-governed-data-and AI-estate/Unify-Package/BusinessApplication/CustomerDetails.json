@@ -1,0 +1,227 @@
+[
+  {
+    "CustomerID": 1,
+    "CustomerName": "Priya Patel",
+    "Email": "priya.patel@example.com",
+    "Phone": "+1-555-4728",
+    "Segment": "Hospital",
+    "AccountManager": "Priya Nguyen",
+    "CreatedDate": "2024-06-23"
+  },
+  {
+    "CustomerID": 2,
+    "CustomerName": "John Patel",
+    "Email": "john.patel@example.com",
+    "Phone": "+1-555-2800",
+    "Segment": "Retail Pharmacy",
+    "AccountManager": "John Nguyen",
+    "CreatedDate": "2024-11-17"
+  },
+  {
+    "CustomerID": 3,
+    "CustomerName": "Liam Brown",
+    "Email": "liam.brown@example.com",
+    "Phone": "+1-555-8726",
+    "Segment": "Hospital",
+    "AccountManager": "Wei Brown",
+    "CreatedDate": "2024-07-31"
+  },
+  {
+    "CustomerID": 4,
+    "CustomerName": "Noah M\u00fcller",
+    "Email": "noah.m\u00fcller@example.com",
+    "Phone": "+1-555-6140",
+    "Segment": "Retail Pharmacy",
+    "AccountManager": "Sofia Brown",
+    "CreatedDate": "2024-12-16"
+  },
+  {
+    "CustomerID": 5,
+    "CustomerName": "Priya Nguyen",
+    "Email": "priya.nguyen@example.com",
+    "Phone": "+1-555-4150",
+    "Segment": "Retail Pharmacy",
+    "AccountManager": "Carlos Brown",
+    "CreatedDate": "2024-11-01"
+  },
+  {
+    "CustomerID": 6,
+    "CustomerName": "Sofia Diaz",
+    "Email": "sofia.diaz@example.com",
+    "Phone": "+1-555-8861",
+    "Segment": "Distributor",
+    "AccountManager": "Noah Rossi",
+    "CreatedDate": "2024-10-21"
+  },
+  {
+    "CustomerID": 7,
+    "CustomerName": "Liam Diaz",
+    "Email": "liam.diaz@example.com",
+    "Phone": "+1-555-3399",
+    "Segment": "Distributor",
+    "AccountManager": "John Rossi",
+    "CreatedDate": "2024-03-21"
+  },
+  {
+    "CustomerID": 8,
+    "CustomerName": "Sofia Khan",
+    "Email": "sofia.khan@example.com",
+    "Phone": "+1-555-4310",
+    "Segment": "Government",
+    "AccountManager": "Carlos Brown",
+    "CreatedDate": "2024-10-05"
+  },
+  {
+    "CustomerID": 9,
+    "CustomerName": "Fatima Smith",
+    "Email": "fatima.smith@example.com",
+    "Phone": "+1-555-9700",
+    "Segment": "Retail Pharmacy",
+    "AccountManager": "Fatima Smith",
+    "CreatedDate": "2024-04-12"
+  },
+  {
+    "CustomerID": 10,
+    "CustomerName": "Wei Smith",
+    "Email": "wei.smith@example.com",
+    "Phone": "+1-555-3587",
+    "Segment": "Clinic",
+    "AccountManager": "Sofia Nguyen",
+    "CreatedDate": "2025-10-28"
+  },
+  {
+    "CustomerID": 11,
+    "CustomerName": "John Garcia",
+    "Email": "john.garcia@example.com",
+    "Phone": "+1-555-4804",
+    "Segment": "Government",
+    "AccountManager": "John Chen",
+    "CreatedDate": "2025-03-03"
+  },
+  {
+    "CustomerID": 12,
+    "CustomerName": "Wei Rossi",
+    "Email": "wei.rossi@example.com",
+    "Phone": "+1-555-1613",
+    "Segment": "Hospital",
+    "AccountManager": "Carlos Patel",
+    "CreatedDate": "2025-09-09"
+  },
+  {
+    "CustomerID": 13,
+    "CustomerName": "Noah Brown",
+    "Email": "noah.brown@example.com",
+    "Phone": "+1-555-9092",
+    "Segment": "Retail Pharmacy",
+    "AccountManager": "Noah Nguyen",
+    "CreatedDate": "2024-10-06"
+  },
+  {
+    "CustomerID": 14,
+    "CustomerName": "Sofia Rossi",
+    "Email": "sofia.rossi@example.com",
+    "Phone": "+1-555-4050",
+    "Segment": "Hospital",
+    "AccountManager": "Aisha Rossi",
+    "CreatedDate": "2025-08-04"
+  },
+  {
+    "CustomerID": 15,
+    "CustomerName": "Liam Brown",
+    "Email": "liam.brown@example.com",
+    "Phone": "+1-555-6372",
+    "Segment": "Hospital",
+    "AccountManager": "Liam Garcia",
+    "CreatedDate": "2024-07-08"
+  },
+  {
+    "CustomerID": 16,
+    "CustomerName": "John Rossi",
+    "Email": "john.rossi@example.com",
+    "Phone": "+1-555-7284",
+    "Segment": "Retail Pharmacy",
+    "AccountManager": "Sofia Rossi",
+    "CreatedDate": "2024-12-03"
+  },
+  {
+    "CustomerID": 17,
+    "CustomerName": "Carlos Diaz",
+    "Email": "carlos.diaz@example.com",
+    "Phone": "+1-555-4871",
+    "Segment": "Hospital",
+    "AccountManager": "Maria Nguyen",
+    "CreatedDate": "2024-11-10"
+  },
+  {
+    "CustomerID": 18,
+    "CustomerName": "Maria Rossi",
+    "Email": "maria.rossi@example.com",
+    "Phone": "+1-555-7021",
+    "Segment": "Government",
+    "AccountManager": "Fatima Khan",
+    "CreatedDate": "2024-05-16"
+  },
+  {
+    "CustomerID": 19,
+    "CustomerName": "Liam Brown",
+    "Email": "liam.brown@example.com",
+    "Phone": "+1-555-8714",
+    "Segment": "Government",
+    "AccountManager": "Fatima Khan",
+    "CreatedDate": "2025-11-27"
+  },
+  {
+    "CustomerID": 20,
+    "CustomerName": "Noah Diaz",
+    "Email": "noah.diaz@example.com",
+    "Phone": "+1-555-2279",
+    "Segment": "Government",
+    "AccountManager": "Maria Smith",
+    "CreatedDate": "2025-07-14"
+  },
+  {
+    "CustomerID": 21,
+    "CustomerName": "Wei Diaz",
+    "Email": "wei.diaz@example.com",
+    "Phone": "+1-555-9525",
+    "Segment": "Clinic",
+    "AccountManager": "Maria Khan",
+    "CreatedDate": "2025-08-20"
+  },
+  {
+    "CustomerID": 22,
+    "CustomerName": "John Nguyen",
+    "Email": "john.nguyen@example.com",
+    "Phone": "+1-555-3161",
+    "Segment": "Government",
+    "AccountManager": "Liam Nguyen",
+    "CreatedDate": "2025-07-31"
+  },
+  {
+    "CustomerID": 23,
+    "CustomerName": "John M\u00fcller",
+    "Email": "john.m\u00fcller@example.com",
+    "Phone": "+1-555-5169",
+    "Segment": "Hospital",
+    "AccountManager": "Fatima Patel",
+    "CreatedDate": "2024-03-15"
+  },
+  {
+    "CustomerID": 24,
+    "CustomerName": "Noah Smith",
+    "Email": "noah.smith@example.com",
+    "Phone": "+1-555-2130",
+    "Segment": "Clinic",
+    "AccountManager": "John Rossi",
+    "CreatedDate": "2025-02-22"
+  },
+  {
+    "CustomerID": 25,
+    "CustomerName": "Aisha M\u00fcller",
+    "Email": "aisha.m\u00fcller@example.com",
+    "Phone": "+1-555-8348",
+    "Segment": "Clinic",
+    "AccountManager": "Liam Garcia",
+    "CreatedDate": "2025-11-30"
+  }
+]

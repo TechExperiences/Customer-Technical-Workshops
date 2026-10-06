@@ -1,0 +1,13 @@
+MaterialID,MaterialName,MaterialType,UnitOfMeasure,UnitCost,SupplierID
+1,Metoprolol API,API,KG,77.45,5
+2,Azithromycin API,API,KG,4.95,4
+3,Levetiracetam API,API,KG,34.45,2
+4,Paclitaxel API,API,KG,28.34,1
+5,Albuterol API,API,KG,88.9,5
+6,Microcrystalline Cellulose,Excipient,KG,3.4,3
+7,Magnesium Stearate,Excipient,KG,4.47,3
+8,Lactose Monohydrate,Excipient,KG,0.48,4
+9,Blister Foil Packaging,Packaging,EA,2.14,4
+10,HDPE Bottle 100ct,Packaging,EA,0.2,4
+11,Carton Box - Standard,Packaging,EA,1.13,1
+12,Gelatin Capsule Shells,Excipient,EA,2.55,2

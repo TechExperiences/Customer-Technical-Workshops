@@ -1,0 +1,6 @@
+ProductID,ProductName,Category,Manufacturer,UnitPrice,LaunchDate
+1,CardioFlow,Cardiology,Caldova Pharma,12.75,2019-03-01
+2,Immunexa,Immunology,Caldova Pharma,18.4,2020-06-15
+3,NeuroVance,Neurology,Caldova Pharma,22.1,2018-11-20
+4,OncoCure,Oncology,Caldova Pharma,45.0,2021-01-10
+5,RespiraX,Respiratory,Caldova Pharma,9.6,2017-09-05
