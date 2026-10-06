@@ -1,5 +1,0 @@
-# Local deployment settings and azd environment state can contain credentials.
-.env
-.azure/
-.deployment-state.json
-infra/sql/.embedding-runtime.sql
