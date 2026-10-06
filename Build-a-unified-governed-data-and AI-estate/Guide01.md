@@ -1,25 +1,26 @@
 ## 1. Envisioning Session Using Whiteboarding
 
-
 ### Whiteboarding
 
-Whiteboarding helps technical teams to quickly align on business goals, current challenges, future-state architecture, and solution priorities. It turns abstract ideas into a shared visual plan and helps accelerate decisions for Microsoft IQ Solution Accelerators.
+Whiteboarding helps technical teams to quickly align on business goals, current challenges, current-state and future-state architecture, and solution priorities. It turns abstract ideas into a shared visual plan and helps accelerate decisions for building a unified, governed data and AI estate.
 
-Let’s consider a common retail use case. Supply chain disruptions can quickly lead to stockouts, revenue loss, and poor customer experiences. Critical data is often spread across disconnected systems, making it difficult to identify risks, understand their business impact, and respond in time.
+Let's consider a common pharmaceutical manufacturing and distribution use case. Caldova Pharmaceuticals is expanding its product portfolio and entering new markets, each with its own pharmaceutical regulations. Customer, product, inventory, supply chain, sales, finance and operational data is spread across business applications, databases, files and cloud storage. Custom integrations, manual preparation, separate reporting datasets, duplicate copies and inconsistent definitions make it difficult to gain unified visibility, govern data, meet compliance requirements and analyze information across business domains.
 
-You will start with whiteboarding to architect a future state of an intelligent solution which can:
-- Detect supply chain disruptions early
-- Identify impacted products, stores, and regions
-- Recommend alternative sourcing options
-- Coordinate decisions across teams
-- Reduce stockouts and protect revenue
-- Accelerate business value with Microsoft Fabric, Foundry, Power BI, and AI working together
+You will start with whiteboarding to architect a future state of a unified, open and governed data solution which can:
+
+- Connect operational and analytical data with minimal unnecessary data movement
+- Unify data across customer, product, inventory, supply chain, sales, finance and operations
+- Integrate application-generated and event-driven data into the data platform
+- Establish centralized data discovery, governance, security and role-based access
+- Create a trusted semantic foundation for consistent reporting and AI-driven insights
+- Keep the architecture open and interoperable, so Caldova can evolve tools and processing engines and integrate third-party systems without creating new data silos
+- Accelerate business value with Microsoft Fabric, OneLake, Azure Integration Services, Power BI and AI working together
 
 ### How to copy the Whiteboard using an existing template URL
 
 1. Open a new browser tab in the Edge browser.
 
-1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQCgG6cKI3xwSon2DSEbtOmxAUc7nM9jphqv7ozbt4RC8aU?e=5Vyzra), then select **Copy link** and then paste it on the browser tab.
+1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQDyoGFFsazxRrM4PuDWjIUMAZ-WDItZle2pvg906JhPpVs?e=9eibLI), then select **Copy link** and then paste it on the browser tab.
 
 1. If prompted, sign in with your ODL user credentials.
 

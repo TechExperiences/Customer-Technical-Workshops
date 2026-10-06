@@ -2,36 +2,45 @@
 
 
 ### Whiteboarding
+Whiteboarding helps technical teams align **Caldova’s business goals, current application and data challenges, modernization priorities, and future-state architecture**. It transforms modernization ideas into a shared visual plan and helps identify where Microsoft technologies and Solution Accelerators can accelerate the journey.
 
-Whiteboarding helps technical teams to quickly align on business goals, current challenges, future-state architecture, and solution priorities. It turns abstract ideas into a shared visual plan and helps accelerate decisions for Microsoft IQ Solution Accelerators.
+For the **Caldova scenario**, start by exploring the current environment and identifying applications, databases, dependencies, integration points, scalability concerns, and modernization opportunities.
 
-Let’s consider a common retail use case. Supply chain disruptions can quickly lead to stockouts, revenue loss, and poor customer experiences. Critical data is often spread across disconnected systems, making it difficult to identify risks, understand their business impact, and respond in time.
+Use whiteboarding to architect a future-state solution that helps Caldova:
 
-You will start with whiteboarding to architect a future state of an intelligent solution which can:
-- Detect supply chain disruptions early
-- Identify impacted products, stores, and regions
-- Recommend alternative sourcing options
-- Coordinate decisions across teams
-- Reduce stockouts and protect revenue
-- Accelerate business value with Microsoft Fabric, Foundry, Power BI, and AI working together
+- Assess the current application and database landscape
+- Identify modernization priorities and dependencies
+- Modernize applications and databases with confidence
+- Introduce AI capabilities into modernized applications
+- Improve scalability, reliability, security, and operational efficiency
+- Create a connected future\-state architecture across applications, data, and AI
+- Accelerate implementation using Microsoft technologies and Solution Accelerators
 
-### How to copy the Whiteboard using an existing template URL
+### Whiteboarding Outcome
+
+By the end of the session, the team has a shared view of **Caldova’s current\-state challenges, modernization priorities, target business outcomes, and future\-state architecture**, providing a clear path from envisioning to rapid prototyping and implementation.
+
+### How to copy the Whiteboard Using an Existing Template URL
 
 1. Open a new browser tab in the Edge browser.
 
-1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQCgG6cKI3xwSon2DSEbtOmxAUc7nM9jphqv7ozbt4RC8aU?e=5Vyzra), then select **Copy link** and then paste it on the browser tab.
+1. Right-click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1005-my.sharepoint.com/:wb:/g/personal/caipuser_sandboxailabs1005_onmicrosoft_com/IQBJ1isDhRDWTYbg7rG092znAa72B_R5ObN7AstWuoYDoEE?e=KyPa16), then select **"Copy link"** and then paste it on the browser tab.
 
 1. If prompted, sign in with your ODL user credentials.
 
-1. Once you login, you will get a pop-up message to create the new Whiteboard. Read the message and click **Got it**.
+1. Once you log in, a pop-up message will appear prompting you to create a new Whiteboard. Read the message and click **Got it**.
 
    ![](../Sandbox-Environment-Guides/Images/amp71.png)
 
+1. Click on **X** to close the pop-up.
+
+   ![](../Modernize-with-confidence/Images/m13.png)
+
 1. Use the **Zoom out** option to view the Whiteboard template clearly.
 
-   ![](../Sandbox-Environment-Guides/Images/cd35.png)
+   ![](../Modernize-with-confidence/Images/m16.png)
 
-1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a Future-state solution architecture.
+1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a future-state solution architecture.
 
 ### Activities
 
@@ -45,10 +54,10 @@ You will start with whiteboarding to architect a future state of an intelligent 
    - Current-state architecture
    - Systems
 
-1. Design the **Future State Architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
+1. Design the **Future-State Architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
 
 1. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
 
 ## This completes the Envisioning Session using Microsoft Whiteboarding.
 
-### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.
+### Now, click on **`Next >>`** in the lower-right corner to move on to **`Rapid Prototyping`**.

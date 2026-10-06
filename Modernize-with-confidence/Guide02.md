@@ -1,6 +1,6 @@
 # 2. Rapid Prototyping
 
-Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
+Now that you have completed the Envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a Intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
 ## Rapid Prototyping using GitHub Copilot
 
@@ -8,6 +8,26 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
+
+### Verify Resources in the Azure Resource Group
+
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups (1)** and select  **Resource groups (2)**.
+
+   ![](../Modernize-with-confidence/Images/m18.png)
+
+1. Click on **rg-caldova-modernize** Resource Group.
+
+   ![](../Modernize-with-confidence/Images/m19.png)
+
+1. Confirm that the resource group contains the following resources:
+   
+   - **Azure OpenAI**
+   - **Azure SQL Database Hyperscale** 
+   - **SQL Server** 
+
+     ![](../Modernize-with-confidence/Images/m20.png)
+
+1. Once you have verified the resources, you can proceed with the next steps.
 
 ### Sign in to GitHub Copilot Chat
 
@@ -64,9 +84,9 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp27.png)
 
-1. Navigate to **`C:\`** path **(1)**, then select the **miq-project** folder **(2)** and then **Select folder (3)**.
+1. Navigate to **`C:\`** path **(1)**, then select the **mwc-project** folder **(2)** and then **Select folder (3)**.
 
-   ![](../Sandbox-Environment-Guides/Images/b56.png)
+   ![](../Modernize-with-confidence/Images/m1.png)
 
 1. From the **GitHub Copilot Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
 
@@ -92,18 +112,18 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Select the **Future-State-Architecture.png**.
 
-   ![](../Sandbox-Environment-Guides/Images/Vsfiles.png)
+   ![](../Modernize-with-confidence/Images/m17.png)
 
 1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b89.png)
 
-## Migration From On-Prem SQl to Azure SQL DB Hyperscale
+## Migration From On-Prem SQL to Azure SQL DB Hyperscale
 
 Migrate the pharmaceutical manufacturing database from on-premises SQL Server to Azure SQL Database Hyperscale to provide scalable, highly available, and cloud-based data management. The migration preserves critical manufacturing, product, inventory, production, and operational data while enabling improved performance, scalability, and integration with modern Azure analytics and AI services.
 
-1. Along with the attached **Solution Architecture** (1), please paste the below prompt (2).
-
+1. Along with the attached **Solution Architecture**, please paste the below prompt in the Chat.
+   
    ```
    You are my smart agent to understand below are the problem statement and planned solution architecture design which will help Caldova to overcome from their problems. After that, please prepare bicep/ARM template and deploy the resources in the respective environment.
 
@@ -114,60 +134,61 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
    First Migrate OnPrem SQL Database available in the VM to Azure SQL Server(Hyperscale) and modernize it with following below instructions:
 
    Instructions:
-   1.	Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
-   2.	Use Existing Azure SQL Server and one Azure SQL Hyperscale Database (CaldovaOrderManagement) which is available in same Resource Group
-   3.	Make UPN - <inject key="AzureAdUserEmail"></inject> set as admin to the azure sql server and hyperscale databse
-   4.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
-   5.	Connect and Access the OnPrem SQL Sever using credentials
-   	User Name: caldova-admin
-   	Password: B!Admin@123
-   6.	Access database CaldovaOrderManagement in this OnPrem server.
-   7.	Migrate Tables and data into the created Azure SQL Hyperscale Database
-   8.	Maintain a similar relationship among all tables.
-
+   1.Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
+   2.Use Existing Azure SQL Server and one Azure SQL Hyperscale Database (CaldovaOrderManagement) which is available in same Resource Group
+   3.Make UPN - <inject key="AzureAdUserEmail"></inject> set as admin to the azure sql server and hyperscale database
+   4.Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
+   5.Connect and Access the OnPrem SQL Server using credentials
+      - User Name: caldova-admin
+      - Password: B!Admin@123
+   6.Access database CaldovaOrderManagement in this OnPrem server.
+   7.Migrate Tables and data into the created Azure SQL Hyperscale Database
+   8.Maintain a similar relationship among all tables.
    ```
 
-   - Then click **Send (3)** button.
+   - Then click **Send** button.
 
-    ![](../Sandbox-Environment-Guides/Images/prompt.png)
+     ![](../Modernize-with-confidence/Images/m22.png)
    
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
-1. If Copilot Asks to aunthenticate like below, please click on provided link and provide the code which was given by copilot 
+1. If Copilot asks you to aunthenticate like below, please click the provided link and provide the code which was given by copilot 
 
    ![](../Sandbox-Environment-Guides/Images/Login.png)
 
-1. Click on Yes, completed and then click on **Submit** button
+1. Click on **Yes, completed (1)** and then click on **Submit (2)** button.
     
     ![](../Sandbox-Environment-Guides/Images/Login2.png)
 
 1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
 
+1. If prompted for the SQL database password, please provide the existing password **<inject key="sqlAdminPassword" enableCopy="false"/>**.
+
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
    
-   >Wait for the deployment to complete. This may take approximately `20–30` minutes.
+   >Wait for the deployment to complete. This may take approximately `10–20` minutes. Select **Keep** to keep the created files.
 
 ### Validation - Azure SQL DB Hyperscale
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Click on **Resource groups**. and Click on **rg-caldova-modernize** Resource Group.
+1. Navigate back to [Azure portal](https://portal.azure.com/).  Go to **Resource groups**. and click on **rg-caldova-modernize** Resource Group.
 
-   ![](../Sandbox-Environment-Guides/Images/portal.png)
+   ![](../Modernize-with-confidence/Images/m23.png)
 
-1. You can see all the resources and click on **Azure SQL Database**
+1. You can see all the resources and click on *Azure SQL Database Hyperscale* named **CaldovaOrderManagement**.
 
-   ![](../Sandbox-Environment-Guides/Images/Database.png)
+   ![](../Modernize-with-confidence/Images/m26.png)
 
-1. Click on **Query Editor** to connect SQL Database and Validate databse objects.
+1. Click on **Query Editor** to connect SQL Database and Validate database objects.
 
-   ![](../Sandbox-Environment-Guides/Images/Queryeditor.png)
+   ![](../Modernize-with-confidence/Images/m24.png)
 
-1. To authorize user click on **Connect as odl_user_<inject key="Deployment-ID" enableCopy="false"/>**.
+1. From **Microsoft Entra authentication (1)** tab. To authorize the user, click on **Connect as odl_user_<inject key="Deployment-ID" enableCopy="false"/> (2)**.
 
-     ![](../Sandbox-Environment-Guides/Images/entra.png)
+   ![](../Modernize-with-confidence/Images/m21.png)
 
-1. Expand Schema(dbo) -> Tables -> and Click any table to see data.
+1. Expand **Schema(dbo) (1)** -> **Tables (2)** -> and click any table to see data **(3)**.
 
     ![](../Sandbox-Environment-Guides/Images/Validation.png)   
 
@@ -177,91 +198,99 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
 Migrate the pharmaceutical manufacturing web application (Order Management) from on-premises infrastructure to Azure App Service to provide a scalable, secure, and highly available cloud-hosted platform. The migration enables improved application performance, simplified infrastructure management, and seamless integration with Azure services and the modernized Azure SQL Database backend.
  
-Follow below instructions to migrate On-prem web application to Azure app service.
+Follow the below instructions to migrate On-prem Web application to Azure app service.
 
-1. Navigate to VScode and paste the below prompt in chat window
+1. Navigate back to **VS Code** and paste the below prompt in **GitHub Copilot Chat**.
 
    ```
-   Great, you have completed OnPrem SQL migration to Azure SQL Database Hyperscale. Now we need to migrate OnPrem Web Application to Azure Web App Service and modernize. 
+   Great, you have completed OnPrem SQL migration to Azure SQL Database Hyperscale. Now we need to migrate OnPrem Web Application to Azure App Service and modernize. 
 
    Follow the instructions below:
 
    Instructions:
    1.	Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
-   2.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
+   2.	Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, password: Password@123)
    3.	Access CaldovaOrderManagement(Caldova.OrderManagement) web application is already deployed in this above VM.
    4.	Migrate CaldovaOrderManagement web application to Azure Web App Service. 
    5.	Modernize the migrated web application and follow below modernization activities:
-   a.	Use latest .NET Framework (.NET 10) 
-   b.	Use CSS/Bootstrap etc. to make modernize look and feel
-   c.	Can use some visuals in the Dashboard page to enhance the look and feel
-   d.	Menu items should places at left side of the page. 
-   e.	Top banner with company details with optimized details/views
-   f.	Modernized Web App responsiveness
+      a.	Use latest .NET Framework (.NET 10) 
+      b.	Use CSS/Bootstrap etc. to make modernize look and feel
+      c.	Can use some visuals in the Dashboard page to enhance the look and feel
+      d.	Menu items should places at left side of the page. 
+      e.	Top banner with company details with optimized details/views
+      f.	Modernized Web App responsiveness
    6.	Migrated and Modernized web applications should integrate with Azure SQL Database (CaldovaOrderManagement) and integrate all functional pages to the respective tables. 
    7.	Please include one more page(in Web Application) for "Traditional SQL Search" where user will perform product based search.
 
    ```
    - Then click **Send** button.
 
+     ![](../Modernize-with-confidence/Images/m25.png)    
+
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
 
+1. Wait for the deployment to complete. This may take approximately `20–30` minutes. Select **Keep** to keep the created files.
+
 ### Validation - Azure App Service
 
-1. Navigate back to Azure portal to validate the migrated web application and search for **rg-caldova-modernize** Resource Group. you can see app service resources along with SQL Database
+1. Once the deployment is completed, navigate back to **Azure portal** to validate the migrated Web application.
 
-1. Click on **app-caldova-ordermanagement.**
+1. Navigate to **rg-caldova-modernize** Resource Group. you can see `App service` resources along with `SQL Database Hyperscale`.
 
-   ![](../Sandbox-Environment-Guides/Images/appservice.png)
+1. Click on App service named **app-caldova-<inject key="Deployment-ID" enableCopy="false"/>**.
+
+   ![](../Modernize-with-confidence/Images/m27.png) 
 
 1. You can see all app related information and click on **default domain**
 
-   ![](../Sandbox-Environment-Guides/Images/applink.png)
+   ![](../Modernize-with-confidence/Images/m28.png) 
 
 1. It will open application in new tab and you can see migrated application. 
 
-   ![](../Sandbox-Environment-Guides/Images/appDB.png)
+   ![](../Modernize-with-confidence/Images/m29.png) 
 
-1. In migrated application you can see **Traditional Sql Search Page** page got added.
+1. In migrated application you can see **Traditional SQL Search** section got added.
 
-1. Click on **Traditional Sql Search Page** and paste the below prompt in search area and click on **search** button.
+1. Click on **Traditional Sql Search** section.
+
+   ![](../Modernize-with-confidence/Images/m30.png) 
+
+1. Paste the below prompt in search area **(1)** and click on **Search (2)** button.
 
    ``` 
    medicine used to reduce fever
    ```
-   ![](../Sandbox-Environment-Guides/Images/traditional.png)
 
-1. You can observe it will return no results.
+   ![](../Modernize-with-confidence/Images/m31.png) 
 
-1. The migrated application currently uses traditional SQL search to find products based on exact text matches. Traditional SQL search typically relies on conditions such as `LIKE`, where the user's search terms need to closely match the words stored in the product description.
 
-   >  For example, if a product description contains:
+1. `You can observe it will return no results.`
 
-   "Paracetamol is used to relieve mild pain."
+   ![](../Modernize-with-confidence/Images/m32.png) 
 
-   and the user searches for:
+   The migrated application currently uses traditional SQL search to find products based on exact text matches. Traditional SQL search typically relies on conditions such as LIKE, where the user's search terms need to closely match the words stored in the product description.
 
-   >  "medicine used to reduce fever"
+   For example, if a product description contains: `"Paracetamol is used to relieve mild pain."` and the user searches for: `"medicine used to reduce fever"`.
 
-   - a traditional SQL `LIKE` search may not return the product because the exact phrase **"medicine used to reduce fever"** does not appear in the product description.
+   - A traditional SQL `LIKE` search may not return the product because the exact phrase `"medicine used to reduce fever"` does not appear in the product description.
 
    - This creates a limitation for users because they often search using natural language, synonyms, or different words that express the same meaning.
 
-1. To overcome this limitation, we will enhance the migrated application with **vector/semantic search** using Azure SQL Database Hyperscale and Azure OpenAI embeddings.
+1. To overcome this limitation, we will enhance the migrated application with **Vector Semantic search** using Azure SQL Database Hyperscale and Azure OpenAI embeddings.
 
-1. Vector search converts product descriptions and user search queries into numerical **embeddings** that represent their meaning. The application can then compare the similarity between the user's query and product descriptions instead of relying only on exact keyword matches.
+   - `Vector search` converts product descriptions and user search queries into numerical **embeddings** that represent their meaning. The application can then compare the similarity between the user's query and product descriptions instead of relying only on exact keyword matches.
 
-   >**Note:** Will do Semantic search validation once next deployment(Vector embedding) is done.
+     >**Note:** Will do Semantic search validation once next deployment(Vector embedding) is done.
 
-1. In this Next Section, we will:
+1. In the next Section, we will:
 
    - Generate embeddings for the existing product descriptions using **Azure OpenAI**.
    - Store the generated embeddings in **Azure SQL Database Hyperscale** using the native `VECTOR` data type.
    - Generate an embedding for the user's natural-language search query.
    - Compare the query embedding with product-description embeddings using vector similarity.
-   - Add a **Semantic/Vector Search** page to the migrated web application.
+   - Add a **Semantic Vector Search** page to the migrated web application.
    - Display matching products along with their similarity/probability scores.
    - Add a visualization to demonstrate product search trends based on the vector-search results.
 
@@ -269,20 +298,22 @@ This allows us to demonstrate how the migrated application can move from **keywo
 
 ## Implementation of Vector/Semantic Search in Azure SQL Database Hyperscale
 
-Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embeddings and the native VECTOR data type to enable natural-language product searches. Query and product embeddings are compared using vector similarity to identify relevant products beyond exact keyword matching, improving search accuracy and product discovery.
+Implement Vector search in Azure SQL Database Hyperscale using Azure OpenAI embeddings and the native VECTOR data type to enable natural-language product searches. Query and product embeddings are compared using vector similarity to identify relevant products beyond exact keyword matching, improving search accuracy and product discovery.
 
 1. Navigate to **Visual Studio Code**.
 
-1. In **Visual Studio Code**, open the `.env` file from the project explorer.
+1. In **Visual Studio Code**, open the `.env` file from the **Explorer**.
 
-   ![](../Sandbox-Environment-Guides/Images/envdetails.png)
+   ![](../Sandbox-Environment-Guides/Images/amwc.png)
 
 1. Under the **Azure OpenAI Configuration** section, update the following variables with corresponding values:
 
    - `AZURE_OPENAI_ENDPOINT` > <inject key="openaiEndpoint" enableCopy="false"/>
    - `AZURE_OPENAI_API_KEY` > <inject key="openaiPrimaryKey" enableCopy="false"/>
 
-1. Copy the below prompt and paste it in chat window
+1. Save the file using **Ctrl+S**.   
+
+1. Copy the below prompt and paste it in **GitHub Copilot Chat**.
 
    ```
    Great, both SQL Database and Web application migration were completed successfully.
@@ -299,7 +330,7 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
    2. Please execute the attached script file (Embedding_Script.sql) for the below activities:
 
-       Read OpeanAI Configuration details (API Endpoint, Key, Models etc.) from .env file and use it in this SQL script file
+       Read OpenAI Configuration details (API Endpoint, Key, Models etc.) from .env file and use it in this SQL script file
       . Use Azure SQL Database (CaldovaOrderManagement) Hyperscale and generate embedding for all existing Products and its Descriptions.
       . Create a table dbo.ProductDescriptionEmbeddings with below columns and  store all embedding details
          1.ProductDescriptionEmbeddingID
@@ -323,32 +354,31 @@ Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
 
+1. Wait for the deployment to complete. Select **Keep** to keep the created files.   
+
 ### Validation - Traditional SQL Search Vs Vector Semantic Search
 
-1. Navigate Azure Portal and Open Migrated Application
+1. Navigate **Azure Portal** and Open Migrated Application.
 
-1. In the updated application, you can see the **Semantic/Vector Search** page that has been added.
+1. In the updated application, you can see the **Semantic Vector Search** section that has been added.
 
-1. Click on **Semantic/Vector search** page and paste the same prompt in search area and click on **search** button. 
+   ![](../Modernize-with-confidence/Images/m33.png) 
+
+1. Click on **Semantic Vector search** section.
+
+1. Paste the below same prompt in search area **(1)** and click on **Semantic search (2)** button. 
 
    ``` 
    medicine used to reduce fever
    ```
-   ![](../Sandbox-Environment-Guides/Images/vector.png)
 
-1. The semantic/vector search can identify products based on the meaning and semantic similarity of the query and product descriptions, even when the exact keywords are not present.
+   ![](../Modernize-with-confidence/Images/m34.png) 
 
+1. The Semantic vector search can identify products based on the meaning and semantic similarity of the query and product descriptions, even when the exact keywords are not present.
 
-
-
-
+   ![](../Modernize-with-confidence/Images/m35.png) 
 
 
+### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session.
 
-
-
-
-
-
-
-### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session
+#### Click on `Next` to view the Pre-deployed `Modernize with Confidence Package`.

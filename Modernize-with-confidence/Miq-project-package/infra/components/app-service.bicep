@@ -17,7 +17,7 @@ param chatApiVersion string = '2024-08-01-preview'
 param embeddingApiVersion string = '2023-05-15'
 
 var commonTags = {
-  managedBy: 'miq-bicep-fallback'
+  managedBy: 'mwc-bicep-fallback'
   workload: 'caldova-order-management'
 }
 
