@@ -1,11 +1,15 @@
-using './main.bicep'
-
-param resourceGroupName = 'rg-Unified'
-param resourceGroupLocation = 'westus2'
-param storageLocation = 'westus3'
-param sqlAdministratorLogin = 'sqladmincaldova'
-param sqlDatabaseName = 'OperationalData'
-param sqlAdministratorPassword = '${SQL_ADMINISTRATOR_PASSWORD}'
-param fabricCapacityAdministrators = [
-  '${FABRIC_CAPACITY_ADMIN_UPN}'
-]
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceGroupName": { "value": "rg-Unified" },
+    "resourceGroupLocation": { "value": "westus2" },
+    "storageLocation": { "value": "westus3" },
+    "sqlAdministratorLogin": { "value": "sqladmincaldova" },
+    "sqlDatabaseName": { "value": "OperationalData" },
+    "sqlAdministratorPassword": { "value": "${SQL_ADMINISTRATOR_PASSWORD}" },
+    "fabricCapacityAdministrators": {
+      "value": ["${FABRIC_CAPACITY_ADMIN_UPN}"]
+    }
+  }
+}
