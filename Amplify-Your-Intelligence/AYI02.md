@@ -104,7 +104,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b89.png)
 
-### Fabric IQ
+### **Fabric IQ**
 
 1. Along with the attached **Future State Architecture** (1), please paste the below prompt (2).
 
@@ -150,7 +150,6 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b13.png)
 
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova F16 deployment confirmation using Fable 5.1.
 
 1. If prompted to provide the UPN for assigning **Fabric Administrator access**, enter **<inject key="AzureAdUserEmail"></inject> (1)** and then select **Submit (2)**. 
 
@@ -299,9 +298,8 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Click on **Publish** again to publish the data agent.
 
-   ![](../Sandbox-Environment-Guides/Images/b66.png)  
+   ![](../Sandbox-Environment-Guides/Images/CalDA.png)  
 
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova data agent publication dialog.
 
 ### Foundry IQ & Web IQ
 
@@ -350,11 +348,11 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    Note: Create a deployment MD with deployment instructions and post-deployment configuration, including how to manually connect the existing Fabric Data Agent to each Foundry agent.
    ```
 
-   > **&lt;TODO&gt;:** Update the following Foundry screenshots and agent-selection labels to show the four Caldova agents and their shared Fabric, knowledge-base and Web IQ connections.
+
 
 1. Wait for the deployment to complete and the **Keep** the file.
 
-   ![](../Sandbox-Environment-Guides/Images/b38.png)  
+   ![](../Sandbox-Environment-Guides/Images/CalFAG.png)  
 
 
 1. Navigate back to the Resource group. Select the **Foundry Project**.
