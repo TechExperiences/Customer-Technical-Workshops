@@ -358,33 +358,27 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Navigate back to the Resource group. Select the **Foundry Project**.
 
-   ![](../Sandbox-Environment-Guides/Images/b39.png)  
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource group and Foundry project.
+   ![](../Amplify-Your-Intelligence/Images/Foundry_project_step5.jpg)
 
 1. Click On **Go to Foundry portal**.
 
-   ![](../Sandbox-Environment-Guides/Images/b40.png)  
-
-   > **&lt;TODO&gt;:** Update this screenshot to show Go to Foundry portal for the Caldova project.
+   ![](../Amplify-Your-Intelligence/Images/40.png)
 
 1. Click on **Build**.
 
-   ![](../Sandbox-Environment-Guides/Images/b41.png)  
+   ![](../Amplify-Your-Intelligence/Images/41.png)
 
 1. Navigate to **Models (1)** and make sure 2  models are deployed **(2)**,
 
-   ![](../Sandbox-Environment-Guides/Images/b42.png)  
+   ![](../Amplify-Your-Intelligence/Images/42.png)  
 
 1. Navigate to **Agents** and confirm these four agents appear: **supplier-terms-agent**, **cmo-evaluation-agent**, **demand-sensing-agent**, and **manufacturing-quality-agent**. Open **supplier-terms-agent** first.
 
-   ![](../Sandbox-Environment-Guides/Images/b43.png)  
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the four Caldova agents and selection of supplier-terms-agent.
+   ![](../Amplify-Your-Intelligence/Images/43.png)
 
 1. Make sure the model is set to **gpt-5-mini**. Check whether the published **Caldova_Launch_Readiness_Agent** is already connected under **Tools**; if it is, keep that connection. Otherwise, add it below.
 
-   ![](../Sandbox-Environment-Guides/Images/b44.png)  
+   ![](../Amplify-Your-Intelligence/Images/44.png)  
 
    > **&lt;TODO&gt;:** Update this screenshot to show the Caldova agent's model and Fabric Data Agent tool.
 
@@ -396,27 +390,19 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    - To add the missing connection, scroll to **Tools**, select **Add**, then **Browse all tools** (or **Add tools**).
 
-     ![](../Sandbox-Environment-Guides/Images/b46.png)  
-
-     > **&lt;TODO&gt;:** Update this screenshot to show the current Add tools menu.
+     ![](../Amplify-Your-Intelligence/Images/45.png)
 
    - Select **Fabric IQ (OneLake Catalog)**, then **Add tool**.
 
-     ![](../Sandbox-Environment-Guides/Images/a32.png)      
-
-     > **&lt;TODO&gt;:** Update this screenshot to show the current Fabric IQ tool selection.
+     ![](../Sandbox-Environment-Guides/Images/a32.png)
 
    - In the catalog, filter **Type** to **Data agent**, select the published **Caldova_Launch_Readiness_Agent** from your Caldova workspace, and click **Add**. Complete any sign-in with the same lab account used in Fabric, then **Save** the Foundry agent.
 
-     ![](../Sandbox-Environment-Guides/Images/b47.png)          
-
-     > **&lt;TODO&gt;:** Replace this screenshot with selection of the published Caldova Data Agent instead of the old retail ontology.
+     ![](../Amplify-Your-Intelligence/Images/46.png)       
 
 1. Scroll down to **Knowledge** and verify that the shared knowledge source for the Caldova demo PDFs is attached. Also confirm the configured public-Web IQ source/tool is present in **Knowledge** or **Tools**, as appropriate for the deployed integration.
 
-   ![](../Sandbox-Environment-Guides/Images/b48.png)  
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova document knowledge and configured public-web grounding.
+   ![](../Amplify-Your-Intelligence/Images/47.png)
 
 1. Test **supplier-terms-agent** with questions about its documents and Fabric data. Confirm document answers include citations and data answers use **Caldova_Launch_Readiness_Agent**. After testing it, repeat the relevant tool, knowledge and response checks for **cmo-evaluation-agent**, **demand-sensing-agent**, and **manufacturing-quality-agent**, keeping each agent's focused instructions.
 
