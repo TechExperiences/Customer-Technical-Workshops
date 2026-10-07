@@ -106,6 +106,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 Transform an existing agent design into a **production-ready, secure capability** using GitHub Copilot—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
 
 ### Creating Supply Chain Agent in Foundry
+Create a Supply Chain Agent in Azure AI Foundry with a SharePoint-based Knowledge Base to provide accurate, enterprise-level responses grounded in approved business documents. The agent will retrieve and use information on production scheduling, market launch plans, manufacturing SOPs, launch escalation procedures, and equipment qualification to answer supply chain and operational questions with the appropriate enterprise context.
 
 1. Please copy the below prompt and paste it in the copilot chat win
 
@@ -147,6 +148,17 @@ Transform an existing agent design into a **production-ready, secure capability*
    
    >Wait for the deployment to complete.
 
+#### Agent Validation
+1. Navigate to Azure portal and click **Resource Group** to view the deployed resources.
+
+1. Below foundry workspace and project created
+
+   ![](../Sandbox-Environment-Guides/Images/Foundry-Project.png)
+
+1. Click **Foundry Project** to navigare and view the created agent.
+
+   ![](../Sandbox-Environment-Guides/Images/Agent-Created.png)
+
 ### Model Addition in Foundry Agent
 
 1. Please copy the below prompt and paste it in the copilot chat win
@@ -187,5 +199,27 @@ Transform an existing agent design into a **production-ready, secure capability*
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
    
    >Wait for the deployment to complete.
+
+#### Model Validation
+1. Navigate to Azure Foundry Agent which is created above.
+
+1. Click **Model** to see new model deployed.
+
+   ![](../Sandbox-Environment-Guides/Images/Model.png)
+
+1. Click **Agent** to see new model replaced old one.
+
+   ![](../Sandbox-Environment-Guides/Images/Agent-Model.png)
+
+### Build to the Coding Agent
+
+### Pull request security
+
+## Topic 2: Agents That Know Your Business 
+
+### Connect Live Manufacturing Context
+
+### Ground the Agent with Enterprise Knowledge
+
 
 #### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session.
