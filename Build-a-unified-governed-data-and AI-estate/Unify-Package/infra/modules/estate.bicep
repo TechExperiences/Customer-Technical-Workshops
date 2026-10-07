@@ -1,7 +1,6 @@
 param storageAccountName string
 param storageLocation string
 param sqlServerName string
-param sqlServerAlreadyExists string
 param sqlLocation string
 param sqlAdministratorLogin string
 @secure()
@@ -10,8 +9,6 @@ param sqlDatabaseName string
 param fabricCapacityName string
 param fabricCapacityLocation string
 param fabricCapacityAdministrators array
-
-var createSqlServer = toLower(sqlServerAlreadyExists) != 'true'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   name: storageAccountName
@@ -38,7 +35,7 @@ resource dataContainer 'Microsoft.Storage/storageAccounts/blobServices/container
   properties: { publicAccess: 'None' }
 }
 
-resource sqlServer 'Microsoft.Sql/servers@2023-08-01-preview' = if (createSqlServer) {
+resource sqlServer 'Microsoft.Sql/servers@2023-08-01-preview' = {
   name: sqlServerName
   location: sqlLocation
   properties: {
@@ -49,11 +46,7 @@ resource sqlServer 'Microsoft.Sql/servers@2023-08-01-preview' = if (createSqlSer
   }
 }
 
-resource existingSqlServer 'Microsoft.Sql/servers@2023-08-01-preview' existing = if (!createSqlServer) {
-  name: sqlServerName
-}
-
-resource allowAzureServices 'Microsoft.Sql/servers/firewallRules@2023-08-01-preview' = if (createSqlServer) {
+resource allowAzureServices 'Microsoft.Sql/servers/firewallRules@2023-08-01-preview' = {
   parent: sqlServer
   name: 'AllowAzureServices'
   properties: {
@@ -62,18 +55,8 @@ resource allowAzureServices 'Microsoft.Sql/servers/firewallRules@2023-08-01-prev
   }
 }
 
-resource operationalDatabaseOnNewServer 'Microsoft.Sql/servers/databases@2023-08-01-preview' = if (createSqlServer) {
+resource operationalDatabase 'Microsoft.Sql/servers/databases@2023-08-01-preview' = {
   parent: sqlServer
-  name: sqlDatabaseName
-  location: sqlLocation
-  sku: { name: 'Basic', tier: 'Basic' }
-  properties: {
-    collation: 'SQL_Latin1_General_CP1_CI_AS'
-  }
-}
-
-resource operationalDatabaseOnExistingServer 'Microsoft.Sql/servers/databases@2023-08-01-preview' = if (!createSqlServer) {
-  parent: existingSqlServer
   name: sqlDatabaseName
   location: sqlLocation
   sku: { name: 'Basic', tier: 'Basic' }
@@ -92,6 +75,6 @@ resource fabricCapacity 'Microsoft.Fabric/capacities@2023-11-01' = {
 }
 
 output storageAccountName string = storageAccount.name
-output sqlServerFqdn string = createSqlServer ? sqlServer!.properties.fullyQualifiedDomainName : existingSqlServer!.properties.fullyQualifiedDomainName
-output sqlDatabaseName string = createSqlServer ? operationalDatabaseOnNewServer.name : operationalDatabaseOnExistingServer.name
+output sqlServerFqdn string = sqlServer.properties.fullyQualifiedDomainName
+output sqlDatabaseName string = operationalDatabase.name
 output fabricCapacityResourceId string = fabricCapacity.id

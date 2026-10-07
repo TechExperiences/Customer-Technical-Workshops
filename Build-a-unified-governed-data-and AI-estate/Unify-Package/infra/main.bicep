@@ -9,9 +9,7 @@ param storageAccountName string = toLower('stcaldova${take(uniqueString(subscrip
 @description('The location for Blob Storage.')
 param storageLocation string = 'westus3'
 @description('Globally unique Azure SQL logical-server name.')
-param sqlServerName string = toLower('sql-operational-${take(uniqueString(subscription().id, resourceGroupName), 12)}')
-@description('Set automatically by the deployment bootstrap when the operational SQL Server already exists.')
-param sqlServerAlreadyExists string = 'false'
+param sqlServerName string
 @secure()
 @description('Temporary SQL administrator password. Store this in Key Vault for production use.')
 param sqlAdministratorPassword string
@@ -37,7 +35,6 @@ module estate './modules/estate.bicep' = {
     storageAccountName: storageAccountName
     storageLocation: storageLocation
     sqlServerName: sqlServerName
-    sqlServerAlreadyExists: sqlServerAlreadyExists
     sqlLocation: resourceGroupLocation
     sqlAdministratorLogin: sqlAdministratorLogin
     sqlAdministratorPassword: sqlAdministratorPassword

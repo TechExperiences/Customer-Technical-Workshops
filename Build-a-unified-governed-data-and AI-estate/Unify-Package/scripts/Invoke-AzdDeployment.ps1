@@ -48,18 +48,13 @@ if ($LASTEXITCODE -ne 0) {
 }
 Invoke-Checked -Command { & az account set --subscription $environment.AZURE_SUBSCRIPTION_ID } -FailureMessage "Cannot select subscription $($environment.AZURE_SUBSCRIPTION_ID). Sign in to the lab tenant and verify access."
 
-# Avoid resubmitting the immutable SQL Server administrator properties on retries.
-# Azure SQL Server updates can remain in an ARM operation for a long time and time out.
-$groupExists = (& az group exists --name $environment.AZURE_RESOURCE_GROUP -o tsv).Trim()
-$sqlServerNames = @()
-if ($groupExists -eq 'true') {
-    $sqlServerNames = @(& az sql server list --resource-group $environment.AZURE_RESOURCE_GROUP `
-        --query "[?starts_with(name, 'sql-operational-')].name" -o tsv | Where-Object { $_ })
-}
-if ($sqlServerNames.Count -gt 1) { throw "More than one sql-operational-* server exists in $($environment.AZURE_RESOURCE_GROUP); cannot select one safely." }
-$environment['SQL_SERVER_ALREADY_EXISTS'] = if ($sqlServerNames.Count -eq 1) { 'true' } else { 'false' }
-$env:SQL_SERVER_ALREADY_EXISTS = $environment['SQL_SERVER_ALREADY_EXISTS']
-Write-Host "Operational SQL Server already exists: $($environment['SQL_SERVER_ALREADY_EXISTS'])" -ForegroundColor Cyan
+# A new logical server is intentional for every run.  The UTC timestamp makes the
+# name traceable; the random suffix protects against two runs starting in one second.
+$runStamp = (Get-Date).ToUniversalTime().ToString('yyyyMMddHHmmss')
+$runSuffix = -join ((48..57) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })
+$environment['SQL_SERVER_NAME'] = "sql-operational-$runStamp$runSuffix"
+$env:SQL_SERVER_NAME = $environment['SQL_SERVER_NAME']
+Write-Host "Creating a new operational SQL Server: $($environment['SQL_SERVER_NAME'])" -ForegroundColor Cyan
 
 & azd auth login --check-status 1>$null 2>$null
 if ($LASTEXITCODE -ne 0) {

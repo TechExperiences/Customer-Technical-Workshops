@@ -7,11 +7,14 @@ $packageRoot = Split-Path -Parent $PSScriptRoot
 $resourceGroup = if ($env:AZURE_RESOURCE_GROUP) { $env:AZURE_RESOURCE_GROUP } else { 'rg-Build-Unify' }
 
 $storageAccount = az storage account list --resource-group $resourceGroup --query '[0].name' -o tsv
-$sqlServer = az sql server list --resource-group $resourceGroup --query '[0].name' -o tsv
+$sqlServer = $env:SQL_SERVER_NAME
 $capacityResourceId = az resource list --resource-group $resourceGroup --resource-type Microsoft.Fabric/capacities --query '[0].id' -o tsv
 if (-not $storageAccount -or -not $sqlServer -or -not $capacityResourceId) {
     throw 'Expected Storage Account, Azure SQL Server, and Fabric Capacity were not found after provisioning.'
 }
+
+& az sql server show --resource-group $resourceGroup --name $sqlServer --only-show-errors 1>$null
+if ($LASTEXITCODE -ne 0) { throw "The SQL Server created for this run was not found: $sqlServer" }
 
 & (Join-Path $PSScriptRoot 'Upload-SourceData.ps1') -StorageAccountName $storageAccount
 & (Join-Path $PSScriptRoot 'Configure-SqlEntraAdmin.ps1') -SqlServerName $sqlServer -AdministratorUpn $env:FABRIC_CAPACITY_ADMIN_UPN -ResourceGroupName $resourceGroup
