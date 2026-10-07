@@ -5,6 +5,7 @@ import argparse
 import csv
 import json
 import os
+import struct
 import subprocess
 from pathlib import Path
 
@@ -20,14 +21,17 @@ SQL_COPT_SS_ACCESS_TOKEN = 1256
 
 def azure_sql_token() -> bytes:
     token_from_environment = os.environ.get("AZURE_SQL_ACCESS_TOKEN")
-    if token_from_environment:
-        return token_from_environment.encode("utf-16-le")
-    result = subprocess.run(
-        ["az", "account", "get-access-token", "--resource", "https://database.windows.net", "-o", "json"],
-        check=True, capture_output=True, text=True,
-    )
-    token = json.loads(result.stdout)["accessToken"]
-    return token.encode("utf-16-le")
+    if not token_from_environment:
+        result = subprocess.run(
+            ["az", "account", "get-access-token", "--resource", "https://database.windows.net", "-o", "json"],
+            check=True, capture_output=True, text=True,
+        )
+        token_from_environment = json.loads(result.stdout)["accessToken"]
+
+    # SQL_COPT_SS_ACCESS_TOKEN expects a 4-byte little-endian byte length followed
+    # by the UTF-16-LE token, not the token bytes alone.
+    encoded_token = token_from_environment.encode("utf-16-le")
+    return struct.pack("<I", len(encoded_token)) + encoded_token
 
 
 def sql_batches(sql: str) -> list[str]:
@@ -46,6 +50,8 @@ def main() -> None:
         f"Server=tcp:{args.server},1433;Database={args.database};"
         "Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
     )
+    if "ODBC Driver 18 for SQL Server" not in pyodbc.drivers():
+        raise RuntimeError("ODBC Driver 18 for SQL Server is not registered. Run .\\up.ps1 again to install it.")
     with pyodbc.connect(connection_string, attrs_before={SQL_COPT_SS_ACCESS_TOKEN: azure_sql_token()}) as connection:
         cursor = connection.cursor()
         for batch in sql_batches((PACKAGE_ROOT / "sql" / "OperationalData.sql").read_text(encoding="utf-8")):
