@@ -1,4 +1,5 @@
 # Ubiquitous Innovation CAIP Customer Workshops
+
 *Build, Connect, Govern. Innovate Everywhere*
  ![](../Sandbox-Environment-Guides/Images/UI.png)
  
@@ -77,7 +78,7 @@ By the end of the workshop, participants will understand how to:
 
 1. Once you're ready to dive in, your Virtual machine and Guide will be right at your fingertips within your web browser.
 
-    >**Note**: If prompted, click on **Accept** to Proceed.
+    >**Note**: If prompted, click **Accept** to proceed.
 
      ![](../Sandbox-Environment-Guides/Images/amp12.png)
 
@@ -97,11 +98,11 @@ By the end of the workshop, participants will understand how to:
 
      ![](../Sandbox-Environment-Guides/Images/amp16.png)
 
-1. If a pop-up appears **Stay signed in**, then select **Yes**.
+1. If a **Stay signed in** pop-up appears, select **Yes**.
 
    ![](../Sandbox-Environment-Guides/Images/amp17.png)
 
 1. You will return to this portal in the upcoming steps. Keep the portal open and proceed with the next steps.
 
 
-### Now, click on **`Next >>`** to continue with **`Envisioning Session Using Whiteboarding`**.
+### Now, click **`Next >>`** to continue with **`Envisioning Session Using Whiteboarding`**.
