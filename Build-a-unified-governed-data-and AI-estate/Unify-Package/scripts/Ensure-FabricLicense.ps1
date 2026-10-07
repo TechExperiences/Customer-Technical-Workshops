@@ -26,7 +26,9 @@ if (@($licenseDetails.value | Where-Object { $_.skuPartNumber -eq $SkuPartNumber
 $subscribedSkus = Invoke-GraphRest -Method GET -Url 'https://graph.microsoft.com/v1.0/subscribedSkus?$select=skuId,skuPartNumber,prepaidUnits,consumedUnits'
 $sku = @($subscribedSkus.value | Where-Object { $_.skuPartNumber -eq $SkuPartNumber } | Select-Object -First 1)
 if (-not $sku) {
-    throw "The tenant has no available SKU named '$SkuPartNumber'. Set FABRIC_LICENSE_SKU_PART_NUMBER to the tenant's exact Fabric/Power BI SKU part number."
+    $relatedSkus = @($subscribedSkus.value | Where-Object { $_.skuPartNumber -match 'FABRIC|POWER_BI' } | ForEach-Object { $_.skuPartNumber })
+    $availableText = if ($relatedSkus.Count) { $relatedSkus -join ', ' } else { 'none returned by Microsoft Graph' }
+    throw "The tenant has no available SKU named '$SkuPartNumber'. Fabric/Power BI SKU candidates returned by Microsoft Graph: $availableText. Set FABRIC_LICENSE_SKU_PART_NUMBER to the exact required SKU."
 }
 
 $available = [int]$sku.prepaidUnits.enabled - [int]$sku.consumedUnits

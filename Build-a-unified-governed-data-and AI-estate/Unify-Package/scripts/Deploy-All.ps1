@@ -24,8 +24,15 @@ Write-Host 'Phase 2/5: Uploading validated source folders to Blob Storage.' -For
 
 Write-Host 'Phase 3/5: Configuring SQL Entra administrator and loading OperationalData.' -ForegroundColor Cyan
 & (Join-Path $PSScriptRoot 'Configure-SqlEntraAdmin.ps1') -SqlServerName $sqlServer -AdministratorUpn $SqlEntraAdministratorUpn -ResourceGroupName $resourceGroup
-& (Get-Command python -ErrorAction Stop).Source (Join-Path $PSScriptRoot 'load_operational_data.py') `
-    --server "$sqlServer.database.windows.net" --database $sqlDatabase --reset
+$env:AZURE_SQL_ACCESS_TOKEN = az account get-access-token --resource https://database.windows.net --query accessToken -o tsv
+if ($LASTEXITCODE -ne 0 -or -not $env:AZURE_SQL_ACCESS_TOKEN) { throw 'Could not acquire an Entra access token for Azure SQL.' }
+try {
+    & (Get-Command python -ErrorAction Stop).Source (Join-Path $PSScriptRoot 'load_operational_data.py') `
+        --server "$sqlServer.database.windows.net" --database $sqlDatabase --reset
+    if ($LASTEXITCODE -ne 0) { throw 'Operational data load failed.' }
+} finally {
+    Remove-Item Env:AZURE_SQL_ACCESS_TOKEN -ErrorAction SilentlyContinue
+}
 
 Write-Host 'Phase 4/5: Creating Fabric workspace, Lakehouse, and Fabric SQL Database.' -ForegroundColor Cyan
 $capacityResourceId = az resource show --resource-group $resourceGroup --resource-type Microsoft.Fabric/capacities `

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -18,6 +19,9 @@ SQL_COPT_SS_ACCESS_TOKEN = 1256
 
 
 def azure_sql_token() -> bytes:
+    token_from_environment = os.environ.get("AZURE_SQL_ACCESS_TOKEN")
+    if token_from_environment:
+        return token_from_environment.encode("utf-16-le")
     result = subprocess.run(
         ["az", "account", "get-access-token", "--resource", "https://database.windows.net", "-o", "json"],
         check=True, capture_output=True, text=True,
