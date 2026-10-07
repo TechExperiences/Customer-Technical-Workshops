@@ -33,11 +33,11 @@ Whiteboarding is connected directly to Caldova's six-month market-launch story a
 
 1. Open a new browser tab in the Edge browser.
 
-1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQDTzUYleJUrSam4WftDPpZ2AX33HhN8Z7CFeGr_t79F1p0?e=PeZ7Jf), then select **Copy link** and then paste it on the browser tab.
+1. Right-click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQDTzUYleJUrSam4WftDPpZ2AX33HhN8Z7CFeGr_t79F1p0?e=PeZ7Jf), then select **Copy link** and then paste it on the browser tab.
 
 1. If prompted, sign in with your ODL user credentials.
 
-1. Once you login, you will get a pop-up message to create the new Whiteboard. Read the message and click **Got it**.
+1. Once you log in, you will get a pop-up message to create the new Whiteboard. Read the message and click **Got it**.
 
    ![](../Sandbox-Environment-Guides/Images/amp71.png)
 
@@ -45,7 +45,7 @@ Whiteboarding is connected directly to Caldova's six-month market-launch story a
 
    ![](../Sandbox-Environment-Guides/Images/UICusNew.png)
 
-1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a Future-state solution architecture.
+1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning Session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a future-state solution architecture.
 
 ### Activities
 
@@ -59,10 +59,10 @@ Whiteboarding is connected directly to Caldova's six-month market-launch story a
    - Current-state architecture
    - Systems
 
-1. Design the **Future State Architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
+1. Design the **Future-State Architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
 
 1. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
 
 ## This completes the Envisioning Session using Microsoft Whiteboarding.
 
-### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.
+### Now, click **`Next >>`** in the lower-right corner to move on to **`Rapid Prototyping`**.
