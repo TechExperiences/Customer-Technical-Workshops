@@ -488,9 +488,6 @@ The third component of the accelerator is Work IQ
 
 1. Click on the default environment
 
-   ![](../Amplify-Your-Intelligence/Images/demand.png)
-
-
 1. Click on  **New Agent** drop-down and select **Agent standard**
 
 1. Enter Name of **Agent** and click **Create**
