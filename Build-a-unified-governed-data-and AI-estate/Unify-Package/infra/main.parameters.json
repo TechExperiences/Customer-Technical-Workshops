@@ -6,6 +6,7 @@
     "resourceGroupLocation": { "value": "westus2" },
     "storageLocation": { "value": "westus3" },
     "sqlAdministratorLogin": { "value": "${SQL_ADMINISTRATOR_LOGIN}" },
+    "sqlServerAlreadyExists": { "value": "${SQL_SERVER_ALREADY_EXISTS}" },
     "sqlDatabaseName": { "value": "OperationalData" },
     "sqlAdministratorPassword": { "value": "${SQL_ADMINISTRATOR_PASSWORD}" },
     "fabricCapacityAdministrators": {

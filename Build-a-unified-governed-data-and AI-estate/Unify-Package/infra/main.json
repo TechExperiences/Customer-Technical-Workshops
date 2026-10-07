@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.46.1.21595",
-      "templateHash": "13060298766895157807"
+      "templateHash": "3046295039971810354"
     }
   },
   "parameters": {
@@ -42,6 +42,13 @@
       "defaultValue": "[toLower(format('sql-operational-{0}', take(uniqueString(subscription().id, parameters('resourceGroupName')), 12)))]",
       "metadata": {
         "description": "Globally unique Azure SQL logical-server name."
+      }
+    },
+    "sqlServerAlreadyExists": {
+      "type": "string",
+      "defaultValue": "false",
+      "metadata": {
+        "description": "Set automatically by the deployment bootstrap when the operational SQL Server already exists."
       }
     },
     "sqlAdministratorPassword": {
@@ -100,6 +107,9 @@
           "sqlServerName": {
             "value": "[parameters('sqlServerName')]"
           },
+          "sqlServerAlreadyExists": {
+            "value": "[parameters('sqlServerAlreadyExists')]"
+          },
           "sqlLocation": {
             "value": "[parameters('resourceGroupLocation')]"
           },
@@ -129,7 +139,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.46.1.21595",
-              "templateHash": "18121245828530338150"
+              "templateHash": "13399755816965468052"
             }
           },
           "parameters": {
@@ -140,6 +150,9 @@
               "type": "string"
             },
             "sqlServerName": {
+              "type": "string"
+            },
+            "sqlServerAlreadyExists": {
               "type": "string"
             },
             "sqlLocation": {
@@ -163,6 +176,9 @@
             "fabricCapacityAdministrators": {
               "type": "array"
             }
+          },
+          "variables": {
+            "createSqlServer": "[not(equals(toLower(parameters('sqlServerAlreadyExists')), 'true'))]"
           },
           "resources": [
             {
@@ -202,6 +218,7 @@
               ]
             },
             {
+              "condition": "[variables('createSqlServer')]",
               "type": "Microsoft.Sql/servers",
               "apiVersion": "2023-08-01-preview",
               "name": "[parameters('sqlServerName')]",
@@ -214,6 +231,7 @@
               }
             },
             {
+              "condition": "[variables('createSqlServer')]",
               "type": "Microsoft.Sql/servers/firewallRules",
               "apiVersion": "2023-08-01-preview",
               "name": "[format('{0}/{1}', parameters('sqlServerName'), 'AllowAzureServices')]",
@@ -226,6 +244,7 @@
               ]
             },
             {
+              "condition": "[variables('createSqlServer')]",
               "type": "Microsoft.Sql/servers/databases",
               "apiVersion": "2023-08-01-preview",
               "name": "[format('{0}/{1}', parameters('sqlServerName'), parameters('sqlDatabaseName'))]",
@@ -240,6 +259,20 @@
               "dependsOn": [
                 "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
               ]
+            },
+            {
+              "condition": "[not(variables('createSqlServer'))]",
+              "type": "Microsoft.Sql/servers/databases",
+              "apiVersion": "2023-08-01-preview",
+              "name": "[format('{0}/{1}', parameters('sqlServerName'), parameters('sqlDatabaseName'))]",
+              "location": "[parameters('sqlLocation')]",
+              "sku": {
+                "name": "Basic",
+                "tier": "Basic"
+              },
+              "properties": {
+                "collation": "SQL_Latin1_General_CP1_CI_AS"
+              }
             },
             {
               "type": "Microsoft.Fabric/capacities",
@@ -264,11 +297,11 @@
             },
             "sqlServerFqdn": {
               "type": "string",
-              "value": "[reference(resourceId('Microsoft.Sql/servers', parameters('sqlServerName')), '2023-08-01-preview').fullyQualifiedDomainName]"
+              "value": "[if(variables('createSqlServer'), reference(resourceId('Microsoft.Sql/servers', parameters('sqlServerName')), '2023-08-01-preview').fullyQualifiedDomainName, reference(resourceId('Microsoft.Sql/servers', parameters('sqlServerName')), '2023-08-01-preview').fullyQualifiedDomainName)]"
             },
             "sqlDatabaseName": {
               "type": "string",
-              "value": "[parameters('sqlDatabaseName')]"
+              "value": "[if(variables('createSqlServer'), parameters('sqlDatabaseName'), parameters('sqlDatabaseName'))]"
             },
             "fabricCapacityResourceId": {
               "type": "string",

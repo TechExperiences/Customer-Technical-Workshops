@@ -8,6 +8,7 @@
     "storageLocation": { "value": "westus3" },
     "sqlServerName": { "value": "sql-operational-REPLACE" },
     "sqlAdministratorLogin": { "value": "squnify" },
+    "sqlServerAlreadyExists": { "value": "false" },
     "sqlDatabaseName": { "value": "OperationalData" },
     "fabricCapacityName": { "value": "fabriccapacityREPLACE" },
     "fabricCapacityAdministrators": { "value": ["REPLACE-WITH-CAPACITY-ADMIN-UPN"] }
