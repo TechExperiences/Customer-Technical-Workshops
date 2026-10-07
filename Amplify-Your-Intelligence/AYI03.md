@@ -1,24 +1,19 @@
+
 # Microsoft IQ Solution Accelerator
 
-Now that you have completed AYI02, explore the existing **Caldova November launch** deployment using the Microsoft IQ Solution Accelerator walkthrough below. Reuse the resources, published Fabric Data Agent and four Foundry agents you already configured. Confirm actual resource names in **Caldova-v1/DEPLOYMENT.md** and **FOUNDRY-DEPLOYMENT.md**; your deployment may use different names.
-
-> **Note:** The retained screenshots show the original accelerator. Follow the Caldova names and prompts in the text. Screenshot replacements are marked below.
+Now that you have deployed the generated template with GitHub Copilot, let’s explore a similar, pre\-deployed solution built using a **Microsoft Solution Accelerator**. Solution Accelerators provide a ready\-to\-use foundation that can help you rapidly prototype, customize, and validate intelligent solutions for your business scenarios.
 
 1. Navigate to the Azure portal. Click on **Resource group**.
 
    ![](../Sandbox-Environment-Guides/Images/amp52.png)
 
-1. Select **rg-caldova-fabric-iq**, or the resource group recorded in your deployment guide.
+1. Select the pre deployed **rg-miqsolution** resource group.
 
    ![](../Sandbox-Environment-Guides/Images/amp53.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-1. Review the existing Caldova resources. This walkthrough does not redeploy them.
+1. Here you can view the pre-deployed Microsoft IQ Solution Accelerator resources.
 
    ![](../Sandbox-Environment-Guides/Images/amp54.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
 
 # Post deployment Guide - Fabric IQ and Microsoft Foundry
@@ -29,75 +24,58 @@ Now that you have completed AYI02, explore the existing **Caldova November launc
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
 
-1. Close the **Welcome to the Fabric view** pop up.
+1. Close the **Welcome to the Fabric view** pop up.  
 
    ![](../Sandbox-Environment-Guides/Images/a35.png)
 
-1. In the left navigation, select **Workspaces (1)** and then select the created workspace **Caldova Fabric IQ - NextGen Launch (2)**
+1. In the left navigation, select **Workspaces (1)** and then select the created workspcae **Microsoft IQ - miqsolution{suffix} (2)**
 
    ![](../Sandbox-Environment-Guides/Images/amp56.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+1. You'll land on the workspace's item list, organized into folders:
 
-1. Review the workspace's item list. Items may be listed directly or organized into folders:
+   - **dashboards:**	Power BI reports (Sales Overview, Supply Chain Management) built on the semantic models
+   - **data_agent:**	The `RetailSC Ontology Agent` — a Fabric Data Agent you can query in natural language over the ontology
+   - **lakehouses:**	The `miqsadata` lakehouse, containing all ingested sample tables
+   - **notebooks:**	Data pipeline notebooks — pipeline_main (the orchestrator that ingests data), pipeline_update, and per-domain loaders
+   - **ontology:**	The `RetailSupplyChainOntologyModel`, defining how the underlying data entities relate to each other
 
-   - **Data agent:** `Caldova_Launch_Readiness_Agent`, published in AYI02.
-   - **Lakehouse:** `caldova_supply_lakehouse`, containing the nine business data domains.
-   - **Ontology:** `Caldova_NovemberLaunch_Ontology`, showing the entities and relationships.
-   - **Reports and notebooks:** Review these if they were created by your deployment.
+   - Click into any folder to open its items. Start with the notebooks folder if you want to see how data flows in, or data_agent if you want to jump straight to asking questions in natural language.   
 
-   Open the Lakehouse to inspect the data, or the Data Agent to ask questions.
+     ![](../Sandbox-Environment-Guides/Images/amp57.png)
 
-   ![](../Sandbox-Environment-Guides/Images/amp57.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-1. If a **Supply Chain Dashboard** report was deployed, open it and review the November launch capacity and readiness summary.
-
-   > **&lt;TODO&gt;:** Confirm the Power BI report in the Caldova architecture has been deployed and replace this screenshot. If the report is absent, record it as a pending dashboard task; workspace visibility does not verify report deployment.
+1. Click on the **Dashboards**. This folder documents Power BI reports shipped with the Microsoft IQ Solution Accelerator. Click on the **Report** to view the Summary.
 
    ![](../Sandbox-Environment-Guides/Images/amp65.png)
 
-1. Navigate back to the workspace and open **caldova_supply_lakehouse**.
+1. Navigate back to Workspace, open the **Lakehouse** folder. From the accelerator's own structure, your workspace has a single lakehouse: **miqsadata**.    
 
    ![](../Sandbox-Environment-Guides/Images/amp67.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
 1. Inside, you'll find two areas.
 
-   - **Tables:** Review the nine domains: plant capacity and commitments; batch schedules and changeovers; equipment and fill-finish availability; product and inventory; demand forecasts; supplier and CMO capacity; quality and CMO evaluations; launch and competitive products; and RFP status. Open a table and confirm its columns and rows are visible.
-   - **Files:** Review any source files generated during deployment. Foundry reference PDFs are stored separately in Azure Blob Storage.
+   - **Tables:** Structured, queryable data organized into six business domains: customer, finance, inventory, product, sales, and supplychain. Each of these holds real tables of data that the rest of the system (ontology, reports, and the data agent) reads from.
+   - **Files:** Supporting files and raw data drops, including a short summary document (sample_inventory_data_summary.md).
 
-     ![](../Sandbox-Environment-Guides/Images/amp68.png)
+     ![](../Sandbox-Environment-Guides/Images/amp68.png)   
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-1. For a visual review, open **Caldova_NovemberLaunch_Ontology** from the workspace.
+1. Navigate back to Workspace, open the **Ontology** folder. This defines a semantic layer over your lakehouse data. Open **RetailSupplyChainOntologyModel**.
 
    ![](../Sandbox-Environment-Guides/Images/amp66.png)
 
-   - Review the nine entity types and their relationships for the Caldova story. The ontology is retained for visual exploration; the tested Data Agent route uses the Lakehouse. **Manage graph** eligibility and materialization are not prerequisites for this walkthrough.
+   - Confirm the entities and relationships are populated (e.g. products, suppliers, inventory, sales, tied together via keys) — this is the semantic layer that lets the agent translate natural language into meaningful queries rather than raw SQL guessing.
 
-   > **&lt;TODO&gt;:** Replace this screenshot with the Caldova ontology view; this optional ontology review can be removed if the updated experience no longer supports the workshop.
+1. Navigate back to Workspace, open the **data_agent** folder. Open the already created **RetailSC Ontology Agent**
 
-1. Navigate back to the workspace and open the existing **Caldova_Launch_Readiness_Agent**.
+   ![](../Sandbox-Environment-Guides/Images/amp69.png)  
 
-   ![](../Sandbox-Environment-Guides/Images/amp69.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-1. Confirm its data source is **caldova_supply_lakehouse** and the required tables are selected. Reuse the working Lakehouse connection from AYI02.
-
-   > **&lt;TODO&gt;:** Replace this screenshot with the Lakehouse selected as the Data Agent source.
+1. Confirm its data source is set to the ontology model **RetailSupplyChainOntologyModel**.
 
    ![](../Sandbox-Environment-Guides/Images/amp70.png)
 
 1. Click **Agent Instructions (1)**. Review the instructions and understand how they guide the agent **(2)**.
 
    ![](../Sandbox-Environment-Guides/Images/agenti1.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
 1. Close the **Agent Instructions (1)** and open the **Test data Agent (2)**.
 
@@ -106,231 +84,179 @@ Now that you have completed AYI02, explore the existing **Caldova November launc
 1. In the query input area, ask questions using natural language, for example:
 
    ```
-   List the three Caldova plants and their required and committed production for the November launch. Show the planning period and units.
-   ```
+   List all product categories.
+   ```    
 
 1. Submit the query and review the response generated by the Data Agent.
 
     ![](../Sandbox-Environment-Guides/Images/a17.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
 1. Observe how the agent:
-   - Interprets the question
-   - Queries the selected Lakehouse tables
-   - Provides insights in a readable format
+   - Interprets the question  
+   - Queries the underlying data using the ontology  
+   - Provides insights in a readable format  
 
 1. Try multiple queries and refine your questions to explore additional insights.
 
    ```
-   What is the current inventory for the products in the Caldova November launch? Break it down by product and plant.
+   What is the current stock of Alpine Explorer Tent?
    ```
 
-    ![](../Sandbox-Environment-Guides/Images/a19.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+    ![](../Sandbox-Environment-Guides/Images/a19.png)    
 
    ```
-   Calculate Caldova's November production shortfall across the three plants. Show required production, committed production, the gap in units and the gap as a percentage of required production. Verify whether the data supports the stated 7% gap.
-   ```
-
-   ```
-   Which plants have insufficient committed production for the November launch? Show the plant-level figures in a table.
+   Which product categories generate the most revenue and have the highest profit margins?
    ```
 
    ```
-   Which equipment, fill-finish or changeover constraints limit internal production recovery for the November launch?
+   Show me products with inventory status LowStock and show results in tabular format.
    ```
 
    ```
-   Which qualified external CMOs have available capacity for the November launch? Include quality evaluation and RFP status, and identify any missing records.
+   Show all products in the category Backpacks.
    ```
 
-    ![](../Sandbox-Environment-Guides/Images/a37.png)
+   ```
+   Can you show me inventory levels for just the sleeping bag products.
+   ```   
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+    ![](../Sandbox-Environment-Guides/Images/a37.png)    
 
    ```
-   Based on the recorded plant commitments, demand forecasts and supplier capacity, which recovery options could reduce the November shortfall? Distinguish available capacity from confirmed commitments.
-   ```
+   Based on current inventory and our reorder policy, when should we place the next order?
+   ```     
 
-    ![](../Sandbox-Environment-Guides/Images/a36.png)
+    ![](../Sandbox-Environment-Guides/Images/a36.png)    
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+     > **Note:**  
+     > - Clear and specific questions provide more accurate results.  
+     > - Responses may vary depending on how the question is framed.  
+     > - The Data Agent uses the Ontology to translate natural language into meaningful queries.   
 
-     > **Note:**
-     > - Clear and specific questions provide more accurate results.
-     > - Responses may vary depending on how the question is framed.
-     > - Use the Lakehouse records as the source of operational figures; show units, planning period and calculations, and do not assume the expected gap is already proven.
-
-1. If you changed the Data Agent, select **Publish**. If the unchanged agent is already published from AYI02, continue to Microsoft Foundry.
+1. Select **Publish**.
    ![](../Sandbox-Environment-Guides/Images/a38.png)
 
-1. Confirm **Publish** to make your changes available to connected agents.
+1. Click on **Publish** again to Publish the data agent.
 
-   ![](../Sandbox-Environment-Guides/Images/a16.png)
+   ![](../Sandbox-Environment-Guides/Images/a16.png)   
 
 
 ## Microsoft Foundry
 
 1. Navigate back to the Azure portal.
 
-1. Select the existing **caldova-nextgen-launch** Foundry project, or the project recorded in **FOUNDRY-DEPLOYMENT.md**.
+1. Select the Foundry project.
 
    ![](../Sandbox-Environment-Guides/Images/amp58.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
 1. Click on **Go to Foundry portal**.
 
    ![](../Sandbox-Environment-Guides/Images/amp59.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-1. Click on **Build (1)**, then **Agents (2)**. Confirm the four agents are listed: **supplier-terms-agent**, **cmo-evaluation-agent**, **demand-sensing-agent** and **manufacturing-quality-agent**.
+1. Click on **Build (1)**, then select **Agents (2)** and make sure that **ChatAgent (3)** has been created.
 
    ![](../Sandbox-Environment-Guides/Images/amp60.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-1. Navigate to **Tools (1)** and review the existing **caldova-kb-mcp** connection used for document and approved public-source retrieval.
+1. Navigate to **Tools (1)**, it shows the **{suffix}-kb-mcp-connection (2)** MCP tool attached
 
    ![](../Sandbox-Environment-Guides/Images/amp61.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
 1. Navigate to **Models / Deployments (1)**, you can see **gpt-5-mini** (chat) and **text-embedding-3-small** (embeddings) **(2)**.
 
    ![](../Sandbox-Environment-Guides/Images/amp62.png)
 
-1. Navigate to **Knowledge (1)** and review **caldova-launch-kb**. Confirm the document source **caldova-documents-ks** is ready and contains the four Caldova PDFs. Review the existing public web source **caldova-public-gmp-web-ks**; no additional Web IQ connection is needed.
+1. Navigate to **Knowledge (1)** to see the Knowledge base created **{suffix}-kb** and Status Ready, listing **{suffix}-ks** as its source **(2)**.
 
    ![](../Sandbox-Environment-Guides/Images/amp63.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
 1. Click on **Manage (1)** from the top navigation bar. Select **Connected resources (2)** to see the connected resources **(3)**.
 
    ![](../Sandbox-Environment-Guides/Images/amp64.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-1. Navigate to **Agents (1)** and select **supplier-terms-agent (2)** first.
+1. Navigate to  **Agents (1)** and select **ChatAgent (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a27.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
 
 1. Make sure **gpt-5-mini** model selected.
 
    ![](../Sandbox-Environment-Guides/Images/a22.png)
 
-1. Verify the existing knowledge-base MCP tool is attached. Keep the deployed specialist instructions and tools.
+1. Verify that Knowledge base is added.
 
    ![](../Sandbox-Environment-Guides/Images/a23.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
     >**Note:** In case we are updating anything in the Agent, we need to click **Save**.
 
-1. In the **Chat** playground, test Supplier Terms Agent using the prompts below. Check that company-specific answers use the Caldova documents and retain the returned source references.
+1. In that **Chat** playground, use the example questions to explore the Azure AI Foundry Agent's capabilities. It will provide the response based on the knowledge base documents along with that citiation will also be added.
 
    ```
-   Summarize Caldova's supplier onboarding and qualification requirements for the November launch. Cite the supporting Caldova documents.
-   ```
+   Show me the supplier onboarding process.
+   ```   
 
    ![](../Sandbox-Environment-Guides/Images/a24.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-   ![](../Sandbox-Environment-Guides/Images/a40.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+   ![](../Sandbox-Environment-Guides/Images/a40.png)   
 
 1. Try some other prompts:
 
    ```
-   What contract obligations and quality-agreement requirements apply to Caldova suppliers and CMOs? Use the Caldova reference PDFs and identify any missing information.
-   ```
+   What training is provided to suppliers?
+   ```   
 
-   ![](../Sandbox-Environment-Guides/Images/b83.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+   ![](../Sandbox-Environment-Guides/Images/b83.png)  
 
    ```
-   What do the Caldova supplier terms say about delivery delays, escalation and remediation? Cite the relevant document sections.
-   ```
+   What performance metrics are used for supplier monitoring?
+   ```     
 
-   ![](../Sandbox-Environment-Guides/Images/b84.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+   ![](../Sandbox-Environment-Guides/Images/b84.png) 
 
    ```
-   Explain the general purpose of a pharmaceutical quality agreement using the approved public FDA or EMA sources. Include the source URL and distinguish this guidance from Caldova-specific contract terms.
-   ```
+   Visualize the approval workflow steps.
+   ```   
 
-   ![](../Sandbox-Environment-Guides/Images/b85.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+   ![](../Sandbox-Environment-Guides/Images/b85.png)   
 
 
-1. Review the existing Fabric Data Agent tool on **supplier-terms-agent**. If you already connected it in AYI02, keep that connection. Otherwise, add **Caldova_Launch_Readiness_Agent** using the steps below. Repeat only for another specialist whose Fabric tool is missing.
+1. Now lets connect the Fabric Data Agent as a Tool in ChatAgent. We can add the Fabric Data Agent (**RetailSCOntologyAgent**) as a tool inside **ChatAgent**.
 
-1. Scroll down to **Tools**, click on **Add** drop down **(1)** and then **Add tools (2)**. This tool retrieves operational data through the published Lakehouse-backed Fabric Data Agent.
+1. Scroll down to **Tools**, click on **Add** drop down **(1)** and then **Add tools (2)**. A tool is simply a capability we plug into an agent so it can reach outside its own knowledge and pull in something it couldn't otherwise access — in this case, live data from our Fabric ontology.
 
-   ![](../Sandbox-Environment-Guides/Images/a28.png)
+   ![](../Sandbox-Environment-Guides/Images/a28.png)   
 
 1. Select **Fabric IQ(OneLake Catalog) (1)** and then **Add tool (2)**.
 
-   ![](../Sandbox-Environment-Guides/Images/a32.png)
+   ![](../Sandbox-Environment-Guides/Images/a32.png)   
 
-1. Select the published **Caldova_Launch_Readiness_Agent (1)** Data Agent and then **Add (2)**.
+1. Select **RetailSC Ontology Agent (1)** data agent and then **Add (2)**.
 
-   ![](../Sandbox-Environment-Guides/Images/a30.png)
+   ![](../Sandbox-Environment-Guides/Images/a30.png)   
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-1. Review the existing specialist instructions. If source guidance is missing, add the following without replacing the agent's role or its existing instructions:
+1. Update the Instructions as below.
 
    ```
-   Use the Caldova document knowledge base for supplier terms, qualification requirements and manufacturing or quality guidance.
-   Use Caldova_Launch_Readiness_Agent for operational figures from the Lakehouse: plant commitments, batch schedules, equipment, inventory, forecasts, supplier/CMO capacity, quality evaluations, launch products and RFP status.
-   Use the existing Web IQ knowledge source only for general GMP and quality-agreement guidance. Public sources do not establish facts about fictional Caldova suppliers or products.
-   Combine the relevant tool results, retain returned source references and state missing evidence. Do not invent operational figures or treat available capacity as a confirmed commitment.
+   You have two knowledge sources:
+   1. A document knowledge base — for policies, contracts, supplier terms, and procedures.
+   2. A Fabric IQ data agent (RetailSCOntologyAgent) — for structured, live data questions about products, inventory, suppliers, purchase orders, and demand forecasts.
+
+   Route each question to the appropriate source. If a question needs both (e.g. "which supplier had disruptions, and what does our risk policy say about that"), use both tools and synthesize the answer, citing each source clearly.
+   ```   
+
+   ![](../Sandbox-Environment-Guides/Images/a31.png)  
+
+1. Try sending a atleast one of the below prompt to test the Fabric IQ Data agent.  
+
    ```
-
-   ![](../Sandbox-Environment-Guides/Images/a31.png)
-
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
-
-1. Try the following prompts to test the Fabric Data Agent route from Supplier Terms Agent. Check that the tool is called and operational figures come from its response.
-
-   ```
-   Which Caldova suppliers or CMOs have available capacity for the November launch? Retrieve their capacity and RFP status through the Fabric Data Agent.
+   Which products are supplied by Fabrikam?
    ```
 
    ![](../Sandbox-Environment-Guides/Images/a34.png)
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova resource, configuration or response described above.
+   ```
+   Given that shortfall, what do our supplier terms say about delayed-delivery penalties or remediation, and what's Tailwind Textiles' typical lead time is expediting realistic before the stockout hits?
 
    ```
-   For a supplier or CMO returned in the previous answer, combine its recorded capacity and RFP status with the Caldova contract and qualification requirements. Explain the next steps and flag evidence that is missing.
-
-   ```
-
+  
 
    >**Note**: If it asks any follow-up or clarification questions without providing an answer, please respond to the question based on what is required and proceed.
 
-1. Repeat the playground test for the other three existing agents:
-
-   | Agent | Test prompt |
-   |---|---|
-   | `cmo-evaluation-agent` | Compare qualified CMO options for Caldova's November launch using recorded capacity, quality evaluation and RFP status. Cite the Caldova qualification documents and identify missing evidence. |
-   | `demand-sensing-agent` | Calculate November required and committed production across the three plants, the shortfall in units and its percentage of required production. Show the planning period and plant-level breakdown. |
-   | `manufacturing-quality-agent` | Explain equipment, fill-finish and changeover constraints for the November launch using Fabric data and Caldova manufacturing guidance. Separately explain GMP using an approved public source and include its URL. |
-
-   > **&lt;TODO&gt;:** Add screenshots of the three specialist responses, including the public-source answer where applicable.
-
-### Now, click on **`Next >>`** from the lower right corner to move on to **`Post deployment Guide - Work IQ`**.
-
-You can also open [AYI04 – Work IQ](AYI04.md) to review the existing Copilot Studio orchestration and test it in Teams.
+### Now, click on **`Next >>`** from the lower right corner to move on to **`Post deployment Guide - Work IQ`**.   
