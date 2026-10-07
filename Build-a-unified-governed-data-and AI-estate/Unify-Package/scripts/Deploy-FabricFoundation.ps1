@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)] [string]$FabricCapacityResourceId,
-    [string]$WorkspaceName = 'Caldova-unify',
+    [string]$WorkspaceName = 'Caldova-Build-Unify',
     [string]$LakehouseName = 'Caldova_Lakehouse',
     [string]$FabricSqlDatabaseName = 'Caldova_SQLDatabase'
 )

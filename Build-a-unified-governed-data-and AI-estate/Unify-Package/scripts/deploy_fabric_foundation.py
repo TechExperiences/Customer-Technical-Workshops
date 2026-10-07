@@ -62,7 +62,7 @@ def capacity_guid(resource_id: str) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--capacity-resource-id", required=True)
-    parser.add_argument("--workspace", default="Caldova-unify")
+    parser.add_argument("--workspace", default="Caldova-Build-Unify")
     parser.add_argument("--lakehouse", default="Caldova_Lakehouse")
     parser.add_argument("--sql-database", default="Caldova_SQLDatabase")
     args = parser.parse_args()
