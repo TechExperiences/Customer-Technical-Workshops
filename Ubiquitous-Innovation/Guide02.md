@@ -95,4 +95,4 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 
 
-#### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session and validated the Unified governed Data&AI estate.
+#### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session.
