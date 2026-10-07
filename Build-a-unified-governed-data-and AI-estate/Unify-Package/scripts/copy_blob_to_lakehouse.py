@@ -2,34 +2,28 @@
 from __future__ import annotations
 
 import argparse
-import json
-import subprocess
-from datetime import datetime, timezone
+import os
+from datetime import datetime, timedelta, timezone
 
 from azure.core.credentials import AccessToken, TokenCredential
 from azure.core.exceptions import ResourceExistsError
 from azure.storage.blob import BlobServiceClient
 from azure.storage.filedatalake import DataLakeServiceClient
 
-STORAGE_RESOURCE = "https://storage.azure.com/"
 CONTAINER_NAME = "data"
 
 
-class AzureCliCredential(TokenCredential):
-    """Small non-interactive credential that reuses the az/azd login from up.ps1."""
+class ProcessTokenCredential(TokenCredential):
+    """Uses the short-lived Storage token that Post-Provision obtains via az."""
 
     def get_token(self, *scopes: str, **_: object) -> AccessToken:
-        response = subprocess.run(
-            ["az", "account", "get-access-token", "--resource", STORAGE_RESOURCE, "-o", "json"],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        token = json.loads(response.stdout)
-        expires = datetime.fromisoformat(token["expiresOn"].replace("Z", "+00:00"))
-        if expires.tzinfo is None:
-            expires = expires.replace(tzinfo=timezone.utc)
-        return AccessToken(token["accessToken"], int(expires.timestamp()))
+        access_token = os.environ.get("AZURE_STORAGE_ACCESS_TOKEN")
+        if not access_token:
+            raise RuntimeError(
+                "AZURE_STORAGE_ACCESS_TOKEN is missing. Run this script through .\\up.ps1 so PowerShell can acquire the token."
+            )
+        expires = datetime.now(timezone.utc) + timedelta(minutes=55)
+        return AccessToken(access_token, int(expires.timestamp()))
 
 
 def ensure_directory(service: DataLakeServiceClient, workspace_id: str, path: str) -> None:
@@ -51,7 +45,7 @@ def main() -> None:
     parser.add_argument("--lakehouse-id", required=True)
     args = parser.parse_args()
 
-    credential = AzureCliCredential()
+    credential = ProcessTokenCredential()
     blob_service = BlobServiceClient(
         account_url=f"https://{args.storage_account}.blob.core.windows.net",
         credential=credential,

@@ -3,21 +3,27 @@ from __future__ import annotations
 
 import argparse
 import json
-import subprocess
+import os
 import time
 
 import requests
 
 FABRIC_API = "https://api.fabric.microsoft.com/v1"
 ARM_API = "https://management.azure.com"
+TOKEN_ENVIRONMENTS = {
+    "https://api.fabric.microsoft.com": "AZURE_FABRIC_ACCESS_TOKEN",
+    "https://management.azure.com/": "AZURE_ARM_ACCESS_TOKEN",
+}
 
 
 def token(resource: str) -> str:
-    response = subprocess.run(
-        ["az", "account", "get-access-token", "--resource", resource, "-o", "json"],
-        check=True, capture_output=True, text=True,
-    )
-    return json.loads(response.stdout)["accessToken"]
+    environment_name = TOKEN_ENVIRONMENTS[resource]
+    access_token = os.environ.get(environment_name)
+    if not access_token:
+        raise RuntimeError(
+            f"{environment_name} is missing. Run this script through .\\up.ps1 so PowerShell can acquire the token."
+        )
+    return access_token
 
 
 class Api:
