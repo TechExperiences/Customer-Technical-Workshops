@@ -5,7 +5,7 @@
  
 In this workshop, you will explore an end-to-end modernization journey from **legacy .NET Framework and on\-premises SQL Server to .NET 10 on Azure App Service and Azure SQL Database Hyperscale**.
 
-Using **whiteboarding and rapid prototyping**, participants assess the current environment, envision the target architecture, validate priority modernization scenarios, and build an actionable roadmap and three\-year business case.
+Using **Whiteboarding and rapid prototyping**, participants assess the current environment, envision the target architecture, validate priority modernization scenarios, and build an actionable roadmap and three\-year business case.
 
 ## Caldova Scenario:
 Caldova, an industrial equipment and spare-parts distributor, plans to expand into new markets and launch a customer portal for **product availability, ordering, and delivery tracking**.
