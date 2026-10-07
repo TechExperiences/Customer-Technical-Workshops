@@ -8,4 +8,4 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
 1. Select the pre deployed **rg-Buid-Unified** resource group.
 
-   ![](../Modernize-with-confidence/Images/m2.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u1.png)
