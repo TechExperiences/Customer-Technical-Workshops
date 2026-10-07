@@ -33,7 +33,7 @@ Whiteboarding is connected directly to Caldova's six-month market-launch story a
 
 1. Open a new browser tab in the Edge browser.
 
-1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQCgG6cKI3xwSon2DSEbtOmxAUc7nM9jphqv7ozbt4RC8aU?e=5Vyzra), then select **Copy link** and then paste it on the browser tab.
+1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQDTzUYleJUrSam4WftDPpZ2AX33HhN8Z7CFeGr_t79F1p0?e=PeZ7Jf), then select **Copy link** and then paste it on the browser tab.
 
 1. If prompted, sign in with your ODL user credentials.
 
