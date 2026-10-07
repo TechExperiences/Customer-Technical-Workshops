@@ -29,4 +29,11 @@ try {
     Remove-Item Env:AZURE_SQL_ACCESS_TOKEN -ErrorAction SilentlyContinue
 }
 & (Join-Path $PSScriptRoot 'Ensure-FabricLicense.ps1') -UserPrincipalName $env:FABRIC_CAPACITY_ADMIN_UPN
-& (Join-Path $PSScriptRoot 'Deploy-FabricFoundation.ps1') -FabricCapacityResourceId $capacityResourceId
+$fabric = & (Join-Path $PSScriptRoot 'Deploy-FabricFoundation.ps1') -FabricCapacityResourceId $capacityResourceId
+if (-not $fabric.workspaceId -or -not $fabric.lakehouseId) {
+    throw 'Fabric foundation provisioning did not return a workspace or Lakehouse ID.'
+}
+& (Join-Path $PSScriptRoot 'Copy-BlobDataToLakehouse.ps1') `
+    -StorageAccountName $storageAccount `
+    -WorkspaceId $fabric.workspaceId `
+    -LakehouseId $fabric.lakehouseId
