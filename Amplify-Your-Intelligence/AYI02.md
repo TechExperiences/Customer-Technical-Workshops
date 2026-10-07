@@ -1133,7 +1133,7 @@ The third component of the accelerator is Work IQ
 
 1. On the **Microsoft 365 and Microsoft Teams** page, select **See agent in Teams**.
 
-   ![](../Sandbox-Environment-Guides/Images/a102.png)  
+   ![](../Amplify-Your-Intelligence/Images/agentsee.png)  
 
 1. Select **Use the web app instead**.
 
