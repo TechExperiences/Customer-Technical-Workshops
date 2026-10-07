@@ -1,6 +1,8 @@
 # Modernize with Confidence Package
 
-Now that you have deployed the generated template with GitHub Copilot, let’s explore a similar, pre-deployed solution. This will provide a ready-to-use foundation that can help you rapidly prototype, customize, and validate intelligent solutions for your business scenarios.
+Now that you have deployed the generated template with GitHub Copilot, let’s explore a similar, pre-deployed solution. 
+
+The **Caldova Order Management solution** has already been pre-deployed to provide a ready-to-use modernization experience. You will explore and validate how the pharmaceutical manufacturing application has been modernized from **on-premises SQL Server and web application infrastructure to Azure SQL Database Hyperscale and Azure App Service**.
 
 1. Navigate to the Azure portal. Click on **Resource group**.
 
@@ -12,9 +14,11 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
 ## Migration From On-Prem SQL to Azure SQL DB Hyperscale
 
-Migrate the pharmaceutical manufacturing database from on-premises SQL Server to Azure SQL Database Hyperscale to provide scalable, highly available, and cloud-based data management. The migration preserves critical manufacturing, product, inventory, production, and operational data while enabling improved performance, scalability, and integration with modern Azure analytics and AI services.
+The pharmaceutical manufacturing database has already been migrated from on-premises SQL Server to Azure SQL Database Hyperscale. In this section, you will validate the migrated database and verify that the critical manufacturing, product, inventory, production, and operational data is available in the modernized environment.
 
 ### Validation - Azure SQL DB Hyperscale
+
+The CaldovaOrderManagement database has already been migrated to Azure SQL Database Hyperscale. In this step, you will validate the database connection, schema, tables, and migrated data to ensure the SQL workload is available in the modernized environment.
 
 1. You can see all the resources and click on *Azure SQL Database Hyperscale* named **CaldovaOrderManagement**.
 
@@ -32,11 +36,11 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
 ## Migration From On-Prem Web Application to Azure App Service 
 
-Migrate the pharmaceutical manufacturing web application (Order Management) from on-premises infrastructure to Azure App Service to provide a scalable, secure, and highly available cloud-hosted platform. The migration enables improved application performance, simplified infrastructure management, and seamless integration with Azure services and the modernized Azure SQL Database backend.
+The pharmaceutical manufacturing Order Management web application has already been migrated from on-premises infrastructure to Azure App Service. In this section, you will validate the migrated application and confirm that it is connected to the modernized Azure SQL Database backend.
 
 ### Validation - Azure App Service
 
-Navigate back to Azure portal to validate the migrated web application and search for `rg-MWC` Resource Group. you can see App service resources along with SQL Database.
+The Caldova Order Management application has already been deployed to Azure App Service. In this step, you will validate the application, access the migrated web experience, and test the existing Traditional SQL Search functionality to understand its limitations with natural-language queries.
 
 1. Navigate back to **rg-MWC** RG. Select the App Service named Click on **app-caldova-ordermgmt-xxxx**.
 
@@ -94,9 +98,11 @@ This allows us to demonstrate how the migrated application can move from **keywo
 
 ## Implementation of Vector/Semantic Search in Azure SQL Database Hyperscale
 
-Implement vector search in Azure SQL Database Hyperscale using Azure OpenAI embeddings and the native VECTOR data type to enable natural-language product searches. Query and product embeddings are compared using vector similarity to identify relevant products beyond exact keyword matching, improving search accuracy and product discovery.
+The migrated application is being enhanced with vector/semantic search using Azure SQL Database Hyperscale and Azure OpenAI embeddings. This enhancement enables the application to understand the meaning of natural-language queries rather than relying only on exact keyword matches.
 
 ### Validation - Traditional SQL Search Vs Vector Semantic Search
+
+The vector/semantic search capability has been implemented using Azure OpenAI embeddings and the native VECTOR data type in Azure SQL Database Hyperscale. In this step, you will validate the semantic search experience using the same natural-language query and compare the results with traditional SQL search.
 
 1. Click on **Semantic Search (1)** section. Paste the same prompt in search area **(2)** and click on **search (3)** button. 
 

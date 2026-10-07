@@ -1,4 +1,4 @@
-## 1. Envisioning Session Using Whiteboarding
+# 1. Envisioning Session Using Whiteboarding
 
 ### Whiteboarding
 
