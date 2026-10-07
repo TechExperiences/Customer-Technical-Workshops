@@ -49,7 +49,11 @@ def ensure_sql_authentication_user(cursor: pyodbc.Cursor, username: str, passwor
         try:
             # New servers have this SQL server login already, so map it to the database.
             cursor.execute(f"CREATE USER [{username}] FOR LOGIN [{username}]")
-        except pyodbc.Error:
+        except pyodbc.ProgrammingError as error:
+            if "already has an account with the user name 'dbo'" in str(error):
+                # The requested login is already the SQL Server administrator and
+                # therefore connects to this database as dbo with full access.
+                return
             # Existing servers cannot rename their immutable server administrator.
             # Create a contained database user so the exact requested username still works.
             escaped_password = password.replace("'", "''")
