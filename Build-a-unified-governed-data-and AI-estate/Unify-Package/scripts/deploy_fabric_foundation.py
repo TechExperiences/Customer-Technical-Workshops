@@ -54,6 +54,23 @@ def first(items: list[dict], display_name: str) -> dict | None:
     return next((item for item in items if item.get("displayName") == display_name), None)
 
 
+def wait_for_workspace_item(fabric: Api, workspace_id: str, display_name: str) -> dict:
+    """Return an item only after Fabric has materialized its final item ID.
+
+    Several Fabric create endpoints complete asynchronously.  Their initial response
+    is an operation object, not the workspace item, so it cannot be used as an ID.
+    """
+    for _ in range(24):
+        items = fabric.request("GET", f"/workspaces/{workspace_id}/items").get("value", [])
+        item = first(items, display_name)
+        if item and item.get("id"):
+            return item
+        time.sleep(5)
+    raise TimeoutError(
+        f"Fabric item {display_name!r} did not appear in workspace {workspace_id} with an ID after two minutes."
+    )
+
+
 def fabric_capacity_id(fabric: Api, azure_capacity_resource_id: str) -> str:
     """Resolve the Fabric capacity GUID from the Fabric API, not ARM metadata.
 
@@ -104,11 +121,13 @@ def main() -> None:
     items = fabric.request("GET", f"/workspaces/{workspace_id}/items").get("value", [])
     lakehouse = first(items, args.lakehouse)
     if lakehouse is None:
-        lakehouse = fabric.request("POST", f"/workspaces/{workspace_id}/items", {"displayName": args.lakehouse, "type": "Lakehouse"})
+        fabric.request("POST", f"/workspaces/{workspace_id}/items", {"displayName": args.lakehouse, "type": "Lakehouse"})
+        lakehouse = wait_for_workspace_item(fabric, workspace_id, args.lakehouse)
 
     sql_database = first(items, args.sql_database)
     if sql_database is None:
-        sql_database = fabric.request("POST", f"/workspaces/{workspace_id}/sqlDatabases", {"displayName": args.sql_database})
+        fabric.request("POST", f"/workspaces/{workspace_id}/sqlDatabases", {"displayName": args.sql_database})
+        sql_database = wait_for_workspace_item(fabric, workspace_id, args.sql_database)
 
     print(json.dumps({
         "workspaceId": workspace_id,
