@@ -82,6 +82,9 @@ resource integrationAccount 'Microsoft.Logic/integrationAccounts@2019-05-01' = {
   sku: {
     name: 'Free'
   }
+  // Required by the Microsoft.Logic resource contract even when no B2B artifacts
+  // are configured yet.
+  properties: {}
 }
 
 resource businessApplicationIngestLogicApp 'Microsoft.Logic/workflows@2019-05-01' = {
