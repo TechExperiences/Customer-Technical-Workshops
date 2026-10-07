@@ -43,7 +43,6 @@ try {
 # Python inherits these process-only tokens.  It never needs to locate az.exe, and
 # none of the token values are written to .env, azd settings, or source control.
 $env:AZURE_FABRIC_ACCESS_TOKEN = Get-AzureAccessToken -Resource 'https://api.fabric.microsoft.com' -Purpose 'Microsoft Fabric'
-$env:AZURE_ARM_ACCESS_TOKEN = Get-AzureAccessToken -Resource 'https://management.azure.com/' -Purpose 'Azure Resource Manager'
 $env:AZURE_STORAGE_ACCESS_TOKEN = Get-AzureAccessToken -Resource 'https://storage.azure.com/' -Purpose 'Azure Blob Storage and OneLake'
 try {
     $fabric = & (Join-Path $PSScriptRoot 'Deploy-FabricFoundation.ps1') -FabricCapacityResourceId $capacityResourceId
@@ -56,6 +55,5 @@ try {
         -LakehouseId $fabric.lakehouseId
 } finally {
     Remove-Item Env:AZURE_FABRIC_ACCESS_TOKEN -ErrorAction SilentlyContinue
-    Remove-Item Env:AZURE_ARM_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_STORAGE_ACCESS_TOKEN -ErrorAction SilentlyContinue
 }

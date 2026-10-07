@@ -9,10 +9,8 @@ import time
 import requests
 
 FABRIC_API = "https://api.fabric.microsoft.com/v1"
-ARM_API = "https://management.azure.com"
 TOKEN_ENVIRONMENTS = {
     "https://api.fabric.microsoft.com": "AZURE_FABRIC_ACCESS_TOKEN",
-    "https://management.azure.com/": "AZURE_ARM_ACCESS_TOKEN",
 }
 
 
@@ -56,13 +54,33 @@ def first(items: list[dict], display_name: str) -> dict | None:
     return next((item for item in items if item.get("displayName") == display_name), None)
 
 
-def capacity_guid(resource_id: str) -> str:
-    arm = Api(ARM_API, token("https://management.azure.com/"))
-    resource = arm.request("GET", f"{resource_id}?api-version=2023-11-01")
-    guid = resource.get("properties", {}).get("guid")
-    if not guid:
-        raise RuntimeError("Fabric capacity GUID was not returned by ARM. Verify capacity provisioning completed.")
-    return guid
+def fabric_capacity_id(fabric: Api, azure_capacity_resource_id: str) -> str:
+    """Resolve the Fabric capacity GUID from the Fabric API, not ARM metadata.
+
+    Azure Resource Manager owns the Azure resource and does not consistently expose
+    Fabric's internal GUID in properties.  The workspace API requires the Fabric API
+    capacity ID, which is returned by GET /capacities.
+    """
+    capacity_name = azure_capacity_resource_id.rstrip("/").rsplit("/", 1)[-1]
+    last_state = "not yet visible in Fabric"
+    for _ in range(24):  # Capacity registration can take a short time after ARM succeeds.
+        capacities = fabric.request("GET", "/capacities").get("value", [])
+        matches = [
+            capacity for capacity in capacities
+            if capacity.get("displayName", "").casefold() == capacity_name.casefold()
+        ]
+        if len(matches) > 1:
+            raise RuntimeError(f"More than one Fabric capacity matches Azure resource name {capacity_name!r}.")
+        if matches:
+            capacity = matches[0]
+            last_state = str(capacity.get("state", "Unknown"))
+            if last_state.casefold() == "active" and capacity.get("id"):
+                return capacity["id"]
+        time.sleep(5)
+    raise RuntimeError(
+        f"Fabric capacity {capacity_name!r} was not available and Active after two minutes "
+        f"(last state: {last_state}). Verify the capacity is active and the signed-in user has Capacity.Read.All access."
+    )
 
 
 def main() -> None:
@@ -77,7 +95,10 @@ def main() -> None:
     workspaces = fabric.request("GET", "/workspaces").get("value", [])
     workspace = first(workspaces, args.workspace)
     if workspace is None:
-        workspace = fabric.request("POST", "/workspaces", {"displayName": args.workspace, "capacityId": capacity_guid(args.capacity_resource_id)})
+        workspace = fabric.request("POST", "/workspaces", {
+            "displayName": args.workspace,
+            "capacityId": fabric_capacity_id(fabric, args.capacity_resource_id),
+        })
     workspace_id = workspace["id"]
 
     items = fabric.request("GET", f"/workspaces/{workspace_id}/items").get("value", [])
