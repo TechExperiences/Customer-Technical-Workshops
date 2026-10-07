@@ -182,8 +182,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
       >**Note:** Not the one which starts with **Microsoft IQ**.
      
-> **Optional: Fix workspace access.** If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. If the workspace is already accessible, skip this step and the next access-fix completion step.
-
+>**Note**: If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. If the workspace is already accessible, skip this step and the next access-fix completion step.
    ```
    I cannot see the Caldova workspace created by the previous deployment in the Fabric portal.
 
@@ -196,11 +195,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    Reuse the existing resources. Do not recreate the workspace, reload data, or rerun the full deployment. This request is for workspace access, not a tenant-wide Fabric Administrator role.
    ```
-
-    ![](../Amplify-Your-Intelligence/Images/26.png)   
-
 1. Wait for the process to complete.
-
 
 1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace which starts with something similar to `Caldova`.
 
@@ -378,117 +373,111 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
      ![](../Amplify-Your-Intelligence/Images/A15.png)
 
-   - Scroll down to the **Knowledge section** and remove **caldova-launch-kb**.
-  
-      ![](../Amplify-Your-Intelligence/Images/A17.png)
+   - In the catalog, filter **Type** to **Data agent**, select the published **caldovaSupplyChainDataAgent** from your Caldova workspace, and click **Add**. 
 
-   - In the catalog, filter **Type** to **Data agent**, select the published **caldova-supplier-terms-agent** from your Caldova workspace, and click **Add**. Complete any sign-in with the same lab account used in Fabric, then **Save** the Foundry agent.
+   - Verify **Web Search** is attached in the tools section, If not click on **Add** drop-down and click on **Add tools** and search for **web search** then click on **Add**
+
+   - Then click on **Save**.
 
      ![](../Amplify-Your-Intelligence/Images/A16.png)       
 
-1. Scroll down to **Knowledge** and verify that the shared knowledge source for the Caldova demo PDFs is attached. Also confirm the configured public-Web IQ source/tool is present in **Knowledge** or **Tools**, as appropriate for the deployed integration.
+1. Scroll down to **Knowledge** and verify that the **caldova-launch-kb** is attached.
 
    ![](../Amplify-Your-Intelligence/Images/47.png)
 
-1. Test **caldova-supplier-terms-agent** with questions about its documents and Fabric data. Confirm document answers include citations and data answers use **caldova-supplier-terms-agent**. After testing it, repeat the relevant tool, knowledge and response checks for **caldova-supplier-terms-agent**, **caldova-demand-sensing-agent**, and **caldova-manufacturing-quality-agent**, keeping each agent's focused instructions.
+1. Test **caldova-supplier-terms-agent** with questions about its documents and Fabric data. Confirm document answers include citations and data answers use **caldova-supplier-terms-agent**. After testing it, repeat the relevant tool, knowledge and response checks for **caldova-supplier-terms-agent**, **caldova-demand-sensing-agent**, and **caldova-manufacturing-quality-agent**, keeping each agent's focused instructions.    
 
-1. For getting the prompts, you can go back to **GitHub Copilot Chat**, and send the below query:
+1. With **supplier-terms-agent** open, use its **Chat/Playground** to run these prompts separately.
 
-   > **&lt;TODO&gt;:** Remove this generic prompt-generation step; use the Caldova agent tests below.
-
-   ```
-   Can you please provide some of the prompts to test the foundry agent.
-   ```
-
-   ![](../Sandbox-Environment-Guides/Images/b49.png) 
-
-1. Once the prompts are generated, you can go back to the Foundry Agent **Chat** section and paste the prompts to see the results.
-
-   > **&lt;TODO&gt;:** Remove this old testing step and replace its screenshots with the Caldova agent tests below.
-
-   ![](../Sandbox-Environment-Guides/Images/b51.png)  
-
-   ![](../Sandbox-Environment-Guides/Images/b52.png)  
-
-   ![](../Sandbox-Environment-Guides/Images/b53.png)     
-
-1. With **supplier-terms-agent** open, use its **Chat/Playground** to run these prompts separately. The published **Caldova_Launch_Readiness_Agent** was connected in step 10; keep that connection and the shared document knowledge.
+1. Copy the below any prompt and paste it in chat window
 
    ```
-   From the Caldova demo documents, summarize the supplier terms and CMO qualification/evaluation process relevant to supporting the November NextGen Pharma launch. Cite the documents and distinguish fictional workshop terms from public guidance. State any missing information.
+   Provide an end-to-end constraint analysis for the November NextGen Pharma launch by combining plant capacity commitments, production requirements, batch schedules/changeovers, inventory positions, equipment/fill-finish availability, supplier/CMO capacity, qualification status and RFP status. Identify the top three constraints, quantify their impact where possible, and explain which constraint has the greatest impact on the remaining launch gap. Clearly show the calculations, planning period and units used.
    ```
 
    ```
-   Use Caldova_Launch_Readiness_Agent to list the pre-qualified CMOs, their available capacity and current RFP status for the November NextGen Pharma launch. Show the planning period and units from the data. Do not assume missing values or replace data with document examples.
+   Which products have the lowest available inventory for the November NextGen Pharma launch? Show the product and available quantity.
    ```
+   ![](../Amplify-Your-Intelligence/Images/prompt.png)
 
-   Confirm document citations in the first answer and a Fabric Data Agent tool call in the second, using the response activity/trace where available.
+   ![](../Amplify-Your-Intelligence/Images/response1.png)
 
-   > **&lt;TODO&gt;:** Add screenshots of the Supplier Terms Agent's document and Fabric answers.
+1.  Review the response provided by the **supplier-terms-agent**.
 
-1. In **supplier-terms-agent**, run this Web IQ prompt:
+1. Open **cmo-evaluation-agent**. 
 
-   ```
-   Use the connected public-web source to explain the purpose of a quality agreement between a drug owner and a contract manufacturer, based on the FDA Contract Manufacturing Arrangements for Drugs guidance. Cite the public URL. Keep this general explanation separate from Caldova's fictional supplier terms and do not infer that any Caldova CMO is approved.
-   ```
+1. For capacity, qualification, and RFP-related questions, confirm that **caldovaSupplyChainDataAgent** is connected under **Tools**. If it is not connected, repeat the connection steps from **supplier-terms-agent**.
 
-   Confirm the answer cites the FDA public source.
+1. Verify **Web Search** is attached in the tools section, If not click on **Add** drop-down and click on **Add tools** and search for **web search** then click on **Add**.
 
-   > **&lt;TODO&gt;:** Add a screenshot of the Supplier Terms Agent's cited Web IQ answer.
+1. Scroll down to **Knowledge** and verify that the **caldova-launch-kb** is attached.
 
-1. Open **cmo-evaluation-agent**. For its capacity, qualification and RFP questions, confirm **Caldova_Launch_Readiness_Agent** is connected under **Tools**. If missing, repeat the connection in step 10 as done for **supplier-terms-agent**, retaining this agent's CMO evaluation instructions. Check its shared document knowledge as in step 11, save, and run:
+1. Then click on **Save**.
 
-   ```
-   Use Caldova_Launch_Readiness_Agent to calculate the remaining November NextGen Pharma production gap after feasible internal recovery. Compare it with available capacity from pre-qualified CMOs for the same period and units, including qualification/evaluation records and RFP status. Use the Caldova CMO demo documents to explain the evaluation process with citations. Distinguish available capacity from capacity already committed, and state missing evidence before recommending an option.
-   ```
-
-   Confirm the numbers come from a Fabric tool response and process explanations cite the demo documents.
-
-   > **&lt;TODO&gt;:** Add a screenshot of the CMO Evaluation Agent's grounded comparison.
-
-1. In **cmo-evaluation-agent**, run this Web IQ prompt:
+1. Copy the below any prompt and paste it in chat window
 
    ```
-   Using the connected public-web source and the FDA quality-agreements guidance, summarize the general quality responsibilities an owner and contract manufacturer should document when establishing a manufacturing arrangement. Cite the public URL. Do not change Caldova's CMO qualification status, capacity or RFP results.
-   ```
+   Which pre-qualified CMOs currently have available capacity for the November NextGen Pharma launch? Show the CMO, available capacitCMO y, qualification status, and RFP status.
 
-   Confirm the answer cites the FDA public source.
-
-   > **&lt;TODO&gt;:** Add a screenshot of the CMO Evaluation Agent's cited Web IQ answer.
-
-1. Open **demand-sensing-agent**. It requires **Caldova_Launch_Readiness_Agent** for forecast and launch data. If the tool is missing, repeat step 10, retaining its demand-sensing instructions, then save. Run:
-
-   ```
-   Use Caldova_Launch_Readiness_Agent to compare required and committed production for the November NextGen Pharma launch across the three plants. Calculate the shortfall in units and as a percentage of required production, showing the formula and planning period. Identify the main constrained plant and summarize relevant launch/competitive-product records from the data. If market impact cannot be calculated from the available fields, state what is missing rather than inventing it.
-   ```
-
-   Confirm a Fabric tool call and data-derived calculations.
-
-   > **&lt;TODO&gt;:** Add a screenshot of the Demand Sensing Agent's calculated launch shortfall.
-
-1. Open **manufacturing-quality-agent**. Confirm **Caldova_Launch_Readiness_Agent** is connected for equipment, production and quality records. If missing, repeat step 10, retaining its manufacturing-quality instructions. Check the shared Caldova manufacturing/quality document knowledge as in step 11, save, and run:
-
-   ```
-   Use Caldova_Launch_Readiness_Agent to identify the plant and equipment constraints affecting November NextGen Pharma production and feasible internal recovery, considering batch schedules/changeovers, equipment fill-finish availability and available quality records. Use the Caldova demo guidance to explain any documented changeover review or sign-off steps, with citations. Separate data-supported recovery from assumptions and state missing information; do not invent downtime, approval status or additional capacity.
-   ```
-
-   Confirm a Fabric tool call and document citations for any process/sign-off explanation.
-
-   > **&lt;TODO&gt;:** Add a screenshot of the Manufacturing Quality Agent's grounded constraint and recovery answer.
-
-1. In **manufacturing-quality-agent**, run these Web IQ prompts separately:
-
-   ```
-   Use the connected public-web source to explain what GMP is and why it matters in drug manufacturing, based on the FDA CGMP overview. Cite the public URL and do not claim that Caldova's plants or CMOs are compliant.
    ```
 
    ```
-   Use the connected public-web source to summarize the purpose of change management in a pharmaceutical quality system, based on EMA's ICH Q10 guidance. Cite the public URL. Keep the explanation separate from Caldova's fictional changeover process and do not introduce new launch constraints.
+   Which products have the highest forecasted demand for the November launch, and what is their current inventory position?
+   ```
+   ![](../Amplify-Your-Intelligence/Images/cmo.png)
+
    ```
 
-   Confirm the answers cite the corresponding FDA/EMA public sources.
+1.  Review the response provided by the **cmo-evaluation-agent**.
 
-   > **&lt;TODO&gt;:** Add screenshots of the Manufacturing Quality Agent's cited FDA and EMA answers.
+1. Open **caldova-manufacturing-quality-agent**. 
+
+1. For capacity, qualification, and RFP-related questions, confirm that **caldovaSupplyChainDataAgent** is connected under **Tools**. If it is not connected, repeat the connection steps from **supplier-terms-agent**.
+
+1. Verify **Web Search** is attached in the tools section, If not click on **Add** drop-down and click on **Add tools** and search for **web search** then click on **Add**.
+
+1. Scroll down to **Knowledge** and verify that the **caldova-launch-kb** is attached.
+
+1. Then click on **Save**.
+
+1. Copy the below any prompt and paste it in chat window
+
+   ```
+   What does FDA publicly recommend regarding quality agreements between pharmaceutical companies and contract manufacturing organizations? Cite the official source and do not apply the guidance as a Caldova-specific requirement.
+
+   ```
+
+   ```
+   For the November 2026 NGP-100 production plan, identify any equipment qualification or changeover risks that could affect the committed production. Use the Fabric Data Agent for the operational facts and the Caldova knowledge base for the applicable quality procedures. Explain what quality review or action may be required, and clearly distinguish operational data from Caldova-specific guidance.
+   ```
+   ![](../Amplify-Your-Intelligence/Images/manufacture.png)
+
+   ```
+
+1.  Review the response provided by the **cmo-manufacturing-quality-agent**.
+
+1. Open **caldova-demand-sensing-agent**. 
+
+1. For capacity, qualification, and RFP-related questions, confirm that **caldovaSupplyChainDataAgent** is connected under **Tools**. If it is not connected, repeat the connection steps from **supplier-terms-agent**.
+
+1. Scroll down to **Knowledge** and verify that the **caldova-launch-kb** is attached.
+
+1. Then click on **Save**.
+
+1. Copy the below any prompt and paste it in chat window
+
+   ```
+   For the November launch, identify the markets with the highest demand and compare their required production with committed production. Highlight any market where committed production may not meet demand and show the gap in units.
+
+   ```
+
+   ```
+   Which plant has the largest November production constraint, and what does the Caldova launch guidance say should happen when this constraint cannot be resolved internally?
+
+   ```
+   ![](../Amplify-Your-Intelligence/Images/demand.png)
+
+1.  Review the response provided by the **caldova-demand-sensing-agent**.
 
 ## Work IQ
 
