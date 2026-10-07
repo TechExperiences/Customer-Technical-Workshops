@@ -38,8 +38,7 @@ Write-Host 'Phase 4/5: Creating Fabric workspace, Lakehouse, and Fabric SQL Data
 $capacityResourceId = az resource show --resource-group $resourceGroup --resource-type Microsoft.Fabric/capacities `
     --name $capacity --query id -o tsv
 if (-not $capacityResourceId) { throw "Fabric capacity $capacity was not found in $resourceGroup." }
-if (-not $env:FABRIC_LICENSE_SKU_PART_NUMBER) { $env:FABRIC_LICENSE_SKU_PART_NUMBER = 'FABRIC_FREE' }
-& (Join-Path $PSScriptRoot 'Ensure-FabricLicense.ps1') -UserPrincipalName $SqlEntraAdministratorUpn -SkuPartNumber $env:FABRIC_LICENSE_SKU_PART_NUMBER
+& (Join-Path $PSScriptRoot 'Ensure-FabricLicense.ps1') -UserPrincipalName $SqlEntraAdministratorUpn
 & (Join-Path $PSScriptRoot 'Deploy-FabricFoundation.ps1') -FabricCapacityResourceId $capacityResourceId
 
 Write-Host 'Phase 5/5: Azure and Fabric foundation deployment completed.' -ForegroundColor Green

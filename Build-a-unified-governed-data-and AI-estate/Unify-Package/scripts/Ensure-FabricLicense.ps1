@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)] [string]$UserPrincipalName,
-    [string]$SkuPartNumber = 'FABRIC_FREE'
+    [Parameter(Mandatory)] [string]$UserPrincipalName
 )
 
 Set-StrictMode -Version Latest
@@ -18,24 +17,22 @@ function Invoke-GraphRest {
 
 $encodedUpn = [System.Uri]::EscapeDataString($UserPrincipalName)
 $licenseDetails = Invoke-GraphRest -Method GET -Url "https://graph.microsoft.com/v1.0/users/$encodedUpn/licenseDetails?`$select=skuId,skuPartNumber"
-if (@($licenseDetails.value | Where-Object { $_.skuPartNumber -eq $SkuPartNumber }).Count) {
-    Write-Host "Fabric license $SkuPartNumber is already assigned to $UserPrincipalName." -ForegroundColor Green
+$assignedFabricLicense = @($licenseDetails.value | Where-Object { $_.skuPartNumber -match 'FABRIC|POWER_BI' } | Select-Object -First 1)
+if ($assignedFabricLicense) {
+    Write-Host "Existing Fabric/Power BI entitlement $($assignedFabricLicense.skuPartNumber) is already assigned to $UserPrincipalName." -ForegroundColor Green
     return
 }
 
 $subscribedSkus = Invoke-GraphRest -Method GET -Url 'https://graph.microsoft.com/v1.0/subscribedSkus?$select=skuId,skuPartNumber,prepaidUnits,consumedUnits'
-$sku = @($subscribedSkus.value | Where-Object { $_.skuPartNumber -eq $SkuPartNumber } | Select-Object -First 1)
+$freeOrTrialSkus = @($subscribedSkus.value | Where-Object {
+    $_.skuPartNumber -in @('FABRIC_FREE', 'POWER_BI_STANDARD') -or
+    $_.skuPartNumber -match '(FABRIC|POWER_BI).*(FREE|TRIAL)'
+} | Where-Object { ([int]$_.prepaidUnits.enabled - [int]$_.consumedUnits) -gt 0 })
+$sku = @($freeOrTrialSkus | Select-Object -First 1)
 if (-not $sku) {
-    $relatedSkus = @($subscribedSkus.value | Where-Object { $_.skuPartNumber -match 'FABRIC|POWER_BI' } | ForEach-Object { $_.skuPartNumber })
-    $availableText = if ($relatedSkus.Count) { $relatedSkus -join ', ' } else { 'none returned by Microsoft Graph' }
-    throw "The tenant has no available SKU named '$SkuPartNumber'. Fabric/Power BI SKU candidates returned by Microsoft Graph: $availableText. Set FABRIC_LICENSE_SKU_PART_NUMBER to the exact required SKU."
-}
-
-$available = [int]$sku.prepaidUnits.enabled - [int]$sku.consumedUnits
-if ($available -lt 1) {
-    throw "No unassigned units remain for license $SkuPartNumber. Acquire or free a license unit before deployment."
+    throw 'No assignable free or trial Fabric/Power BI license is exposed by this tenant. Microsoft Graph cannot create or enroll a tenant into a new 60-day trial; it can only assign licenses that the tenant already exposes. Enable the Fabric/Power BI trial or free license once in the Microsoft 365/Fabric admin experience, then rerun .\up.ps1.'
 }
 
 $body = @{ addLicenses = @(@{ skuId = $sku.skuId }); removeLicenses = @() } | ConvertTo-Json -Compress
 [void](Invoke-GraphRest -Method POST -Url "https://graph.microsoft.com/v1.0/users/$encodedUpn/assignLicense" -Body $body)
-Write-Host "Assigned Fabric license $SkuPartNumber to $UserPrincipalName." -ForegroundColor Green
+Write-Host "Assigned free or trial Fabric/Power BI license $($sku.skuPartNumber) to $UserPrincipalName." -ForegroundColor Green
