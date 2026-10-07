@@ -1,10 +1,10 @@
 # Fabric notebook source
-# Load the validated package landing zone into Delta tables in the Lakehouse dbo schema.
-# Configure PACKAGE_ROOT to the OneLake Files path populated by the deployment step.
+# Load only Analytical and Operational landing files into Lakehouse Delta tables.
+# BusinessApplication JSON is intentionally loaded into Fabric SQL Database by Logic App.
 
 from pyspark.sql import functions as F
 
-PACKAGE_ROOT = "Files/source"
+PACKAGE_ROOT = "Files/raw"
 TARGET_SCHEMA = "dbo"
 
 ANALYTICAL_TABLES = [
@@ -12,7 +12,10 @@ ANALYTICAL_TABLES = [
     "FactInventory", "FactInventorySnapshot", "FactProduction", "FactQuality", "FactSales",
     "FactShipment", "FactSupplyChain",
 ]
-BUSINESS_TABLES = ["CustomerDetails", "CustomerAddress"]
+OPERATIONAL_TABLES = [
+    "Inventory", "ManufacturingBatch", "Material", "PurchaseOrder",
+    "PurchaseOrderItem", "QualityInspection", "Shipment", "Supplier",
+]
 
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {TARGET_SCHEMA}")
 
@@ -28,8 +31,9 @@ for table in ANALYTICAL_TABLES:
           .csv(f"{PACKAGE_ROOT}/Analytical/{table}.csv"))
     write_table(df, table)
 
-for table in BUSINESS_TABLES:
-    df = spark.read.option("multiLine", "true").json(f"{PACKAGE_ROOT}/BusinessApplication/{table}.json")
+for table in OPERATIONAL_TABLES:
+    df = (spark.read.option("header", "true").option("inferSchema", "true")
+          .csv(f"{PACKAGE_ROOT}/Operational/{table}.csv"))
     write_table(df, table)
 
 # Normalize the one mixed-format source date before semantic-model use.

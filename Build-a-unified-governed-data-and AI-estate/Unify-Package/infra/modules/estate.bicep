@@ -74,7 +74,50 @@ resource fabricCapacity 'Microsoft.Fabric/capacities@2023-11-01' = {
   }
 }
 
+// Foundation for the BusinessApplication-to-Fabric SQL integration. The workflow
+// stays disabled until its managed identity has confirmed Fabric workspace access.
+resource integrationAccount 'Microsoft.Logic/integrationAccounts@2019-05-01' = {
+  name: 'caldova-integration-account'
+  location: sqlLocation
+  sku: {
+    name: 'Free'
+  }
+}
+
+resource businessApplicationIngestLogicApp 'Microsoft.Logic/workflows@2019-05-01' = {
+  name: 'caldova-businessapp-ingest'
+  location: sqlLocation
+  identity: {
+    type: 'SystemAssigned'
+  }
+  properties: {
+    state: 'Disabled'
+    integrationAccount: {
+      id: integrationAccount.id
+    }
+    definition: {
+      '$schema': 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+      contentVersion: '1.0.0.0'
+      parameters: {}
+      triggers: {
+        manual: {
+          type: 'Request'
+          kind: 'Http'
+          inputs: {
+            schema: {}
+          }
+        }
+      }
+      actions: {}
+      outputs: {}
+    }
+    parameters: {}
+  }
+}
+
 output storageAccountName string = storageAccount.name
 output sqlServerFqdn string = sqlServer.properties.fullyQualifiedDomainName
 output sqlDatabaseName string = operationalDatabase.name
 output fabricCapacityResourceId string = fabricCapacity.id
+output businessApplicationLogicAppName string = businessApplicationIngestLogicApp.name
+output businessApplicationLogicAppPrincipalId string = businessApplicationIngestLogicApp.identity.principalId

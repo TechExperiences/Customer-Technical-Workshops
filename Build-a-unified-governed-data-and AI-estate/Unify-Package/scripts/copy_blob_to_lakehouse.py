@@ -43,6 +43,7 @@ def main() -> None:
     parser.add_argument("--storage-account", required=True)
     parser.add_argument("--workspace-id", required=True)
     parser.add_argument("--lakehouse-id", required=True)
+    parser.add_argument("--source-folders", nargs="+", required=True)
     args = parser.parse_args()
 
     credential = ProcessTokenCredential()
@@ -59,8 +60,10 @@ def main() -> None:
 
     copied = 0
     for blob in source.list_blobs():
-        # Upload-SourceData writes the three source folders beneath data/.
         relative_path = blob.name.replace("\\", "/")
+        source_folder = relative_path.split("/", 1)[0]
+        if source_folder not in args.source_folders:
+            continue
         target_directory = f"{args.lakehouse_id}/Files/raw"
         if "/" in relative_path:
             target_directory = f"{target_directory}/{relative_path.rsplit('/', 1)[0]}"
@@ -73,7 +76,7 @@ def main() -> None:
 
     if copied == 0:
         raise RuntimeError("No blobs were found in the data container; source upload did not complete.")
-    print(f"Copied {copied} source files into the Lakehouse raw zone.")
+    print(f"Copied {copied} {', '.join(args.source_folders)} source files into the Lakehouse raw zone.")
 
 
 if __name__ == "__main__":

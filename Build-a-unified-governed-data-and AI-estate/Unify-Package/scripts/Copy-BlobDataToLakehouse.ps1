@@ -2,7 +2,8 @@
 param(
     [Parameter(Mandatory)] [string]$StorageAccountName,
     [Parameter(Mandatory)] [string]$WorkspaceId,
-    [Parameter(Mandatory)] [string]$LakehouseId
+    [Parameter(Mandatory)] [string]$LakehouseId,
+    [string[]]$SourceFolders = @('Analytical', 'Operational')
 )
 
 Set-StrictMode -Version Latest
@@ -12,5 +13,6 @@ $python = Get-Command python -ErrorAction Stop
 & $python.Source (Join-Path $PSScriptRoot 'copy_blob_to_lakehouse.py') `
     --storage-account $StorageAccountName `
     --workspace-id $WorkspaceId `
-    --lakehouse-id $LakehouseId
+    --lakehouse-id $LakehouseId `
+    --source-folders $SourceFolders
 if ($LASTEXITCODE -ne 0) { throw 'Copying Blob source files to OneLake failed.' }

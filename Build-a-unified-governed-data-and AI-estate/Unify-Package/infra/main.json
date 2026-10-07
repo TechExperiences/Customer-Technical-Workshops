@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.46.1.21595",
-      "templateHash": "16604632049516823614"
+      "templateHash": "7574535986252130441"
     }
   },
   "parameters": {
@@ -128,7 +128,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.46.1.21595",
-              "templateHash": "18121245828530338150"
+              "templateHash": "16899529720672396080"
             }
           },
           "parameters": {
@@ -254,6 +254,50 @@
                   "members": "[parameters('fabricCapacityAdministrators')]"
                 }
               }
+            },
+            {
+              "type": "Microsoft.Logic/integrationAccounts",
+              "apiVersion": "2019-05-01",
+              "name": "caldova-integration-account",
+              "location": "[parameters('sqlLocation')]",
+              "sku": {
+                "name": "Free"
+              }
+            },
+            {
+              "type": "Microsoft.Logic/workflows",
+              "apiVersion": "2019-05-01",
+              "name": "caldova-businessapp-ingest",
+              "location": "[parameters('sqlLocation')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "state": "Disabled",
+                "integrationAccount": {
+                  "id": "[resourceId('Microsoft.Logic/integrationAccounts', 'caldova-integration-account')]"
+                },
+                "definition": {
+                  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                  "contentVersion": "1.0.0.0",
+                  "parameters": {},
+                  "triggers": {
+                    "manual": {
+                      "type": "Request",
+                      "kind": "Http",
+                      "inputs": {
+                        "schema": {}
+                      }
+                    }
+                  },
+                  "actions": {},
+                  "outputs": {}
+                },
+                "parameters": {}
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Logic/integrationAccounts', 'caldova-integration-account')]"
+              ]
             }
           ],
           "outputs": {
@@ -272,6 +316,14 @@
             "fabricCapacityResourceId": {
               "type": "string",
               "value": "[resourceId('Microsoft.Fabric/capacities', parameters('fabricCapacityName'))]"
+            },
+            "businessApplicationLogicAppName": {
+              "type": "string",
+              "value": "caldova-businessapp-ingest"
+            },
+            "businessApplicationLogicAppPrincipalId": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.Logic/workflows', 'caldova-businessapp-ingest'), '2019-05-01', 'full').identity.principalId]"
             }
           }
         }
@@ -301,6 +353,14 @@
     "fabricCapacityResourceId": {
       "type": "string",
       "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'caldova-estate'), '2025-04-01').outputs.fabricCapacityResourceId.value]"
+    },
+    "businessApplicationLogicAppName": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'caldova-estate'), '2025-04-01').outputs.businessApplicationLogicAppName.value]"
+    },
+    "businessApplicationLogicAppPrincipalId": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'caldova-estate'), '2025-04-01').outputs.businessApplicationLogicAppPrincipalId.value]"
     }
   }
 }

@@ -49,10 +49,30 @@ try {
     if (-not $fabric.workspaceId -or -not $fabric.lakehouseId) {
         throw 'Fabric foundation provisioning did not return a workspace or Lakehouse ID.'
     }
+    $logicAppPrincipalId = (az logic workflow show --resource-group $resourceGroup --name caldova-businessapp-ingest `
+        --query identity.principalId -o tsv).Trim()
+    if ($LASTEXITCODE -ne 0 -or -not $logicAppPrincipalId) {
+        throw 'The managed identity for caldova-businessapp-ingest was not created.'
+    }
+    $logicAppApplicationId = (az ad sp show --id $logicAppPrincipalId --query appId -o tsv).Trim()
+    if ($LASTEXITCODE -ne 0 -or -not $logicAppApplicationId) {
+        throw 'Could not resolve the Logic App managed identity application ID in Microsoft Entra.'
+    }
+    $env:AZURE_POWERBI_ACCESS_TOKEN = Get-AzureAccessToken -Resource 'https://analysis.windows.net/powerbi/api' -Purpose 'Fabric workspace access assignment'
+    try {
+        & (Join-Path $PSScriptRoot 'Grant-LogicAppFabricAccess.ps1') `
+            -WorkspaceId $fabric.workspaceId `
+            -LogicAppApplicationId $logicAppApplicationId `
+            -PowerBiAccessToken $env:AZURE_POWERBI_ACCESS_TOKEN
+    } finally {
+        Remove-Item Env:AZURE_POWERBI_ACCESS_TOKEN -ErrorAction SilentlyContinue
+    }
     & (Join-Path $PSScriptRoot 'Copy-BlobDataToLakehouse.ps1') `
         -StorageAccountName $storageAccount `
         -WorkspaceId $fabric.workspaceId `
-        -LakehouseId $fabric.lakehouseId
+        -LakehouseId $fabric.lakehouseId `
+        -SourceFolders @('Analytical', 'Operational')
+    & (Join-Path $PSScriptRoot 'Remove-OperationalBlobs.ps1') -StorageAccountName $storageAccount
 } finally {
     Remove-Item Env:AZURE_FABRIC_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_STORAGE_ACCESS_TOKEN -ErrorAction SilentlyContinue
