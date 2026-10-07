@@ -392,6 +392,10 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
      ![](../Amplify-Your-Intelligence/Images/A15.png)
 
+   - Scroll down to the **Knowledge section** and remove **caldova-launch-kb**.
+  
+      ![](../Amplify-Your-Intelligence/Images/A17.png)
+
    - In the catalog, filter **Type** to **Data agent**, select the published **caldova-supplier-terms-agent** from your Caldova workspace, and click **Add**. Complete any sign-in with the same lab account used in Fabric, then **Save** the Foundry agent.
 
      ![](../Amplify-Your-Intelligence/Images/A16.png)       
