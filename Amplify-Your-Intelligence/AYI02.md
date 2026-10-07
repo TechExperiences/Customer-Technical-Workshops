@@ -371,39 +371,36 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Amplify-Your-Intelligence/Images/42.png)  
 
-1. Navigate to **Agents** and confirm these four agents appear: **supplier-terms-agent**, **cmo-evaluation-agent**, **demand-sensing-agent**, and **manufacturing-quality-agent**. Open **supplier-terms-agent** first.
+1. Navigate to **Agents** and confirm these four agents appear: **caldova-cmo-evaluation-agent**, **caldova-demand-sensing-agent**, and **caldova-manufacturing-quality-agent**. Open **caldova-supplier-terms-agent** first.
 
    ![](../Amplify-Your-Intelligence/Images/43.png)
 
-1. Make sure the model is set to **gpt-5-mini**. Check whether the published **Caldova_Launch_Readiness_Agent** is already connected under **Tools**; if it is, keep that connection. Otherwise, add it below.
+1. Make sure the model is set to **gpt-5-mini**. Check whether the published **caldova-supplier-terms-agent** is already connected under **Tools**; if it is, keep that connection. Otherwise, add it below.
 
-   ![](../Amplify-Your-Intelligence/Images/44.png)  
+   ![](../Amplify-Your-Intelligence/Images/A11.png)  
 
-   > **&lt;TODO&gt;:** Update this screenshot to show the Caldova agent's model and Fabric Data Agent tool.
 
-   - In **Instructions**, retain the supplier-terms guidance and ensure it tells the agent to use **Caldova_Launch_Readiness_Agent** for capacity, qualification status and RFP data, and document knowledge for fictional supplier terms. Do not hard-code answers.
+   - In **Instructions**, retain the supplier-terms guidance and ensure it tells the agent to use **caldova-supplier-terms-agent** for capacity, qualification status and RFP data, and document knowledge for fictional supplier terms. Do not hard-code answers.
 
-     ![](../Sandbox-Environment-Guides/Images/b45.png)  
-
-     > **&lt;TODO&gt;:** Replace this screenshot with the Caldova agent instructions; the old model-switch workaround is no longer part of this step.
+     ![](../Amplify-Your-Intelligence/Images/A12.png)  
 
    - To add the missing connection, scroll to **Tools**, select **Add**, then **Browse all tools** (or **Add tools**).
 
-     ![](../Amplify-Your-Intelligence/Images/45.png)
+     ![](../Amplify-Your-Intelligence/Images/A13.png)
 
    - Select **Fabric IQ (OneLake Catalog)**, then **Add tool**.
 
-     ![](../Sandbox-Environment-Guides/Images/a32.png)
+     ![](../Amplify-Your-Intelligence/Images/A15.png)
 
-   - In the catalog, filter **Type** to **Data agent**, select the published **Caldova_Launch_Readiness_Agent** from your Caldova workspace, and click **Add**. Complete any sign-in with the same lab account used in Fabric, then **Save** the Foundry agent.
+   - In the catalog, filter **Type** to **Data agent**, select the published **caldova-supplier-terms-agent** from your Caldova workspace, and click **Add**. Complete any sign-in with the same lab account used in Fabric, then **Save** the Foundry agent.
 
-     ![](../Amplify-Your-Intelligence/Images/46.png)       
+     ![](../Amplify-Your-Intelligence/Images/A16.png)       
 
 1. Scroll down to **Knowledge** and verify that the shared knowledge source for the Caldova demo PDFs is attached. Also confirm the configured public-Web IQ source/tool is present in **Knowledge** or **Tools**, as appropriate for the deployed integration.
 
    ![](../Amplify-Your-Intelligence/Images/47.png)
 
-1. Test **supplier-terms-agent** with questions about its documents and Fabric data. Confirm document answers include citations and data answers use **Caldova_Launch_Readiness_Agent**. After testing it, repeat the relevant tool, knowledge and response checks for **cmo-evaluation-agent**, **demand-sensing-agent**, and **manufacturing-quality-agent**, keeping each agent's focused instructions.
+1. Test **caldova-supplier-terms-agent** with questions about its documents and Fabric data. Confirm document answers include citations and data answers use **caldova-supplier-terms-agent**. After testing it, repeat the relevant tool, knowledge and response checks for **caldova-supplier-terms-agent**, **caldova-demand-sensing-agent**, and **caldova-manufacturing-quality-agent**, keeping each agent's focused instructions.
 
 1. For getting the prompts, you can go back to **GitHub Copilot Chat**, and send the below query:
 
