@@ -30,7 +30,7 @@ function Invoke-Checked {
 }
 
 $environment = Import-DotEnv -Path (Resolve-Path -LiteralPath $EnvFile)
-foreach ($required in @('AZURE_ENV_NAME', 'AZURE_SUBSCRIPTION_ID', 'AZURE_LOCATION', 'AZURE_RESOURCE_GROUP', 'FABRIC_CAPACITY_ADMIN_UPN', 'SQL_ADMINISTRATOR_PASSWORD')) {
+foreach ($required in @('AZURE_ENV_NAME', 'AZURE_SUBSCRIPTION_ID', 'AZURE_LOCATION', 'AZURE_RESOURCE_GROUP', 'FABRIC_CAPACITY_ADMIN_UPN', 'SQL_ADMINISTRATOR_LOGIN', 'SQL_ADMINISTRATOR_PASSWORD')) {
     $value = [string]$environment[$required]
     if (-not $value -or $value -match '^<.*>$') { throw "Set a real value for $required in $EnvFile before deployment." }
 }

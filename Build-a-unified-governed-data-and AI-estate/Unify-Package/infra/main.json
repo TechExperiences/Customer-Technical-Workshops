@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.46.1.21595",
-      "templateHash": "5908123504869004675"
+      "templateHash": "13060298766895157807"
     }
   },
   "parameters": {
@@ -52,7 +52,7 @@
     },
     "sqlAdministratorLogin": {
       "type": "string",
-      "defaultValue": "sqladmincaldova"
+      "defaultValue": "squnify"
     },
     "sqlDatabaseName": {
       "type": "string",

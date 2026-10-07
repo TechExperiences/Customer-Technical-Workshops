@@ -13,7 +13,7 @@ param sqlServerName string = toLower('sql-operational-${take(uniqueString(subscr
 @secure()
 @description('Temporary SQL administrator password. Store this in Key Vault for production use.')
 param sqlAdministratorPassword string
-param sqlAdministratorLogin string = 'sqladmincaldova'
+param sqlAdministratorLogin string = 'squnify'
 param sqlDatabaseName string = 'OperationalData'
 param fabricCapacityName string = toLower('fabriccapacity${take(uniqueString(subscription().id, resourceGroupName), 12)}')
 @description('UPNs of Fabric capacity administrators.')

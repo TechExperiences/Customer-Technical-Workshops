@@ -7,7 +7,7 @@
     "storageAccountName": { "value": "stcaldovaREPLACE" },
     "storageLocation": { "value": "westus3" },
     "sqlServerName": { "value": "sql-operational-REPLACE" },
-    "sqlAdministratorLogin": { "value": "sqladmincaldova" },
+    "sqlAdministratorLogin": { "value": "squnify" },
     "sqlDatabaseName": { "value": "OperationalData" },
     "fabricCapacityName": { "value": "fabriccapacityREPLACE" },
     "fabricCapacityAdministrators": { "value": ["REPLACE-WITH-CAPACITY-ADMIN-UPN"] }

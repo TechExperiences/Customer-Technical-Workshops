@@ -5,7 +5,7 @@
     "resourceGroupName": { "value": "rg-Build-Unify" },
     "resourceGroupLocation": { "value": "westus2" },
     "storageLocation": { "value": "westus3" },
-    "sqlAdministratorLogin": { "value": "sqladmincaldova" },
+    "sqlAdministratorLogin": { "value": "${SQL_ADMINISTRATOR_LOGIN}" },
     "sqlDatabaseName": { "value": "OperationalData" },
     "sqlAdministratorPassword": { "value": "${SQL_ADMINISTRATOR_PASSWORD}" },
     "fabricCapacityAdministrators": {
