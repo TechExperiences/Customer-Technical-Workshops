@@ -1067,7 +1067,7 @@ The third component of the accelerator is Work IQ
    
    The final response should be understandable to a business user in    Teams without requiring them to know which underlying agent was used.
 
-### 3.2: Add the Fabric Data Agent   
+### Add the Fabric Data Agent   
 
 1. Confirm the Foundry agent appears in the connected-agent list **(1)** and then click **+ Add an agent (2)**.
 
@@ -1109,7 +1109,7 @@ The third component of the accelerator is Work IQ
 
    ![](../Sandbox-Environment-Guides/Images/b75.png)
 
-## Step 5: Publish the Agent
+## Publish the Agent
 
 1. Click on the **Overview (1)** tab and then **Publish (2)**.
 
@@ -1149,7 +1149,7 @@ The third component of the accelerator is Work IQ
 
 1. Make sure you can see the agent.
 
-### Step 4: Review Response in Teams
+### Review Response in Teams
 
 1. You should receive a message from the agent in Teams.
 
