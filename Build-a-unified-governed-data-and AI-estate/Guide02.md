@@ -222,7 +222,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Select the **DimDate** table to open and review the table data. 
 
-   ![](../Sandbox-Environment-Guides/Images/LH-Analyticaldata.png)
+   ![](/Sandbox-Environment-Guides/Images/LH-AnalyticalData.png)   
 
 1. Navigate back to Github Copilot 
 
@@ -249,7 +249,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Once the deployment is complete, you can verify the Created tables in the same Lakehouse.
 
-   ![](../Sandbox-Environment-Guides/Images/LH-operational.png)
+   ![](/Sandbox-Environment-Guides/Images/LH-Operational.png)
 
 
 ### Step 3: Loading Business Application Data into Fabric SQL Database:
