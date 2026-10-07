@@ -143,21 +143,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Amplify-Your-Intelligence/Images/21.png)
 
-<!--
-1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
-
-1. Select **Yes**, if any question prompts you to respond related to `F16` deployment.
-
-   ![](../Sandbox-Environment-Guides/Images/b13.png)
-
-
-1. If prompted to provide the UPN for assigning **Fabric Administrator access**, enter **<inject key="AzureAdUserEmail"></inject> (1)** and then select **Submit (2)**. 
-
-    ![](../Sandbox-Environment-Guides/Images/b14.png)
-
-    > **&lt;TODO&gt;:** Replace this screenshot with the Caldova deployment and lab user access prompt using Fable 5.1.
-
--->
+1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response.
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
 
