@@ -3,19 +3,33 @@
 
 ### Whiteboarding
 
-Whiteboarding helps technical teams to quickly align on business goals, current challenges, future-state architecture, and solution priorities. It turns abstract ideas into a shared visual plan and helps accelerate decisions for Microsoft IQ Solution Accelerators.
+Whiteboarding helps technical and business teams align on **business goals, current challenges, future-state architecture, and solution priorities**. It turns ideas into a shared visual plan and establishes the foundation for the agentic solution participants will build throughout the workshop.
 
-Let’s consider a common retail use case. Supply chain disruptions can quickly lead to stockouts, revenue loss, and poor customer experiences. Critical data is often spread across disconnected systems, making it difficult to identify risks, understand their business impact, and respond in time.
+## Caldova Market Launch Scenario
 
-You will start with whiteboarding to architect a future state of an intelligent solution which can:
-- Detect supply chain disruptions early
-- Identify impacted products, stores, and regions
-- Recommend alternative sourcing options
-- Coordinate decisions across teams
-- Reduce stockouts and protect revenue
-- Accelerate business value with Microsoft Fabric, Foundry, Power BI, and AI working together
+Caldova has **six months to enter a new market**, and the launch date will not move. Today, critical data, knowledge, and decisions are spread across product, sales, operations, engineering, and enterprise systems. This makes it difficult to identify changes, understand their impact, coordinate decisions, and act quickly.
 
-### How to copy the Whiteboard using an existing template URL
+You will start with whiteboarding to envision a future-state intelligent solution that can:
+
+- **Know** what is happening across Caldova using business data, enterprise knowledge, and organizational context.
+- **Detect** supplier, manufacturing, and launch-readiness changes early.
+- **Assess** the impact on the market launch plan.
+- **Decide** the appropriate response and recommend corrective actions.
+- **Coordinate** agents, teams, and workflows across the business.
+- **Act** through governed business processes with human approval where required.
+- **Build** new agent capabilities quickly when gaps are identified.
+- **Secure, govern, and optimize** agents from development through runtime.
+
+### Outcome
+By the end of the envisioning session, participants have a shared view of **Caldova's business challenge, future-state agent architecture, key agent interactions, and solution priorities** that guides the rest of the hands-on workshop.
+
+> **Know. Decide. Act. Build. Govern. Get Caldova into the new market before the competition.**
+
+### What Changed
+Whiteboarding is connected directly to Caldova's six-month market-launch story and serves as the entry point to the four workshop topics. This makes the whiteboard the beginning of one continuous journey rather than a separate activity.
+
+
+## How to copy the Whiteboard using an existing template URL
 
 1. Open a new browser tab in the Edge browser.
 
@@ -29,7 +43,7 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
 1. Use the **Zoom out** option to view the Whiteboard template clearly.
 
-   ![](../Sandbox-Environment-Guides/Images/cd35.png)
+   ![](../Sandbox-Environment-Guides/Images/UICusNew.png)
 
 1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a Future-state solution architecture.
 
