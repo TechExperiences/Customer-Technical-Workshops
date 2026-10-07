@@ -48,14 +48,20 @@ CREATE TABLE dbo.ManufacturingBatch (
 
 CREATE TABLE dbo.Inventory (
     InventoryID INT NOT NULL PRIMARY KEY,
-    ProductID INT NOT NULL,
-    MaterialID INT NOT NULL,
+    -- An inventory row represents either a finished product or a raw material.
+    -- The source deliberately leaves the non-applicable identifier empty.
+    ProductID INT NULL,
+    MaterialID INT NULL,
     PlantID INT NOT NULL,
     QuantityOnHand INT NOT NULL,
     ReorderThreshold INT NOT NULL,
     SafetyStock INT NOT NULL,
     LastUpdated DATE NOT NULL,
-    CONSTRAINT FK_Inventory_Material FOREIGN KEY (MaterialID) REFERENCES dbo.Material(MaterialID)
+    CONSTRAINT FK_Inventory_Material FOREIGN KEY (MaterialID) REFERENCES dbo.Material(MaterialID),
+    CONSTRAINT CK_Inventory_ExactlyOneItemType CHECK (
+        (ProductID IS NOT NULL AND MaterialID IS NULL) OR
+        (ProductID IS NULL AND MaterialID IS NOT NULL)
+    )
 );
 
 CREATE TABLE dbo.PurchaseOrderItem (
