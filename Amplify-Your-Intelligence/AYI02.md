@@ -488,7 +488,7 @@ The third component of the accelerator is Work IQ
 
 1. Click on the default environment
 
-   ![](../Sandbox-Environment-Guides/Images/a70.png)
+   ![](../Amplify-Your-Intelligence/Images/demand.png)
 
 
 1. Click on  **New Agent** drop-down and select **Agent standard**
@@ -497,11 +497,11 @@ The third component of the accelerator is Work IQ
 
 1. Open the **Agents** tab. If it is hidden, use the **+6 (1)** / more-tabs menu and select **Agents (2)**.
 
-   ![](../Sandbox-Environment-Guides/Images/agent.png)
+   ![](../Amplify-Your-Intelligence/Images/agent.png)
 
 1. Click on **+Add** to add Agent.
 
-   ![](../Sandbox-Environment-Guides/Images/add.png)
+   ![](../Amplify-Your-Intelligence/Images/add.png)
 
 1. Click on **Connect to an External agent (1)** drop down and select **Microsoft Foundry (2)**.
 
@@ -1116,7 +1116,7 @@ The third component of the accelerator is Work IQ
 
 1. Click on the **Overview (1)** tab and then **Publish (2)**.
 
-   ![](../Sandbox-Environment-Guides/Images/publish.png)
+   ![](../Amplify-Your-Intelligence/Images/publish.png)
 
 1. Click on **Publish** to **Publish the agent.**
 
@@ -1163,13 +1163,13 @@ The third component of the accelerator is Work IQ
 
    ```
 
-   ![](../Sandbox-Environment-Guides/Images/promptchat.png)
+   ![](../Amplify-Your-Intelligence/Images/promptchat.png)
 
     >Note: click on **Allow** for every Connect pop up.
 
 1. Type **Allow** in chat window, then you will get response from agent
 
-    ![](../Sandbox-Environment-Guides/Images/chatresponse.png)
+    ![](../Amplify-Your-Intelligence/Images/chatresponse.png)
 
 
 ### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session and validated the Microsoft IQ solution across` Fabric IQ, Foundry IQ`, and `Work IQ`.
