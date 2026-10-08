@@ -475,6 +475,7 @@ GitHub Copilot can use the architecture and these requirements to determine the 
    ```
    Which products have the highest forecasted demand for the November launch, and what is their current inventory position?
    ```
+   
    ![](../Amplify-Your-Intelligence/Images/cmo.png)
 
 1.  Review the response provided by the **cmo-evaluation-agent**.
