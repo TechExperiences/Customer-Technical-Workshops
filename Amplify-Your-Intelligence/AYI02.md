@@ -285,6 +285,10 @@ This allows Copilot to understand the solution as a whole, determine the impleme
 
    ![](../Amplify-Your-Intelligence/Images/37.png)
 
+1. Now that the Data Agent has been configured with business data, we can validate whether it is working as expected.
+
+1. This validation helps confirm that the Data Agent can understand the available business data, retrieve relevant information, perform the required calculations, and provide meaningful responses to business questions.
+
 1. Navigate to **Test data agent (1)**, send the following prompts in Data agent input box **(2)**:
 
    ```
