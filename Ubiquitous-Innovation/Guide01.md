@@ -77,10 +77,6 @@ Once the **Future State Architecture** has been defined during the Envisioning s
    - Setting up the required data sources, connections, and dependencies.
    - Validating that the components work together as intended.
 
-1. This manual process can take considerable time and effort before you can actually see the proposed idea working as a solution.
-
-1. **Rapid prototyping with GitHub Copilot** helps reduce much of this manual effort. Instead of creating each component individually, we can take the solution we have already designed and describe what we want to build. The prototype can then be developed iteratively, allowing us to move from an idea and architecture to a working solution much faster.
-
 The traditional approach can be time-consuming and heavily dependent on specialized experience, particularly when developing and implementing agent-driven capabilities. 
 
 In the next exercise, we will introduce a prototype-based approach that demonstrates how GitHub Copilot can accelerate the same activities with minimal manual effort, helping teams improve productivity, reduce errors, and focus more on expressing the desired solution, validating the outcome, and refining the prototype rather than manually building each individual component
