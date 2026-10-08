@@ -238,9 +238,20 @@ Pull request created for review and commit.
 
 ## Topic 2: Agents That Know Your Business 
 
-### Connect Live Manufacturing Context
+### Activity 2.1: Validate the Deployed Business Intelligence Agent
 
-### Ground the Agent with Enterprise Knowledge
+### Activity 2.2: Connect Live Manufacturing Context
 
+### Activity 2.3: Ground the Agent with Enterprise Knowledge
+
+### Activity 2.4: Add Organizational Context
+
+### Activity 2.5: Enable the Agent to Act
+
+### Activity 2.6: Evaluate the Agent 
+
+## Topic 3: From One Agent to a Coordinated System 
+
+## Continue...
 
 #### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session.
