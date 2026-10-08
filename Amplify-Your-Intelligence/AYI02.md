@@ -14,9 +14,9 @@ In the previous Envisioning session, you defined the **Future State Architecture
 
 Rather than manually implementing each component, you will provide the architecture and implementation requirements to **GitHub Copilot** and work with it interactively to build the prototype.
 
-As you progress, Copilot may ask questions, request confirmations, or suggest implementation options. Review these interactions and provide the appropriate responses so that the prototype stays aligned with the intended architecture.
+As you progress, **Copilot** may ask questions, request confirmations, or suggest implementation options. Review these interactions and provide the appropriate responses so that the prototype stays aligned with the intended architecture.
 
-You will first set up GitHub Copilot and then use it to begin implementing the Fabric IQ, Foundry IQ, and Work IQ components of the solution.
+You will first set up **GitHub Copilot** and then use it to begin implementing the **Fabric IQ, Foundry IQ, and Work IQ** components of the solution.
 
 ### Sign in to GitHub Copilot Chat
 
@@ -118,7 +118,7 @@ The prompt below acts as the implementation plan for the **Fabric IQ** portion o
 
 **What will this prompt do?**
 
-When you provide the architecture and the prompt to GitHub Copilot, it will work through the implementation requirements and help create the Fabric IQ prototype, including:
+When you provide the **architecture** and the prompt to **GitHub Copilot**, it will work through the implementation requirements and help create the Fabric IQ prototype, including:
 
 - Identify the Fabric resources required for the solution.
 - Reuse the existing Resource Group and Fabric Capacity.
@@ -127,7 +127,7 @@ When you provide the architecture and the prompt to GitHub Copilot, it will work
 - Create the Ontology using the Lakehouse data and establish the required entities and relationships.
 - Create and configure the Data Agent to work with the business data and answer - launch-readiness questions.
 
-This allows Copilot to understand the solution as a whole, determine the implementation sequence, and interact with us when it needs clarification or confirmation.
+This allows **Copilot** to understand the solution as a whole, determine the implementation sequence, and interact with us when it needs clarification or confirmation.
 
 1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the approved **Caldova-Future-State-Architecture.png (2)**.
 
@@ -285,9 +285,9 @@ This allows Copilot to understand the solution as a whole, determine the impleme
 
    ![](../Amplify-Your-Intelligence/Images/37.png)
 
-1. Now that the Data Agent has been configured with business data, we can validate whether it is working as expected.
+1. Now that the **Data Agent** has been configured with business data, we can validate whether it is working as expected.
 
-1. This validation helps confirm that the Data Agent can understand the available business data, retrieve relevant information, perform the required calculations, and provide meaningful responses to business questions.
+1. This validation helps confirm that the **Data Agent** can understand the available business data, retrieve relevant information, perform the required calculations, and provide meaningful responses to business questions.
 
 1. Navigate to **Test data agent (1)**, send the following prompts in Data agent input box **(2)**:
 
@@ -316,28 +316,28 @@ This allows Copilot to understand the solution as a whole, determine the impleme
 
 ## Foundry IQ & Web IQ
 
-With the Fabric IQ prototype in place, the next step is to implement the **Foundry IQ** portion of the Future State Architecture.
+With the **Fabric IQ** prototype in place, the next step is to implement the **Foundry IQ** portion of the Future State Architecture.
 
-Rather than manually creating each Foundry resource, we will provide GitHub Copilot with the architecture and the implementation requirements.
+Rather than manually creating each Foundry resource, we will provide **GitHub Copilot** with the architecture and the implementation requirements.
 
-The prompt below acts as the implementation plan for the Foundry IQ portion of the solution. It gives GitHub Copilot the context it needs to understand what should be created, how the resources should be configured, and how the different agents should support the Caldova launch scenario.
+The prompt below acts as the implementation plan for the Foundry IQ portion of the solution. It gives **GitHub Copilot** the context it needs to understand what should be created, how the resources should be configured, and how the different agents should support the Caldova launch scenario.
 
 **What will this prompt do?**
 
-When you provide the architecture and the prompt to GitHub Copilot, it will help build the Foundry IQ prototype by:
+When you provide the architecture and the prompt to **GitHub Copilot**, it will help build the **Foundry IQ** prototype by:
 
-- Identify and deploy the Foundry resources required by the architecture.
+- Identify and deploy the **Foundry** resources required by the architecture.
 - Reuse the existing Resource Group and configure the required Azure region.
 - Deploy the required AI models.
 - Create representative Caldova documents and make them available through the configured knowledge base.
-- Configure Web IQ to retrieve relevant information from the approved public sources.
+- Configure **Web IQ** to retrieve relevant information from the approved public sources.
 - Create the four focused agents:**Supplier Terms Agent,CMO Evaluation Agent,Demand Sensing Agent,Manufacturing Quality Agent**
 - Configure the appropriate models, document knowledge, and Web Search tools for the agents.
 - Prepare the agents to use the existing Fabric Data Agent for operational information after the required manual connection.
 - Perform targeted validation of the document and Web Search capabilities.
 - Generate deployment and post-deployment instructions, including the manual Fabric connection step.
 
-GitHub Copilot can use the architecture and these requirements to determine the implementation sequence, create the required resources, configure the agents, and interact with you if it needs clarification or confirmation.
+**GitHub Copilot** can use the architecture and these requirements to determine the implementation sequence, create the required resources, configure the agents, and interact with you if it needs clarification or confirmation.
 
 1. Navigate back to the **GitHub Copilot Chat** to deploy the **Foundry resources**.
 
@@ -535,15 +535,15 @@ GitHub Copilot can use the architecture and these requirements to determine the 
 ## Work IQ
 The third component of the accelerator is **Work IQ**
 
-The Fabric IQ and Foundry IQ components provide the solution with operational data, business knowledge, and specialized AI agents. The next step is to extend the prototype with Work IQ, so the solution can also work with relevant organizational context.
+The **Fabric IQ** and **Foundry IQ** components provide the solution with operational data, business knowledge, and specialized AI agents. The next step is to extend the prototype with **Work IQ**, so the solution can also work with relevant organizational context.
 
 Instead of building another solution from scratch, we will use **Copilot Studio** as the orchestration layer and connect the existing Foundry agents and Fabric Data Agent to a main agent.
 
 The **objective** is to demonstrate how the individual capabilities created during rapid prototyping can be brought together into a single business-facing experience.
 
-Instead of a user having to know which underlying agent or data source contains the required information, the main agent can orchestrate the request, use the appropriate connected sources, and provide a consolidated response.
+Instead of a user having to know which underlying **agent** or data source contains the required information, the main agent can orchestrate the request, use the appropriate connected sources, and provide a consolidated response.
 
-You will now configure the main agent in **Copilot Studio**, connect the existing Foundry and Fabric agents, provide the orchestration instructions, and publish the agent to Microsoft Teams.
+You will now configure the main agent in **Copilot Studio**, connect the existing Foundry and Fabric agents, provide the orchestration instructions, and publish the agent to **Microsoft Teams**.
 
 
 1. Right click on [**Copilot Studio**](https://copilotstudio.microsoft.com), then **Copy link** and then paste it on your VM browser tab to open the Copilot Studio.
@@ -1095,7 +1095,7 @@ Starting with the **Future State Architecture** from the Envisioning session, yo
 
 Instead of manually creating and configuring every component, you described what you wanted the solution to achieve, provided the relevant architecture and requirements, and worked interactively with the AI tools to build and validate the prototype.
 
-Throughout the process, the tools could ask questions, request confirmation, identify issues, and help refine the implementation. This makes rapid prototyping an iterative conversation between your idea and the technology, rather than a sequence of purely manual configuration steps
+Throughout the process, the tools could ask questions, request confirmation, identify issues, and help refine the implementation. This makes rapid **prototyping** an iterative conversation between your idea and the technology, rather than a sequence of purely manual configuration steps
 
 
 ### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session and validated the Microsoft IQ solution across` Fabric IQ, Foundry IQ`, and `Work IQ`.

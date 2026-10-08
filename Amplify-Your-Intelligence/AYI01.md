@@ -65,6 +65,6 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
 1. The traditional approach can be time-consuming and heavily dependent on specialized experience, particularly when developing and implementing agent-driven capabilities. 
 
-1. In the next exercise, we will introduce a prototype-based approach that demonstrates how GitHub Copilot can accelerate the same activities with minimal manual effort, helping teams improve productivity, reduce errors, and focus more on expressing the desired solution, validating the outcome, and refining the prototype rather than manually building each individual component
+1. In the next exercise, we will introduce a **prototype-based** approach that demonstrates how **GitHub Copilot** can accelerate the same activities with minimal manual effort, helping teams improve productivity, reduce errors, and focus more on expressing the desired solution, validating the outcome, and refining the prototype rather than manually building each individual component
 
 ### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.
