@@ -49,7 +49,7 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
 1. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
 
-## This completes the Envisioning Session using Microsoft Whiteboarding.
+## Next plan for Future State Architecture
 
 1. Once the **Future State Architecture** has been defined during the Envisioning session, the next step is to bring the proposed solution to life as a working prototype.
 
@@ -69,8 +69,8 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
 In the next exercise, we will use **GitHub Copilot** as an interactive development partner. We will provide it with the Future State Architecture and the steps needed to implement the solution. Copilot will interpret the requirements, generate the required implementation, and interact with us whenever clarification or confirmation is needed.
 
-This approach allows us to focus less on manually building the individual components and more on expressing the solution we want to achieve, validating the outcome, and refining the prototype.
+The traditional approach can be time-consuming and heavily dependent on specialized experience, particularly when developing and implementing agent-driven capabilities. 
 
-In next exercise, you will take the Future State Architecture created in the Envisioning session and use rapid prototyping to turn that design into a working solution.
+In the next exercise, we will introduce a prototype-based approach that demonstrates how GitHub Copilot can accelerate the same activities with minimal manual effort, helping teams improve productivity, reduce errors, and focus more on expressing the desired solution, validating the outcome, and refining the prototype rather than manually building each individual component
 
 ### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.
