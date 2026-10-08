@@ -118,6 +118,11 @@ Turn the whiteboard into a reviewed implementation plan and issue set for extend
 
 1. Please copy the below prompt and paste it in the copilot chat win
 
+   >- This activity is required to validate the future-state architecture before development begins and ensure the proposed solution aligns with the business requirement.
+   >- Review the architecture to understand each component and determine how the new tool-handler capability should be implemented, documented, and reviewed by the business team.
+
+   
+   **Prompt**
    ```
    For my first activity, I have attached a whiteboard-generated future-state architecture design. Please review the architecture thoroughly and create a document based on your analysis. Follow the instructions below for this activity:
    
@@ -173,118 +178,63 @@ Turn the whiteboard into a reviewed implementation plan and issue set for extend
 ### Activity 1.4: Choose the Model for the Job
 Select the most appropriate model for the task while staying within the models and policies enabled by the organization. Review the available models using /model, switch between models to understand that model selection is task-specific, and use /model auto to allow GitHub Copilot to select an appropriate model based on the task, effort, and optimization settings such as Balanced versus Intelligence. Use /usage to review session usage and /context to understand the available context and session information. Finally, repeat the same task using a Frontier model and Auto mode to compare their output, performance, value, and cost, and understand when each approach is most appropriate.
 
-TBD
+Based on the context, the user can switch between the available models and validate their suitability for the task. Finally, select the **Auto** option to allow GitHub Copilot to automatically choose the most appropriate model based on the requirements and complexity of the work.
 
+   ![](../Sandbox-Environment-Guides/Images/Model-Selection.png)
 
-### Activity 1.5: Creating Supply Chain Intelligent Agent in Foundry
-Create a Supply Chain Agent in Azure AI Foundry with a SharePoint-based Knowledge Base to provide accurate, enterprise-level responses grounded in approved business documents. The agent will retrieve and use information on production scheduling, market launch plans, manufacturing SOPs, launch escalation procedures, and equipment qualification to answer supply chain and operational questions with the appropriate enterprise context.
+### Activity 1.5: Hand the Build to the Coding Agent
+Validate the local changes from Activities 1.2 and 1.3, then use /delegate from the same GitHub Copilot session to hand off the implementation to the coding agent, accepting the checkpoint so the agent branch includes the existing scaffold and updated instructions. While the agent works, review the session log and reasoning, and demonstrate concurrent work by showing another active session before returning to the current task. 
 
-1. Please copy the below prompt and paste it in the copilot chat win
-
-   ```
-   For the first activity, create a Supply Chain Agent in Azure AI Foundry and configure it with a SharePoint Knowledge Base. Please follow the steps below and complete the task:
-   
-   Attached to future state architecture: Future-State-Architecture.png
-   
-   Instructions:
-     1. Use existing resource group   (rg-caldova-ubiquitous-new)
-     2. Create a new Foundry Project   (Supply-Chain-Mgmt)
-     3. Create a new Foundry AI Agent   (Supply-Chain-Agent)
-     4. Create a new Knowledge source under this   above created Foundry AI Agent and point to   Work IQ SharePoint (Path: https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/)
-         a. Use folder: AI Knowledge Base (All enterprise level documents available here)
-     5. Add agent instruction based on   knowledgebase included in agent
-     6. Validate the question and answer will be performed with this agent regarding this knowledgebase.
-     7. Generate code for all the above steps and push to the GIT Repo: Test-SAML/Test
-
-   Note: After completing all above steps successfully, create README.md file with deployment instructions and post deployment configurations steps. Also generate bicep/ARM template based on the identified resources
-   ```
-
-   - Then click **Send** button.
-  
-1. Once Copilot starts generating the response, monitor the process closely. 
-
-1. If Copilot Asks to aunthenticate like below, please click on provided link and provide the code which was given by copilot 
-
-   ![](../Sandbox-Environment-Guides/Images/Login.png)
-
-1. Click on Yes, completed and then click on **Submit** button
-    
-    ![](../Sandbox-Environment-Guides/Images/Login2.png)
-
-1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
-
-1. Monitor the process to understand how it generates the response and handles or resolves errors.  
-
-   >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
-   
-   >Wait for the deployment to complete.
-
-#### Agent Validation
-1. Navigate to Azure portal and click **Resource Group** to view the deployed resources.
-
-1. Below foundry workspace and project created
-
-   ![](../Sandbox-Environment-Guides/Images/Foundry-Project.png)
-
-1. Click **Foundry Project** to navigare and view the created agent.
-
-   ![](../Sandbox-Environment-Guides/Images/Agent-Created.png)
-
-### Model Addition in Foundry Agent
+Once complete, open the draft pull request in GitHub and verify that the diff includes the tool handler, updated agent instructions, and tests. Before human review, request a Copilot code review, evaluate its findings, and then add a follow-up comment beginning with @copilot requesting any necessary revisions so Copilot updates and commits the changes to the same branch.
 
 1. Please copy the below prompt and paste it in the copilot chat win
 
    ```
-   Great. You have created the Azure AI Foundry Agent for me. Now, identify the most suitable model for the Knowledge Base attached to the agent to provide accurate, enterprise-level responses, and configure the selected model with the agent.
+   1. Run /delegate and accept the checkpoint to delegate the implementation.
+   2. Update Review-Plan.md with the final agent instructions, tool-handler requirements, constraints, and test approach.
+   Monitor the coding-agent execution and 
+   3. Create a Draft Pull Request when complete.
+   ```
 
-   Instructions:
-      1. Use existing Foundry AI Agent    (Supply-Chain-Agent) and validate below   commands to check if any model is added in our agent or not.
-         a.	/model
-         b.	/model auto
-         c.	/usage
-         d.	/context
-         Note: Run these commands one by one and   show    the result and take human  confirmation.
-      2. Choose suitable model for our Agent which can help to search for text from the agent Knowledgebase.
-      3. Save the Agent changes and publish.
-      4. Prepare some questions based on the Agent Knowledgebase and document it and store it.
-      5. Also validating the question and answer will be performed with this agent regarding this knowledgebase.
-      6. Generate code for all the above steps and push to the GIT Repo: Test-SAML/Test
+   - Then click **Send** button.
 
-   Note: After completing all above steps successfully, create README.md file with deployment instructions and post deployment configurations steps. Also generate bicep/ARM template based on the identified resources
+1. After completing above step, validate the Pull Request with passing below prompt:
+
+   ```
+   1. @copilot Please address the valid review findings, update the implementation, Review-Plan.md, agent instructions, and tests as needed, and commit the revisions to the same PR branch. Do not merge.
+   2. Confirm the revised changes are committed to the same PR branch and report any remaining issues requiring human review.
    ```
 
    - Then click **Send** button.
   
-1. Once Copilot starts generating the response, monitor the process closely. 
+### Activity 1.6: Fix Security in the Same Pull Request
+Review the capability to ensure it aligns with the agreed business requirements, governance standards, approval boundaries, and risk controls. Confirm that all identified business risks are addressed, required stakeholder approvals are obtained, and the capability is ready for release. 
 
-1. Click on appropriate model and PR option to update proceed further
-    
-    ![](../Sandbox-Environment-Guides/Images/Model-Selection.png)
+**Objective:** Demonstrate a complete business journey from design and review through risk validation, approval, and final release, ensuring the capability is governed and business-ready before user adoption.
 
-    ![](../Sandbox-Environment-Guides/Images/PR-Selection.png)
+1. Navigate to Github.com and open the pull request
 
-1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
+1. Select Approve and run workflows to allow the required checks to begin.
 
-1. Monitor the process to understand how it generates the response and handles or resolves errors.  
+1. Review the code scanning results and identify the flagged vulnerability in the tool handler.
 
-   >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
-   
-   >Wait for the deployment to complete.
+1. Review the Autofix recommendation and commit the fix directly to the same Pull Request branch.
 
-#### Model Validation
-1. Navigate to Azure Foundry Agent which is created above.
+1. Wait for all required checks and validations to complete successfully.
 
-1. Click **Model** to see new model deployed.
+1. Obtain the required human or CODEOWNER approval.
 
-   ![](../Sandbox-Environment-Guides/Images/Model.png)
+1. Review the final changes and merge the Pull Request.
 
-1. Click **Agent** to see new model replaced old one.
+#### Validation
+Pull request created for review and commit. 
 
-   ![](../Sandbox-Environment-Guides/Images/Agent-Model.png)
+1. Open the Pull request and validate the summary
+   ![](../Sandbox-Environment-Guides/Images/PR-I.png)
 
-### Build to the Coding Agent
+1. After validation, merge pull request and commit.
+   ![](../Sandbox-Environment-Guides/Images/PR-II.png)
 
-### Pull request security
 
 ## Topic 2: Agents That Know Your Business 
 
