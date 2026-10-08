@@ -108,10 +108,6 @@ You will first set up GitHub Copilot and then use it to begin implementing the F
 
    ![](../Amplify-Your-Intelligence/Images/18.png)
 
-1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the approved **Caldova-Future-State-Architecture.png (2)**.
-
-   ![](../Sandbox-Environment-Guides/Images/b89.png)
-
 ---
 
 ## **Fabric IQ**
@@ -132,6 +128,10 @@ When you provide the architecture and the prompt to GitHub Copilot, it will work
 - Create and configure the Data Agent to work with the business data and answer - launch-readiness questions.
 
 This allows Copilot to understand the solution as a whole, determine the implementation sequence, and interact with us when it needs clarification or confirmation.
+
+1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the approved **Caldova-Future-State-Architecture.png (2)**.
+
+   ![](../Sandbox-Environment-Guides/Images/b89.png)
 
 1. Along with the attached **Future State Architecture** (1), please paste the below prompt (2).
 
