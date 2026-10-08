@@ -310,7 +310,7 @@ This allows Copilot to understand the solution as a whole, determine the impleme
 
 1. Click on **Publish** again to publish the data agent.
 
-   ![](../Sandbox-Environment-Guides/Images/CalDA.png) 
+   ![](../Amplify-Your-Intelligence/Images/calDA.png) 
 
 --- 
 
