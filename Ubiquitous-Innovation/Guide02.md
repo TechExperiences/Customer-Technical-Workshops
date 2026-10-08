@@ -213,17 +213,11 @@ Review the capability to ensure it aligns with the agreed business requirements,
 **Objective:** Demonstrate a complete business journey from design and review through risk validation, approval, and final release, ensuring the capability is governed and business-ready before user adoption.
 
 1. Navigate to Github.com and open the pull request
-
 1. Select Approve and run workflows to allow the required checks to begin.
-
 1. Review the code scanning results and identify the flagged vulnerability in the tool handler.
-
 1. Review the Autofix recommendation and commit the fix directly to the same Pull Request branch.
-
 1. Wait for all required checks and validations to complete successfully.
-
 1. Obtain the required human or CODEOWNER approval.
-
 1. Review the final changes and merge the Pull Request.
 
 #### Validation
