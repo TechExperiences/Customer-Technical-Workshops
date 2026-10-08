@@ -477,8 +477,6 @@ GitHub Copilot can use the architecture and these requirements to determine the 
    ```
    ![](../Amplify-Your-Intelligence/Images/cmo.png)
 
-   ```
-
 1.  Review the response provided by the **cmo-evaluation-agent**.
 
 1. Open **caldova-manufacturing-quality-agent**. 
