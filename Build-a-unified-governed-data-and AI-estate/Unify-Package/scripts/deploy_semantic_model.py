@@ -195,8 +195,33 @@ class Api:
         return results
 
 
-def first(items: list[dict], display_name: str) -> dict | None:
-    return next((item for item in items if item.get("displayName") == display_name), None)
+def first(items: list[dict], display_name: str, item_type: str) -> dict | None:
+    """Find the expected Fabric item, never merely an arbitrary name match.
+
+    Workspace item display names are not a reliable identifier: a notebook, report,
+    or an item from a partially failed deployment can have the same display name as
+    the semantic model we are looking for.  Returning an item only when both fields
+    match prevents a report from being bound to the wrong artifact ID.
+    """
+    return next(
+        (
+            item for item in items
+            if item.get("displayName") == display_name and item.get("type") == item_type
+        ),
+        None,
+    )
+
+
+def wait_for_item(fabric: Api, workspace_id: str, display_name: str, item_type: str) -> dict:
+    """Wait for a created Fabric item to become visible as its expected type."""
+    for _ in range(24):
+        item = first(fabric.list_all(f"/workspaces/{workspace_id}/items"), display_name, item_type)
+        if item and item.get("id"):
+            return item
+        time.sleep(5)
+    raise TimeoutError(
+        f"Fabric {item_type} {display_name!r} did not appear in workspace {workspace_id} after two minutes."
+    )
 
 
 def encode(text: str) -> str:
@@ -319,14 +344,13 @@ def deploy_semantic_model(fabric: Api, workspace_id: str, display_name: str,
     }
 
     items = fabric.list_all(f"/workspaces/{workspace_id}/items")
-    existing = first(items, display_name)
+    existing = first(items, display_name, "SemanticModel")
     if existing is None:
         fabric.request("POST", f"/workspaces/{workspace_id}/semanticModels", {
             "displayName": display_name,
             "definition": definition,
         })
-        items = fabric.list_all(f"/workspaces/{workspace_id}/items")
-        existing = first(items, display_name)
+        existing = wait_for_item(fabric, workspace_id, display_name, "SemanticModel")
     else:
         fabric.request("POST", f"/workspaces/{workspace_id}/items/{existing['id']}/updateDefinition", {
             "definition": definition,
@@ -336,14 +360,16 @@ def deploy_semantic_model(fabric: Api, workspace_id: str, display_name: str,
 
 def deploy_report(fabric: Api, workspace_id: str, display_name: str, semantic_model_id: str) -> str:
     """Create a minimal, blank report bound to the semantic model via a single empty page."""
+    # Fabric REST API uses the v2 report-definition schema.  Its documented
+    # byConnection form needs only semanticmodelid=<item GUID>.  The prior v1
+    # shape was incomplete (it omitted pbiModelVirtualServerName and name), which
+    # caused Fabric to reject definition.pbir before it could create the report.
     pbir = {
-        "version": "1.0",
+        "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json",
+        "version": "4.0",
         "datasetReference": {
             "byConnection": {
-                "connectionString": None,
-                "pbiModelDatabaseName": semantic_model_id,
-                "pbiServiceModelId": None,
-                "connectionType": "pbiServiceXmlaStyleLive",
+                "connectionString": f"semanticmodelid={semantic_model_id}",
             }
         },
     }
@@ -370,14 +396,13 @@ def deploy_report(fabric: Api, workspace_id: str, display_name: str, semantic_mo
     }
 
     items = fabric.list_all(f"/workspaces/{workspace_id}/items")
-    existing = first(items, display_name)
+    existing = first(items, display_name, "Report")
     if existing is None:
         fabric.request("POST", f"/workspaces/{workspace_id}/reports", {
             "displayName": display_name,
             "definition": definition,
         })
-        items = fabric.list_all(f"/workspaces/{workspace_id}/items")
-        existing = first(items, display_name)
+        existing = wait_for_item(fabric, workspace_id, display_name, "Report")
     else:
         fabric.request("POST", f"/workspaces/{workspace_id}/items/{existing['id']}/updateDefinition", {
             "definition": definition,
