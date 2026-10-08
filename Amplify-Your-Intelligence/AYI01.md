@@ -71,6 +71,6 @@ In the next exercise, we will use **GitHub Copilot** as an interactive developme
 
 This approach allows us to focus less on manually building the individual components and more on expressing the solution we want to achieve, validating the outcome, and refining the prototype.
 
-In this exercise, you will take the Future State Architecture created in the Envisioning session and use rapid prototyping to turn that design into a working solution.
+In next exercise, you will take the Future State Architecture created in the Envisioning session and use rapid prototyping to turn that design into a working solution.
 
 ### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.
