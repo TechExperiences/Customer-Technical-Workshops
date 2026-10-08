@@ -74,8 +74,9 @@ resource fabricCapacity 'Microsoft.Fabric/capacities@2023-11-01' = {
   }
 }
 
-// Foundation for the BusinessApplication-to-Fabric SQL integration. The workflow
-// stays disabled until its managed identity has confirmed Fabric workspace access.
+// Foundation for the BusinessApplication-to-Fabric SQL integration. The Logic App
+// ingests BusinessApplication blobs into the Fabric SQL Database on each invocation
+// from Invoke-BusinessApplicationIngestion.ps1, once Fabric workspace access is granted.
 resource integrationAccount 'Microsoft.Logic/integrationAccounts@2019-05-01' = {
   name: 'caldova-integration-account'
   location: sqlLocation
@@ -87,6 +88,27 @@ resource integrationAccount 'Microsoft.Logic/integrationAccounts@2019-05-01' = {
   properties: {}
 }
 
+// Connects to the Fabric SQL Database at runtime using the Logic App's own managed
+// identity. The server/database are supplied per-call by the trigger body, because
+// the Fabric SQL Database does not exist yet when this connection is deployed.
+resource sqlConnection 'Microsoft.Web/connections@2016-06-01' = {
+  name: 'sql'
+  location: sqlLocation
+  kind: 'V1'
+  properties: {
+    displayName: 'sql'
+    api: {
+      id: subscriptionResourceId('Microsoft.Web/locations/managedApis', sqlLocation, 'sql')
+    }
+    // The SQL connector registers Managed Identity auth under the ID "oauthMI", not
+    // the generic "managedIdentityAuth" name other connectors use.
+    parameterValueSet: {
+      name: 'oauthMI'
+      values: {}
+    }
+  }
+}
+
 resource businessApplicationIngestLogicApp 'Microsoft.Logic/workflows@2019-05-01' = {
   name: 'caldova-businessapp-ingest'
   location: sqlLocation
@@ -94,14 +116,35 @@ resource businessApplicationIngestLogicApp 'Microsoft.Logic/workflows@2019-05-01
     type: 'SystemAssigned'
   }
   properties: {
-    state: 'Disabled'
+    state: 'Enabled'
     integrationAccount: {
       id: integrationAccount.id
     }
     definition: {
       '$schema': 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
       contentVersion: '1.0.0.0'
-      parameters: {}
+      parameters: {
+        '$connections': {
+          type: 'Object'
+          defaultValue: {}
+        }
+        // Set via an ARM PATCH immediately before each run (Invoke-BusinessApplicationIngestion.ps1),
+        // then fired through the ARM "run trigger" action - never through the public callback URL.
+        // This keeps every control step on the same reliable ARM control plane the rest of this
+        // pipeline already uses, instead of the separate multi-tenant data-plane trigger gateway.
+        // The blob content itself is also read by that script (via "az storage blob download
+        // --auth-mode login", the same proven pattern as Upload-SourceData.ps1) and passed in
+        // here, rather than having the workflow read blobs itself.
+        sqlServer: { type: 'String', defaultValue: '' }
+        sqlDatabase: { type: 'String', defaultValue: '' }
+        // Full INSERT...FROM OPENJSON(N'<escaped json>') WITH (...) statements, built by
+        // Invoke-BusinessApplicationIngestion.ps1 with the data embedded as a string literal.
+        // The SQL connector's formalParameters/@json binding does not reliably parameterize
+        // a query containing an OPENJSON ... WITH (...) clause (it left @json unresolved and
+        // misparsed the WITH keyword), so the query text is now fully self-contained instead.
+        customerDetailsQuery: { type: 'String', defaultValue: '' }
+        customerAddressQuery: { type: 'String', defaultValue: '' }
+      }
       triggers: {
         manual: {
           type: 'Request'
@@ -111,10 +154,101 @@ resource businessApplicationIngestLogicApp 'Microsoft.Logic/workflows@2019-05-01
           }
         }
       }
-      actions: {}
+      actions: {
+        // The SQL connector's query/sql action does not reliably execute a multi-statement
+        // batch (a DELETE followed by an INSERT...FROM OPENJSON(@json) WITH (...)) as one
+        // call - it returned "Must declare the scalar variable @json" / "Incorrect syntax
+        // near 'with'" when both statements were combined. Each statement now runs as its
+        // own action instead.
+        Delete_CustomerDetails: {
+          type: 'ApiConnection'
+          runAfter: {}
+          inputs: {
+            host: {
+              connection: {
+                name: '@parameters(\'$connections\')[\'sql\'][\'connectionId\']'
+              }
+            }
+            method: 'post'
+            path: '/v2/datasets/@{encodeURIComponent(encodeURIComponent(parameters(\'sqlServer\')))},@{encodeURIComponent(encodeURIComponent(parameters(\'sqlDatabase\')))}/query/sql'
+            body: {
+              query: 'DELETE FROM dbo.CustomerDetails;'
+            }
+          }
+        }
+        Load_CustomerDetails: {
+          type: 'ApiConnection'
+          runAfter: {
+            Delete_CustomerDetails: ['Succeeded']
+          }
+          inputs: {
+            host: {
+              connection: {
+                name: '@parameters(\'$connections\')[\'sql\'][\'connectionId\']'
+              }
+            }
+            method: 'post'
+            path: '/v2/datasets/@{encodeURIComponent(encodeURIComponent(parameters(\'sqlServer\')))},@{encodeURIComponent(encodeURIComponent(parameters(\'sqlDatabase\')))}/query/sql'
+            body: {
+              query: '@parameters(\'customerDetailsQuery\')'
+            }
+          }
+        }
+        Delete_CustomerAddress: {
+          type: 'ApiConnection'
+          runAfter: {
+            Load_CustomerDetails: ['Succeeded']
+          }
+          inputs: {
+            host: {
+              connection: {
+                name: '@parameters(\'$connections\')[\'sql\'][\'connectionId\']'
+              }
+            }
+            method: 'post'
+            path: '/v2/datasets/@{encodeURIComponent(encodeURIComponent(parameters(\'sqlServer\')))},@{encodeURIComponent(encodeURIComponent(parameters(\'sqlDatabase\')))}/query/sql'
+            body: {
+              query: 'DELETE FROM dbo.CustomerAddress;'
+            }
+          }
+        }
+        Load_CustomerAddress: {
+          type: 'ApiConnection'
+          runAfter: {
+            Delete_CustomerAddress: ['Succeeded']
+          }
+          inputs: {
+            host: {
+              connection: {
+                name: '@parameters(\'$connections\')[\'sql\'][\'connectionId\']'
+              }
+            }
+            method: 'post'
+            path: '/v2/datasets/@{encodeURIComponent(encodeURIComponent(parameters(\'sqlServer\')))},@{encodeURIComponent(encodeURIComponent(parameters(\'sqlDatabase\')))}/query/sql'
+            body: {
+              query: '@parameters(\'customerAddressQuery\')'
+            }
+          }
+        }
+      }
       outputs: {}
     }
-    parameters: {}
+    parameters: {
+      '$connections': {
+        value: {
+          sql: {
+            connectionId: sqlConnection.id
+            connectionName: 'sql'
+            connectionProperties: {
+              authentication: {
+                type: 'ManagedServiceIdentity'
+              }
+            }
+            id: subscriptionResourceId('Microsoft.Web/locations/managedApis', sqlLocation, 'sql')
+          }
+        }
+      }
+    }
   }
 }
 

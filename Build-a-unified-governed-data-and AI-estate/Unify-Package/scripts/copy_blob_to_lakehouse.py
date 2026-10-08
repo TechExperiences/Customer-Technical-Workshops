@@ -27,11 +27,18 @@ class ProcessTokenCredential(TokenCredential):
 
 
 def ensure_directory(service: DataLakeServiceClient, workspace_id: str, path: str) -> None:
-    """Create every OneLake path component; existing folders are intentionally reused."""
+    """Create every OneLake path component under the Lakehouse artifact; existing folders are reused.
+
+    The first path segment is the Lakehouse's own artifact ID, which already exists as
+    the implicit root - OneLake's policy rejects directory operations directly on that
+    root ("folder '' under 'Lakehouse' artifact"), so creation starts one level down
+    (e.g. "<lakehouseId>/Files", not the bare lakehouse ID alone).
+    """
     file_system = service.get_file_system_client(workspace_id)
-    current = ""
-    for component in path.split("/"):
-        current = f"{current}/{component}" if current else component
+    components = path.split("/")
+    current = components[0]
+    for component in components[1:]:
+        current = f"{current}/{component}"
         try:
             file_system.get_directory_client(current).create_directory()
         except ResourceExistsError:

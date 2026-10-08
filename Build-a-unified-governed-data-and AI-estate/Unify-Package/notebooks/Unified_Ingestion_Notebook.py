@@ -1,4 +1,22 @@
 # Fabric notebook source
+
+# METADATA ********************
+
+# META {
+# META   "kernel_info": {
+# META     "name": "synapse_pyspark"
+# META   },
+# META   "dependencies": {
+# META     "lakehouse": {
+# META       "default_lakehouse": "__LAKEHOUSE_ID__",
+# META       "default_lakehouse_name": "__LAKEHOUSE_NAME__",
+# META       "default_lakehouse_workspace_id": "__WORKSPACE_ID__"
+# META     }
+# META   }
+# META }
+
+# CELL ********************
+
 # Load only Analytical and Operational landing files into Lakehouse Delta tables.
 # BusinessApplication JSON is intentionally loaded into Fabric SQL Database by Logic App.
 
@@ -66,3 +84,10 @@ spark.sql(f"""
 """)
 
 display(spark.sql(f"SHOW TABLES IN {TARGET_SCHEMA}"))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
