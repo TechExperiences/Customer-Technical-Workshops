@@ -148,7 +148,7 @@ Once GitHub Copilot completes the execution, validate the Project Explorer to co
 
    ![](../Sandbox-Environment-Guides/Images/Design-Review.png)
 
-### Activity 1.3: Turn the Whiteboard into a Reviewed Plan
+### Activity 1.3: Ground Copilot in What the Business Already Decided
 Turn the whiteboard into a reviewed implementation plan and issue set for extending the existing agent, without manually transcribing it.
 
 1. Please copy the below prompt and paste it in the copilot chat window.
