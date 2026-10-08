@@ -475,9 +475,8 @@ GitHub Copilot can use the architecture and these requirements to determine the 
    ```
    Which products have the highest forecasted demand for the November launch, and what is their current inventory position?
    ```
-   
-   ![](../Amplify-Your-Intelligence/Images/cmo.png)
 
+   ![](../Amplify-Your-Intelligence/Images/cmo.png)
 1.  Review the response provided by the **cmo-evaluation-agent**.
 
 1. Open **caldova-manufacturing-quality-agent**. 
@@ -499,10 +498,9 @@ GitHub Copilot can use the architecture and these requirements to determine the 
 
    ```
    For the November 2026 NGP-100 production plan, identify any equipment qualification or changeover risks that could affect the committed production. Use the Fabric Data Agent for the operational facts and the Caldova knowledge base for the applicable quality procedures. Explain what quality review or action may be required, and clearly distinguish operational data from Caldova-specific guidance.
-   ```
-   ![](../Amplify-Your-Intelligence/Images/manufacture.png)
 
    ```
+   ![](../Amplify-Your-Intelligence/Images/manufacture.png)
 
 1.  Review the response provided by the **cmo-manufacturing-quality-agent**.
 
