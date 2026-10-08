@@ -561,7 +561,7 @@ The third component of the accelerator is Work IQ
 
 1. Open the main agent's **Overview → Instructions**. Replace the existing instructions with the full Caldova instructions below. **Optional:** Use **/** in the instruction editor to select each of the four connected Foundry agents by its actual name where its routing instruction appears. Save the instructions.
 
-   ```text
+   ```
    ------#PURPOSE#------
 
    Analyze and respond to business inquiries related to Caldova's November NextGen Pharma launch, including products, inventory, demand forecasts, markets, production, manufacturing capacity, suppliers, CMOs, quality, qualification, RFP status and launch readiness.
@@ -1066,6 +1066,7 @@ The third component of the accelerator is Work IQ
    6. Provide one consolidated business response.
    
    The final response should be understandable to a business user in    Teams without requiring them to know which underlying agent was used.
+   ```
 
 ### Add the Fabric Data Agent   
 
