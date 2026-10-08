@@ -502,7 +502,7 @@ GitHub Copilot can use the architecture and these requirements to determine the 
    ```
    ![](../Amplify-Your-Intelligence/Images/manufacture.png)
 
-1.  Review the response provided by the **cmo-manufacturing-quality-agent**.
+1.  Review the response provided by the **caldova-manufacturing-quality-agent**.
 
 1. Open **caldova-demand-sensing-agent**. 
 
