@@ -10,6 +10,14 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
 
+In the previous Envisioning session, you defined the **Future State Architecture** for solution. In this session, you will use that architecture as the starting point for rapid prototyping.
+
+Rather than manually implementing each component, you will provide the architecture and implementation requirements to **GitHub Copilot** and work with it interactively to build the prototype.
+
+As you progress, Copilot may ask questions, request confirmations, or suggest implementation options. Review these interactions and provide the appropriate responses so that the prototype stays aligned with the intended architecture.
+
+You will first set up GitHub Copilot and then use it to begin implementing the Fabric IQ, Foundry IQ, and Work IQ components of the solution.
+
 ### Sign in to GitHub Copilot Chat
 
 
@@ -104,7 +112,24 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/b89.png)
 
+---
+
 ### **Fabric IQ**
+
+1. The **Future State Architecture** describes what we want the solution to contain. The next step is to translate that design into the actual Fabric resources needed for the prototype.
+
+1. The prompt below acts as the implementation plan for the **Fabric IQ** portion of the architecture. It tells **GitHub Copilot** what needs to be created, what existing resources should be reused, what data should be generated, and how the Fabric components should be connected.
+
+**What will this prompt do?**
+
+1. When you provide the architecture and the prompt to GitHub Copilot, it will work through the implementation requirements and help create the Fabric IQ prototype, including:
+
+- Identify the Fabric resources required for the solution.
+- Reuse the existing Resource Group and Fabric Capacity.
+- Create and configure the Caldova Pharma Fabric Workspace.
+- Create the required Lakehouse and populate it with representative data for the business scenario.
+- Create the Ontology using the Lakehouse data and establish the required entities and relationships.
+- Create and configure the Data Agent to work with the business data and answer - launch-readiness questions.
 
 1. Along with the attached **Future State Architecture** (1), please paste the below prompt (2).
 
@@ -279,8 +304,9 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Click on **Publish** again to publish the data agent.
 
-   ![](../Sandbox-Environment-Guides/Images/CalDA.png)  
+   ![](../Sandbox-Environment-Guides/Images/CalDA.png) 
 
+--- 
 
 ### Foundry IQ & Web IQ
 
@@ -333,7 +359,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Wait for the deployment to complete and the **Keep** the file.
 
-   ![](../Sandbox-Environment-Guides/Images/CalFAG.png)  
+   ![](../Amplify-Your-Intelligence/Images/CalFAG.png)  
 
 
 1. Navigate back to the Resource group. Select the **Foundry Project**.

@@ -51,4 +51,26 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
 ## This completes the Envisioning Session using Microsoft Whiteboarding.
 
+1. Once the **Future State Architecture** has been defined during the Envisioning session, the next step is to bring the proposed solution to life as a working prototype.
+
+**Traditional Approach:**
+
+1. Traditionally, after completing the architecture and identifying the required solution components, the next step would be to manually translate the design into Azure resources and configurations. This typically involves:
+
+   - Identifying all the resources required for the solution.
+   - Determining the Resource Groups and services where they should be created.
+   - Creating and configuring the resources individually.
+   - Setting up the required data sources, connections, and dependencies.
+   - Validating that the components work together as intended.
+
+1. This manual process can take considerable time and effort before you can actually see the proposed idea working as a solution.
+
+1. **Rapid prototyping with GitHub Copilot** helps reduce much of this manual effort. Instead of creating each component individually, we can take the solution we have already designed and describe what we want to build. The prototype can then be developed iteratively, allowing us to move from an idea and architecture to a working solution much faster.
+
+In the next exercise, we will use **GitHub Copilot** as an interactive development partner. We will provide it with the Future State Architecture and the steps needed to implement the solution. Copilot will interpret the requirements, generate the required implementation, and interact with us whenever clarification or confirmation is needed.
+
+This approach allows us to focus less on manually building the individual components and more on expressing the solution we want to achieve, validating the outcome, and refining the prototype.
+
+In this exercise, you will take the Future State Architecture created in the Envisioning session and use rapid prototyping to turn that design into a working solution.
+
 ### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.
