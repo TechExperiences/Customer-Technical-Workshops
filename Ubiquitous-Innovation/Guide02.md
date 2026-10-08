@@ -146,7 +146,9 @@ Once GitHub Copilot completes the execution, validate the Project Explorer to co
 ### Activity 1.3: Turn the Whiteboard into a Reviewed Plan
 Turn the whiteboard into a reviewed implementation plan and issue set for extending the existing agent, without manually transcribing it.
 
-1. Please copy the below prompt and paste it in the copilot chat win
+1. Please copy the below prompt and paste it in the copilot chat window.
+
+
 
    ```
    Great. You have created above design review guide. Now review the same with below points and provide me with instructions and after confirmation include them in the same document.
@@ -169,6 +171,7 @@ Turn the whiteboard into a reviewed implementation plan and issue set for extend
 
 
 ### Activity 1.4: Choose the Model for the Job
+Select the most appropriate model for the task while staying within the models and policies enabled by the organization. Review the available models using /model, switch between models to understand that model selection is task-specific, and use /model auto to allow GitHub Copilot to select an appropriate model based on the task, effort, and optimization settings such as Balanced versus Intelligence. Use /usage to review session usage and /context to understand the available context and session information. Finally, repeat the same task using a Frontier model and Auto mode to compare their output, performance, value, and cost, and understand when each approach is most appropriate.
 
 TBD
 
