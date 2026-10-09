@@ -93,7 +93,7 @@ The **Direct Lake semantic model and Data Agent** have already been created usin
 
 1. Navigate back to Fabric Portal and open the **Caldova-Build-Unify-xxxxx** Workspace.
 
-1. Open the created **Semantic model**.
+1. Open the created **Caldova_Unified_SemanticModel** Semantic model .
 
    ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u14.png) 
 
@@ -139,7 +139,7 @@ The **Direct Lake semantic model and Data Agent** have already been created usin
 
 The Caldova Pharma Fabric workspace and data assets are already available in Microsoft Fabric. In this step, we will use OneLake Catalog to validate the available governance and security capabilities, including data discovery, access management, ownership, sensitivity, lineage, and compliance across the Fabric environment.
 
-1. Click **OneLake Catalog **(1)** and navigate to catalog page.
+1. Click **OneLake Catalog** **(1)** and navigate to catalog page.
 
    - Landing page of OneLake Catalog with show items and sub-items for all the workspaces **(2)**.
 
