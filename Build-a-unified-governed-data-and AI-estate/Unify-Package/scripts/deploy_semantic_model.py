@@ -222,6 +222,38 @@ def wait_for_item(fabric: Api, workspace_id: str, display_name: str, item_type: 
     )
 
 
+def refresh_semantic_model(workspace_id: str, semantic_model_id: str) -> None:
+    """Trigger a Direct Lake refresh (framing) and wait for it to complete.
+
+    Direct Lake tables created or updated through the REST API (as opposed to the
+    Fabric portal) are left in an unprocessed state until something explicitly
+    refreshes the model - Microsoft's own Direct Lake documentation states this
+    directly, and querying an unprocessed table returns an error. Without this
+    step every fresh deployment's tables show as unprocessed (a warning icon in
+    the portal's model view) and the Data Agent cannot answer any question.
+    """
+    session = requests.Session()
+    session.headers.update({
+        "Authorization": f"Bearer {token('AZURE_POWERBI_ACCESS_TOKEN')}",
+        "Content-Type": "application/json",
+    })
+    base = f"https://api.powerbi.com/v1.0/myorg/groups/{workspace_id}/datasets/{semantic_model_id}"
+    response = session.post(f"{base}/refreshes", json={"type": "full"}, timeout=60)
+    if not response.ok:
+        raise RuntimeError(f"POST {base}/refreshes -> {response.status_code}: {response.text}")
+    for _ in range(24):
+        time.sleep(5)
+        response = session.get(f"{base}/refreshes", timeout=60)
+        response.raise_for_status()
+        refreshes = response.json().get("value", [])
+        latest = refreshes[0] if refreshes else None
+        if latest and latest.get("status") == "Completed":
+            return
+        if latest and latest.get("status") == "Failed":
+            raise RuntimeError(f"Semantic model refresh failed: {json.dumps(latest, indent=2)}")
+    raise TimeoutError(f"Semantic model {semantic_model_id} refresh did not complete in two minutes.")
+
+
 def encode(text: str) -> str:
     return base64.b64encode(text.encode("utf-8")).decode("utf-8")
 
@@ -393,6 +425,7 @@ def main() -> None:
         fabric, args.workspace_id, args.semantic_model_name,
         args.lakehouse_id,
     )
+    refresh_semantic_model(args.workspace_id, semantic_model_id)
     report_id = deploy_report(fabric, args.workspace_id, args.report_name, semantic_model_id)
 
     print(json.dumps({"semanticModelId": semantic_model_id, "reportId": report_id}, indent=2))

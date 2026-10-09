@@ -44,6 +44,7 @@ try {
 # none of the token values are written to .env, azd settings, or source control.
 $env:AZURE_FABRIC_ACCESS_TOKEN = Get-AzureAccessToken -Resource 'https://api.fabric.microsoft.com' -Purpose 'Microsoft Fabric'
 $env:AZURE_STORAGE_ACCESS_TOKEN = Get-AzureAccessToken -Resource 'https://storage.azure.com/' -Purpose 'Azure Blob Storage and OneLake'
+$env:AZURE_POWERBI_ACCESS_TOKEN = Get-AzureAccessToken -Resource 'https://analysis.windows.net/powerbi/api' -Purpose 'Power BI semantic model refresh'
 try {
     $fabric = & (Join-Path $PSScriptRoot 'Deploy-FabricFoundation.ps1') -FabricCapacityResourceId $capacityResourceId
     if (-not $fabric.workspaceId -or -not $fabric.lakehouseId) {
@@ -104,4 +105,5 @@ try {
 } finally {
     Remove-Item Env:AZURE_FABRIC_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_STORAGE_ACCESS_TOKEN -ErrorAction SilentlyContinue
+    Remove-Item Env:AZURE_POWERBI_ACCESS_TOKEN -ErrorAction SilentlyContinue
 }
