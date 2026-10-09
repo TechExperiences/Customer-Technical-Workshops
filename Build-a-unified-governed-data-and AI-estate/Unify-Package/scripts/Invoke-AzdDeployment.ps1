@@ -73,4 +73,21 @@ foreach ($entry in $environment.GetEnumerator()) {
     Invoke-Checked -Command { & azd env set $entry.Key $entry.Value --environment $environment.AZURE_ENV_NAME } -FailureMessage "Could not save $($entry.Key) to the azd environment."
 }
 
+# The Fabric capacity ARM resource consumes this value from the azd environment
+# while resolving infra/main.parameters.json.  Do an explicit final write and a
+# read-back check so a stale or blank saved azd value can never become
+# administration.members: [""] during provisioning.
+$fabricCapacityAdminUpn = ([string]$environment.FABRIC_CAPACITY_ADMIN_UPN).Trim()
+Invoke-Checked -Command { & azd env set FABRIC_CAPACITY_ADMIN_UPN $fabricCapacityAdminUpn --environment $environment.AZURE_ENV_NAME } -FailureMessage 'Could not save FABRIC_CAPACITY_ADMIN_UPN to the azd environment.'
+
+$effectiveAzdValues = & azd env get-values --environment $environment.AZURE_ENV_NAME
+if ($LASTEXITCODE -ne 0) { throw 'Could not read the azd environment after saving FABRIC_CAPACITY_ADMIN_UPN.' }
+$effectiveAdminLine = $effectiveAzdValues | Where-Object { $_ -match '^FABRIC_CAPACITY_ADMIN_UPN=' } | Select-Object -First 1
+if (-not $effectiveAdminLine) { throw 'FABRIC_CAPACITY_ADMIN_UPN was not persisted in the azd environment; provisioning was not started.' }
+$effectiveAdminUpn = ($effectiveAdminLine -replace '^FABRIC_CAPACITY_ADMIN_UPN=', '').Trim().Trim('"').Trim("'")
+if ([string]::IsNullOrWhiteSpace($effectiveAdminUpn) -or $effectiveAdminUpn -ne $fabricCapacityAdminUpn) {
+    throw 'FABRIC_CAPACITY_ADMIN_UPN in the azd environment is blank or differs from .env; provisioning was not started.'
+}
+Write-Host 'Verified Fabric capacity administrator from .env in the azd environment.' -ForegroundColor Cyan
+
 Invoke-Checked -Command { & azd up --environment $environment.AZURE_ENV_NAME --no-prompt } -FailureMessage 'azd up failed. Review the preceding deployment output for the failing resource or permission.'
