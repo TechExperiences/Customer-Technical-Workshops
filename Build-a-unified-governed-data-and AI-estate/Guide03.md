@@ -6,7 +6,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
    ![](../Sandbox-Environment-Guides/Images/amp52.png)
 
-1. Select the pre deployed **rg-Buid-Unified** resource group.
+1. Select the pre deployed **rg-Buid-Unify** resource group.
 
    ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u3.png)
 
