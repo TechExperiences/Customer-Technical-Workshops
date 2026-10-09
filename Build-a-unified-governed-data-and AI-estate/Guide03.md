@@ -23,9 +23,13 @@ The **Caldova-Pharma-XXXX** Fabric workspace has already been created and config
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
 
-1. Navigate to **Workspaces**, there should be workspace created with the name similar to **Caldova-Pharma**. 
+1. Navigate to **Workspaces (1)**, there should be workspace created with the name starting with  **Caldova-Build-Unify-**. 
 
-   ![](../Sandbox-Environment-Guides/Images/workspace-created.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u6.png)
+
+1. See the created Fabric items.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u5.png)
 
 
 ## Step 2: Validate the Required Delta Tables Loaded into the Lakehouse
@@ -34,7 +38,9 @@ The required analytical and operational data has already been loaded into the Ca
 
 The validation ensures that the data is ready for downstream analytics, reporting, and AI workloads.
 
-1. Select the created **Caldova-Pharma** Workspace.
+1. Select the created **Caldova_Lakehouse** Workspace.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u7.png)
 
 1. Open the **Caldova_Lakehouse** lakehouse from the workspace.
 
