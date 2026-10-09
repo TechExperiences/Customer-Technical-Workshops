@@ -41,7 +41,7 @@ module estate './modules/estate.bicep' = {
     sqlDatabaseName: sqlDatabaseName
     fabricCapacityName: fabricCapacityName
     fabricCapacityLocation: 'westus2'
-    fabricCapacityAdministrators: fabricCapacityAdministrators
+    fabricCapacityAdministrators: union(fabricCapacityAdministrators, [])
   }
 }
 
