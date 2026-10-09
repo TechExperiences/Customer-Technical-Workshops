@@ -17,8 +17,10 @@
 
 # CELL ********************
 
-# Load only Analytical and Operational landing files into Lakehouse Delta tables.
-# BusinessApplication JSON is intentionally loaded into Fabric SQL Database by Logic App.
+# Load the governed Lakehouse representation used by the semantic model.  The
+# BusinessApplication JSON is also retained in Fabric SQL Database through the
+# Logic App; materializing it here avoids an external DirectQuery credential
+# dependency in the semantic model.
 
 from pyspark.sql import functions as F
 
@@ -34,6 +36,7 @@ OPERATIONAL_TABLES = [
     "Inventory", "ManufacturingBatch", "Material", "PurchaseOrder",
     "PurchaseOrderItem", "QualityInspection", "Shipment", "Supplier",
 ]
+BUSINESS_APPLICATION_TABLES = ["CustomerDetails", "CustomerAddress"]
 
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {TARGET_SCHEMA}")
 
@@ -52,6 +55,14 @@ for table in ANALYTICAL_TABLES:
 for table in OPERATIONAL_TABLES:
     df = (spark.read.option("header", "true").option("inferSchema", "true")
           .csv(f"{PACKAGE_ROOT}/Operational/{table}.csv"))
+    write_table(df, table)
+
+for table in BUSINESS_APPLICATION_TABLES:
+    # Source files are JSON arrays, so multiLine is required for Spark to read
+    # each array as records rather than treating the whole document as one row.
+    df = spark.read.option("multiLine", "true").json(f"{PACKAGE_ROOT}/BusinessApplication/{table}.json")
+    if table == "CustomerDetails":
+        df = df.withColumn("CreatedDate", F.to_date("CreatedDate"))
     write_table(df, table)
 
 # Normalize the one mixed-format source date before semantic-model use.

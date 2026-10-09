@@ -15,9 +15,9 @@ import requests
 
 FABRIC_API = "https://api.fabric.microsoft.com/v1"
 
-# (table, [(column, dataType), ...]) - column lists come from the CSV headers / SQL DDL
-# already shipped in this package; table names match the lowercase Delta table names the
-# ingestion notebook writes (Lakehouse) or the exact SQL Database table names (Fabric SQL DB).
+# (table, [(column, dataType), ...]) - column lists come from the CSV headers and
+# BusinessApplication JSON contracts already shipped in this package.  Every
+# table is materialized as a Delta table by the Lakehouse ingestion notebook.
 LAKEHOUSE_TABLES: dict[str, list[tuple[str, str]]] = {
     "DimDate": [("DateKey", "int64"), ("FullDate", "dateTime"), ("Year", "int64"), ("Quarter", "int64"),
                 ("Month", "int64"), ("MonthName", "string"), ("Day", "int64")],
@@ -71,9 +71,6 @@ LAKEHOUSE_TABLES: dict[str, list[tuple[str, str]]] = {
     "Shipment": [("ShipmentID", "int64"), ("BatchID", "int64"), ("ProductID", "int64"), ("PlantID", "int64"),
                   ("DestinationLocationID", "int64"), ("ShipDate", "dateTime"), ("DeliveryDate", "dateTime"),
                   ("Quantity", "int64"), ("Carrier", "string"), ("Status", "string")],
-}
-
-SQL_DATABASE_TABLES: dict[str, list[tuple[str, str]]] = {
     "CustomerDetails": [("CustomerID", "int64"), ("CustomerName", "string"), ("Email", "string"),
                           ("Phone", "string"), ("Segment", "string"), ("AccountManager", "string"),
                           ("CreatedDate", "dateTime")],
@@ -232,7 +229,7 @@ def guid() -> str:
     return str(uuid.uuid4())
 
 
-def build_model_bim(workspace_id: str, lakehouse_id: str, sql_server: str, sql_database: str) -> dict:
+def build_model_bim(workspace_id: str, lakehouse_id: str) -> dict:
     tables = []
     for name, columns in LAKEHOUSE_TABLES.items():
         tables.append({
@@ -248,30 +245,6 @@ def build_model_bim(workspace_id: str, lakehouse_id: str, sql_server: str, sql_d
                 "source": {"type": "entity", "entityName": name.lower(), "schemaName": "dbo", "expressionSource": "LakehouseQuery"},
             }],
         })
-    for name, columns in SQL_DATABASE_TABLES.items():
-        tables.append({
-            "name": name,
-            "lineageTag": guid(),
-            "columns": [
-                {"name": column, "dataType": data_type, "sourceColumn": column, "lineageTag": guid()}
-                for column, data_type in columns
-            ],
-            "partitions": [{
-                "name": name,
-                "mode": "directQuery",
-                "source": {
-                    "type": "m",
-                    "expression": [
-                        "let",
-                        "    Source = FabricSqlDatabaseQuery,",
-                        f"    Navigation = Source{{[Schema=\"dbo\",Item=\"{name}\"]}}[Data]",
-                        "in",
-                        "    Navigation",
-                    ],
-                },
-            }],
-        })
-
     relationships = [
         {
             "name": guid(),
@@ -292,11 +265,9 @@ def build_model_bim(workspace_id: str, lakehouse_id: str, sql_server: str, sql_d
             "dataAccessOptions": {"legacyRedirects": True, "returnErrorValuesAsNull": True},
             "expressions": [
                 {
-                    # Direct Lake on OneLake (binds the Lakehouse's own storage directly via the
-                    # Azure Data Lake Storage connector) - not Direct Lake on SQL (Sql.Database
-                    # against the SQL analytics endpoint), which Fabric rejects when combined with
-                    # DirectQuery tables in the same composite model: "You cannot use Direct Lake
-                    # on SQL mode together with other storage modes in the same model."
+                    # Direct Lake on OneLake binds all governed tables, including the
+                    # BusinessApplication replica.  The authoritative customer records
+                    # remain in Fabric SQL as well, loaded by the Logic App.
                     "name": "LakehouseQuery",
                     "kind": "m",
                     "lineageTag": guid(),
@@ -308,17 +279,10 @@ def build_model_bim(workspace_id: str, lakehouse_id: str, sql_server: str, sql_d
                     ],
                     "annotations": [{"name": "PBI_IncludeFutureArtifacts", "value": "False"}],
                 },
-                {
-                    "name": "FabricSqlDatabaseQuery",
-                    "kind": "m",
-                    "lineageTag": guid(),
-                    "expression": ["let", f"    Source = Sql.Database(\"{sql_server}\", \"{sql_database}\")", "in", "    Source"],
-                    "annotations": [{"name": "PBI_IncludeFutureArtifacts", "value": "False"}],
-                },
             ],
             "tables": tables,
             "relationships": relationships,
-            "annotations": [{"name": "PBI_QueryOrder", "value": json.dumps(list(LAKEHOUSE_TABLES) + list(SQL_DATABASE_TABLES))}],
+            "annotations": [{"name": "PBI_QueryOrder", "value": json.dumps(list(LAKEHOUSE_TABLES))}],
         },
     }
 
@@ -332,9 +296,8 @@ def platform_part(display_name: str, item_type: str) -> str:
 
 
 def deploy_semantic_model(fabric: Api, workspace_id: str, display_name: str,
-                            lakehouse_id: str,
-                            sql_server: str, sql_database: str) -> str:
-    model_bim = build_model_bim(workspace_id, lakehouse_id, sql_server, sql_database)
+                            lakehouse_id: str) -> str:
+    model_bim = build_model_bim(workspace_id, lakehouse_id)
     definition = {
         "parts": [
             {"path": "model.bim", "payload": encode(json.dumps(model_bim)), "payloadType": "InlineBase64"},
@@ -416,17 +379,13 @@ def main() -> None:
     parser.add_argument("--lakehouse-id", required=True)
     parser.add_argument("--semantic-model-name", default="Caldova_Unified_SemanticModel")
     parser.add_argument("--report-name", default="Caldova_Unified_Report")
-    parser.add_argument("--sql-server", required=True, help="Fabric SQL Database server FQDN (host,port)")
-    parser.add_argument("--sql-database", required=True)
     args = parser.parse_args()
 
     fabric = Api(token("AZURE_FABRIC_ACCESS_TOKEN"))
 
-    sql_server_host = args.sql_server.split(",")[0]
-
     semantic_model_id = deploy_semantic_model(
         fabric, args.workspace_id, args.semantic_model_name,
-        args.lakehouse_id, sql_server_host, args.sql_database,
+        args.lakehouse_id,
     )
     report_id = deploy_report(fabric, args.workspace_id, args.report_name, semantic_model_id)
 

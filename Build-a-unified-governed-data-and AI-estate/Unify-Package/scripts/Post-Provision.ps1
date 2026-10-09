@@ -87,7 +87,7 @@ try {
         -StorageAccountName $storageAccount `
         -WorkspaceId $fabric.workspaceId `
         -LakehouseId $fabric.lakehouseId `
-        -SourceFolders @('Analytical', 'Operational')
+        -SourceFolders @('Analytical', 'Operational', 'BusinessApplication')
     & (Join-Path $PSScriptRoot 'Remove-OperationalBlobs.ps1') -StorageAccountName $storageAccount
 
     & (Get-Command python -ErrorAction Stop).Source (Join-Path $PSScriptRoot 'deploy_lakehouse_notebook.py') `
@@ -95,8 +95,7 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Lakehouse ingestion notebook deployment/run failed.' }
 
     $semanticArtifacts = & (Get-Command python -ErrorAction Stop).Source (Join-Path $PSScriptRoot 'deploy_semantic_model.py') `
-        --workspace-id $fabric.workspaceId --lakehouse-id $fabric.lakehouseId `
-        --sql-server $fabric.sqlDatabaseServerFqdn --sql-database $fabric.sqlDatabaseName | ConvertFrom-Json
+        --workspace-id $fabric.workspaceId --lakehouse-id $fabric.lakehouseId | ConvertFrom-Json
     if ($LASTEXITCODE -ne 0 -or -not $semanticArtifacts.semanticModelId) { throw 'Semantic model/report deployment failed.' }
 
     & (Get-Command python -ErrorAction Stop).Source (Join-Path $PSScriptRoot 'deploy_data_agent.py') `

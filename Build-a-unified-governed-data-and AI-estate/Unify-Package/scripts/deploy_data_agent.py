@@ -12,8 +12,8 @@ import requests
 
 FABRIC_API = "https://api.fabric.microsoft.com/v1"
 
-# Every table in the semantic model (deploy_semantic_model.py's LAKEHOUSE_TABLES +
-# SQL_DATABASE_TABLES). The Data Agent's datasource.json "elements" array is how
+# Every table in the semantic model (deploy_semantic_model.py's LAKEHOUSE_TABLES).
+# The Data Agent's datasource.json "elements" array is how
 # Fabric decides which tables the agent may query - with it omitted/empty, the
 # agent has no tables selected at all ("No tables selected yet" in the portal),
 # regardless of how well-formed the semantic model itself is.
