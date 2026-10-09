@@ -110,24 +110,26 @@ You will first set up **GitHub Copilot** and then use it to begin implementing t
 
 ---
 
-## **Fabric IQ**
+## **Deploy Fabric IQ with GitHub Copilot**
+# Future State Architecture
 
-The **Future State Architecture** describes what we want the solution to contain. The next step is to translate that design into the actual Fabric resources needed for the prototype.
+The **Future State Architecture** shows what we want the solution to look like. Rather than manually creating each Fabric resource and configuring every component step by step, we’ll use **GitHub Copilot** to help turn that architecture into a working prototype.
 
-The prompt below acts as the implementation plan for the **Fabric IQ** portion of the architecture. It tells **GitHub Copilot** what needs to be created, what existing resources should be reused, what data should be generated, and how the Fabric components should be connected.
+Instead of starting with individual configuration tasks, you’ll describe what you want to build through a prompt. The prompt provides **GitHub Copilot** with the architecture, implementation requirements, resources to reuse, data needed for the scenario, and how the Fabric components should work together.
 
-**What will this prompt do?**
+## What Will This Prompt Do?
 
-When you provide the **architecture** and the prompt to **GitHub Copilot**, it will work through the implementation requirements and help create the Fabric IQ prototype, including:
+When you provide the architecture and prompt to **GitHub Copilot**, it can help work through the implementation of the **Fabric IQ** prototype, including:
 
-- Identify the Fabric resources required for the solution.
-- Reuse the existing Resource Group and Fabric Capacity.
-- Create and configure the Caldova Pharma Fabric Workspace.
-- Create the required Lakehouse and populate it with representative data for the business scenario.
-- Create the Ontology using the Lakehouse data and establish the required entities and relationships.
-- Create and configure the Data Agent to work with the business data and answer - launch-readiness questions.
+1. Identifying the Fabric resources needed for the solution.
+2. Reusing the existing Resource Group and Fabric Capacity.
+3. Creating and configuring the Caldova Pharma Fabric Workspace.
+4. Creating the required Lakehouse and populating it with representative business data.
+5. Creating the Ontology based on the Lakehouse data and establishing the required entities and relationships.
+6. Creating and configuring the Data Agent to work with the business data and support launch-readiness questions.
 
-This allows **Copilot** to understand the solution as a whole, determine the implementation sequence, and interact with us when it needs clarification or confirmation.
+The goal is to move from **manually building each component** to **describing the desired solution through prompts and using GitHub Copilot to help implement it**. You’ll guide Copilot with your requirements, review what it creates, and refine your prompts as you build the prototype.
+
 
 1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the approved **Caldova-Future-State-Architecture.png (2)**.
 
@@ -314,7 +316,7 @@ This allows **Copilot** to understand the solution as a whole, determine the imp
 
 --- 
 
-## Foundry IQ & Web IQ
+## Deploy Foundry IQ & Web IQ with GitHub Copilot
 
 With the **Fabric IQ** prototype in place, the next step is to implement the **Foundry IQ** portion of the Future State Architecture.
 
