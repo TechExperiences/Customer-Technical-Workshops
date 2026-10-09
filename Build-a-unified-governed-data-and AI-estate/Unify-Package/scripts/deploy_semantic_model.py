@@ -359,8 +359,164 @@ def deploy_semantic_model(fabric: Api, workspace_id: str, display_name: str,
     return existing["id"]
 
 
+def _visual_field(table: str, column: str, aggregation: int | None = None) -> tuple[dict, str, str]:
+    """Return a semantic-query expression plus the stable Power BI query reference."""
+    column_expression = {
+        "Column": {
+            "Expression": {"SourceRef": {"Source": table}},
+            "Property": column,
+        }
+    }
+    if aggregation is None:
+        return column_expression, f"{table}.{column}", column
+    aggregation_expression = {
+        "Aggregation": {"Expression": column_expression, "Function": aggregation}
+    }
+    aggregation_names = {0: "Sum", 1: "Average", 2: "Count", 5: "DistinctCount"}
+    return aggregation_expression, f"{aggregation_names[aggregation]}({table}.{column})", f"{aggregation_names[aggregation]} of {column}"
+
+
+def _report_visual(
+    name: str,
+    visual_type: str,
+    x: int,
+    y: int,
+    width: int,
+    height: int,
+    projections: dict[str, list[tuple[str, str, int | None]]],
+    title: str,
+    tab_order: int,
+) -> dict:
+    """Build one legacy report.json visual container for Fabric's report API.
+
+    Fabric still accepts this report.json format for REST-created reports.  Keeping
+    it lets this project update an existing report in place while supplying real
+    visual definitions rather than an empty report canvas.
+    """
+    query_select: list[dict] = []
+    config_projections: dict[str, list[dict]] = {}
+    transform_ordering: dict[str, list[int]] = {}
+    transform_active: dict[str, list[dict]] = {}
+    source_tables: list[str] = []
+
+    for role, fields in projections.items():
+        config_projections[role] = []
+        transform_ordering[role] = []
+        transform_active[role] = []
+        for table, column, aggregation in fields:
+            if table not in source_tables:
+                source_tables.append(table)
+            expression, query_ref, restatement = _visual_field(table, column, aggregation)
+            projection_index = len(query_select)
+            query_select.append({**expression, "Name": query_ref})
+            config_projections[role].append({"queryRef": query_ref})
+            transform_ordering[role].append(projection_index)
+            transform_active[role].append({"queryRef": query_ref})
+
+    visual_config = {
+        "name": name,
+        "layouts": [{
+            "id": 0,
+            "position": {"x": x, "y": y, "z": tab_order, "width": width, "height": height, "tabOrder": tab_order},
+        }],
+        "singleVisual": {
+            "visualType": visual_type,
+            "projections": config_projections,
+            "vcObjects": {"title": [{"properties": {"text": {"expr": {"Literal": {"Value": json.dumps(f"'{title}'")}}}}}]},
+        },
+    }
+    query = {
+        "Commands": [{"SemanticQueryDataShapeCommand": {
+            "Query": {
+                "Version": 2,
+                "From": [{"Name": table, "Entity": table, "Type": 0} for table in source_tables],
+                "Select": query_select,
+            },
+            "Binding": {
+                "DataReduction": {"DataVolume": 3, "Primary": {"Window": {"Count": 500}}},
+                "Primary": {"Groupings": [{"Projections": list(range(len(query_select)))}]},
+                "Version": 1,
+            },
+            "ExecutionMetricsKind": 1,
+        }}],
+    }
+    query_metadata = []
+    for role_fields in projections.values():
+        for table, column, aggregation in role_fields:
+            _, query_ref, restatement = _visual_field(table, column, aggregation)
+            query_metadata.append({"Name": query_ref, "Restatement": restatement})
+    data_transforms = {
+        "objects": {},
+        "projectionOrdering": transform_ordering,
+        "projectionActive": transform_active,
+        "queryMetadata": {"Select": query_metadata},
+    }
+    return {
+        "x": x,
+        "y": y,
+        "z": tab_order,
+        "width": width,
+        "height": height,
+        "config": json.dumps(visual_config),
+        "query": json.dumps(query),
+        "dataTransforms": json.dumps(data_transforms),
+        "filters": "[]",
+    }
+
+
+def build_report_json() -> dict:
+    """Create the Caldova executive overview using the unified Direct Lake model."""
+    report_namespace = uuid.UUID("524eb324-ee4a-5a71-a01e-63e287510219")
+
+    def visual(
+        key: str, visual_type: str, x: int, y: int, width: int, height: int,
+        projections: dict[str, list[tuple[str, str, int | None]]], title: str, tab_order: int,
+    ) -> dict:
+        return _report_visual(
+            uuid.uuid5(report_namespace, key).hex,
+            visual_type, x, y, width, height, projections, title, tab_order,
+        )
+
+    visuals = [
+        visual("total-revenue", "card", 20, 20, 285, 100,
+               {"Values": [("FactSales", "TotalRevenue", 0)]}, "Total Revenue", 0),
+        visual("units-sold", "card", 325, 20, 285, 100,
+               {"Values": [("FactSales", "UnitsSold", 0)]}, "Units Sold", 1),
+        visual("inventory-on-hand", "card", 630, 20, 285, 100,
+               {"Values": [("Inventory", "QuantityOnHand", 0)]}, "Quantity on Hand", 2),
+        visual("supplier-quality", "card", 935, 20, 325, 100,
+               {"Values": [("DimSupplier", "QualityRating", 1)]}, "Average Supplier Quality", 3),
+        visual("revenue-trend", "lineChart", 20, 145, 600, 265,
+               {"Category": [("DimDate", "FullDate", None)], "Y": [("FactSales", "TotalRevenue", 0)]},
+               "Revenue Trend", 4),
+        visual("revenue-by-product", "clusteredBarChart", 640, 145, 620, 265,
+               {"Category": [("DimProduct", "ProductName", None)], "Y": [("FactSales", "TotalRevenue", 0)]},
+               "Revenue by Product", 5),
+        visual("inventory-by-plant", "clusteredColumnChart", 20, 435, 600, 265,
+               {"Category": [("DimPlant", "PlantName", None)], "Y": [("Inventory", "QuantityOnHand", 0)]},
+               "Inventory by Plant", 6),
+        visual("supplier-quality-table", "tableEx", 640, 435, 620, 265,
+               {"Values": [("DimSupplier", "SupplierName", None), ("DimSupplier", "QualityRating", 1)]},
+               "Supplier Quality", 7),
+    ]
+    return {
+        "config": json.dumps({"version": "5.43", "themeCollection": {}}),
+        "layoutOptimization": 0,
+        "sections": [{
+            "name": "ReportSection1",
+            "displayName": "Overview",
+            "filters": "[]",
+            "ordinal": 0,
+            "visualContainers": visuals,
+            "width": 1280,
+            "height": 720,
+        }],
+        "resourcePackages": [],
+    }
+
+
 def deploy_report(fabric: Api, workspace_id: str, display_name: str, semantic_model_id: str) -> str:
-    """Create a minimal, blank report bound to the semantic model via a single empty page."""
+    """Create or update the business-ready report bound to the semantic model."""
     # Fabric REST API uses the v2 report-definition schema.  Its documented
     # byConnection form needs only semanticmodelid=<item GUID>.  The prior v1
     # shape was incomplete (it omitted pbiModelVirtualServerName and name), which
@@ -374,20 +530,7 @@ def deploy_report(fabric: Api, workspace_id: str, display_name: str, semantic_mo
             }
         },
     }
-    report_json = {
-        "config": json.dumps({"version": "5.43", "themeCollection": {}}),
-        "layoutOptimization": 0,
-        "sections": [{
-            "name": "ReportSection1",
-            "displayName": "Overview",
-            "filters": "[]",
-            "ordinal": 0,
-            "visualContainers": [],
-            "width": 1280,
-            "height": 720,
-        }],
-        "resourcePackages": [],
-    }
+    report_json = build_report_json()
     definition = {
         "parts": [
             {"path": "definition.pbir", "payload": encode(json.dumps(pbir)), "payloadType": "InlineBase64"},
