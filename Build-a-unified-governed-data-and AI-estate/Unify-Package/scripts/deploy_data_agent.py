@@ -11,12 +11,12 @@ import uuid
 import requests
 
 FABRIC_API = "https://api.fabric.microsoft.com/v1"
+LINEAGE_NAMESPACE = uuid.UUID("a7d99ee8-718c-5e3d-a52f-e966b51288a1")
 
 # Every table in the semantic model (deploy_semantic_model.py's LAKEHOUSE_TABLES).
-# The Data Agent's datasource.json "elements" array is how
-# Fabric decides which tables the agent may query - with it omitted/empty, the
-# agent has no tables selected at all ("No tables selected yet" in the portal),
-# regardless of how well-formed the semantic model itself is.
+# The Data Agent's datasource.json "elements" array must use the semantic
+# model's actual table lineage IDs.  Random IDs display table names in Fabric
+# but are treated as deleted table references at query time.
 SEMANTIC_MODEL_TABLES = [
     "DimDate", "DimLocation", "DimMaterial", "DimPlant", "DimProduct", "DimSupplier",
     "FactInventory", "FactInventorySnapshot", "FactProduction", "FactQuality", "FactSales",
@@ -97,6 +97,10 @@ def encode(obj: dict) -> str:
     return base64.b64encode(json.dumps(obj).encode("utf-8")).decode("utf-8")
 
 
+def semantic_table_lineage_id(table_name: str) -> str:
+    return str(uuid.uuid5(LINEAGE_NAMESPACE, f"table/{table_name}"))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--workspace-id", required=True)
@@ -116,7 +120,7 @@ def main() -> None:
         "userDescription": "Unified Caldova Analytical, Operational, and Customer data spanning the Lakehouse and Fabric SQL Database.",
         "elements": [
             {
-                "id": str(uuid.uuid4()),
+                "id": semantic_table_lineage_id(table),
                 "is_selected": True,
                 "display_name": table,
                 "type": "semantic_model.table",

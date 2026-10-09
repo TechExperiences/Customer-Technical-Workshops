@@ -1,6 +1,4 @@
-"""Deploy the composite Semantic Model spanning the Lakehouse (Direct Lake) and the
-Fabric SQL Database (DirectQuery), then create a minimal Power BI report bound to it.
-"""
+"""Deploy the unified Direct Lake Semantic Model and its bound Fabric report."""
 from __future__ import annotations
 
 import argparse
@@ -14,6 +12,9 @@ from pathlib import Path
 import requests
 
 FABRIC_API = "https://api.fabric.microsoft.com/v1"
+# Stable lineage IDs let Fabric and the Data Agent continue referencing the same
+# semantic-model tables after idempotent updateDefinition deployments.
+LINEAGE_NAMESPACE = uuid.UUID("a7d99ee8-718c-5e3d-a52f-e966b51288a1")
 
 # (table, [(column, dataType), ...]) - column lists come from the CSV headers and
 # BusinessApplication JSON contracts already shipped in this package.  Every
@@ -225,8 +226,8 @@ def encode(text: str) -> str:
     return base64.b64encode(text.encode("utf-8")).decode("utf-8")
 
 
-def guid() -> str:
-    return str(uuid.uuid4())
+def lineage_id(*parts: str) -> str:
+    return str(uuid.uuid5(LINEAGE_NAMESPACE, "/".join(parts)))
 
 
 def build_model_bim(workspace_id: str, lakehouse_id: str) -> dict:
@@ -234,9 +235,14 @@ def build_model_bim(workspace_id: str, lakehouse_id: str) -> dict:
     for name, columns in LAKEHOUSE_TABLES.items():
         tables.append({
             "name": name,
-            "lineageTag": guid(),
+            "lineageTag": lineage_id("table", name),
             "columns": [
-                {"name": column, "dataType": data_type, "sourceColumn": column, "lineageTag": guid()}
+                {
+                    "name": column,
+                    "dataType": data_type,
+                    "sourceColumn": column,
+                    "lineageTag": lineage_id("table", name, "column", column),
+                }
                 for column, data_type in columns
             ],
             "partitions": [{
@@ -247,7 +253,7 @@ def build_model_bim(workspace_id: str, lakehouse_id: str) -> dict:
         })
     relationships = [
         {
-            "name": guid(),
+            "name": lineage_id("relationship", from_table, from_column, to_table, to_column),
             "fromTable": from_table, "fromColumn": from_column,
             "toTable": to_table, "toColumn": to_column,
             **({"isActive": False} if (from_table, from_column, to_table, to_column) in INACTIVE_RELATIONSHIPS else {}),
@@ -270,7 +276,7 @@ def build_model_bim(workspace_id: str, lakehouse_id: str) -> dict:
                     # remain in Fabric SQL as well, loaded by the Logic App.
                     "name": "LakehouseQuery",
                     "kind": "m",
-                    "lineageTag": guid(),
+                    "lineageTag": lineage_id("expression", "LakehouseQuery"),
                     "expression": [
                         "let",
                         f"    Source = AzureStorage.DataLake(\"https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}\", [HierarchicalNavigation=true])",

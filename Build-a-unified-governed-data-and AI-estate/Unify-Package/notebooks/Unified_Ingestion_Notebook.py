@@ -38,6 +38,18 @@ OPERATIONAL_TABLES = [
 ]
 BUSINESS_APPLICATION_TABLES = ["CustomerDetails", "CustomerAddress"]
 
+# Direct Lake maps directly to the physical Delta schema.  CSV inference otherwise
+# produces 32-bit integers and date values that do not match the model's int64 and
+# dateTime declarations, leaving every Direct Lake table unavailable at query time.
+TEMPORAL_COLUMNS = {
+    "DimDate": {"FullDate"}, "DimProduct": {"LaunchDate"}, "DimSupplier": {"OnboardedDate"},
+    "FactInventory": {"SnapshotDate"}, "FactSales": {"SalesDate"}, "Supplier": {"OnboardedDate"},
+    "PurchaseOrder": {"OrderDate", "ExpectedDeliveryDate"},
+    "ManufacturingBatch": {"StartDate", "EndDate"}, "Inventory": {"LastUpdated"},
+    "QualityInspection": {"InspectionDate"}, "Shipment": {"ShipDate", "DeliveryDate"},
+    "CustomerDetails": {"CreatedDate"},
+}
+
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {TARGET_SCHEMA}")
 
 def write_table(dataframe, table_name):
@@ -47,31 +59,39 @@ def write_table(dataframe, table_name):
         .option("overwriteSchema", "true")
         .saveAsTable(f"{TARGET_SCHEMA}.{table_name.lower()}"))
 
+
+def normalize_for_direct_lake(dataframe, table_name):
+    """Make physical Delta types match the semantic model's Direct Lake contract."""
+    for field in dataframe.schema.fields:
+        if field.dataType.simpleString() in {"tinyint", "smallint", "int"}:
+            dataframe = dataframe.withColumn(field.name, F.col(field.name).cast("long"))
+        elif field.dataType.simpleString() == "float":
+            dataframe = dataframe.withColumn(field.name, F.col(field.name).cast("double"))
+    for column in TEMPORAL_COLUMNS.get(table_name, set()):
+        if table_name == "FactSales" and column == "SalesDate":
+            dataframe = dataframe.withColumn(
+                column,
+                F.coalesce(F.to_timestamp(column, "M/d/yyyy h:mm:ss a"), F.to_timestamp(column)),
+            )
+        else:
+            dataframe = dataframe.withColumn(column, F.to_timestamp(F.col(column)))
+    return dataframe
+
 for table in ANALYTICAL_TABLES:
     df = (spark.read.option("header", "true").option("inferSchema", "true")
           .csv(f"{PACKAGE_ROOT}/Analytical/{table}.csv"))
-    write_table(df, table)
+    write_table(normalize_for_direct_lake(df, table), table)
 
 for table in OPERATIONAL_TABLES:
     df = (spark.read.option("header", "true").option("inferSchema", "true")
           .csv(f"{PACKAGE_ROOT}/Operational/{table}.csv"))
-    write_table(df, table)
+    write_table(normalize_for_direct_lake(df, table), table)
 
 for table in BUSINESS_APPLICATION_TABLES:
     # Source files are JSON arrays, so multiLine is required for Spark to read
     # each array as records rather than treating the whole document as one row.
     df = spark.read.option("multiLine", "true").json(f"{PACKAGE_ROOT}/BusinessApplication/{table}.json")
-    if table == "CustomerDetails":
-        df = df.withColumn("CreatedDate", F.to_date("CreatedDate"))
-    write_table(df, table)
-
-# Normalize the one mixed-format source date before semantic-model use.
-spark.sql(f"""
-    CREATE OR REPLACE TABLE {TARGET_SCHEMA}.factsales AS
-    SELECT * EXCEPT (SalesDate),
-           COALESCE(to_date(SalesDate, 'M/d/yyyy h:mm:ss a'), to_date(SalesDate)) AS SalesDate
-    FROM {TARGET_SCHEMA}.factsales
-""")
+    write_table(normalize_for_direct_lake(df, table), table)
 
 # Extend DimDate for fact dates outside the supplied dimension calendar.
 spark.sql(f"""
