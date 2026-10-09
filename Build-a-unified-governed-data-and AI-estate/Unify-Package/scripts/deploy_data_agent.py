@@ -6,10 +6,25 @@ import base64
 import json
 import os
 import time
+import uuid
 
 import requests
 
 FABRIC_API = "https://api.fabric.microsoft.com/v1"
+
+# Every table in the semantic model (deploy_semantic_model.py's LAKEHOUSE_TABLES +
+# SQL_DATABASE_TABLES). The Data Agent's datasource.json "elements" array is how
+# Fabric decides which tables the agent may query - with it omitted/empty, the
+# agent has no tables selected at all ("No tables selected yet" in the portal),
+# regardless of how well-formed the semantic model itself is.
+SEMANTIC_MODEL_TABLES = [
+    "DimDate", "DimLocation", "DimMaterial", "DimPlant", "DimProduct", "DimSupplier",
+    "FactInventory", "FactInventorySnapshot", "FactProduction", "FactQuality", "FactSales",
+    "FactShipment", "FactSupplyChain",
+    "Supplier", "Material", "PurchaseOrder", "ManufacturingBatch", "Inventory",
+    "PurchaseOrderItem", "QualityInspection", "Shipment",
+    "CustomerDetails", "CustomerAddress",
+]
 
 AI_INSTRUCTIONS = """You are the Caldova Unified Data Estate analytics agent. Answer questions about \
 sales, products, plants, suppliers, materials, manufacturing, inventory, shipments, purchase orders, \
@@ -99,6 +114,15 @@ def main() -> None:
         "displayName": args.semantic_model_name,
         "type": "semantic_model",
         "userDescription": "Unified Caldova Analytical, Operational, and Customer data spanning the Lakehouse and Fabric SQL Database.",
+        "elements": [
+            {
+                "id": str(uuid.uuid4()),
+                "is_selected": True,
+                "display_name": table,
+                "type": "semantic_model.table",
+            }
+            for table in SEMANTIC_MODEL_TABLES
+        ],
     }
     stage_config = {"$schema": "1.0.0", "aiInstructions": AI_INSTRUCTIONS}
     publish_info = {"$schema": "1.0.0", "description": "Published by Post-Provision.ps1"}
