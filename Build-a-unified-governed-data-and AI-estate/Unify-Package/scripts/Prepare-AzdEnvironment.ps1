@@ -20,3 +20,14 @@ if (-not $env:SQL_ADMINISTRATOR_PASSWORD) {
     $env:SQL_ADMINISTRATOR_PASSWORD = $plainPassword
 }
 
+# UNIFY-SP-SUPPORT
+$operator = $env:FABRIC_CAPACITY_ADMIN_UPN
+$signedIn = az account show --query user -o json | ConvertFrom-Json
+if ($signedIn.type -eq 'servicePrincipal') {
+    $token = (az account get-access-token --resource https://database.windows.net --query accessToken -o tsv).Trim()
+    $payload = $token.Split('.')[1].Replace('-', '+').Replace('_', '/')
+    switch ($payload.Length % 4) { 2 { $payload += '==' } 3 { $payload += '=' } }
+    $operator = ([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($payload)) | ConvertFrom-Json).oid
+}
+azd env set FABRIC_CAPACITY_ADMIN_OPERATOR $operator | Out-Null
+$env:FABRIC_CAPACITY_ADMIN_OPERATOR = $operator
