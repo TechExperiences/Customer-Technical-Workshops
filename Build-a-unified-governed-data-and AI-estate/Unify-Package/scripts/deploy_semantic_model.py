@@ -413,18 +413,6 @@ def _report_visual(
             transform_ordering[role].append(projection_index)
             transform_active[role].append({"queryRef": query_ref})
 
-    visual_config = {
-        "name": name,
-        "layouts": [{
-            "id": 0,
-            "position": {"x": x, "y": y, "z": tab_order, "width": width, "height": height, "tabOrder": tab_order},
-        }],
-        "singleVisual": {
-            "visualType": visual_type,
-            "projections": config_projections,
-            "vcObjects": {"title": [{"properties": {"text": {"expr": {"Literal": {"Value": json.dumps(f"'{title}'")}}}}}]},
-        },
-    }
     query = {
         "Commands": [{"SemanticQueryDataShapeCommand": {
             "Query": {
@@ -439,6 +427,29 @@ def _report_visual(
             },
             "ExecutionMetricsKind": 1,
         }}],
+    }
+    # Power BI uses prototypeQuery to turn the projection queryRef strings into
+    # actual semantic-model fields.  The earlier report payload only supplied
+    # the projections. Fabric could therefore draw the visual shell but showed
+    # "Select or drag fields" for every visual, as if no fields were assigned.
+    prototype_query = {
+        "Version": 2,
+        "From": [{"Name": table, "Entity": table, "Type": 0} for table in source_tables],
+        "Select": query_select,
+    }
+    visual_config = {
+        "name": name,
+        "layouts": [{
+            "id": 0,
+            "position": {"x": x, "y": y, "z": tab_order, "width": width, "height": height, "tabOrder": tab_order},
+        }],
+        "singleVisual": {
+            "visualType": visual_type,
+            "projections": config_projections,
+            "prototypeQuery": prototype_query,
+            "drillFilterOtherVisuals": True,
+            "vcObjects": {"title": [{"properties": {"text": {"expr": {"Literal": {"Value": json.dumps(f"'{title}'")}}}}}]},
+        },
     }
     query_metadata = []
     for role_fields in projections.values():
