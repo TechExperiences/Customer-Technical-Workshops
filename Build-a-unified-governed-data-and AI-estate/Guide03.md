@@ -8,11 +8,11 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
 1. Select the pre deployed **rg-Buid-Unified** resource group.
 
-   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u1.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u3.png)
 
 1. You can see the already deployed resources.
 
-   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u2.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u4.png)
 
 ## Step 1: Validate the Fabric Workspace
 
