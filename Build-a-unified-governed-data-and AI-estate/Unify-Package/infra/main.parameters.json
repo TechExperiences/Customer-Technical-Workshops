@@ -10,7 +10,7 @@
     "sqlDatabaseName": { "value": "OperationalData" },
     "sqlAdministratorPassword": { "value": "${SQL_ADMINISTRATOR_PASSWORD}" },
     "fabricCapacityAdministrators": {
-      "value": ["${FABRIC_CAPACITY_ADMIN_UPN}"]
+      "value": ["${FABRIC_CAPACITY_ADMIN_UPN}", "${FABRIC_CAPACITY_ADMIN_OPERATOR}"]
     }
   }
 }
