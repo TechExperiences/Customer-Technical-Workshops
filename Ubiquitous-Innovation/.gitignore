@@ -1,0 +1,7 @@
+# Local Azure Developer CLI state and user-specific deployment settings
+.azure/
+.env
+
+# Python interpreter artifacts
+__pycache__/
+*.py[cod]

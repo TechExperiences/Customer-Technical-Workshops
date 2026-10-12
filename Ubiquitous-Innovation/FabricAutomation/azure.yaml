@@ -1,0 +1,5 @@
+name: ubiquitous-fabric-automation
+infra:
+  provider: bicep
+  path: infra
+  module: main
