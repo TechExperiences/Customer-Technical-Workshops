@@ -131,7 +131,7 @@ When you provide the architecture and prompt to **GitHub Copilot**, it can help 
 The goal is to move from **manually building each component** to **describing the desired solution through prompts and using GitHub Copilot to help implement it**. You’ll guide Copilot with your requirements, review what it creates, and refine your prompts as you build the prototype.
 
 
-1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the approved **Caldova-Future-State-Architecture.png (2)**.
+1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the approved Caldova's **Future-State-Architecture.png (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b89.png)
 
@@ -189,11 +189,6 @@ The goal is to move from **manually building each component** to **describing th
 1. Navigate to the Azure portal and click **Resource groups**. Open **rg-Caldova-iq** to verify the deployed resources.
 
    ![](../Amplify-Your-Intelligence/Images/23.png)
-
-
-1. Select the **existing Resource Group used for the deployment**. Do not select the resource groups highlighted below.
-
-   ![](../Amplify-Your-Intelligence/Images/24.png)
 
 1. You should see the deployed Fabric capacity.
 
