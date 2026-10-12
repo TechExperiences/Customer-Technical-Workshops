@@ -188,7 +188,7 @@ The goal is to move from **manually building each component** to **describing th
 
 1. Navigate to the Azure portal and click **Resource groups**. Open **rg-Caldova-iq** to verify the deployed resources.
 
-   ![](../Amplify-Your-Intelligence/Images/23.png)
+   ![](../Amplify-Your-Intelligence/Images/u25.png)
 
 1. You should see the deployed Fabric capacity.
 
