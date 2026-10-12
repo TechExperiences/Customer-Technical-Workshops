@@ -50,6 +50,22 @@ You will start with whiteboarding to architect a future state of a unified, open
 
 1. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
 
-## This completes the Envisioning Session using Microsoft Whiteboarding.
+### ## Next Step: Bringing the Unified Data and AI Solution to Life
+
+Once the **Future State Architecture** has been defined during the Envisioning session, the next step is to turn the proposed solution into a working prototype. For Caldova Pharma, this involves bringing together analytical, operational, and business application data in Microsoft Fabric and making it available for reporting, business insights, and AI-driven interactions.
+
+**Traditional Approach:**
+
+1. Traditionally, after finalizing the architecture and identifying the required solution components, the next step would be to manually implement and configure the solution. This typically involves:
+   - Creating the Fabric workspace and configuring the required capacity and access permissions.
+   - Connecting to analytical data in Azure Blob Storage and operational data in Azure SQL Database.
+   - Creating the Lakehouse, configuring shortcuts and mirroring, and making the required data available.
+   - Integrating business application data into Fabric SQL Database using the required integration components.
+   - Building the semantic model, establishing table relationships, and creating Power BI reports and a Data Agent.
+   - Reviewing governance, security, and data assets through OneLake Catalog.
+
+2. This traditional approach involves multiple configuration and integration activities across data sources, Microsoft Fabric, reporting, and AI capabilities. It can require considerable manual effort and technical expertise to ensure that all components are configured correctly and work together as intended.
+
+3. In the next exercise, we will use a **rapid prototyping** approach to demonstrate how **GitHub Copilot** can help translate the Future State Architecture and implementation requirements into a unified data and AI solution. By providing structured prompts describing the desired outcomes and existing resources, you will work interactively with Copilot to build the prototype, review its progress, and validate the results. This allows you to spend less time manually configuring individual components and more time focusing on the solution's business value and capabilities.
 
 ### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.

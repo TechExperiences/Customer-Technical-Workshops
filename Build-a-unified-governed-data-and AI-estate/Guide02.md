@@ -3,9 +3,9 @@
 
 Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
-## Rapid Prototyping using GitHub Copilot
+## Rapid Prototyping using ****GitHub Copilot****
 
-You will use GitHub Copilot to generate ARM or Bicep templates using the Future State Architecture arrived at from the previous Whiteboarding exercise.
+You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the Future State Architecture arrived at from the previous Whiteboarding exercise.
 
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
@@ -27,7 +27,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 1. Verify that the resources are available in their respective Azure regions and that the migration environment has been provisioned successfully.
 
 
-## Sign in to GitHub Copilot Chat
+## Sign in to ****GitHub Copilot**** Chat
 
 ### Step 1: Creation Of Fabric Workspace
 
@@ -35,7 +35,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp14.png)
 
-1. Click on **Continue with GitHub** to sign in to GitHub Copilot.
+1. Click on **Continue with GitHub** to sign in to ****GitHub Copilot****.
 
    ![](../Sandbox-Environment-Guides/Images/amp18.png)
 
@@ -87,7 +87,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/unifyvscode.png)
 
-1. From the **GitHub Copilot Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
+1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b6.png)
 
@@ -108,6 +108,21 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 1. Select **Enable**.
 
    ![](../Sandbox-Environment-Guides/Images/amp33.png)
+
+
+## Creation of Fabric Workspace using ****GitHub Copilot****
+
+The unified Caldova Pharma solution requires a **Microsoft Fabric workspace** to bring together analytical data, operational data, business application data, and AI capabilities. Before configuring these components, we need to establish the Fabric workspace and associate it with the existing Fabric capacity.
+
+Traditionally, this would involve manually creating the workspace, selecting the appropriate capacity, and configuring the required access permissions. Instead, we will provide ****GitHub Copilot**** with the workspace requirements and details of the existing Azure resources.
+
+## What will this prompt do?
+
+- Reuse the existing Azure Resource Group, storage account, and Fabric capacity.
+- Create the Caldova-Pharma Fabric workspace and attach the existing capacity.
+- Configure the requested Fabric workspace access for the specified user.
+
+This allows us to establish the foundation for the unified data solution through a natural-language prompt rather than manually configuring each item.
 
 
 1. Please copy the below prompt and paste it in the copilot chat win
@@ -164,9 +179,26 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    ![](../Sandbox-Environment-Guides/Images/workspace-created.png)
 
 
-### Step 2: Loading Of Required Delta Tables Into Lakehouse 
+## Step 2: Loading Required Data into the Lakehouse
 
-1. Navigate back to Github Copilot 
+### Bringing Analytical and Operational Data into OneLake
+
+With the Fabric workspace created, the next step is to bring together Caldova's analytical and operational data so that it can be used for reporting, analysis, and AI-driven insights.
+
+Traditionally, this would require manually creating a Lakehouse, configuring connections to the relevant data sources, setting up shortcuts or mirroring, and validating that the data is accessible. We will instead use ****GitHub Copilot**** to help configure these components based on the required data sources and ingestion approach.
+
+### What will this prompt do?
+
+- Create the Caldova-Lakehouse in the existing Fabric workspace.
+- Access analytical CSV files in Azure Blob Storage and use shortcuts to make them available in the Lakehouse.
+- Connect to the existing Azure SQL Database containing operational data.
+- Configure the mirrored database and the required shortcuts to make operational data available.
+- Validate that the required tables are accessible in the Lakehouse.
+
+This approach demonstrates how different data sources can be brought together in OneLake while reducing the manual effort required to configure individual data integration components.
+
+
+1. Navigate back to ****GitHub Copilot**** 
 
 1. Copy the below prompt and paste it in the chat window 
 
@@ -224,7 +256,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](/Sandbox-Environment-Guides/Images/LH-AnalyticalData.png)   
 
-1. Navigate back to Github Copilot 
+1. Navigate back to ****GitHub Copilot**** 
 
 1. Copy the below prompt and paste it in the chat window 
 
@@ -252,13 +284,27 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
    ![](/Sandbox-Environment-Guides/Images/LH-Operational.png)
 
 
-### Step 3: Loading Business Application Data into Fabric SQL Database:
+## Step 3: Loading Business Application Data into Fabric SQL Database:
 
-The business application data is currently stored as files in the **Azure Storage Account**. In this step, we will make this application data available in **Fabric SQL Database** so that it can be used by downstream applications, reporting, analytics, and AI workloads.
+### Integrating Business Application Data
 
-The data movement will be orchestrated using an **Azure Logic App**. The Logic App will act as the integration layer between Azure Storage and Fabric SQL Database.
+In addition to analytical and operational data, Caldova's solution requires business application data to be available for downstream reporting, analytics, and AI workloads. This data is stored separately in Azure Blob Storage and needs to be loaded into Fabric SQL Database.
 
-1. Navigate back to Github Copilot 
+Traditionally, this would involve manually configuring the integration components, creating the required connections, and developing a workflow to transfer data between the source and target systems.
+
+With ****GitHub Copilot****, we can describe the required integration flow and allow it to help create the necessary resources and configuration.
+
+### What will this prompt do?
+
+- Create a Fabric SQL Database in the existing Fabric workspace.
+- Configure the required Azure integration components.
+- Create an Azure Logic App to read business application data from the designated storage location and load it into Fabric SQL Database.
+- Make the business application tables available for downstream use.
+- Enable validation of the created database and integration resources.
+
+The objective is to demonstrate how a business requirement can be translated into an integration workflow with the help of ****GitHub Copilot****, instead of manually building each component separately.
+
+1. Navigate back to ****GitHub Copilot**** 
 
 1. Copy the below prompt and paste it in the chat window 
 
@@ -312,40 +358,58 @@ The data movement will be orchestrated using an **Azure Logic App**. The Logic A
 
    ![](../Sandbox-Environment-Guides/Images/LogicApp-Int.png)
 
-### Step 4: Building Semantic Model using Fabric Lakehouse and SQL Database to generate PowerBI report
+## Step 4: Building **Semantic Model** using Fabric Lakehouse and SQL Database to generate PowerBI report
 
-1. Navigate back to Github Copilot 
+### Turning Unified Data into Business Insights
+
+Once the **analytical, operational, and business application** data are available, the next step is to make the data meaningful and accessible to business users.
+
+**Traditionally**, this would involve manually building a **Semantic Model**, defining relationships between tables, developing a Power BI report, and configuring a Data Agent to answer business questions.
+
+In this exercise, we will use ****GitHub Copilot**** to accelerate the creation of these components and demonstrate how the unified data can be used for both visual analytics and natural-language interactions.
+
+### What will this prompt do?
+- Create a Direct Lake **Semantic Model** using the available Lakehouse and Fabric SQL Database tables.
+- Establish relationships between related tables.
+- Create a Data Agent using the **Semantic Model** and provide instructions based on the available data.
+- Help generate a Power BI operations report with relevant KPIs and visualizations.
+
+After the components are created, you will review the **Semantic Model** relationships, inspect the generated report, and test the Data Agent with a business question.
+
+This demonstrates how ****GitHub Copilot**** can help move from data integration to a usable analytics and AI experience.
+
+1. Navigate back to ****GitHub Copilot**** 
 
 1. Copy the below prompt and paste it in the chat window 
 
    ```
-   Great, You have loaded all data, please follow below instructions to create semantic model and Data agent in fabric workspace
+   Great, You have loaded all data, please follow below instructions to create **Semantic Model** and Data agent in fabric workspace
  
-   1. Create ONE Semantic Model using Direct Lake mode.  
+   1. Create ONE **Semantic Model** using Direct Lake mode.  
    
    Add ALL tables from the existing Fabric Lakehouse and Fabric SQL Database.
    
    Create and validate proper relationships between related tables.
    
-   Ensure all tables and relationships are visible, connected, and usable in  the Semantic Model.
+   Ensure all tables and relationships are visible, connected, and usable in  the **Semantic Model**.
    
-   2. Create one Data Agent using the Semantic Model and add concise instructions based on the available tables.
+   2. Create one Data Agent using the **Semantic Model** and add concise instructions based on the available tables.
 
    ```
 1. Navigate to Fabric Portal
 
-1. Open the created **semantic model** and review the configured table relationships to ensure the data model is correctly connected.
+1. Open the created ****Semantic Model**** and review the configured table relationships to ensure the data model is correctly connected.
 
    ![](../Sandbox-Environment-Guides/Images/Semantic-Model.png)
 
-1. Locate the created **semantic model** and Select the **More options (...)** menu for the semantic model and Select **Create report**.
+1. Locate the created ****Semantic Model**** and Select the **More options (...)** menu for the **Semantic Model** and Select **Create report**.
 
    ![](../Sandbox-Environment-Guides/Images/Create-Report.png)
 
 1. Click on **Copilot** icon on top and paste the below prompt and click send button to create Report 
 
    ```
-   Create a Caldova Pharma Operations Report using only the attached semantic model. Build a clean single-page dashboard with 5 KPI cards at the top (Orders, Revenue/Sales, Products, Customers, Inventory/Stock), followed by 3–4 visuals including a donut chart, bar chart, line chart, and trend chart. Use relevant fields and measures from the model without inventing data, and apply a professional, consistent blue theme with clear titles, proper formatting, and an executive-friendly layout.
+   Create a Caldova Pharma Operations Report using only the attached **Semantic Model**. Build a clean single-page dashboard with 5 KPI cards at the top (Orders, Revenue/Sales, Products, Customers, Inventory/Stock), followed by 3–4 visuals including a donut chart, bar chart, line chart, and trend chart. Use relevant fields and measures from the model without inventing data, and apply a professional, consistent blue theme with clear titles, proper formatting, and an executive-friendly layout.
 
    ```
 
@@ -379,8 +443,21 @@ The data movement will be orchestrated using an **Azure Logic App**. The Logic A
    ![](../Sandbox-Environment-Guides/Images/DA-Response.png)
 
 
-### Step 5: Govern & Secure - Caldova Operation
-Use OneLake Catalog to provide centralized governance and security for Caldova Pharma’s Fabric workspaces, enabling visibility and management of data assets, access permissions, sensitivity, lineage, ownership, and compliance policies across the unified data platform.
+## Step 5: Govern & Secure - Caldova Operation
+
+### Establishing Governance and Security Across the Unified Data Estate
+After creating the data and analytics components, the final step is to review how the resulting assets can be discovered, governed, and secured within Microsoft Fabric.
+
+As the solution grows, it becomes important to understand which workspaces and data assets are available, review governance information, and manage access permissions appropriately.
+
+In this step, we will use **OneLake Catalog** to explore the available data assets and the governance and security capabilities provided by Microsoft Fabric.
+
+### What will you explore?
+- Discover the workspaces and data assets available through **OneLake Catalog**.
+- Review governance insights for the created Fabric content.
+- Explore the available security and access-management capabilities.
+
+This step completes the prototype by connecting data integration and analytics with the governance and security capabilities needed to manage the unified data estate.
 
 1. Click **OneLake Catalog** and navigate to catalog page.
 
@@ -402,4 +479,4 @@ Use OneLake Catalog to provide centralized governance and security for Caldova P
    > **Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
 
 
-#### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session and validated the Unified governed Data&AI estate.
+#### Congratulations! You have successfully completed the `Rapid Prototyping using ****GitHub Copilot****` session and validated the Unified governed Data&AI estate.
