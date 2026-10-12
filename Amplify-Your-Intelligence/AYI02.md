@@ -384,10 +384,9 @@ When you provide the architecture and the prompt to **GitHub Copilot**, it will 
 
    ![](../Amplify-Your-Intelligence/Images/CalFAG.png)  
 
-
 1. Navigate back to the Resource group. Select the **Foundry Project**.
 
-   ![](../Amplify-Your-Intelligence/Images/Foundry_project_step5.jpg)
+   ![](../Amplify-Your-Intelligence/Images/u30.png)
 
 1. Click On **Go to Foundry portal**.
 
@@ -419,9 +418,9 @@ When you provide the architecture and the prompt to **GitHub Copilot**, it will 
 
    - Select **Fabric IQ (OneLake Catalog)**, then **Add tool**.
 
-     ![](../Amplify-Your-Intelligence/Images/A15.png)
+   - In the catalog, filter **Type** to **Data agent**, select the published **Data agent** from your **Caldova** workspace, and click **Add**. 
 
-   - In the catalog, filter **Type** to **Data agent**, select the published **caldovaSupplyChainDataAgent** from your Caldova workspace, and click **Add**. 
+     ![](../Amplify-Your-Intelligence/Images/A15.png)   
 
    - Verify **Web Search** is attached in the tools section, If not click on **Add** drop-down and click on **Add tools** and search for **web search** then click on **Add**
 
