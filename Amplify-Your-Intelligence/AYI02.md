@@ -223,13 +223,13 @@ The goal is to move from **manually building each component** to **describing th
 
 1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace **Caldova-Pharma-IQ<inject key="Deployment-ID" enableCopy="false"/>**.
 
-   ![](../Amplify-Your-Intelligence/Images/27.png)
+   ![](../Amplify-Your-Intelligence/Images/u28.png)
 
 1. Open the **Caldova-Pharma-IQ<inject key="Deployment-ID" enableCopy="false"/>** workspace.
 
 1. Make sure that all the workspace items mentioned in the prompt are created. 
 
-   ![](../Amplify-Your-Intelligence/Images/28.png)
+   ![](../Amplify-Your-Intelligence/Images/u29.png)
 
 1. Please open each item and verify that it has been created correctly. If anything is missing, go back to the **GitHub Copilot Chat** and provide a follow-up prompt to address the missing item.  
 
