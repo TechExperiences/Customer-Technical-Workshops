@@ -145,7 +145,7 @@ The goal is to move from **manually building each component** to **describing th
    1. List down all the Azure resources required for the Fabric IQ section of the attached architecture diagram.
    2. Use existing Resource Group (rg-caldova-iq) and proceed further.
    3. Use existing Fabric Capacity (fabriccapacity<inject key="Deployment-ID" enableCopy="false"/>).
-   4. Create a new Fabric Workspace (Caldova-Pharma-IQ) and attach capacity.
+   4. Create a new Fabric Workspace (Caldova-Pharma-IQ<inject key="Deployment-ID" enableCopy="false"/>) and attach capacity.
    5. Please provide Fabric admin access to the UPN <inject key="AzureAdUserEmail"></inject> to see the fabric workspace (Caldova-Pharma)
    6. Create Lakehouse and use GitHub Copilot to generate and store sample data into tables for the Fabric data sources shown in the architecture: Plant Capacity & Commitments, Batch Schedules & Changeovers, Equipment & Fill-Finish Availability, Product & Inventory Data, Demand Forecasts, Supplier & CMO Capacity, Quality & CMO Evaluation Records, Launch & Competitive Products, and RFP Status. Keep these as tables in the same Lakehouse; no external database connections are required.
       Keep shared IDs, dates and production units consistent across tables. Include required launch production, committed production, maximum plant capacity, equipment qualification windows, fill-finish availability and feasible internal schedule recovery.
