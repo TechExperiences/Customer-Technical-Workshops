@@ -203,22 +203,22 @@ The goal is to move from **manually building each component** to **describing th
    - If your unable to see. Please go back to the **GitHub Copilot Chat**.
 
      ![](../Sandbox-Environment-Guides/Images/b18.png)
-
-      >**Note:** Not the one which starts with **Microsoft IQ**.
      
->**Note**: If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. If the workspace is already accessible, skip this step and the next access-fix completion step.
-   ```
-   I cannot see the Caldova workspace created by the previous deployment in the Fabric portal.
+     >**Note**: If the newly created Caldova workspace is not visible in the Fabric portal, send the following prompt in the **same GitHub Copilot conversation**. If the workspace is already accessible, skip this step and the next access-fix completion step.
+   
+      ```
+      I cannot see the Caldova workspace created by the previous deployment in the Fabric portal.
 
-   Using deployment-output.json and the existing deployment identity:
-   1. Verify that the workspace exists through the Fabric API and report its workspace ID and tenant ID.
-   2. Resolve the lab user <inject key="AzureAdUserEmail"></inject> to the correct user object ID in that tenant.
-   3. Grant this user Admin access to the existing workspace, preserving existing access.
-   4. Verify the user's workspace role assignment and confirm the workspace is attached to the deployed F16 capacity.
-   5. Provide the direct workspace URL and report the actual API verification results.
+      Using deployment-output.json and the existing deployment identity:
+      1. Verify that the workspace exists through the Fabric API and report its workspace ID and tenant ID.
+      2. Resolve the lab user <inject key="AzureAdUserEmail"></inject> to the correct user object ID in that tenant.
+      3. Grant this user Admin access to the existing workspace, preserving existing access.
+      4. Verify the user's workspace role assignment and confirm the workspace is attached to the deployed F16 capacity.
+      5. Provide the direct workspace URL and report the actual API verification results.
 
-   Reuse the existing resources. Do not recreate the workspace, reload data, or rerun the full deployment. This request is for workspace access, not a tenant-wide Fabric Administrator role.
-   ```
+      Reuse the existing resources. Do not recreate the workspace, reload data, or rerun the full deployment. This request is for workspace access, not a tenant-wide Fabric Administrator role.
+      ```
+      
 1. Wait for the process to complete.
 
 1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace which starts with something similar to `Caldova`.
