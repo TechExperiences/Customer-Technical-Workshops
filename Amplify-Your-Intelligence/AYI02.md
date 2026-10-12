@@ -380,8 +380,6 @@ When you provide the architecture and the prompt to **GitHub Copilot**, it will 
    Note: Create a deployment MD with deployment instructions and post-deployment configuration, including how to manually connect the existing Fabric Data Agent to each Foundry agent.
    ```
 
-
-
 1. Wait for the deployment to complete and the **Keep** the file.
 
    ![](../Amplify-Your-Intelligence/Images/CalFAG.png)  
@@ -410,7 +408,6 @@ When you provide the architecture and the prompt to **GitHub Copilot**, it will 
 1. Make sure the model is set to **gpt-5-mini**. Check whether the published **caldova-supplier-terms-agent** is already connected under **Tools**; if it is, keep that connection. Otherwise, add it below.
 
    ![](../Amplify-Your-Intelligence/Images/A11.png)  
-
 
    - In **Instructions**, retain the supplier-terms guidance and ensure it tells the agent to use **caldova-supplier-terms-agent** for capacity, qualification status and RFP data, and document knowledge for fictional supplier terms. Do not hard-code answers.
 
