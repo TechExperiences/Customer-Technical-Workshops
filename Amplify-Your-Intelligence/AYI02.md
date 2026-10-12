@@ -221,11 +221,11 @@ The goal is to move from **manually building each component** to **describing th
 
 1. Wait for the process to complete.
 
-1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace which starts with something similar to `Caldova`.
+1. Now please go back to the Fabric portal, refresh the portal and navigate to the **Workspaces**. Now you should be able to see a Workspace **Caldova-Pharma-IQ<inject key="Deployment-ID" enableCopy="false"/>**.
 
    ![](../Amplify-Your-Intelligence/Images/27.png)
 
-1. Open the **Caldova** workspace.
+1. Open the **Caldova-Pharma-IQ<inject key="Deployment-ID" enableCopy="false"/>** workspace.
 
 1. Make sure that all the workspace items mentioned in the prompt are created. 
 
@@ -292,7 +292,7 @@ The goal is to move from **manually building each component** to **describing th
    For the November NextGen Pharma launch, show required production, committed production and maximum capacity by plant. Calculate the network shortfall in units and as a percentage of required production. Which plant is the main constraint, how much can feasible internal recovery close, and what gap remains? Show the calculation, planning period and units from the data.
    ```
 
-   ![](../Amplify-Your-Intelligence/Images/38.png)   
+   ![](../Amplify-Your-Intelligence/Images/u26.png)   
 
    ```
    Which pre-qualified CMOs have available capacity to help close the remaining November NextGen Pharma launch gap? List their available capacity, qualification status and current RFP status. Compare capacity with the remaining gap using the same planning period and units. If a required value is missing, state that rather than assuming it.
