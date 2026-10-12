@@ -2,9 +2,9 @@
 
 Now that you have completed the Envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a Intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
-## Rapid Prototyping using GitHub Copilot
+## Rapid Prototyping using ******GitHub Copilot******
 
-You will use GitHub Copilot to generate ARM or Bicep templates using the Future State Architecture arrived at from the previous Whiteboarding exercise.
+You will use ******GitHub Copilot****** to generate ARM or Bicep templates using the Future State Architecture arrived at from the previous Whiteboarding exercise.
 
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
@@ -29,14 +29,14 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 1. Once you have verified the resources, you can proceed with the next steps.
 
-### Sign in to GitHub Copilot Chat
+### Sign in to ******GitHub Copilot****** Chat
 
 
 1. Click on the **Visual Studio Code** from the VM desktop.
 
    ![](../Sandbox-Environment-Guides/Images/amp14.png)
 
-1. Click on **Continue with GitHub** to sign in to GitHub Copilot.
+1. Click on **Continue with GitHub** to sign in to ******GitHub Copilot******.
 
    ![](../Sandbox-Environment-Guides/Images/amp18.png)
 
@@ -88,7 +88,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Modernize-with-confidence/Images/m1.png)
 
-1. From the **GitHub Copilot Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
+1. From the ********GitHub Copilot****** Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b6.png)
 
@@ -110,17 +110,36 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp33.png)
 
+## Migration From On-Prem SQL to Azure SQL Database Hyperscale with ******GitHub Copilot******
+
+The **solution architecture** defines how Caldova's existing on-premises database can be modernized by moving it to **Azure SQL Database Hyperscale**.
+Traditionally, this migration would require manually connecting to the on-premises environment, identifying the database and its objects, configuring the target Azure SQL environment, migrating tables and data, and validating the migrated database.
+
+Instead of performing each of these activities manually, we will provide ********GitHub Copilot******** with the solution architecture and the migration requirements.
+
+## What Will This Prompt Do?
+
+The prompt provides ********GitHub Copilot******** with the context and implementation steps required to perform the database migration. It instructs Copilot to:
+1. Understand the proposed migration from the attached architecture.
+2. Reuse the existing Azure resources.
+3. Access the on-premises SQL Server environment.
+4. Identify and access the CaldovaOrderManagement database.
+5. Migrate the required tables and data to the Azure SQL Database Hyperscale environment.
+6. Preserve the relationships between the migrated tables.
+7. Prepare and deploy the required implementation.
+8. Interact with you if additional authentication, clarification, or confirmation is required.
+
+The objective is to move from manually executing individual migration tasks to describing the desired migration outcome and allowing ******GitHub Copilot****** to help implement it.
+
+In this step, the prompt acts as the implementation plan that connects the existing on-premises database to the target Azure SQL Database environment.
+
 1. Select the **Future-State-Architecture.png**.
 
    ![](../Modernize-with-confidence/Images/m17.png)
 
-1. From the **GitHub Copilot Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
+1. From the ********GitHub Copilot****** Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b89.png)
-
-## Migration From On-Prem SQL to Azure SQL DB Hyperscale
-
-Migrate the pharmaceutical manufacturing database from on-premises SQL Server to Azure SQL Database Hyperscale to provide scalable, highly available, and cloud-based data management. The migration preserves critical manufacturing, product, inventory, production, and operational data while enabling improved performance, scalability, and integration with modern Azure analytics and AI services.
 
 1. Along with the attached **Solution Architecture**, please paste the below prompt in the Chat.
    
@@ -194,13 +213,32 @@ Migrate the pharmaceutical manufacturing database from on-premises SQL Server to
 
    >**Note**: Similarly click other tables to compare and validate data.
 
-## Migration From On-Prem Web Application to Azure App Service 
+## Migration From On-Prem Web Application to Azure App Service with ******GitHub Copilot******
 
-Migrate the pharmaceutical manufacturing web application (Order Management) from on-premises infrastructure to Azure App Service to provide a scalable, secure, and highly available cloud-hosted platform. The migration enables improved application performance, simplified infrastructure management, and seamless integration with Azure services and the modernized Azure SQL Database backend.
+**Extend the Prototype to the Application Layer**
+
+The database has now been migrated to Azure SQL Database Hyperscale. 
+The next step is to modernize the application that currently runs in the on-premises environment and move it to Azure App Service.
+
+Instead of manually analyzing the existing application, creating the App Service, migrating the application, updating its configuration, and implementing the requested UI changes separately, we will use ****GitHub Copilot**** to help perform these activities based on the existing solution requirements.
+
+## What Will This Prompt Do?
+The prompt provides Copilot with the application migration and modernization requirements. It instructs Copilot to:
+- Access the existing CaldovaOrderManagement application in the VM.
+- Migrate the application to Azure App Service.
+- Modernize the application's user interface and responsiveness.
+- Upgrade the application to the specified .NET version.
+- Connect the application to the migrated Azure SQL Database.
+- Ensure the existing functional pages continue to work with the corresponding database tables.
+- Add a Traditional SQL Search page that will be used as the baseline for the next stage of the prototype.
+
+This creates a clear progression from database **modernization to application modernization**, while allowing ******GitHub Copilot****** to handle much of the implementation work based on the requirements you provide.
+
+The purpose of this prompt is to take the **migrated database** and **extend the prototype into a working, modernized application running on Azure.**
  
 Follow the below instructions to migrate On-prem Web application to Azure app service.
 
-1. Navigate back to **VS Code** and paste the below prompt in **GitHub Copilot Chat**.
+1. Navigate back to **VS Code** and paste the below prompt in ******GitHub Copilot****** Chat**.
 
    ```
    Great, you have completed OnPrem SQL migration to Azure SQL Database Hyperscale. Now we need to migrate OnPrem Web Application to Azure App Service and modernize. 
@@ -296,9 +334,39 @@ Follow the below instructions to migrate On-prem Web application to Azure app se
 
 This allows us to demonstrate how the migrated application can move from **keyword-based search** to **meaning-based search** using Azure AI capabilities.
 
-## Implementation of Vector/Semantic Search in Azure SQL Database Hyperscale
+## Implementation of Vector/Semantic Search with ******GitHub Copilot******
 
-Implement Vector search in Azure SQL Database Hyperscale using Azure OpenAI embeddings and the native VECTOR data type to enable natural-language product searches. Query and product embeddings are compared using vector similarity to identify relevant products beyond exact keyword matching, improving search accuracy and product discovery.
+**Move from Keyword Search to Meaning-Based Search**
+
+The migrated application currently provides Traditional SQL Search, which relies on matching the user's search terms against the text stored in product descriptions.
+
+The Product description may contain different words that express the same meaning. Because traditional keyword-based search depends on matching the text, the application may not return the expected product.
+
+This demonstrates a limitation of the current search experience: the application can match words, but it does not understand the meaning behind the user's query. The existing guide demonstrates this limitation before introducing semantic/vector search
+
+**Turn the Search Requirement into an AI-Powered Prototype**
+
+To address this limitation, we will enhance the existing application with **Vector Semantic Search using Azure OpenAI embeddings and Azure SQL Database Hyperscale**.
+
+Instead of manually implementing the embedding generation, database changes, vector storage, search logic, and application changes separately, we will provide ****GitHub Copilot**** with the business objective and implementation requirements.
+
+## What Will This Prompt Do?
+
+The prompt will guide ****GitHub Copilot**** to:
+1. Generate embeddings for the existing product descriptions using Azure OpenAI.
+2. Store the embeddings in Azure SQL Database Hyperscale using the native VECTOR data type.
+3. Create the required embedding table and store the product information and embeddings.
+4. Generate embeddings for natural-language search queries.
+5. Compare the query meaning with product-description meanings using vector similarity.
+6. Add a Semantic Vector Search experience alongside the existing Traditional SQL Search.
+7. Return relevant products based on semantic similarity.
+8. Display similarity/probability information and the requested visualization
+
+**Traditional SQL Search → Matches words**
+and
+**Vector Semantic Search → Matches meaning**
+
+The **goal** is to demonstrate how a natural-language business requirement can be translated into an AI-powered capability using **GitHub Copilot**, rather than manually implementing each component.
 
 1. Navigate to **Visual Studio Code**.
 
@@ -313,7 +381,7 @@ Implement Vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
 
 1. Save the file using **Ctrl+S**.   
 
-1. Copy the below prompt and paste it in **GitHub Copilot Chat**.
+1. Copy the below prompt and paste it in ********GitHub Copilot****** Chat**.
 
    ```
    Great, both SQL Database and Web application migration were completed successfully.
@@ -379,6 +447,6 @@ Implement Vector search in Azure SQL Database Hyperscale using Azure OpenAI embe
    ![](../Modernize-with-confidence/Images/m35.png) 
 
 
-### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session.
+### Congratulations! You have successfully completed the `Rapid Prototyping using ******GitHub Copilot******` session.
 
 #### Click on `Next` to view the Pre-deployed `Modernize with Confidence Package`.

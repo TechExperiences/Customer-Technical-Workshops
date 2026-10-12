@@ -58,6 +58,21 @@ By the end of the session, the team has a shared view of **Caldova’s current\-
 
 1. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
 
-## This completes the Envisioning Session using Microsoft Whiteboarding.
+## Next Step: Bringing the Modernization Architecture to Life
+
+Once the **Future State Architecture** has been defined during the Envisioning session, the next step is to transform the proposed solution into a working prototype. For Caldova, this involves modernizing the existing database and web application, followed by introducing **AI-powered semantic search capabilities.**
+
+**Traditional Approach:**
+
+1. Traditionally, after finalizing the architecture and identifying the required solution components, the next step would be to manually implement the modernization activities. This typically involves:
+   - Assessing the existing on-premises SQL Server database and migrating its tables and data to Azure SQL Database Hyperscale.
+   - Migrating the existing web application to Azure App Service and configuring it to connect to the migrated database.
+   - Modernizing the application's user interface and ensuring that its functional pages work with the migrated data.
+   - Implementing **Azure OpenAI embeddings and vector search capabilities** to support natural-language product searches.
+   - Testing and validating the migrated database, application functionality, and semantic search experience.
+
+2. This traditional approach requires multiple implementation steps, configuration changes, and validation activities across the database, application, and AI components. It can be time-consuming and requires specialized technical knowledge to ensure that all components work together as intended.
+
+3. In the next exercise, we will introduce a **rapid prototyping** approach that demonstrates how **GitHub Copilot** can help translate the Future State Architecture and implementation requirements into a working solution. Instead of manually carrying out each activity, you will provide Copilot with structured prompts describing the desired outcomes, existing resources, and technical requirements. Copilot will help implement the solution interactively, allowing you to review its progress, respond to clarification requests, and refine the prototype as needed.
 
 ### Now, click on **`Next >>`** in the lower-right corner to move on to **`Rapid Prototyping`**.
