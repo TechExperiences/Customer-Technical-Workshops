@@ -110,7 +110,7 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
    ![](../Sandbox-Environment-Guides/Images/amp33.png)
 
 
-## Creation of Fabric Workspace using ****GitHub Copilot****
+## Creation of Fabric Workspace using **GitHub Copilot**
 
 The unified Caldova Pharma solution requires a **Microsoft Fabric workspace** to bring together analytical data, operational data, business application data, and AI capabilities. Before configuring these components, we need to establish the Fabric workspace and associate it with the existing Fabric capacity.
 
@@ -442,6 +442,13 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    ![](../Sandbox-Environment-Guides/Images/DA-Response.png)
 
+1. In the Data Agent editor, click **Publish** to publish the latest changes.
+
+   ![](../Sandbox-Environment-Guides/Images/publish.png)
+
+1. In the **Publish changes** window, enable **Also publish to Microsoft 365 Copilot** and click on **Publish**.
+
+   ![](../Sandbox-Environment-Guides/Images/365.png)
 
 ## Step 5: Govern & Secure - Caldova Operation
 
@@ -478,5 +485,34 @@ This step completes the prototype by connecting data integration and analytics w
 
    > **Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
 
+## Step 6: Integrating the Fabric Data Agent with Microsoft 365 Copilot
+
+### Bringing Unified Business Insights into Microsoft 365
+
+With the Fabric Data Agent created and validated against the semantic model, the next step is to make these insights accessible through Microsoft 365 Copilot. This allows business users to ask natural-language questions about Caldova Pharma's operational data from their Microsoft 365 experience without rebuilding the underlying data solution.
+
+In this exercise, you will publish the existing Fabric Data Agent, access it through Microsoft 365 Copilot, and validate its responses using business questions about supplier performance, sales, and inventory.
+
+### What will you achieve?
+
+- Publish the existing Fabric Data Agent for Microsoft 365 Copilot.
+- Access the published agent from Microsoft 365 Copilot.
+- Ask business questions and validate the answers against the unified data.
+
+1. Open **[Microsoft 365 Copilot](https://m365.cloud.microsoft/chat?omkt=en-001&source=post_page---------------------------)** and provide sign-in details
+
+1. Navigate to **Agents**. and Under **Your agents**, select **Caldova_Unified_DataAgent**.
+
+   ![](../Sandbox-Environment-Guides/Images/agent_copilot.png)
+
+1. Enter the following prompt in the chat window:
+
+   ```
+   What is our average supplier lead time by supplier, and which supplier has the best quality rating?
+   ```
+
+   ![](../Sandbox-Environment-Guides/Images/copilotagent.png)
+
+1. Review the response.
 
 #### Congratulations! You have successfully completed the `Rapid Prototyping using ****GitHub Copilot****` session and validated the Unified governed Data&AI estate.
