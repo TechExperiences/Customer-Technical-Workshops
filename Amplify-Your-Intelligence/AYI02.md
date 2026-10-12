@@ -304,7 +304,6 @@ The goal is to move from **manually building each component** to **describing th
 
    ![](../Sandbox-Environment-Guides/Images/b65.png)  
 
-
 1. Click on **Publish** again to publish the data agent.
 
    ![](../Amplify-Your-Intelligence/Images/calDA.png) 
