@@ -50,7 +50,7 @@ You will start with whiteboarding to architect a future state of a unified, open
 
 1. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
 
-### ## Next Step: Bringing the Unified Data and AI Solution to Life
+### Next Step: Bringing the Unified Data and AI Solution to Life
 
 Once the **Future State Architecture** has been defined during the Envisioning session, the next step is to turn the proposed solution into a working prototype. For Caldova Pharma, this involves bringing together analytical, operational, and business application data in Microsoft Fabric and making it available for reporting, business insights, and AI-driven interactions.
 
