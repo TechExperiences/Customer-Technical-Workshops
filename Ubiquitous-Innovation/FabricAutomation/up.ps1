@@ -154,7 +154,10 @@ if ($LASTEXITCODE -ne 0 -or -not $capacityResourceId) { throw 'The newly created
 Invoke-Checked { python -m pip install --disable-pip-version-check -q -r (Join-Path $PSScriptRoot 'requirements.txt') } 'Could not install the Python dependencies.'
 $env:AZURE_FABRIC_ACCESS_TOKEN = (& az account get-access-token --resource https://api.fabric.microsoft.com --query accessToken -o tsv).Trim()
 $env:AZURE_STORAGE_ACCESS_TOKEN = (& az account get-access-token --resource https://storage.azure.com/ --query accessToken -o tsv).Trim()
-if (-not $env:AZURE_FABRIC_ACCESS_TOKEN -or -not $env:AZURE_STORAGE_ACCESS_TOKEN) { throw 'Could not acquire Fabric or Storage access tokens.' }
+$env:AZURE_POWERBI_ACCESS_TOKEN = (& az account get-access-token --resource https://analysis.windows.net/powerbi/api --query accessToken -o tsv).Trim()
+if (-not $env:AZURE_FABRIC_ACCESS_TOKEN -or -not $env:AZURE_STORAGE_ACCESS_TOKEN -or -not $env:AZURE_POWERBI_ACCESS_TOKEN) {
+    throw 'Could not acquire Fabric, Storage, or Power BI access tokens.'
+}
 
 try {
     Write-Host "Uploading local data from $BlobSourceFolder to ADLS Gen2 container data..." -ForegroundColor Cyan
@@ -177,8 +180,22 @@ try {
             --workspace-id $fabric.workspaceId --lakehouse-id $fabric.lakehouseId --source-folder $SourceFolder
     } 'Lakehouse ingestion failed.'
 
-    Write-Host "Completed. Storage account: $StorageAccountName; Workspace: $workspaceName; Lakehouse: $LakehouseName" -ForegroundColor Green
+    Write-Host 'Creating and refreshing the Direct Lake semantic model...' -ForegroundColor Cyan
+    $semanticModel = & python (Join-Path $PSScriptRoot 'scripts/deploy_semantic_model.py') `
+        --workspace-id $fabric.workspaceId --lakehouse-id $fabric.lakehouseId | ConvertFrom-Json
+    if ($LASTEXITCODE -ne 0 -or -not $semanticModel.semanticModelId) {
+        throw 'Semantic model deployment failed.'
+    }
+
+    Write-Host 'Creating and publishing the Data Agent...' -ForegroundColor Cyan
+    Invoke-Checked {
+        python (Join-Path $PSScriptRoot 'scripts/deploy_data_agent.py') `
+            --workspace-id $fabric.workspaceId --semantic-model-id $semanticModel.semanticModelId
+    } 'Data Agent deployment failed.'
+
+    Write-Host "Completed. Storage account: $StorageAccountName; Workspace: $workspaceName; Lakehouse: $LakehouseName; Semantic model: Ubiquitous_Innovation_SemanticModel; Data Agent: Ubiquitous_Innovation_DataAgent" -ForegroundColor Green
 } finally {
     Remove-Item Env:AZURE_FABRIC_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_STORAGE_ACCESS_TOKEN -ErrorAction SilentlyContinue
+    Remove-Item Env:AZURE_POWERBI_ACCESS_TOKEN -ErrorAction SilentlyContinue
 }

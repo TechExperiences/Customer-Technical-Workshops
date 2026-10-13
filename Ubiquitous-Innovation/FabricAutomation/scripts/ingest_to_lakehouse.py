@@ -7,6 +7,7 @@ import re
 import time
 from pathlib import Path
 
+import pyarrow as pa
 import pyarrow.csv as csv
 from deltalake import write_deltalake
 
@@ -41,6 +42,30 @@ def write_table_when_onelake_ready(uri: str, table, storage_options: dict[str, s
                 raise RuntimeError(f"Could not create Delta table {table_name}: {error}") from error
             print(f"OneLake Tables path is not ready for {table_name}; waiting 5 seconds (attempt {attempt}/{max_attempts})...")
             time.sleep(5)
+
+
+def latest_plant_dimension(plant_table: pa.Table) -> pa.Table:
+    """Return one current dimension row per PlantID from Plant observations."""
+    plants: dict[str, dict] = {}
+    for row in plant_table.to_pylist():
+        plant_id = str(row["PlantID"])
+        existing = plants.get(plant_id)
+        if existing is None or str(row["PlantObservationDate"]) > str(existing["PlantObservationDate"]):
+            plants[plant_id] = row
+    return pa.Table.from_pylist([
+        {
+            "PlantID": row["PlantID"],
+            "PlantName": row["PlantName"],
+            "Location": row["Location"],
+            "Country": row["Country"],
+            "PlantObservationDate": row["PlantObservationDate"],
+        }
+        for _, row in sorted(plants.items())
+    ])
+
+
+def lakehouse_table_uri(workspace_id: str, lakehouse_id: str, table_name: str) -> str:
+    return f"abfss://{workspace_id}@onelake.dfs.fabric.microsoft.com/{lakehouse_id}/Tables/dbo/{table_name}"
 
 
 def main() -> None:
@@ -78,15 +103,27 @@ def main() -> None:
         "AZURE_STORAGE_TOKEN": access_token,
     }
     created = 0
+    plant_table: pa.Table | None = None
     for local_file, table_name in tables:
         arrow_table = csv.read_csv(local_file)
-        table_uri = (
-            f"abfss://{args.workspace_id}@onelake.dfs.fabric.microsoft.com/"
-            f"{args.lakehouse_id}/Tables/dbo/{table_name}"
-        )
+        table_uri = lakehouse_table_uri(args.workspace_id, args.lakehouse_id, table_name)
         write_table_when_onelake_ready(table_uri, arrow_table, storage_options, table_name)
+        if table_name == "Plant":
+            plant_table = arrow_table
         created += 1
         print(f"Created table {table_name} from {local_file.relative_to(source).as_posix()}")
+
+    if plant_table is None:
+        raise RuntimeError("Plant.csv is required to derive the DimPlant Lakehouse dimension.")
+    dim_plant = latest_plant_dimension(plant_table)
+    write_table_when_onelake_ready(
+        lakehouse_table_uri(args.workspace_id, args.lakehouse_id, "DimPlant"),
+        dim_plant,
+        storage_options,
+        "DimPlant",
+    )
+    created += 1
+    print("Created table DimPlant from the latest Plant observation per PlantID")
     print(f"Created {created} Delta table(s) in the Lakehouse Tables area.")
 
 
