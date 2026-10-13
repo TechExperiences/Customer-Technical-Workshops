@@ -234,15 +234,199 @@ Pull request created for review and commit.
 
 ### Activity 2.1: Validate the Deployed Business Intelligence Agent
 
+Before adding business context to the agent, we need to establish a baseline by validating the existing Business Intelligence agent deployed in Microsoft Foundry during Topic 1.
+
+Traditionally, this would involve manually reviewing the agent configuration and testing its responses to understand its current capabilities and limitations. In this activity, we will use GitHub Copilot to locate and inspect the existing agent and run an initial Supply Chain assessment.
+
+**What will this prompt do?**
+
+- Locate and validate the existing `supply-chain-Bi-agent`.
+- Review its model, role, instructions, and capabilities without changing the configuration.
+- Run a baseline Supply Chain assessment and identify gaps in the available information.
+
+This baseline will help us evaluate how the agent improves as we add live operational data, enterprise knowledge, and organizational context in the following activities.
+
+1. Navigate back to **vs code**
+
+1. Copy the below prompt and paste it in chat window
+
+   ```
+   Please follow below instructions
+   1.	Open and validate the existing Caldova Pharma Business Intelligence agent(supply-chain-Bi-agent) deployed in Microsoft Foundry 
+   2.	Review its model, role, instructions, and capabilities without modifying or recreating the agent.
+   3.	Run the following baseline Supply Chain prompt and summarize the response, including any information gaps
+   ```
+
+1. Review the Response provided by agent
+
 ### Activity 2.2: Connect Live Manufacturing Context
+
+The existing Business Intelligence agent needs access to live manufacturing data to answer questions about plant capacity, production schedules, and operational readiness. In this activity, we will connect the existing Fabric Data Agent from the `Caldova_UI` workspace to the Foundry agent using tool calling.
+
+**What will this prompt do?**
+
+- Locate the existing Fabric Data Agent in the `Caldova_UI` workspace.
+- Configure the Data Agent as a tool for the existing `supply-chain-Bi-agent`.
+- Validate that the Foundry agent can retrieve operational data by asking a question about November capacity utilization.
+
+This enables the Business Intelligence agent to use live manufacturing context when answering relevant Supply Chain questions, without recreating the existing agents.
+
+1. Navigate back to **vs code**
+
+1. Copy the below prompt and paste it in chat window
+
+   ```
+   Follow the instructions below to connect the existing Data Agent from the Caldova_UI workspace as a tool in the existing Microsoft Foundry agent (supply-chain-Bi-agent).
+   •	Locate the existing Data Agent in the Caldova_UI workspace.
+   •	Configure and connect the Data Agent under the Tools section of the existing Foundry agent using tool calling.
+   •	Ensure the Foundry agent can invoke the Data Agent to retrieve operational data when answering relevant questions.
+   ```
+
+1. Verify that the **Fabric Data Agent** is attached under the **Tools** section of the existing Foundry agent.
+
+1. Confirm that the Data Agent is connected and configured correctly.
+
+1. Copy the following prompt and paste it into the **Agent Playground**:
+
+   ```
+   What is the November capacity utilization of PL01?
+   ```
+
+1. Review the response provided by the Foundry agent and verify that it retrieves the expected manufacturing data through the Fabric Data Agent.
+
 
 ### Activity 2.3: Ground the Agent with Enterprise Knowledge
 
+Operational data alone may not explain the procedures and constraints that influence manufacturing decisions. The agent also needs access to Caldova's manufacturing documents, including scheduling guidance and relevant procedures.
+
+In this activity, we will create a Foundry IQ knowledge base from the existing documents stored in Azure Blob Storage and connect it to the Knowledge section of the existing Foundry agent.
+
+**What will this prompt do?**
+
+- Create a Foundry IQ knowledge base using documents from the specified Azure Blob Storage location.
+- Configure the knowledge base to index and retrieve documents from the blobstorage
+- Connect the knowledge base under the **Knowledge** section of `supply-chain-Bi-agent`.
+- Validate the agent's ability to answer a production scheduling question using the available documents.
+
+This allows the agent to combine operational data with documented manufacturing procedures and scheduling guidance when responding to business questions.
+
+1. Navigate back to **vs code**
+
+1. Copy the below prompt and paste it in chat window
+
+   ```
+   Follow the instructions below to create a Foundry IQ knowledge base from the  existing Caldova manufacturing documents in Azure Blob Storage and connect it under the Knowledge section of the existing Microsoft Foundry agent (supply-chain-Bi-agent)
+   •	Create a Foundry IQ knowledge base using documents stored in Azure Blob    Storage under the rg-caldova-ubiquituos resource group.
+   •	Access the testingsharepoint storage container and its data folder.
+   •	Configure the knowledge base to index and retrieve the available  documents in above folder.
+   •	Add the knowledge base under the Knowledge section of the existing   Caldova Business Intelligence Agent in Microsoft Foundry, not under Tools.
+   •	Configure the agent to use this knowledge source when answering questions about the documents
+
+   ```
+
+1. Verify that the **Foundry IQ knowledge base** is configured under the **Knowledge** section of the existing Foundry agent.
+
+1. Confirm that the knowledge base is connected properly and the relevant manufacturing documents are available for retrieval.
+
+1. Copy the following prompt and paste it into the **Agent Playground**:
+
+   ```
+   According to Caldova's scheduling guidance, what should we consider when planning a production batch?
+   ```
+
+1. Review the response provided by the Foundry agent and verify that it uses the relevant manufacturing documents to provide a grounded answer.
+
+
 ### Activity 2.4: Add Organizational Context
+
+To make better launch decisions, the Business Intelligence agent must understand not only manufacturing operations and procedures, but also Caldova's business priorities, commitments, and team responsibilities.
+
+In this activity, we will connect the existing SharePoint source through ****Work IQ**** as a tool for the existing Microsoft Foundry agent.
+
+**What will this prompt do?**
+
+- Connect the specified SharePoint source through ****Work IQ****.
+- Configure ****Work IQ**** under the **Tools** section of `supply-chain-Bi-agent`.
+- Enable the agent to retrieve relevant organizational context, including launch priorities, business commitments, and team responsibilities.
+- Validate the integration by asking about Caldova's main priorities for the November launch.
+
+This adds organizational context to the agent's existing operational and enterprise knowledge, helping it provide more relevant answers to business questions.
+
+1. Navigate back to **vs code**
+
+1. Copy the below prompt and paste it in chat window
+
+   ```
+   Follow the instructions below to connect the existing SharePoint documents as a **Work IQ** tool in the existing Microsoft Foundry agent (supply-chain-Bi-agent).
+   •	Use the following SharePoint URL to configure the **Work IQ** integration: https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base&viewid=2aae9886%2D5883%2D4e2a%2D8949%2D612beaeb50ac
+   •	Connect the SharePoint source through **Work IQ** and add it under the Tools section of the existing Foundry agent.
+   •	Ensure the agent can retrieve and use relevant business-context documents, including launch priorities, business commitments, and team responsibilities.
+   •	Configure the agent to use **Work IQ** when answering questions about Caldova's business and organizational context.
+   ```
+
+1. Verify that the ****Work IQ** SharePoint integration** is configured under the **Tools** section of the existing Foundry agent.
+
+1. Confirm that the SharePoint source is connected properly and the relevant business-context documents are accessible.
+
+1. Copy the following prompt and paste it into the **Agent Playground**:
+
+   ```
+   What are Caldova's main priorities for the November launch?
+   ```
+
+1. Review the response provided by the Foundry agent and verify that it uses the relevant organizational context, including launch priorities, business commitments, and team responsibilities.
+
+1. To Verify that the agent retrieves accurate information from the **Fabric Data Agent, Foundry IQ knowledge base, and **Work IQ**** integrations.
+
+1. Test the existing agent in the **Agent Playground** , copy below prompt and paste it in **Agent Playground**
+
+   ```
+   Assess Caldova's manufacturing readiness for the November launch of product P0001. Identify key risks, explain the relevant business and manufacturing considerations, and recommend appropriate next steps using the available information.
+   ```
+
+1. Review the responses and confirm that all integrations work as expected.
 
 ### Activity 2.5: Enable the Agent to Act
 
+
+
 ### Activity 2.6: Evaluate the Agent 
+
+### Evaluating the Business Intelligence Agent
+
+After connecting the Fabric Data Agent, Foundry IQ knowledge base, and **Work IQ** integration, the next step is to evaluate the existing `supply-chain-Bi-agent` in Microsoft Foundry. This helps determine whether the agent can provide accurate, complete, and grounded answers to Caldova Pharma's business questions.
+
+Traditionally, evaluating an agent involves manually preparing test questions, reviewing its responses, identifying gaps, and repeating the tests after making improvements. In this activity, we will use GitHub Copilot to help define expected behavior, prepare synthetic test questions, and guide the evaluation process using the **Evaluation** tab in Microsoft Foundry.
+
+**What will this prompt do?**
+
+- Review the existing agent and its connected data and knowledge sources.
+- Define expected behavior and prepare test questions with expected outcomes.
+- Evaluate responses to identify incorrect, incomplete, or ungrounded answers.
+- Recommend improvements to the agent's instructions or grounding configuration.
+- Rerun the evaluation to compare results and summarize the improvements and remaining gaps.
+
+This approach helps us measure the agent's response quality and validate whether the connected sources enable it to answer Caldova Pharma's Supply Chain and November launch questions more effectively.
+
+1. Navigate back to **vs code**
+
+1. Copy the below prompt and paste it in chat window
+
+   ```
+   Follow the instructions below to evaluate the supply-chain-Bi-agent deployed in Microsoft Foundry.
+
+   1. Review the existing agent's instructions, connected Fabric Data Agent, Foundry IQ knowledge base, and Work IQ integration without recreating the agent.
+   2. Define expected behavior and evaluation
+   3. Create a prompt evaluation using relevant test questions and expected  outcomes. Generate synthetic test questions to cover the connected data and  knowledge sources.
+   4. Run the evaluation and review the results to identify incorrect,  incomplete, or ungrounded responses.
+   5. Identify weak areas and recommend improvements to the agent's  instructions or grounding configuration.
+   6. Apply only necessary improvements, preserving the existing agent and   integrations, then rerun the evaluation to compare results.
+   7. Summarize the evaluation results, identified gaps, improvements made, and  remaining issues.
+   Do not invent evaluation results or modify the agent without reviewing the proposed changes.
+
+   ```
+
+
 
 ## Topic 3: From One Agent to a Coordinated System 
 
