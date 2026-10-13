@@ -86,9 +86,13 @@ You will first set up **GitHub Copilot** and then use it to begin implementing t
 
    ![](../Sandbox-Environment-Guides/Images/amp30.png)
 
-1. Click **Auto (1)**, then click **Other Models (2)** to expand the list of available models.
+1. Click **Auto (1)**, the **turn off (2)** the **Auto** toggle botton.
 
-   ![](../Amplify-Your-Intelligence/Images/14.png)
+   ![](../Amplify-Your-Intelligence/Images/u31.png)
+
+1. Expand **Other Models**.
+
+   ![](../Amplify-Your-Intelligence/Images/u32.png)
 
 1. Select **Claude Fable 5.1 (1)**, then set the thinking effort to **High (2)** and the context to **1M (3)**.
 
