@@ -50,10 +50,27 @@ Whiteboarding is connected directly to Caldova's six-month market-launch story a
 ### Activities
 
 1. Review the **Business Envisioning Notes** to understand the organization's goals, challenges, and desired outcomes.
+1. Review the **Technical Envisioning** section and:
+   - Review the **Top 5 Pain Points**.
+   - Review the **Top Priorities** and corresponding **Success Criteria**.
+## Top 5 Pain Points
 
-1. Go to the **Technical Envisioning** section and:
-   - Capture the **Top 5 Pain Points**.
-   - Define the **Top Priorities** and corresponding **Success Criteria**.
+1. Disconnected data and systems
+2. Manual processes and reporting
+3. Limited data visibility
+4. Limited cross-team coordination
+5. Generic insights without business context
+
+## Top Priorities and Success Criteria
+
+| Top Priority | Success Criteria |
+|---|---|
+| Real-time inventory visibility | Unified and timely inventory data across systems |
+| Reduce supply chain risk | Earlier identification of supply and operational risks |
+| Improve data accuracy and trust | Consistent, reliable, and governed data |
+| Enable faster decision-making | Reduced manual reporting and improved access to actionable insights |
+| Improve cross-team collaboration | Shared information and better coordination across business functions |
+
 
 1. Complete the **Technical Discovery** by documenting:
    - Current-state architecture
