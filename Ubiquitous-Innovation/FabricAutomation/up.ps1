@@ -55,12 +55,24 @@ $ResourceGroupName = $env:AZURE_RESOURCE_GROUP
 $CapacityAdministratorUpn = $env:FABRIC_CAPACITY_ADMIN_UPN
 $LakehouseName = if ($env:LAKEHOUSE_NAME) { $env:LAKEHOUSE_NAME } else { 'Ubiquitous_Lakehouse' }
 $SourceFolder = Join-Path $PSScriptRoot 'Fabric Data'
+$SharePointSourceFolder = Join-Path $PSScriptRoot 'Sharepoint_doc'
+$EnableSharePointUpload = $env:ENABLE_SHAREPOINT_GRAPH_UPLOAD -eq 'true'
+$ProvisionSharePointWrite = $env:PROVISION_SHAREPOINT_SITE_WRITE -eq 'true'
 if ($ResourceGroupName -ne 'rg-Ubiquitous') { throw 'AZURE_RESOURCE_GROUP must be rg-Ubiquitous for this creation-only workflow.' }
 if (-not (Test-Path -LiteralPath $SourceFolder -PathType Container)) {
     throw "Source folder does not exist: $SourceFolder"
 }
 if (-not (Get-ChildItem -LiteralPath $SourceFolder -Recurse -File | Select-Object -First 1)) {
     throw "Source folder contains no files: $SourceFolder"
+}
+if ($EnableSharePointUpload) {
+    if (-not (Test-Path -LiteralPath $SharePointSourceFolder -PathType Container) -or -not (Get-ChildItem -LiteralPath $SharePointSourceFolder -Recurse -File | Select-Object -First 1)) {
+        throw "SharePoint source folder is missing or empty: $SharePointSourceFolder"
+    }
+    foreach ($setting in @('SHAREPOINT_TENANT_ID', 'SHAREPOINT_CLIENT_ID', 'SHAREPOINT_CLIENT_SECRET', 'SHAREPOINT_SITE_URL', 'SHAREPOINT_LIBRARY_NAME', 'SHAREPOINT_DESTINATION_FOLDER')) {
+        $value = [string](Get-Item "Env:$setting" -ErrorAction SilentlyContinue).Value
+        if (-not $value -or $value -match '^<.*>$') { throw "Set a real value for $setting in .env before enabling SharePoint upload." }
+    }
 }
 
 & az account show --only-show-errors 1>$null 2>$null
@@ -82,12 +94,12 @@ if ($LASTEXITCODE -ne 0) {
         azd env new $env:AZURE_ENV_NAME --subscription $env:AZURE_SUBSCRIPTION_ID --location $Location --no-prompt
     } "Could not create Azure Developer CLI environment $($env:AZURE_ENV_NAME)."
 }
-foreach ($setting in $configuration.GetEnumerator()) {
+foreach ($setting in $configuration.GetEnumerator() | Where-Object { $_.Key -ne 'SHAREPOINT_CLIENT_SECRET' }) {
     Invoke-Checked { azd env set $setting.Key $setting.Value --environment $env:AZURE_ENV_NAME } "Could not save $($setting.Key) to the Azure Developer CLI environment."
 }
 # Read the effective values back from azd so all subsequent provisioning uses the
 # selected Azure Developer CLI environment, not merely the original .env process values.
-foreach ($setting in $configuration.GetEnumerator()) {
+foreach ($setting in $configuration.GetEnumerator() | Where-Object { $_.Key -ne 'SHAREPOINT_CLIENT_SECRET' }) {
     $effectiveValue = (& azd env get-value $setting.Key --environment $env:AZURE_ENV_NAME).Trim()
     if ($LASTEXITCODE -ne 0 -or -not $effectiveValue) {
         throw "Could not read $($setting.Key) from the Azure Developer CLI environment."
@@ -99,11 +111,19 @@ $ResourceGroupName = $env:AZURE_RESOURCE_GROUP
 $CapacityAdministratorUpn = $env:FABRIC_CAPACITY_ADMIN_UPN
 $LakehouseName = if ($env:LAKEHOUSE_NAME) { $env:LAKEHOUSE_NAME } else { 'Ubiquitous_Lakehouse' }
 $SourceFolder = Join-Path $PSScriptRoot 'Fabric Data'
+$SharePointSourceFolder = Join-Path $PSScriptRoot 'Sharepoint_doc'
+$EnableSharePointUpload = $env:ENABLE_SHAREPOINT_GRAPH_UPLOAD -eq 'true'
+$ProvisionSharePointWrite = $env:PROVISION_SHAREPOINT_SITE_WRITE -eq 'true'
 Write-Host "Saved .env values to Azure Developer CLI environment $($env:AZURE_ENV_NAME)." -ForegroundColor Cyan
 
 # Complete the user entitlement check before creating the resource group or the F16
 # capacity, so a licensing failure cannot leave billable deployment resources behind.
 & (Join-Path $PSScriptRoot 'scripts/Ensure-FabricLicense.ps1') -UserPrincipalName $CapacityAdministratorUpn
+
+if ($EnableSharePointUpload -and $ProvisionSharePointWrite) {
+    & (Join-Path $PSScriptRoot 'scripts/Grant-ServicePrincipalSharePointWrite.ps1') `
+        -ClientId $env:SHAREPOINT_CLIENT_ID -SharePointSiteUrl $env:SHAREPOINT_SITE_URL
+}
 
 # This deployment intentionally never reuses an existing resource group.  A second
 # invocation must use a clean subscription or a different requested group name.
@@ -152,6 +172,19 @@ try {
         python (Join-Path $PSScriptRoot 'scripts/ingest_to_lakehouse.py') `
             --workspace-id $fabric.workspaceId --lakehouse-id $fabric.lakehouseId --source-folder $SourceFolder
     } 'Lakehouse ingestion failed.'
+
+    if ($EnableSharePointUpload) {
+        Write-Host "Uploading SharePoint documents from $SharePointSourceFolder through the service principal..." -ForegroundColor Cyan
+        Invoke-Checked {
+            python (Join-Path $PSScriptRoot 'scripts/upload_sharepoint_documents.py') `
+                --source-folder $SharePointSourceFolder `
+                --tenant-id $env:SHAREPOINT_TENANT_ID `
+                --client-id $env:SHAREPOINT_CLIENT_ID `
+                --site-url $env:SHAREPOINT_SITE_URL `
+                --library-name $env:SHAREPOINT_LIBRARY_NAME `
+                --destination-folder $env:SHAREPOINT_DESTINATION_FOLDER
+        } 'SharePoint document upload failed.'
+    }
 
     Write-Host "Completed. Workspace: $workspaceName; Lakehouse: $LakehouseName" -ForegroundColor Green
 } finally {
