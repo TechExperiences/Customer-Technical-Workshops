@@ -1,7 +1,6 @@
 param capacityName string
 param location string
-param capacityAdministratorUpn string
-param capacityOperatorObjectId string = ''
+param capacityAdministratorObjectId string
 
 resource fabricCapacity 'Microsoft.Fabric/capacities@2023-11-01' = {
   name: capacityName
@@ -12,7 +11,7 @@ resource fabricCapacity 'Microsoft.Fabric/capacities@2023-11-01' = {
   }
   properties: {
     administration: {
-      members: empty(capacityOperatorObjectId) ? [capacityAdministratorUpn] : [capacityAdministratorUpn, capacityOperatorObjectId]
+      members: [capacityAdministratorObjectId]
     }
   }
 }
