@@ -43,7 +43,7 @@ def upload_when_ready(file_system, local_file: Path, destination_path: str) -> N
     max_attempts = 60
     for attempt in range(1, max_attempts + 1):
         try:
-            ensure_directory(file_system, destination_path.rsplit("/", 1)[0])
+            ensure_directory(file_system, destination_path.rpartition("/")[0])
             with local_file.open("rb") as contents:
                 # The account and data container are created only for this run.
                 # Overwrite is used solely to make a transient retry safe.
