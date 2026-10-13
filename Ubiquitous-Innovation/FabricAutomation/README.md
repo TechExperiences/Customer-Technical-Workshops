@@ -6,9 +6,9 @@ Create `.env` from `.env.example`, replace the placeholders with your Azure subs
 .\up.ps1
 ```
 
-If Azure CLI has no active session, the script starts `az login` automatically.
+With the default interactive authentication, if Azure CLI has no active session the script starts `az login` automatically. With service-principal authentication, it signs both Azure CLI and Azure Developer CLI in non-interactively instead.
 
-The script imports `.env`, saves non-secret configuration into the named Azure Developer CLI environment (`AZURE_ENV_NAME`), then uses those loaded values for the deployment. Azure authentication is performed through Azure CLI/Azure Developer CLI sign-in.
+The script imports `.env`, saves non-secret configuration into the named Azure Developer CLI environment (`AZURE_ENV_NAME`), then uses those loaded values for the deployment. Azure authentication is performed through Azure CLI/Azure Developer CLI sign-in. Set `AZURE_AUTH_MODE=service_principal` for a fully unattended run: `up.ps1` reuses `SHAREPOINT_CLIENT_ID` and `SHAREPOINT_CLIENT_SECRET` to sign both tools in with that application and never opens a browser. The client secret is excluded from azd environment persistence, but remains sensitive local configuration and must never be committed.
 
 Before resource creation, the script checks `FABRIC_CAPACITY_ADMIN_UPN` for an assigned Fabric/Power BI license. It uses an existing non-free entitlement when available, otherwise an existing free entitlement. If neither exists, it attempts to assign only a free tenant-exposed SKU. It never assigns a paid SKU, buys a license, or creates a trial.
 
@@ -27,12 +27,12 @@ Only these resources are created:
 3. One Fabric workspace assigned to that capacity at creation
 4. One schema-enabled Lakehouse
 
-`FABRIC_CAPACITY_ADMIN_UPN` is added to the new capacity as its capacity administrator and to the new workspace as Fabric `Admin`. Before adding the workspace role, the script checks its existing role assignments and skips the add when that user is already an Admin. It does not replace a different existing workspace role.
+`FABRIC_CAPACITY_ADMIN_UPN` is added to the new capacity as its capacity administrator and to the new workspace as Fabric `Admin`. Before adding the workspace role, the script checks its existing role assignments and skips the add when that user is already an Admin. It does not replace a different existing workspace role. When Azure authentication uses a service principal, the pipeline also adds that application's Entra object ID to the new capacity administration list so it can complete Fabric provisioning.
 
 ## Optional direct SharePoint upload with a service principal
 
 When `ENABLE_SHAREPOINT_GRAPH_UPLOAD=true`, the pipeline uploads every file under `Sharepoint_doc` directly to the configured SharePoint library/folder through the existing service principal. It does not use OneDrive, VM managed identity, browser sign-in, a user password, or TAP.
 
-The service principal requires Microsoft Graph **Application** permission `Sites.Selected`, admin consent, and explicit `write` access to the configured SharePoint site. Set `PROVISION_SHAREPOINT_SITE_WRITE=true` only if the signed-in Azure CLI user has SharePoint/Graph administrator authority; the pipeline then attempts the site-level write grant. Set the service principal client ID, tenant ID, secret, site URL, library, and destination folder in `.env`. The client secret is intentionally excluded from azd environment persistence, but it remains a sensitive local value and must never be committed.
+The service principal requires Microsoft Graph **Application** permission `Sites.Selected`, admin consent, and explicit `write` access to the configured SharePoint site. Set `PROVISION_SHAREPOINT_SITE_WRITE=true` only if the signed-in Azure CLI user has SharePoint/Graph administrator authority; the pipeline then attempts the site-level write grant. Set the service principal client ID, tenant ID, secret, site URL, library, and destination folder in `.env`. Use a site URL only (for example `https://contoso.sharepoint.com/sites/Operations` or `https://contoso.sharepoint.com` for the tenant root site), never a `/_layouts/` page URL. The client secret is intentionally excluded from azd environment persistence, but it remains a sensitive local value and must never be committed.
 
-Prerequisites: Azure CLI, Python, Azure permission to create a resource group and Fabric capacity, Fabric capacity/workspace creation permission, and a tenant configuration that permits the signed-in identity to use Fabric APIs. This project does not create or assign licenses, does not modify Entra permissions, and creates no other Azure or Fabric resources.
+Prerequisites: Azure CLI, Python, Azure permission to create a resource group and Fabric capacity, Fabric capacity/workspace creation permission, and a tenant configuration that permits the signed-in identity to use Fabric APIs. In service-principal mode, the application needs those Azure and Fabric permissions plus the Microsoft Graph application permissions used by the existing license check (`User.Read.All`, `Organization.Read.All`, and, only if a free license must be assigned, `LicenseAssignment.ReadWrite.All`), each with tenant admin consent. This project does not create or assign Entra permissions and creates no other Azure or Fabric resources.

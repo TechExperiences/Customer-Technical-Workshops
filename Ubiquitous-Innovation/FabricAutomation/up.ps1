@@ -49,6 +49,20 @@ foreach ($required in @('AZURE_ENV_NAME', 'AZURE_SUBSCRIPTION_ID', 'AZURE_TENANT
     if (-not $value -or $value -match '^<.*>$') { throw "Set a real value for $required in $EnvFile." }
 }
 foreach ($setting in $configuration.GetEnumerator()) { Set-Item -Path "Env:$($setting.Key)" -Value $setting.Value }
+$AzureAuthMode = if ($env:AZURE_AUTH_MODE) { $env:AZURE_AUTH_MODE.ToLowerInvariant() } else { 'interactive' }
+if ($AzureAuthMode -notin @('interactive', 'service_principal')) { throw 'AZURE_AUTH_MODE must be interactive or service_principal.' }
+$ServicePrincipalClientId = [string]$env:SHAREPOINT_CLIENT_ID
+$ServicePrincipalClientSecret = [string]$env:SHAREPOINT_CLIENT_SECRET
+if ($AzureAuthMode -eq 'service_principal') {
+    foreach ($credential in @(
+        @{ Name = 'SHAREPOINT_CLIENT_ID'; Value = $ServicePrincipalClientId },
+        @{ Name = 'SHAREPOINT_CLIENT_SECRET'; Value = $ServicePrincipalClientSecret }
+    )) {
+        if (-not $credential.Value -or $credential.Value -match '^<.*>$') {
+            throw "Set a real value for $($credential.Name) in .env when AZURE_AUTH_MODE=service_principal."
+        }
+    }
+}
 
 $Location = $env:AZURE_LOCATION
 $ResourceGroupName = $env:AZURE_RESOURCE_GROUP
@@ -75,18 +89,29 @@ if ($EnableSharePointUpload) {
     }
 }
 
-& az account show --only-show-errors 1>$null 2>$null
-if ($LASTEXITCODE -ne 0) {
+if ($AzureAuthMode -eq 'service_principal') {
+    Write-Host 'Signing in to Azure CLI with the configured service principal...' -ForegroundColor Cyan
+    & az login --service-principal --username $ServicePrincipalClientId --password $ServicePrincipalClientSecret --tenant $env:AZURE_TENANT_ID --only-show-errors
+    if ($LASTEXITCODE -ne 0) { throw 'Azure CLI service-principal sign-in did not complete.' }
+} else {
+    & az account show --only-show-errors 1>$null 2>$null
+    if ($LASTEXITCODE -ne 0) {
     Write-Host 'No active Azure CLI session was found. Starting Azure sign-in...' -ForegroundColor Cyan
     & az login --tenant $env:AZURE_TENANT_ID --only-show-errors
     if ($LASTEXITCODE -ne 0) { throw 'Azure CLI sign-in did not complete.' }
+    }
 }
 Invoke-Checked { az account set --subscription $env:AZURE_SUBSCRIPTION_ID --only-show-errors } "Could not select subscription $($env:AZURE_SUBSCRIPTION_ID)."
 
-& azd auth login --check-status 1>$null 2>$null
-if ($LASTEXITCODE -ne 0) {
+if ($AzureAuthMode -eq 'service_principal') {
+    Write-Host 'Signing in to Azure Developer CLI with the configured service principal...' -ForegroundColor Cyan
+    Invoke-Checked { azd auth login --client-id $ServicePrincipalClientId --client-secret $ServicePrincipalClientSecret --tenant-id $env:AZURE_TENANT_ID --no-prompt } 'Azure Developer CLI service-principal sign-in did not complete.'
+} else {
+    & azd auth login --check-status 1>$null 2>$null
+    if ($LASTEXITCODE -ne 0) {
     Write-Host 'No active Azure Developer CLI session was found. Starting Azure Developer CLI sign-in...' -ForegroundColor Cyan
     Invoke-Checked { azd auth login --tenant-id $env:AZURE_TENANT_ID } 'Azure Developer CLI sign-in did not complete.'
+    }
 }
 & azd env select $env:AZURE_ENV_NAME 1>$null 2>$null
 if ($LASTEXITCODE -ne 0) {
@@ -94,12 +119,12 @@ if ($LASTEXITCODE -ne 0) {
         azd env new $env:AZURE_ENV_NAME --subscription $env:AZURE_SUBSCRIPTION_ID --location $Location --no-prompt
     } "Could not create Azure Developer CLI environment $($env:AZURE_ENV_NAME)."
 }
-foreach ($setting in $configuration.GetEnumerator() | Where-Object { $_.Key -ne 'SHAREPOINT_CLIENT_SECRET' }) {
+foreach ($setting in $configuration.GetEnumerator() | Where-Object { $_.Key -notin @('AZURE_CLIENT_SECRET', 'SHAREPOINT_CLIENT_SECRET') }) {
     Invoke-Checked { azd env set $setting.Key $setting.Value --environment $env:AZURE_ENV_NAME } "Could not save $($setting.Key) to the Azure Developer CLI environment."
 }
 # Read the effective values back from azd so all subsequent provisioning uses the
 # selected Azure Developer CLI environment, not merely the original .env process values.
-foreach ($setting in $configuration.GetEnumerator() | Where-Object { $_.Key -ne 'SHAREPOINT_CLIENT_SECRET' }) {
+foreach ($setting in $configuration.GetEnumerator() | Where-Object { $_.Key -notin @('AZURE_CLIENT_SECRET', 'SHAREPOINT_CLIENT_SECRET') }) {
     $effectiveValue = (& azd env get-value $setting.Key --environment $env:AZURE_ENV_NAME).Trim()
     if ($LASTEXITCODE -ne 0 -or -not $effectiveValue) {
         throw "Could not read $($setting.Key) from the Azure Developer CLI environment."
@@ -114,6 +139,7 @@ $SourceFolder = Join-Path $PSScriptRoot 'Fabric Data'
 $SharePointSourceFolder = Join-Path $PSScriptRoot 'Sharepoint_doc'
 $EnableSharePointUpload = $env:ENABLE_SHAREPOINT_GRAPH_UPLOAD -eq 'true'
 $ProvisionSharePointWrite = $env:PROVISION_SHAREPOINT_SITE_WRITE -eq 'true'
+$AzureAuthMode = if ($env:AZURE_AUTH_MODE) { $env:AZURE_AUTH_MODE.ToLowerInvariant() } else { 'interactive' }
 Write-Host "Saved .env values to Azure Developer CLI environment $($env:AZURE_ENV_NAME)." -ForegroundColor Cyan
 
 # Complete the user entitlement check before creating the resource group or the F16
@@ -136,6 +162,11 @@ if ($resourceGroupExists -eq 'true') {
 $suffix = New-RandomSuffix
 $capacityName = "fabricubiquitous$suffix"
 $workspaceName = "Ubiquitous-Innovation-$suffix"
+$capacityOperatorObjectId = ''
+if ($AzureAuthMode -eq 'service_principal') {
+    $capacityOperatorObjectId = (& az ad sp show --id $ServicePrincipalClientId --query id -o tsv).Trim()
+    if ($LASTEXITCODE -ne 0 -or -not $capacityOperatorObjectId) { throw 'Could not resolve the Azure service principal object ID.' }
+}
 
 Write-Host "Creating resource group $ResourceGroupName in $Location..." -ForegroundColor Cyan
 Invoke-Checked { az group create --name $ResourceGroupName --location $Location --only-show-errors 1>$null } "Could not create resource group $ResourceGroupName."
@@ -143,7 +174,7 @@ Invoke-Checked { az group create --name $ResourceGroupName --location $Location 
 Write-Host "Creating F16 Fabric capacity $capacityName..." -ForegroundColor Cyan
 Invoke-Checked {
     az deployment group create --resource-group $ResourceGroupName --template-file (Join-Path $PSScriptRoot 'infra/main.bicep') `
-        --parameters capacityName=$capacityName location=$Location capacityAdministratorUpn=$CapacityAdministratorUpn --only-show-errors 1>$null
+        --parameters capacityName=$capacityName location=$Location capacityAdministratorUpn=$CapacityAdministratorUpn capacityOperatorObjectId=$capacityOperatorObjectId --only-show-errors 1>$null
 } 'Fabric capacity deployment failed.'
 
 $capacityResourceId = (& az resource show --resource-group $ResourceGroupName --resource-type Microsoft.Fabric/capacities --name $capacityName --query id -o tsv).Trim()

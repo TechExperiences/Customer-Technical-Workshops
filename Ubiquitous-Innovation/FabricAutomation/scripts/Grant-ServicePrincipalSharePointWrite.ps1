@@ -19,10 +19,11 @@ function Invoke-Graph {
 $servicePrincipal = az ad sp show --id $ClientId --query '{appId:appId,displayName:displayName}' -o json | ConvertFrom-Json
 if ($LASTEXITCODE -ne 0 -or -not $servicePrincipal.appId) { throw "Could not resolve service principal client ID $ClientId." }
 $siteUri = [Uri]$SharePointSiteUrl
-if ($siteUri.Scheme -ne 'https' -or -not $siteUri.Host -or -not $siteUri.AbsolutePath.Trim('/')) {
+if ($siteUri.Scheme -ne 'https' -or -not $siteUri.Host) {
     throw 'SHAREPOINT_SITE_URL must be a full HTTPS SharePoint site URL.'
 }
-$site = Invoke-Graph -Method GET -Path "/sites/$($siteUri.Host):$($siteUri.AbsolutePath)"
+$sitePath = if ($siteUri.AbsolutePath.Trim('/')) { "/sites/$($siteUri.Host):$($siteUri.AbsolutePath)" } else { '/sites/root' }
+$site = Invoke-Graph -Method GET -Path $sitePath
 $permissions = (Invoke-Graph -Method GET -Path "/sites/$($site.id)/permissions").value
 $alreadyGranted = $false
 foreach ($permission in $permissions) {

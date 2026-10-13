@@ -63,9 +63,10 @@ def ensure_folder(graph: Graph, drive_id: str, folder_path: str) -> None:
 
 def resolve_drive(graph: Graph, site_url: str, library_name: str) -> str:
     uri = urlparse(site_url)
-    if uri.scheme != "https" or not uri.netloc or not uri.path.strip("/"):
+    if uri.scheme != "https" or not uri.netloc:
         raise RuntimeError("SHAREPOINT_SITE_URL must be a full HTTPS SharePoint site URL.")
-    site = graph.request("GET", f"/sites/{uri.netloc}:{quote(uri.path, safe='/')}").json()
+    site_path = f"/sites/{uri.netloc}:{quote(uri.path, safe='/')}" if uri.path.strip("/") else "/sites/root"
+    site = graph.request("GET", site_path).json()
     drives = graph.request("GET", f"/sites/{site['id']}/drives").json().get("value", [])
     drive = next((item for item in drives if item.get("name") == library_name), None)
     if not drive:
