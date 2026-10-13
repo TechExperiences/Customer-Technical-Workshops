@@ -1,32 +1,22 @@
-# Fabric workspace and Lakehouse creation
+# Fabric workspace, Lakehouse, and local data ingestion
 
-Create `.env` from `.env.example`, replace the placeholders with your Azure subscription ID, tenant ID, and capacity-administrator UPN, then run from PowerShell:
+Create `.env` from `.env.example`, replace the placeholders, then run:
 
 ```powershell
 .\up.ps1
 ```
 
-If Azure CLI has no active session, the script starts `az login` automatically.
+The script uses the configured service principal for non-interactive Azure CLI sign-in. If Azure CLI is already signed in as that exact application in the configured tenant, it reuses the existing session; otherwise it signs in silently.
 
-The script imports `.env`, saves every value into the named Azure Developer CLI environment (`AZURE_ENV_NAME`), then uses those loaded values for the deployment. It does not accept or store passwords, client secrets, or tokens in `.env`; authentication is performed through Azure CLI/Azure Developer CLI sign-in.
+The only local input is `Fabric Data` beside `up.ps1`. Every file is uploaded recursively once to the `Files/` area of the new Lakehouse, retaining subfolders. The source path is resolved from the project directory, so it works when the project is copied to a VM.
 
-Before resource creation, the script checks `FABRIC_CAPACITY_ADMIN_UPN` for an assigned Fabric/Power BI license. It uses an existing non-free entitlement when available, otherwise an existing free entitlement. If neither exists, it attempts to assign only a free tenant-exposed SKU. It never assigns a paid SKU, buys a license, or creates a trial.
-
-The only source data folder is `Fabric Data` beside `up.ps1`. Its files are copied once to the new Lakehouse's `Files/` area, retaining subfolders. The path is resolved from the script location, so the project can be moved to a VM; it is not configurable through `.env` or command-line parameters.
-
-After Lakehouse creation, OneLake can take time to expose its `Files` path. The ingestion step retries `PathNotFound` responses for up to three minutes; all local files are discovered recursively, so no file list is required.
-
-The script is deliberately creation-only. It stops if `rg-Ubiquitous` already exists and never searches for, reuses, updates, reassigns, or deletes Fabric workspaces, Lakehouses, or capacities.
-
-Each run generates a random five-character alphanumeric suffix. For example, the capacity can be `fabricubiquitousx4p7k` and the paired workspace `Ubiquitous-Innovation-x4p7k`.
-
-Only these resources are created:
+The workflow is creation-only and stops if `rg-Ubiquitous` already exists. It creates only:
 
 1. `rg-Ubiquitous`
-2. One F16 Fabric capacity
-3. One Fabric workspace assigned to that capacity at creation
+2. One F16 Fabric capacity with a random five-character alphanumeric suffix
+3. One paired `Ubiquitous-Innovation-<suffix>` Fabric workspace
 4. One schema-enabled Lakehouse
 
-`FABRIC_CAPACITY_ADMIN_UPN` is added to the new capacity as its capacity administrator and to the new workspace as Fabric `Admin`. Before adding the workspace role, the script checks its existing role assignments and skips the add when that user is already an Admin. It does not replace a different existing workspace role.
+The service principal creates the workspace and Lakehouse. `FABRIC_CAPACITY_ADMIN_UPN` is added as a capacity administrator and workspace `Admin`, so that user can see and open the new workspace normally in the Fabric portal.
 
-Prerequisites: Azure CLI, Python, Azure permission to create a resource group and Fabric capacity, Fabric capacity/workspace creation permission, and a tenant configuration that permits the signed-in identity to use Fabric APIs. This project does not create or assign licenses, does not modify Entra permissions, and creates no other Azure or Fabric resources.
+Prerequisites: Azure CLI, Python, Azure RBAC that permits the service principal to create the resource group and Fabric capacity, a Fabric tenant setting that permits service principals to use Fabric APIs, and Microsoft Graph **Application** permission `User.Read.All` with tenant admin consent. The permission is used only to resolve `FABRIC_CAPACITY_ADMIN_UPN` to its Entra object ID before adding that user to the new workspace; the project does not check or assign licenses.

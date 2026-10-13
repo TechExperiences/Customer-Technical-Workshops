@@ -95,9 +95,17 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
    ![](../Sandbox-Environment-Guides/Images/amp30.png)
 
-1. Click **Auto (1)**, search for **Sonnet 5 (2)** and then set the model to **Claude Sonnet 5 (3)**.
+1. Click **Auto (1)** and then **turn off (2)** the **Auto** toggle. 
 
-   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u27.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u31.png)
+
+1. Expand **Other Models**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u32.png)
+
+1. Set the model to **Claude Sonnet 5**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u33.png)
 
     >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
 
