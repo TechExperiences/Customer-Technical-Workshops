@@ -80,7 +80,7 @@ if (-not (Get-Command az -ErrorAction Ignore)) { throw 'Azure CLI (az) is requir
 if (-not (Get-Command python -ErrorAction Ignore)) { throw 'Python is required.' }
 
 $configuration = Import-DotEnv -Path (Resolve-Path -LiteralPath $EnvFile)
-foreach ($required in @('AZURE_SUBSCRIPTION_ID', 'AZURE_TENANT_ID', 'AZURE_CLIENT_ID', 'AZURE_CLIENT_SECRET', 'AZURE_LOCATION', 'AZURE_RESOURCE_GROUP')) {
+foreach ($required in @('AZURE_SUBSCRIPTION_ID', 'AZURE_TENANT_ID', 'AZURE_CLIENT_ID', 'AZURE_CLIENT_SECRET', 'AZURE_LOCATION', 'AZURE_RESOURCE_GROUP', 'FABRIC_CAPACITY_ADMIN_UPN')) {
     $value = [string]$configuration[$required]
     if (-not $value -or $value -match '^<.*>$') { throw "Set a real value for $required in $EnvFile." }
     Set-Item -Path "Env:$required" -Value $value
@@ -88,6 +88,7 @@ foreach ($required in @('AZURE_SUBSCRIPTION_ID', 'AZURE_TENANT_ID', 'AZURE_CLIEN
 
 $Location = $env:AZURE_LOCATION
 $ResourceGroupName = $env:AZURE_RESOURCE_GROUP
+$CapacityAdministratorUpn = $env:FABRIC_CAPACITY_ADMIN_UPN
 $LakehouseName = if ($configuration.Contains('LAKEHOUSE_NAME') -and $configuration['LAKEHOUSE_NAME']) { $configuration['LAKEHOUSE_NAME'] } else { 'Ubiquitous_Lakehouse' }
 $SourceFolder = Join-Path $PSScriptRoot 'Fabric Data'
 if ($ResourceGroupName -ne 'rg-Ubiquitous') { throw 'AZURE_RESOURCE_GROUP must be rg-Ubiquitous for this creation-only workflow.' }
@@ -112,6 +113,10 @@ if ($resourceGroupExists -eq 'true') {
 $managementAccessToken = (& az account get-access-token --resource https://management.azure.com/ --query accessToken -o tsv).Trim()
 if ($LASTEXITCODE -ne 0 -or -not $managementAccessToken) { throw 'Could not acquire an Azure Resource Manager access token.' }
 $capacityAdministratorObjectId = Get-TokenObjectId -AccessToken $managementAccessToken
+$workspaceAdminPrincipalId = (& az ad user show --id $CapacityAdministratorUpn --query id -o tsv).Trim()
+if ($LASTEXITCODE -ne 0 -or -not $workspaceAdminPrincipalId) {
+    throw "Could not resolve FABRIC_CAPACITY_ADMIN_UPN $CapacityAdministratorUpn to an Entra user object ID. The service principal needs Microsoft Graph User.Read.All application permission with admin consent."
+}
 
 $suffix = New-RandomSuffix
 $capacityName = "fabricubiquitous$suffix"
@@ -123,7 +128,7 @@ Invoke-Checked { az group create --name $ResourceGroupName --location $Location 
 Write-Host "Creating F16 Fabric capacity $capacityName..." -ForegroundColor Cyan
 Invoke-Checked {
     az deployment group create --resource-group $ResourceGroupName --template-file (Join-Path $PSScriptRoot 'infra/main.bicep') `
-        --parameters capacityName=$capacityName location=$Location capacityAdministratorObjectId=$capacityAdministratorObjectId --only-show-errors 1>$null
+        --parameters capacityName=$capacityName location=$Location capacityAdministratorObjectId=$capacityAdministratorObjectId capacityAdministratorUpn=$CapacityAdministratorUpn --only-show-errors 1>$null
 } 'Fabric capacity deployment failed.'
 
 $capacityResourceId = (& az resource show --resource-group $ResourceGroupName --resource-type Microsoft.Fabric/capacities --name $capacityName --query id -o tsv).Trim()
@@ -137,7 +142,8 @@ if (-not $env:AZURE_FABRIC_ACCESS_TOKEN -or -not $env:AZURE_STORAGE_ACCESS_TOKEN
 try {
     Write-Host "Creating workspace $workspaceName and Lakehouse $LakehouseName..." -ForegroundColor Cyan
     $fabric = & python (Join-Path $PSScriptRoot 'scripts/provision_fabric.py') `
-        --capacity-resource-id $capacityResourceId --workspace-name $workspaceName --lakehouse-name $LakehouseName | ConvertFrom-Json
+        --capacity-resource-id $capacityResourceId --workspace-name $workspaceName --lakehouse-name $LakehouseName `
+        --workspace-admin-principal-id $workspaceAdminPrincipalId | ConvertFrom-Json
     if ($LASTEXITCODE -ne 0 -or -not $fabric.workspaceId -or -not $fabric.lakehouseId) {
         throw 'Workspace or Lakehouse creation did not return IDs.'
     }

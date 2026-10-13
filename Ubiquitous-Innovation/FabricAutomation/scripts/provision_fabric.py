@@ -82,11 +82,19 @@ def wait_for_lakehouse(api: FabricApi, workspace_id: str, lakehouse_name: str) -
     raise TimeoutError("New Lakehouse did not materialize within three minutes.")
 
 
+def add_workspace_admin(api: FabricApi, workspace_id: str, principal_id: str) -> None:
+    api.request("POST", f"/workspaces/{workspace_id}/roleAssignments", {
+        "principal": {"id": principal_id, "type": "User"},
+        "role": "Admin",
+    })
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--capacity-resource-id", required=True)
     parser.add_argument("--workspace-name", required=True)
     parser.add_argument("--lakehouse-name", required=True)
+    parser.add_argument("--workspace-admin-principal-id", required=True)
     args = parser.parse_args()
 
     access_token = os.environ.get("AZURE_FABRIC_ACCESS_TOKEN")
@@ -102,6 +110,7 @@ def main() -> None:
     if not workspace_id:
         raise RuntimeError(f"Workspace creation returned no workspace ID: {json.dumps(workspace, indent=2)}")
     wait_for_capacity_assignment(api, workspace_id)
+    add_workspace_admin(api, workspace_id, args.workspace_admin_principal_id)
     # This endpoint creates a new, schema-enabled Lakehouse only. It intentionally
     # performs no existing-item lookup or update.
     api.request("POST", f"/workspaces/{workspace_id}/lakehouses", {

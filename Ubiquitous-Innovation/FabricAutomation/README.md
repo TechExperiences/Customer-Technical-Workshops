@@ -17,6 +17,6 @@ The workflow is creation-only and stops if `rg-Ubiquitous` already exists. It cr
 3. One paired `Ubiquitous-Innovation-<suffix>` Fabric workspace
 4. One schema-enabled Lakehouse
 
-The service principal is the capacity administrator and creates the workspace and Lakehouse.
+The service principal creates the workspace and Lakehouse. `FABRIC_CAPACITY_ADMIN_UPN` is added as a capacity administrator and workspace `Admin`, so that user can see and open the new workspace normally in the Fabric portal.
 
-Prerequisites: Azure CLI, Python, Azure RBAC that permits the service principal to create the resource group and Fabric capacity, and a Fabric tenant setting that permits service principals to use Fabric APIs.
+Prerequisites: Azure CLI, Python, Azure RBAC that permits the service principal to create the resource group and Fabric capacity, a Fabric tenant setting that permits service principals to use Fabric APIs, and Microsoft Graph **Application** permission `User.Read.All` with tenant admin consent. The permission is used only to resolve `FABRIC_CAPACITY_ADMIN_UPN` to its Entra object ID before adding that user to the new workspace; the project does not check or assign licenses.
