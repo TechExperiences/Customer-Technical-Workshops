@@ -32,7 +32,8 @@ def write_table_when_onelake_ready(uri: str, table, storage_options: dict[str, s
         try:
             # This workflow targets a brand-new Lakehouse and never reuses a table.
             # Delta writes create the transaction log and Parquet data under
-            # Tables/<table_name>, which Fabric exposes as a Lakehouse table.
+            # Tables/dbo/<table_name>; schema-enabled Lakehouses recognize tables
+            # inside a schema.
             write_deltalake(uri, table, mode="error", storage_options=storage_options)
             return
         except Exception as error:
@@ -81,7 +82,7 @@ def main() -> None:
         arrow_table = csv.read_csv(local_file)
         table_uri = (
             f"abfss://{args.workspace_id}@onelake.dfs.fabric.microsoft.com/"
-            f"{args.lakehouse_id}/Tables/{table_name}"
+            f"{args.lakehouse_id}/Tables/dbo/{table_name}"
         )
         write_table_when_onelake_ready(table_uri, arrow_table, storage_options, table_name)
         created += 1
