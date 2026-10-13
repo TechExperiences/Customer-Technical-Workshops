@@ -21,7 +21,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
       - **Storage Account**
 
 1. Verify that the resources are available in their respective Azure regions and that the migration environment has been provisioned successfully.
-
+---
 ## Sign in to GitHub Copilot Chat
 
 1. Click on the **Visual Studio Code** from the VM desktop.
@@ -101,6 +101,23 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 1. Select **Enable**.
 
    ![](../Sandbox-Environment-Guides/Images/amp33.png)
+
+## Future State Architecture
+
+The **Future State Architecture** shows what we want the solution to look like. Rather than manually creating each Fabric resource and configuring every component step by step, we’ll use **GitHub Copilot** to help turn that architecture into a working prototype.
+
+Instead of starting with individual configuration tasks, you’ll describe what you want to build through a prompt. The prompt provides **GitHub Copilot** with the architecture, implementation requirements, resources to reuse, data needed for the scenario, and how the Fabric components should work together.
+
+## What Will This Prompt Do?
+
+When you provide the architecture and prompt to **GitHub Copilot**, it can help work through the implementation of the **Fabric IQ** prototype, including:
+
+1. Build Agents and Software at the Speed of AI: **GitHub Copilot + Microsoft Foundry**
+1. Agents That Know Your Business: **Microsoft Foundry + Microsoft IQ**
+1. From One Agent to a Coordinated System: **Copilot Studio + Microsoft Foundry**: Connect agents into an end-to-end workflow with human approvals and controlled actions.
+1. Secure, Govern, and Optimize Agents: **Agent 365**: Manage agent identity, security, governance, usage, and cost at scale.
+
+The goal is to move from **manually building each component** to **describing the desired solution through prompts and using GitHub Copilot to help implement it**. You’ll guide Copilot with your requirements, review what it creates, and refine your prompts as you build the prototype.
 
 ## Topic 1 - Build agents and software at the speed of AI
 Transform an existing agent design into a **production-ready, secure capability** using GitHub Copilot—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
