@@ -40,6 +40,25 @@ function New-RandomSuffix {
     return -join ($bytes | ForEach-Object { $alphabet[$_ % $alphabet.Length] })
 }
 
+function Test-ServicePrincipalAzureCliSession {
+    param(
+        [Parameter(Mandatory)] [string]$ClientId,
+        [Parameter(Mandatory)] [string]$TenantId
+    )
+
+    $accountJson = & az account show --only-show-errors --output json 2>$null
+    if ($LASTEXITCODE -ne 0 -or -not $accountJson) { return $false }
+
+    try {
+        $account = $accountJson | ConvertFrom-Json
+        return $account.user.type -eq 'servicePrincipal' -and
+            $account.user.name -eq $ClientId -and
+            $account.tenantId -eq $TenantId
+    } catch {
+        return $false
+    }
+}
+
 if (-not (Get-Command az -ErrorAction Ignore)) { throw 'Azure CLI (az) is required.' }
 if (-not (Get-Command azd -ErrorAction Ignore)) { throw 'Azure Developer CLI (azd) is required.' }
 if (-not (Get-Command python -ErrorAction Ignore)) { throw 'Python is required.' }
@@ -90,9 +109,13 @@ if ($EnableSharePointUpload) {
 }
 
 if ($AzureAuthMode -eq 'service_principal') {
-    Write-Host 'Signing in to Azure CLI with the configured service principal...' -ForegroundColor Cyan
-    & az login --service-principal --username $ServicePrincipalClientId --password $ServicePrincipalClientSecret --tenant $env:AZURE_TENANT_ID --only-show-errors
-    if ($LASTEXITCODE -ne 0) { throw 'Azure CLI service-principal sign-in did not complete.' }
+    if (Test-ServicePrincipalAzureCliSession -ClientId $ServicePrincipalClientId -TenantId $env:AZURE_TENANT_ID) {
+        Write-Host 'Using the existing Azure CLI session for the configured service principal.' -ForegroundColor Cyan
+    } else {
+        Write-Host 'Signing in to Azure CLI with the configured service principal...' -ForegroundColor Cyan
+        & az login --service-principal --username $ServicePrincipalClientId --password $ServicePrincipalClientSecret --tenant $env:AZURE_TENANT_ID --only-show-errors
+        if ($LASTEXITCODE -ne 0) { throw 'Azure CLI service-principal sign-in did not complete.' }
+    }
 } else {
     & az account show --only-show-errors 1>$null 2>$null
     if ($LASTEXITCODE -ne 0) {
@@ -104,8 +127,13 @@ if ($AzureAuthMode -eq 'service_principal') {
 Invoke-Checked { az account set --subscription $env:AZURE_SUBSCRIPTION_ID --only-show-errors } "Could not select subscription $($env:AZURE_SUBSCRIPTION_ID)."
 
 if ($AzureAuthMode -eq 'service_principal') {
-    Write-Host 'Signing in to Azure Developer CLI with the configured service principal...' -ForegroundColor Cyan
-    Invoke-Checked { azd auth login --client-id $ServicePrincipalClientId --client-secret $ServicePrincipalClientSecret --tenant-id $env:AZURE_TENANT_ID --no-prompt } 'Azure Developer CLI service-principal sign-in did not complete.'
+    & azd auth login --check-status 1>$null 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host 'Using the existing Azure Developer CLI session.' -ForegroundColor Cyan
+    } else {
+        Write-Host 'Signing in to Azure Developer CLI with the configured service principal...' -ForegroundColor Cyan
+        Invoke-Checked { azd auth login --client-id $ServicePrincipalClientId --client-secret $ServicePrincipalClientSecret --tenant-id $env:AZURE_TENANT_ID --no-prompt } 'Azure Developer CLI service-principal sign-in did not complete.'
+    }
 } else {
     & azd auth login --check-status 1>$null 2>$null
     if ($LASTEXITCODE -ne 0) {
