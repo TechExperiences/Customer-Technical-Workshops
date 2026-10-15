@@ -1,6 +1,6 @@
 # 	Microsoft Technical Workshop: Build AI Context Across People, Business & Knowledge with Microsoft IQ
 
-### Overview about Amplify Your Intelligence
+### Overview of Amplify Your Intelligence 
 
 **Workshop Purpose:** This workshop helps technical teams design and deliver integrated Microsoft IQ solutions that unify work context, business data, and enterprise knowledge into a single intelligence layer. 
 
@@ -11,9 +11,9 @@ In this workshop, we will use Caldova Pharmaceutical’s accelerated NextGen Pha
 ## Accessing your Sandbox Environment
 
 
-1. Once you're ready to dive in, your Virtual machine and Guide will be right at your fingertips within your web browser.
+1. Once you're ready to dive in, your virtual machine and guide  will be right at your fingertips within your web browser.
 
-    >**Note**: If prompted, click on **Accept** to Proceed.
+    >**Note**: If prompted, click **Accept** to Proceed.
 
      ![](../Sandbox-Environment-Guides/Images/amp12.png)
 
@@ -21,24 +21,24 @@ In this workshop, we will use Caldova Pharmaceutical’s accelerated NextGen Pha
 
    ![](../Sandbox-Environment-Guides/Images/amp13.png)
 
-1. You'll see the **Sign into Microsoft Azure** tab. Here, enter your credentials:
+1. You'll see the **Sign in to Microsoft Azure** tab. Enter your credentials: 
 
    - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
 
      ![](../Sandbox-Environment-Guides/Images/amp15.png)
 
-1. Next, provide your password:
+1. Next, enter your password: 
  
    - **Password:** <inject key="AzureAdUserPassword"></inject>
 
      ![](../Sandbox-Environment-Guides/Images/amp16.png)
 
-1. If a pop-up appears **Stay signed in**, then select **Yes**.
+1. If the **Stay signed in**,select **Yes**.
 
    ![](../Sandbox-Environment-Guides/Images/amp17.png)
 
-1. You will return to this portal in the upcoming steps. Keep the portal open and proceed with the next steps.
+1. You will return to this portal in later steps. Keep the portal open and proceed with the next steps.
 
 
-### Now, click on **`Next >>`** to continue with **`Envisioning Session Using Whiteboarding`**.
+### Click **`Next >>`** continue to the **`Envisioning Session Using Whiteboarding`**.
 
