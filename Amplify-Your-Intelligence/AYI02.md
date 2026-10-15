@@ -1,16 +1,16 @@
 # 2. Rapid Prototyping
 
 
-Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
+Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how an intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
 ## Rapid Prototyping using GitHub Copilot
 
-You will use GitHub Copilot to generate ARM or Bicep templates using the Future State Architecture arrived at from the previous Whiteboarding exercise.
+You will use GitHub Copilot to generate ARM or Bicep templates using the Future State Architecture created during from the previous Whiteboarding exercise.
 
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
 
-In the previous Envisioning session, you defined the **Future State Architecture** for solution. In this session, you will use that architecture as the starting point for rapid prototyping.
+In the previous Envisioning session, you defined the **Future State Architecture** for the solution. In this session, you will use that architecture as the starting point for rapid prototyping.
 
 Rather than manually implementing each component, you will provide the architecture and implementation requirements to **GitHub Copilot** and work with it interactively to build the prototype.
 
@@ -86,7 +86,7 @@ You will first set up **GitHub Copilot** and then use it to begin implementing t
 
    ![](../Sandbox-Environment-Guides/Images/amp30.png)
 
-1. Click **Auto (1)**, the **turn off (2)** the **Auto** toggle botton.
+1. Click **Auto (1)**, then **turn off (2)** the **Auto** toggle button.
 
    ![](../Amplify-Your-Intelligence/Images/u31.png)
 
@@ -157,7 +157,7 @@ The goal is to move from **manually building each component** to **describing th
    7. Create Fabric Ontology using above Lakehouse tables with proper entities and relationships to show the business model. Graph materialization is not required for this workshop.
    8. Create the Data Agent using the Lakehouse tables as its data source and prepare appropriate Agent Instructions. Instruct it to calculate committed production versus maximum capacity by plant, the network shortfall and feasible internal recovery, identify the constrained plant, and assess whether external CMO capacity is needed for the November launch. Show calculations, units and the planning period; do not hard-code answers. Perform one quick test for the November shortfall and internal recovery without creating a separate verification script.
    
-   Note: After complete all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment(create workspace, create lakehouse, table creation, sample data insertion, ontology creation, data agent creation)
+   Note: After completing all above steps successfully, create MD(mark down) file with deployment instructions and post deployment configurations, and start deployment(create workspace, create lakehouse, table creation, sample data insertion, ontology creation, data agent creation)
    ```
 
    - Then **Send (3)**.
@@ -204,7 +204,7 @@ The goal is to move from **manually building each component** to **describing th
 
 1. Navigate to **Workspaces**, there should be workspace created with the name similar to **Caldova**.
 
-   - If your unable to see. Please go back to the **GitHub Copilot Chat**.
+   - If you're unable to see. Please go back to the **GitHub Copilot Chat**.
 
      ![](../Sandbox-Environment-Guides/Images/b18.png)
      
@@ -268,7 +268,7 @@ The goal is to move from **manually building each component** to **describing th
 
    - Navigate back to the **Fabric workspace** and open the **Data Agent**. Remove the failing **Ontology** Data Source and add the existing **Lakehouse**; select all nine Caldova story tables. Keep the ontology item in the workspace.
 
-   - Click on the **elipses (1)** and then **Remove (2)**.
+   - Click on the **ellipsis (1)** and then **Remove (2)**.
 
      ![](../Amplify-Your-Intelligence/Images/33.png)
 
@@ -290,7 +290,7 @@ The goal is to move from **manually building each component** to **describing th
 
 1. This validation helps confirm that the **Data Agent** can understand the available business data, retrieve relevant information, perform the required calculations, and provide meaningful responses to business questions.
 
-1. Navigate to **Test data agent (1)**, send the following prompts in Data agent input box **(2)**:
+1. Navigate to **Test data agent (1)**, and send the following prompts in Data agent input box **(2)**:
 
    ```
    For the November NextGen Pharma launch, show required production, committed production and maximum capacity by plant. Calculate the network shortfall in units and as a percentage of required production. Which plant is the main constraint, how much can feasible internal recovery close, and what gap remains? Show the calculation, planning period and units from the data.
@@ -388,7 +388,7 @@ When you provide the architecture and the prompt to **GitHub Copilot**, it will 
 
    ![](../Amplify-Your-Intelligence/Images/CalFAG.png)  
 
-1. Navigate back to the Resource group. Select the **Foundry Project**.
+1. Navigate back to the Resource Group. Select the **Foundry Project**.
 
    ![](../Amplify-Your-Intelligence/Images/u30.png)
 
@@ -440,7 +440,7 @@ When you provide the architecture and the prompt to **GitHub Copilot**, it will 
 
 1. With **supplier-terms-agent** open, use its **Chat/Playground** to run these prompts separately.
 
-1. Copy the below any prompt and paste it in chat window
+1. Copy either of the prompts below and paste it in chat window
 
    ```
    Provide an end-to-end constraint analysis for the November NextGen Pharma launch by combining plant capacity commitments, production requirements, batch schedules/changeovers, inventory positions, equipment/fill-finish availability, supplier/CMO capacity, qualification status and RFP status. Identify the top three constraints, quantify their impact where possible, and explain which constraint has the greatest impact on the remaining launch gap. Clearly show the calculations, planning period and units used.
@@ -465,7 +465,7 @@ When you provide the architecture and the prompt to **GitHub Copilot**, it will 
 
 1. Then click on **Save**.
 
-1. Copy the below any prompt and paste it in chat window
+1. Copy either of the prompts below and paste it in chat window
 
    ```
    Which pre-qualified CMOs currently have available capacity for the November NextGen Pharma launch? Show the CMO, available capacitCMO y, qualification status, and RFP status.
@@ -489,7 +489,7 @@ When you provide the architecture and the prompt to **GitHub Copilot**, it will 
 
 1. Then click on **Save**.
 
-1. Copy the below any prompt and paste it in chat window
+1. Copy either of the prompts below and paste it in chat window
 
    ```
    What does FDA publicly recommend regarding quality agreements between pharmaceutical companies and contract manufacturing organizations? Cite the official source and do not apply the guidance as a Caldova-specific requirement.
@@ -512,7 +512,7 @@ When you provide the architecture and the prompt to **GitHub Copilot**, it will 
 
 1. Then click on **Save**.
 
-1. Copy the below any prompt and paste it in chat window
+1. Copy either of the prompts below and paste it in chat window
 
    ```
    For the November launch, identify the markets with the highest demand and compare their required production with committed production. Highlight any market where committed production may not meet demand and show the gap in units.
@@ -1040,7 +1040,7 @@ You will now configure the main agent in **Copilot Studio**, connect the existin
 
    ![](../Sandbox-Environment-Guides/Images/a99.png)
 
-1. Once the Agent is published, click on **+6 (1)** and then select **Channels (2)**.
+1. Once the agent is published, click on **+6 (1)** and then select **Channels (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a100.png)
 
@@ -1060,7 +1060,7 @@ You will now configure the main agent in **Copilot Studio**, connect the existin
 
    ![](../Sandbox-Environment-Guides/Images/a105.png)
 
-1. Once the Agent added, click **Open** to open the agent in Teams.
+1. Once the agent is added, click **Open** to open the agent in Teams.
 
    ![](../Sandbox-Environment-Guides/Images/a106.png)
 
@@ -1070,7 +1070,7 @@ You will now configure the main agent in **Copilot Studio**, connect the existin
 
 1. You should receive a message from the agent in Teams.
 
-1. Copy any follow-up Question and paste it in chat window
+1. Copy the follow-up question and paste it in chat window
 
    ```
    What does FDA publicly recommend regarding quality agreements between pharmaceutical companies and contract manufacturing organizations? Cite the official source and do not apply the guidance as a Caldova-specific requirement.
@@ -1079,7 +1079,7 @@ You will now configure the main agent in **Copilot Studio**, connect the existin
 
    ![](../Amplify-Your-Intelligence/Images/promptchat.png)
 
-    >Note: click on **Allow** for every Connect pop up.
+    >Note: click **Allow** for every Connection pop up.
 
 1. Type **Allow** in chat window, then you will get response from agent
 
