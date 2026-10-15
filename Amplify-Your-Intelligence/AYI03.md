@@ -1,7 +1,7 @@
 
 # Microsoft IQ Solution Accelerator
 
-Now that you have deployed the generated template with GitHub Copilot, let’s explore a similar, pre\-deployed solution built using a **Microsoft Solution Accelerator**. Solution Accelerators provide a ready\-to\-use foundation that can help you rapidly prototype, customize, and validate intelligent solutions for your business scenarios.
+Now that you have deployed the generated template with GitHub Copilot, let’s explore a similar, pre-deployed solution built using a **Microsoft Solution Accelerator**. Solution Accelerators provide a ready\-to\-use foundation that can help you rapidly prototype, customize, and validate intelligent solutions for your business scenarios.
 
 1. Navigate to the Azure portal. Click on **Resource group**.
 
@@ -16,15 +16,15 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
    ![](../Amplify-Your-Intelligence/Images/u36.png)
 
 
-# Post deployment Guide - Fabric IQ and Microsoft Foundry
+# Post-Deployment Guide - Fabric IQ and Microsoft Foundry
 
 ## Fabric IQ
 
-1. Click on the **App launcher (1)** and select **Microsoft fabric** icon.
+1. Click on the **App launcher (1)** and select the **Microsoft fabric** icon.
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
 
-1. Close the **Welcome to the Fabric view** pop up.  
+1. Close the **Welcome to the Fabric view** pop-up.  
 
    ![](../Sandbox-Environment-Guides/Images/a35.png)
 
@@ -65,7 +65,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
    - Confirm the entities and relationships are populated (e.g. products, suppliers, inventory, sales, tied together via keys) — this is the semantic layer that lets the agent translate natural language into meaningful queries rather than raw SQL guessing.
 
-1. Navigate back to Workspace, open the **data_agent** folder. Open the already created **RetailSC Ontology Agent**
+1. Navigate back to Workspace, open the **data_agent** folder. Open the existing **RetailSC Ontology Agent**
 
    ![](../Sandbox-Environment-Guides/Images/amp69.png)  
 
@@ -136,7 +136,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 1. Select **Publish**.
    ![](../Sandbox-Environment-Guides/Images/a38.png)
 
-1. Click on **Publish** again to Publish the data agent.
+1. Click on **Publish** again to Publish the Data Agent.
 
    ![](../Sandbox-Environment-Guides/Images/a16.png)   
 
@@ -179,7 +179,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
    ![](../Sandbox-Environment-Guides/Images/a27.png)
 
-1. Make sure **gpt-5-mini** model selected.
+1. Make sure **gpt-5-mini** model is selected.
 
    ![](../Sandbox-Environment-Guides/Images/a22.png)
 
@@ -189,7 +189,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
     >**Note:** In case we are updating anything in the Agent, we need to click **Save**.
 
-1. In that **Chat** playground, use the example questions to explore the Azure AI Foundry Agent's capabilities. It will provide the response based on the knowledge base documents along with that citiation will also be added.
+1. In that **Chat** playground, use the example questions to explore the Azure AI Foundry Agent's capabilities. It will provide the response based on the knowledge base documents along with that citation will also be added.
 
    ```
    Show me the supplier onboarding process.
@@ -219,9 +219,9 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
    ![](../Sandbox-Environment-Guides/Images/b85.png)   
 
 
-1. Now lets connect the Fabric Data Agent as a Tool in ChatAgent. We can add the Fabric Data Agent (**RetailSCOntologyAgent**) as a tool inside **ChatAgent**.
+1. Now let's connect the Fabric Data Agent as a Tool in ChatAgent. We can add the Fabric Data Agent (**RetailSCOntologyAgent**) as a tool inside **ChatAgent**.
 
-1. Scroll down to **Tools**, click on **Add** drop down **(1)** and then **Add tools (2)**. A tool is simply a capability we plug into an agent so it can reach outside its own knowledge and pull in something it couldn't otherwise access — in this case, live data from our Fabric ontology.
+1. Scroll down to **Tools**, click on **Add** drop-down **(1)** and then **Add tools (2)**. A tool is simply a capability we plug into an agent so it can reach outside its own knowledge and pull in something it couldn't otherwise access — in this case, live data from our Fabric ontology.
 
    ![](../Sandbox-Environment-Guides/Images/a28.png)   
 
@@ -245,7 +245,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
    ![](../Sandbox-Environment-Guides/Images/a31.png)  
 
-1. Try sending a atleast one of the below prompt to test the Fabric IQ Data agent.  
+1. Try sending at atleast one of the below prompt to test the Fabric IQ Data agent.  
 
    ```
    Which products are supplied by Fabrikam?
@@ -254,7 +254,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
    ![](../Sandbox-Environment-Guides/Images/a34.png)
 
    ```
-   Given that shortfall, what do our supplier terms say about delayed-delivery penalties or remediation, and what's Tailwind Textiles' typical lead time is expediting realistic before the stockout hits?
+   Given that shortfall, what do our supplier terms say about delayed-delivery penalties or remediation, and what is Tailwind Textiles' typical lead time is expediting realistic before the stockout hits?
 
    ```
   
