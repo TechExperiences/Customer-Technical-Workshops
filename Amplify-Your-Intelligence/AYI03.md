@@ -9,11 +9,11 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
 1. Select the pre deployed **rg-miqsolution<inject key="Deployment-ID" enableCopy="false"/>** resource group.
 
-   ![](../Sandbox-Environment-Guides/Images/amp53.png)
+   ![](../Amplify-Your-Intelligence/Images/u35.png)
 
 1. Here you can view the pre-deployed Microsoft IQ Solution Accelerator resources.
 
-   ![](../Sandbox-Environment-Guides/Images/amp54.png)
+   ![](../Amplify-Your-Intelligence/Images/u36.png)
 
 
 # Post deployment Guide - Fabric IQ and Microsoft Foundry
