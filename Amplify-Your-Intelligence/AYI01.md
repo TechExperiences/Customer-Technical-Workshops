@@ -19,7 +19,7 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
 1. Open a new browser tab in the Edge browser.
 
-1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQBftfOLwcofS510WIW-uVTSASac7l_pm9xMNdNF50ddwLw?e=FOospg), then select **Copy link** and then paste it on the browser tab.
+1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQAEQjjkekDEQa0tBw05W6zoAQ_uZrImWD3m2z1WE6YwPMY?e=hD6D5f), then select **Copy link** and then paste it on the browser tab.
 
 1. If prompted, sign in with your ODL user credentials.
 
