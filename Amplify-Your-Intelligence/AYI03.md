@@ -7,7 +7,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
    ![](../Sandbox-Environment-Guides/Images/amp52.png)
 
-1. Select the pre deployed **rg-miqsolution** resource group.
+1. Select the pre deployed **rg-miqsolution<inject key="Deployment-ID" enableCopy="false"/>** resource group.
 
    ![](../Sandbox-Environment-Guides/Images/amp53.png)
 
@@ -144,6 +144,8 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 ## Microsoft Foundry
 
 1. Navigate back to the Azure portal.
+
+1. Go to **rg-miqsolution<inject key="Deployment-ID" enableCopy="false"/>** Resource group.
 
 1. Select the Foundry project.
 
