@@ -3,11 +3,11 @@
 
 ### Whiteboarding
 
-Whiteboarding helps technical teams to quickly align on business goals, current challenges, future-state architecture, and solution priorities. It turns abstract ideas into a shared visual plan and helps accelerate decisions for Microsoft IQ Solution Accelerators.
+Whiteboarding helps technical teams quickly align on business goals, current challenges, future-state architecture, and solution priorities. It turns abstract ideas into a shared visual plan and helps accelerate decisions for Microsoft IQ solution Accelerators.
 
 Let’s consider Caldova Pharmaceutical’s accelerated NextGen Pharma product launch. Caldova needs to determine whether it can close a 7% production-capacity gap across three plants before the November launch. Manufacturing data, GMP guidance, market information, and organizational context need to come together to support this decision.
 
-You will start with whiteboarding to architect a future state of an intelligent solution which can:
+You will start with whiteboarding to architect the future state of an intelligent solution:
 - Assess manufacturing capacity and identify gaps across plants
 - Understand the impact on the NextGen Pharma launch
 - Evaluate external manufacturing options
@@ -15,15 +15,15 @@ You will start with whiteboarding to architect a future state of an intelligent 
 - Use GMP guidance and competitor information to inform decisions
 - Accelerate business value with Microsoft Fabric, Foundry, Power BI, and AI working together
 
-### How to copy the Whiteboard using an existing template URL
+### How to create a Whiteboard using an existing template URL
 
-1. Open a new browser tab in the Edge browser.
+1. Open a new browser tab in the Microsoft Edge .
 
-1. Right click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQAEQjjkekDEQa0tBw05W6zoAQ_uZrImWD3m2z1WE6YwPMY?e=hD6D5f), then select **Copy link** and then paste it on the browser tab.
+1. Right-click on the following Whiteboard template link, ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQAEQjjkekDEQa0tBw05W6zoAQ_uZrImWD3m2z1WE6YwPMY?e=hD6D5f), then select **Copy link** and then paste it into the browser tab.
 
 1. If prompted, sign in with your ODL user credentials.
 
-1. Once you login, you will get a pop-up message to create the new Whiteboard. Read the message and click **Got it**.
+1. Once you log in, a pop-up message to create the new Whiteboard. Read the message and click**Got it**.
 
    ![](../Sandbox-Environment-Guides/Images/amp71.png)
 
@@ -31,25 +31,25 @@ You will start with whiteboarding to architect a future state of an intelligent 
 
    ![](../Amplify-Your-Intelligence/Images/AYIWhiteboardNew123.png)
 
-1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a Future-state solution architecture.
+1. Please follow along as the **facilitator** guides you through the **Business** and **Technical** Envisioning session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a future-state solution architecture.
 
 ### Activities
 
 1. Review the **Business Envisioning Notes** to understand the organization's goals, challenges, and desired outcomes.
 
 1. Go to the **Technical Envisioning** section and:
-   - Capture the **Top 5 Pain Points**.
-   - Define the **Top Priorities** and corresponding **Success Criteria**.
+   - Capture the **top five pain points**.
+   - Define the **top priorities** and corresponding **success criteria**.
 
 1. Complete the **Technical Discovery** by documenting:
-   - Current-state architecture
+   - Current-state architecture and
    - Systems
 
-1. Design the **Future State Architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
+1. Design the **future state architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
 
 1. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
 
-## Next plan for Future State Architecture
+## Next steps for the future-state architecture 
 
 1. Once the **Future State Architecture** has been defined during the Envisioning session, the next step is to bring the proposed solution to life as a working prototype.
 
@@ -63,8 +63,8 @@ You will start with whiteboarding to architect a future state of an intelligent 
    - Setting up the required data sources, connections, and dependencies.
    - Validating that the components work together as intended.
 
-1. The traditional approach can be time-consuming and heavily dependent on specialized experience, particularly when developing and implementing agent-driven capabilities. 
+1. The traditional approach can be time-consuming and heavily dependent on specialized expertise, particularly when developing and implementing agent-driven capabilities. 
 
-1. In the next exercise, we will introduce a **prototype-based** approach that demonstrates how **GitHub Copilot** can accelerate the same activities with minimal manual effort, helping teams improve productivity, reduce errors, and focus more on expressing the desired solution, validating the outcome, and refining the prototype rather than manually building each individual component
+1. In the next exercise, we will introduce a **prototype-based** approach that demonstrates how **GitHub Copilot** can accelerate the same activities with minimal manual effort, helping teams improve productivity, reduce errors, and focus more on expressing the desired solution, validating the outcome, and refining the prototype rather than manually building each individual component.
 
 ### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.
