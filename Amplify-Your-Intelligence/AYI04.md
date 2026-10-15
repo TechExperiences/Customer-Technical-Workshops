@@ -1,4 +1,4 @@
-# Post deployment Guide - Work IQ
+# Post-Deployment Guide - Work IQ
 
 The third component of the accelerator is Work IQ (the Copilot Studio email-triggered agent that orchestrates Fabric IQ and Foundry IQ from a single conversational ingress)
 
@@ -13,7 +13,7 @@ The third component of the accelerator is Work IQ (the Copilot Studio email-trig
 
 >**Note:** If you have already completed this step during the **Rapid Prototyping – Work IQ** section, skip to **Step 3**. Otherwise, proceed with the steps below to create the Power Platform environment.
 
-1. Right click on the [make.powerapps.com](https://make.powerapps.com) link then **Copy link** and then paste it on your VM browser tab.
+1. Right-click on the [make.powerapps.com](https://make.powerapps.com) link then **Copy link** and then paste it on your VM browser tab.
 
 1. On the **Welcome to Power Apps** page, click **Get started**.
 
@@ -32,11 +32,11 @@ The third component of the accelerator is Work IQ (the Copilot Studio email-trig
     - **Type:** Choose **Developer (1)**
     - **Region:** Leave default
     - **Name:** Enter **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** **(2)**
-    - Then Scroll down to **Change default settings**
+    - Then scroll down to **Change default settings**
 
       ![](../Sandbox-Environment-Guides/Images/b77.png)
 
-1. Expand **Change default settings (1)** and then **Turn On (2)** setting **Add a Dataverse data  store?** and then click on **Next (3)**.
+1. Expand **Change default settings (1)** and then **Turn on (2)** setting **Add a Dataverse data  store?** and then click on **Next (3)**.
 
    ![](../Sandbox-Environment-Guides/Images/a45.png)
 
@@ -83,7 +83,7 @@ In this step, you will import the Power Platform zip solution file into your Pow
 
    ![](../Sandbox-Environment-Guides/Images/a56.png)
 
-1. Make sure you signed in / green check mark is showing up for all the services **(1)** and then **Import (2)**.
+1. Make sure you're signed in / green check mark is showing up for all the services **(1)** and then **Import (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a57.png)
 
@@ -125,15 +125,15 @@ Once connections are set, configure the Power Automate flow to monitor the corre
 
    ![](../Sandbox-Environment-Guides/Images/a65.png)
 
-1. Once it is deleted, click on the **folder (1)** icon and then select the **Inbox (2)** again. We deleted and selected the folder again because `Even though the Folder field shows 'Inbox,' this solution was imported from a different environment, so it may still be pointing at the wrong mailbox behind the scenes. Delete the value and re-select 'Inbox' from the picker to force it to re-link to your own mailbox.`
+1. Once it is deleted, click on the **folder (1)** icon and then select the **Inbox (2)** again. We deleted and selected the folder again because even though the Folder field shows 'Inbox,' this solution was imported from a different environment, so it may still be pointing at the wrong mailbox behind the scenes. Delete the value and re-select 'Inbox' from the picker to force it to re-link to your own mailbox.`
 
    ![](../Sandbox-Environment-Guides/Images/a66.png)
 
-1. Expand the **Show advanced options** drop down.
+1. Expand the **Show advanced options** drop-down.
 
    ![](../Sandbox-Environment-Guides/Images/a67.png)
 
-1. Click the **X** next to that email address to remove it entirely, it is a stale leftover from wherever this solution was originally built/tested. 
+1. Click the **X** next to that email address to remove it entirely, as it is a stale leftover from wherever this solution was originally built/tested. 
 
    ![](../Sandbox-Environment-Guides/Images/a68.png)
 
@@ -141,19 +141,19 @@ Once connections are set, configure the Power Automate flow to monitor the corre
 
    ![](../Sandbox-Environment-Guides/Images/a69.png)
 
-## Step 3: Add the External Agents in Copilot Studio   
+## Step 3: Add the External agents in Copilot Studio   
 
 After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fabric for data questions and Foundry for document questions. If they do not appear yet, finish deploying Fabric and Foundry first, then return to Copilot Studio and refresh the agent list.
 
 ### 3.1 Add the Foundry Chat Agent
  
-1. Right click on [Copilot Studio](https://copilotstudio.microsoft.com), then **Copy link** and then paste it on your VM browser tab to open the Copilot Studio.
+1. Right-click on [Copilot Studio](https://copilotstudio.microsoft.com), then **Copy link** and then paste it on your VM browser tab to open the Copilot Studio.
 
 1. Click on the default environment **(1)** and then select your **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/> (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a70.png)
 
-1. Make sure your in **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
+1. Make sure you're in **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
 
    ![](../Sandbox-Environment-Guides/Images/a71.png)
 
@@ -161,23 +161,23 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a72.png)
 
-1. On the **Welocome to Microsoft Copilot Studio** page, click on **Get Started**.
+1. On the **Welcome to Microsoft Copilot Studio** page, click on **Get Started**.
 
    ![](../Sandbox-Environment-Guides/Images/a73.png)
 
-    >**Note:** If you get any error like the below **(1)**, go back the previous tab **(2)**. Refresh the browser and then open the agent again.
+    >**Note:** If you get any error like the below **(1)**, go back to the previous tab **(2)**. Refresh the browser and then open the agent again.
 
      ![](../Sandbox-Environment-Guides/Images/a103.png)    
 
-1. Click **Skip** to skip the **Welcome to Copilot Studio** pop up.
+1. Click **Skip** to skip the **Welcome to Copilot Studio** pop-up.
 
    ![](../Sandbox-Environment-Guides/Images/a74.png)
 
-1. Navigate to **Agents (1)** and the sleect **Microsoft IQ Agent (2)**.   
+1. Navigate to **Agents (1)** and the select **Microsoft IQ Agent (2)**.   
 
    ![](../Sandbox-Environment-Guides/Images/b67.png)   
 
-1. Make sure your in **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
+1. Make sure you're in **Amplify Environment<inject key="Deployment-ID" enableCopy="false"/>** Environment.
 
    ![](../Sandbox-Environment-Guides/Images/a75.png)
 
@@ -185,21 +185,21 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a76.png)
 
-1. Click on **+Add** to add Agent.
+1. Click on **+Add** to add an agent.
 
    ![](../Sandbox-Environment-Guides/Images/a77.png)
 
-1. Click on **Connect to an External agent (1)** drop down and select **Microsoft Foundry (2)**.
+1. Click on **Connect to an External agent (1)** drop-down and select **Microsoft Foundry (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a78.png)
 
-1. Click on **Not connected (1)** drop down and then click **Create new connections (2)**.
+1. Click on **Not connected (1)** drop-down and then click **Create new connections (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a79.png)
 
-1. Before proceeding to the next step, navigate back to the **Microsoft Foundry Portal.** Click on the Project name, if prompted **Save** the Agent.
+1. Before proceeding to the next step, navigate back to the **Microsoft Foundry portal.** Click on the Project name, if prompted **Save** the Agent.
 
-1. Copy and paste the **Project endpoint** in a notepad.
+1. Copy and paste the **Project endpoint** into notepad.
 
    ![](../Sandbox-Environment-Guides/Images/a80.png)
 
@@ -221,7 +221,7 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a83.png)
 
-1. On the **Connect Microsft Foundry agent** page, provide the following details:
+1. On the **Connect Microsoft Foundry agent** page, provide the following details:
 
    - **Name**: Enter **ChatAgent (1)**
    - **Description**: `You are a data analyst assistant for Microsoft IQ with access to documents and reference materials.` **(2)**
@@ -241,11 +241,11 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a86.png)
 
-1. Click on **Connect to an External agent (1)** drop down and select **Microsoft Fabric (2)**.
+1. Click on **Connect to an External agent (1)** drop-down and select **Microsoft Fabric (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a87.png)
 
-1. Click on **Not connected (1)** drop down and then click **Create new connections (2)**.
+1. Click on **Not connected (1)** drop-down and then click **Create new connections (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a88.png)
 
@@ -265,7 +265,7 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a91.png)
 
-1. On the Ontology Agent page, provide the name as **RetailSC Ontology Agent (1)** and then **Add and Configure (2)**.
+1. On the Ontology Agent page, provide the name as **RetailSC Ontology Agent (1)** and then **Add and configure (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a92.png)
 
@@ -307,7 +307,7 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a97.png)
 
-1. Click on **Publish** to **Publish the agent.**
+1. Click on **Publish** to **publish the agent.**
 
    ![](../Sandbox-Environment-Guides/Images/a98.png)
  
@@ -335,7 +335,7 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a105.png)
 
-1. Once the Agent added, click **Open** to open the agent in Teams.
+1. Once the agent is added, click **Open** to open the agent in Teams.
 
    ![](../Sandbox-Environment-Guides/Images/a106.png)
 
@@ -352,9 +352,9 @@ After import, add the Fabric and Foundry agents again in Copilot Studio. Use Fab
 
    ![](../Sandbox-Environment-Guides/Images/a107.png)
 
-1. **Open your email client** (Outlook/Office 365) that's monitored by the flow 
+1. **Open your email client** (Outlook/Office 365) that is monitored by the flow 
 
-1. Right click on [make.powerautomate.com](https://make.powerautomate.com), then **Copy link** and then paste it on your VM browser tab to open **Power Automate**  to monitor the flow run history.
+1. Right-click on [make.powerautomate.com](https://make.powerautomate.com), then **Copy link** and then paste it on your VM browser tab to open **Power Automate**  to monitor the flow run history.
 
 ### Step 2: Send a Test Email
 
@@ -362,7 +362,7 @@ Send an email to trigger the agent. Use the below example scenarios that test bo
 
 #### Example: Supply Chain Disruption
 
-1. Right click on [Outlook](https://outlook.com/) then **Copy link** and and then paste it on your VM browser tab to open **Outlook**.
+1. Right-click on [Outlook](https://outlook.com/) then **Copy link** and then paste it on your VM browser tab to open **Outlook**.
 
 1. If prompted, select **Sign in**.
 
@@ -370,11 +370,11 @@ Send an email to trigger the agent. Use the below example scenarios that test bo
 
    ![](../Sandbox-Environment-Guides/Images/a108.png)
 
-1. Click on **New mail (1)** drop down and then **Mail (2)**.
+1. Click on **New mail (1)** drop-down and then **Mail (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/a109.png)
 
-1. Draft the below mail:
+1. Draft the email below:
 
    - **TO:** Provide the email address as **<inject key="AzureAdUserEmail"></inject> (1)**
 
@@ -421,7 +421,7 @@ After sending the email:
 
    ![](../Sandbox-Environment-Guides/Images/a113.png)
 
-1. Typical execution time: 30 seconds to 2 minutes. Status should progress from **Running** to **Succeeded**
+1. Typical execution time: 30 seconds to 2 minutes. The Status should progress from **Running** to **Succeeded**
 
    ![](../Sandbox-Environment-Guides/Images/a114.png)
 
@@ -431,24 +431,24 @@ After sending the email:
 
    ![](../Sandbox-Environment-Guides/Images/b57.png)
 
-1. The response should look similar to this. Including detials regarding the triggered mail.
+1. The response should look similar to this.It should include detials regarding the triggered mail.
 
    ![](../Sandbox-Environment-Guides/Images/a116.png)
 
-1. Copy any follow-up Question and paste it in chat window
+1. Copy any follow-up question and paste it in chat window
 
-1. It will ask for **Allow**, Please click on **Allow**
+1. It will ask for **Allow**, Please click **Allow**
 
    ![](../Sandbox-Environment-Guides/Images/agentprompt.png)
 
-    >Note: click on **Allow** for every Connect pop up.
+    >Note: click on **Allow** for every Connect pop-up.
 
-1. Then Type **Allow** in chat window, then you will get response from agent
+1. Then Type **Allow** in chat the window, then you will get response from agent
 
     ![](../Sandbox-Environment-Guides/Images/Agentresponse.png)
 
 
-### Congratulations, You have successfully completed the Workshop!
+### Congratulations! You have successfully completed the Workshop!
 
 
    
