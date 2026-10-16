@@ -24,8 +24,7 @@ You will use GitHub Copilot to build the Future State Architecture from the Whit
 
       ![](../Sandbox-Environment-Guides/Images/rg-resource.png)
 
-1. Verify that the resources are available in their respective Azure regions and that the migration environment has been provisioned successfully.
-
+1. Verify that the resources are available in their respective Azure regions.
 
 ## Sign in to ****GitHub Copilot**** Chat
 
@@ -238,22 +237,6 @@ This approach demonstrates how different data sources can be brought together in
           b. Load data (csv files) into the above created (Caldova-Lakehouse) using Shortcut technique.
    
    After completing above steps, please validate Lakehouse and all delta tables are created successfully.
-   
-   Great. Now you have created Fabric Lakehouse in the Workspace (Caldova-Pharma) and ingested data from Azure Blob  storage. Now follow the instructions below to ingest operational data from Azure SQL Database.
-   
-   Instructions:  
-   
-   Use the above Resource Group, Azure Blob storage account, Fabric capacity, Fabric Workspace, and Lakehouse  (Caldova-Lakehouse).  
-   
-   Connect to Azure SQL Server (sql-operational-2410878.database.windows.net) and its Database (OperationalData)  
-   
-   Use UPN: odl_user_2410878@sandboxailabs1002.onmicrosoft.com to connect above SQL Server and Database to read/  ingest Operational data into Lakehouse  
-   
-   Create Fabric Mirrored Database and connect to Azure SQL Server for Operational Data.
-   
-   Ingest data and create delta tables in the above created Lakehouse using shortcut pointing to Mirrored database.
-   
-   After completing the above steps, please validate Lakehouse. All delta tables are created successfully and data moved from Azure SQL Database.  
    ```
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
@@ -348,15 +331,12 @@ The objective is to demonstrate how a business requirement can be translated int
 1. When the terminal prompts you to install the required extension, review the message displayed.
 
 1. If you see the following prompt:
-
-   ```
-   The command requires the extension logic.
-
-   Do you want to install it now?
-
-   The command will continue to run after the extension is installed. (Y/n):
-   ```
-
+   
+   > [!TIP]
+   > The command requires the extension logic.
+   > Do you want to install it now?
+   > The command will continue to run after the extension is installed. (Y/n):
+ 
 1. Enter `Y` and press Enter to allow the required Azure CLI extension to be installed.
 
    ![](../Sandbox-Environment-Guides/Images/LogicApp-Extension.png)
