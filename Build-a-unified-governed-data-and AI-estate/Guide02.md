@@ -1,14 +1,12 @@
 # 2. Rapid Prototyping
 
 
-Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
+Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. By the end of this exercise, Caldova's operations, supply chain and customer data will sit in one governed platform. A business user will be able to ask a cross-functional question, such as which supplier has the best lead time and quality rating and get an answer in Microsoft 365 Copilot.
 
 ## Rapid Prototyping using ****GitHub Copilot****
 
-You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the Future State Architecture arrived at from the previous Whiteboarding exercise.
 
-- **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
-- **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
+You will use GitHub Copilot to build the Future State Architecture from the Whiteboarding exercise. You describe what you need in plain language, and Copilot creates and configures the Fabric and Azure components.
 
 ### Step1: Verify Resources in the Azure Resource Group
 
@@ -133,6 +131,10 @@ Traditionally, this would involve manually creating the workspace, selecting the
 This allows us to establish the foundation for the unified data solution through a natural-language prompt rather than manually configuring each item.
 
 
+> [!TIP]
+> **Business value:** Caldova starts with the Azure resources it already has: the same storage account, database and Fabric capacity. Nothing is replaced. Access is set when the workspace is created, so governance starts on day one rather than being added later.
+
+
 1. Please copy the below prompt and paste it in the copilot chat win
 
    ```
@@ -204,6 +206,10 @@ Traditionally, this would require manually creating a Lakehouse, configuring con
 - Validate that the required tables are accessible in the Lakehouse.
 
 This approach demonstrates how different data sources can be brought together in OneLake while reducing the manual effort required to configure individual data integration components.
+
+
+> [!TIP]
+> **Business value:** Analytical files stay in Blob Storage, and operational data stays in Azure SQL Database where the business applications still use it. Shortcuts and mirroring make both available in OneLake without building pipelines or keeping extra copies. When Caldova enters a new market or acquires a company, its data can be connected the same way. The data is stored in the open Delta Parquet format, so Caldova can use other engines and tools later without migrating it.
 
 
 1. Navigate back to ****GitHub Copilot**** 
@@ -312,6 +318,10 @@ With ****GitHub Copilot****, we can describe the required integration flow and a
 
 The objective is to demonstrate how a business requirement can be translated into an integration workflow with the help of ****GitHub Copilot****, instead of manually building each component separately.
 
+
+> [!TIP]
+> **Business value:** Customer data written by business applications now lands in the same estate as operational and analytical data, through a managed Logic Apps workflow instead of custom integration code. The same pattern can be reused for the next application, and Service Bus or Event Grid can be added when Caldova needs event-driven updates.
+
 1. Navigate back to ****GitHub Copilot**** 
 
 1. Copy the below prompt and paste it in the chat window 
@@ -386,6 +396,10 @@ After the components are created, you will review the **Semantic Model** relatio
 
 This demonstrates how ****GitHub Copilot**** can help move from data integration to a usable analytics and AI experience.
 
+
+> [!TIP]
+> **Business value:** The semantic model holds one set of business definitions, such as what counts as revenue, an order or stock on hand. The Power BI report and the Data Agent both use it, so a dashboard and an AI answer return the same number. Direct Lake mode reads the data in OneLake directly, so reports don't depend on a separate imported copy.
+
 1. Navigate back to ****GitHub Copilot**** 
 
 1. Copy the below prompt and paste it in the chat window 
@@ -450,6 +464,10 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    ![](../Sandbox-Environment-Guides/Images/DA-Response.png)
 
+
+   > [!TIP]
+   > **What this shows:** The question combines supplier performance and quality data. Before, answering it meant pulling extracts from separate systems and reconciling them by hand. Here, anyone with access can ask it in plain language and get an answer based on the governed model.
+
 1. In the Data Agent editor, click **Publish** to publish the latest changes.
 
    ![](../Sandbox-Environment-Guides/Images/publish.png)
@@ -473,6 +491,10 @@ In this step, we will use **OneLake Catalog** to explore the available data asse
 - Explore the available security and access-management capabilities.
 
 This step completes the prototype by connecting data integration and analytics with the governance and security capabilities needed to manage the unified data estate.
+
+
+> [!TIP]
+> **Business value:** As Caldova adds markets, each with its own pharmaceutical regulations, the business needs to know what data it has, who owns it and who can access it. The OneLake catalog gives one place to find, govern and secure the lakehouse, databases, semantic model and agent built today, instead of managing controls system by system.
 
 1. Click **OneLake Catalog** and navigate to catalog page.
 
@@ -506,6 +528,10 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
 - Publish the existing Fabric Data Agent for Microsoft 365 Copilot.
 - Access the published agent from Microsoft 365 Copilot.
 - Ask business questions and validate the answers against the unified data.
+
+
+> [!TIP]
+> **Business value:** Business users get answers in Microsoft 365 Copilot, where they already work, without learning a new tool. The agent answers from the same governed semantic model as the reports, so access controls and business definitions carry through to every answer.
 
 1. Open **[Microsoft 365 Copilot](https://m365.cloud.microsoft/chat?omkt=en-001&source=post_page---------------------------)** and provide sign-in details
 

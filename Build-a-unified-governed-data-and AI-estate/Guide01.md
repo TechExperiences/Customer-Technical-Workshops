@@ -14,7 +14,7 @@ You will start with whiteboarding to architect a future state of a unified, open
 - Establish centralized data discovery, governance, security and role-based access
 - Create a trusted semantic foundation for consistent reporting and AI-driven insights
 - Keep the architecture open and interoperable, so Caldova can evolve tools and processing engines and integrate third-party systems without creating new data silos
-- Accelerate business value with Microsoft Fabric, OneLake, Azure Integration Services, Power BI and AI working together
+- Shorten the time from a business question to a trusted answer, for people and for AI, by running Fabric, OneLake, Azure Integration Services and Power BI as one platform
 
 ### How to copy the Whiteboard using an existing template URL
 
@@ -42,6 +42,8 @@ You will start with whiteboarding to architect a future state of a unified, open
    - Capture the **Top 5 Pain Points**.
    - Define the **Top Priorities** and corresponding **Success Criteria**.
 
+1. Where you can, attach a measure to each pain point and success criterion. For example: hours spent reconciling reports each month, days needed to bring a new market's data online, or the number of reports that define revenue differently.   
+
 1. Complete the **Technical Discovery** by documenting:
    - Current-state architecture
    - Systems
@@ -66,6 +68,6 @@ Once the **Future State Architecture** has been defined during the Envisioning s
 
 2. This traditional approach involves multiple configuration and integration activities across data sources, Microsoft Fabric, reporting, and AI capabilities. It can require considerable manual effort and technical expertise to ensure that all components are configured correctly and work together as intended.
 
-3. In the next exercise, we will use a **rapid prototyping** approach to demonstrate how **GitHub Copilot** can help translate the Future State Architecture and implementation requirements into a unified data and AI solution. By providing structured prompts describing the desired outcomes and existing resources, you will work interactively with Copilot to build the prototype, review its progress, and validate the results. This allows you to spend less time manually configuring individual components and more time focusing on the solution's business value and capabilities.
+3. In the next exercise, we will use a **rapid prototyping** approach to demonstrate how **GitHub Copilot** can help translate the Future State Architecture and implementation requirements into a unified data and AI solution. By providing structured prompts describing the desired outcomes and existing resources, you will work interactively with Copilot to build the prototype, review its progress, and validate the results. This allows you to spend less time manually configuring individual components and more time focusing on the solution's business value and capabilities. Caldova, a prototype means business and technical leaders can test the future-state design against real questions before they commit budget to a full implementation.
 
 ### Now, click on **`Next >>`** from the lower right corner to move on to **`Rapid Prototyping`**.
