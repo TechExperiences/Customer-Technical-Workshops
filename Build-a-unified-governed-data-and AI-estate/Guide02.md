@@ -336,6 +336,7 @@ The objective is to demonstrate how a business requirement can be translated int
    > The command requires the extension logic.
    > Do you want to install it now?
    > The command will continue to run after the extension is installed. (Y/n):
+
  
 1. Enter `Y` and press Enter to allow the required Azure CLI extension to be installed.
 
