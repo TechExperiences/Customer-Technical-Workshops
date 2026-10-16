@@ -1,7 +1,9 @@
 # 2. Rapid Prototyping
 
 
-Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. By the end of this exercise, Caldova's operations, supply chain and customer data will sit in one governed platform. A business user will be able to ask a cross-functional question, such as which supplier has the best lead time and quality rating and get an answer in Microsoft 365 Copilot.
+Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype.
+
+By the end of this exercise, Caldova's operations, supply chain and customer data will sit in one governed platform. A business user will be able to ask a cross-functional question, such as which supplier has the best lead time and quality rating and get an answer in Microsoft 365 Copilot.
 
 ## Rapid Prototyping using ****GitHub Copilot****
 
