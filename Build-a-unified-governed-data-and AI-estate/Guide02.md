@@ -152,7 +152,7 @@ This allows us to establish the foundation for the unified data solution through
    
    Create a new Fabric Workspace (Caldova-Pharma) and attach capacity.
    
-   Please provide Fabric admin access to the UPN (odl_user_2410878@sandboxailabs1002.onmicrosoft.com) to see the fabric workspace (Caldova-Pharma)
+   Please provide Fabric admin access to the UPN <inject key="AzureAdUserEmail"></inject> to see the fabric workspace (Caldova-Pharma)
 
    ```
 
@@ -337,7 +337,7 @@ The objective is to demonstrate how a business requirement can be translated int
    
    3. Create a new Azure Integration Service in the above resource group.
    
-   4. Create an Azure Logic App to read Application data from:    storage2410878→ Application folder under data container and load it into  the Fabric SQL Database.
+   4. Create an Azure Logic App to read Application data from:    storage<inject key="Deployment-ID" enableCopy="false"/>→ Application folder under data container and load it into  the Fabric SQL Database.
 
    ```
 
