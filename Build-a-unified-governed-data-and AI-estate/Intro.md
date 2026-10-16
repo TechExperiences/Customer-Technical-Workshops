@@ -38,6 +38,18 @@ The workshop takes each of Caldova's challenges and builds the matching Microsof
 
 ## Workshop Outcomes
 
+>By the end of the workshop, participants will have:
+
+     - A unified, open and governed data foundation built with Fabric, so teams work from the same data instead of reconciling separate copies
+
+    - Low-copy connections to operational and analytical data through OneLake, so new sources can be added without building and maintaining new pipelines
+
+    - A repeatable way to bring application data into Fabric SQL Database, so business application data joins the same estate as everything else
+
+    - Central discovery and access control through the OneLake catalog, so the business can see what data exists and who can use it
+
+    - One trusted semantic layer for reporting and AI, so reports and AI answers use the same business definitions
+
 By the end of the workshop, participants will have:
 
 - A unified, open and governed data foundation built with Fabric
