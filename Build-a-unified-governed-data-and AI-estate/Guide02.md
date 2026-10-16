@@ -149,9 +149,9 @@ This allows us to establish the foundation for the unified data solution through
    
    Use existing Resource Group (rg-unified) and proceed further.
    
-   Use existing storage account(storage2410878) and container inside this.
+   Use existing storage account(storage<inject key="Deployment-ID" enableCopy="false"/>) and container inside this.
    
-   Use existing Fabric Capacity (fabriccapacity2410878).
+   Use existing Fabric Capacity (fabriccapacity<inject key="Deployment-ID" enableCopy="false"/>).
    
    Create a new Fabric Workspace (Caldova-Pharma) and attach capacity.
    
@@ -230,7 +230,7 @@ This approach demonstrates how different data sources can be brought together in
    
    After Lakehouse is created, ingest data from Azure Blob and follow the steps below.
    
-   Connect storage account(storage2410878) and Container (data)  
+   Connect storage account(storage<inject key="Deployment-ID" enableCopy="false"/>) and Container (data)  
    
           a. Extract/Read analytical data from the Analytical folder exist under above container. 
 
@@ -268,9 +268,9 @@ This approach demonstrates how different data sources can be brought together in
    
    Use the above Resource Group, Azure Blob storage account, Fabric capacity, Fabric Workspace, and Lakehouse (Caldova-Lakehouse).  
    
-   Connect to Azure SQL Server (sql-operational-2410878.database.windows.net)    and its Database (OperationalData)  
+   Connect to Azure SQL Server (sql-operational-<inject key="Deployment-ID" enableCopy="false"/>.database.windows.net)    and its Database (OperationalData)  
    
-   Use UPN: odl_user_2410878@sandboxailabs1002.onmicrosoft.com to connect  above SQL Server and Database to read/ingest Operational data into    Lakehouse  
+   Use UPN: <inject key="AzureAdUserEmail"></inject> to connect  above SQL Server and Database to read/ingest Operational data into    Lakehouse  
    
    Create Fabric Mirrored Database and connect to Azure SQL Server for  Operational Data.
    
