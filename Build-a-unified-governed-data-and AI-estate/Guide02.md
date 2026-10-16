@@ -8,7 +8,7 @@ Now that you have completed the envisioning **Whiteboard session** and identifie
 
 You will use GitHub Copilot to build the Future State Architecture from the Whiteboarding exercise. You describe what you need in plain language, and Copilot creates and configures the Fabric and Azure components.
 
-### Step1: Verify Resources in the Azure Resource Group
+### Step 0: Verify Resources in the Azure Resource Group
 
 1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
 
@@ -135,7 +135,7 @@ This allows us to establish the foundation for the unified data solution through
 > **Business value:** Caldova starts with the Azure resources it already has: the same storage account, database and Fabric capacity. Nothing is replaced. Access is set when the workspace is created, so governance starts on day one rather than being added later.
 
 
-1. Please copy the below prompt and paste it in the copilot chat win
+1. Please copy the below prompt and paste it in the copilot chat window.
 
    ```
    You are my Smart Agent supporting Caldova Pharma. I am planning to build a unified solution to improve business operations and decision-making.
@@ -162,7 +162,7 @@ This allows us to establish the foundation for the unified data solution through
    
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
-1. If Copilot Asks to aunthenticate like below, please click on provided link and provide the code which was given by copilot 
+1. If Copilot Asks to authenticate like below, please click on provided link and provide the code which was given by copilot 
 
    ![](../Sandbox-Environment-Guides/Images/Login.png)
 
@@ -260,7 +260,7 @@ This approach demonstrates how different data sources can be brought together in
 
 1. Once the deployment is complete, you can verify the created Lakehouse in fabric workspace.
 
-1. Navigate to the **Microsoft Fabric** portal and Open the **Caldova_Lakehouse** lakehouse from the workspace.
+1. Navigate to the **Microsoft Fabric** portal and Open the **Caldova-Lakehouse** lakehouse from the workspace.
 
 1. In the **Explorer** pane, expand **Tables**.
 
@@ -268,7 +268,7 @@ This approach demonstrates how different data sources can be brought together in
 
 1. Select the **DimDate** table to open and review the table data. 
 
-   ![](/Sandbox-Environment-Guides/Images/LH-AnalyticalData.png)   
+   ![](../Sandbox-Environment-Guides/Images/LH-AnalyticalData.png)   
 
 1. Navigate back to ****GitHub Copilot**** 
 
@@ -295,7 +295,7 @@ This approach demonstrates how different data sources can be brought together in
 
 1. Once the deployment is complete, you can verify the Created tables in the same Lakehouse.
 
-   ![](/Sandbox-Environment-Guides/Images/LH-Operational.png)
+   ![](../Sandbox-Environment-Guides/Images/LH-Operational.png)
 
 
 ## Step 3: Loading Business Application Data into Fabric SQL Database:
@@ -337,7 +337,7 @@ The objective is to demonstrate how a business requirement can be translated int
    
    3. Create a new Azure Integration Service in the above resource group.
    
-   4. Create an Azure Logic App to read Application data from:    storage2410878→ Application folder under data contrainer and load it into  the Fabric SQL Database.
+   4. Create an Azure Logic App to read Application data from:    storage2410878→ Application folder under data container and load it into  the Fabric SQL Database.
 
    ```
 
@@ -345,12 +345,15 @@ The objective is to demonstrate how a business requirement can be translated int
 
 1. If you see the following prompt:
 
-   ```text
+   ```
    The command requires the extension logic.
-   Do you want to install it now?
-   The command will continue to run after the extension is installed. (Y/n):
 
-1. Enter Y and press Enter to allow the required Azure CLI extension to be installed.
+   Do you want to install it now?
+
+   The command will continue to run after the extension is installed. (Y/n):
+   ```
+
+1. Enter `Y` and press Enter to allow the required Azure CLI extension to be installed.
 
    ![](../Sandbox-Environment-Guides/Images/LogicApp-Extension.png)
 
@@ -441,7 +444,7 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    ![](../Sandbox-Environment-Guides/Images/Report.png)
 
-### Building Data Agent using Sementic Model.
+### Building Data Agent using Semantic Model.
 
 1. Navigate to the created **Data Agent**.
 
@@ -508,7 +511,7 @@ This step completes the prototype by connecting data integration and analytics w
 
    ![](../Sandbox-Environment-Guides/Images/Govern.png)
 
-1. Click the **Secure** tab where all users will be managed under one space and add, remove, and manage access accross all the domains and workspaces.
+1. Click the **Secure** tab where all users will be managed under one space and add, remove, and manage access across all the domains and workspaces.
 
 
    ![](../Sandbox-Environment-Guides/Images/Secure.png)
