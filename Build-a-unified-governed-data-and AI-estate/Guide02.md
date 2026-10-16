@@ -549,4 +549,13 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
 
 1. Review the response.
 
+
+### What you built and why it matters for Caldova
+ 
+- One governed data estate across analytical, operational and application data, built on the resources Caldova already had
+- New sources connected without new copies or custom pipelines, so new markets and acquisitions come online faster
+- One set of business definitions shared by reports and AI
+- A single place to discover, govern and secure data assets
+- Answers to cross-functional questions in Microsoft 365 Copilot
+
 #### Congratulations! You have successfully completed the `Rapid Prototyping using ****GitHub Copilot****` session and validated the Unified governed Data&AI estate.

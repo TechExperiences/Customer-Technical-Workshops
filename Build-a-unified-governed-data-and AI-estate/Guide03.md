@@ -2,6 +2,9 @@
 
 Now that you have deployed the generated template with GitHub Copilot, let’s explore a similar, pre-deployed solution. This provides a ready-to-use foundation to review, validate, and understand how the solution brings together data, analytics, AI, governance, and security to address Caldova’s business needs.
 
+>Note:
+This pre-deployed package is a reference version of what you built. Compare it with your prototype to see the full pattern working end to end. It can also serve as the starting point for a pilot with your own data, which shortens the path from this workshop to a working solution.
+
 1. Navigate to the Azure portal. Click on **Resource group**.
 
    ![](../Sandbox-Environment-Guides/Images/amp52.png)
@@ -18,6 +21,9 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
 The **Caldova-Build-Unify-xxxxx** Fabric workspace has already been created and configured. In this step, we will validate that the workspace is available and accessible in **Microsoft Fabric**.
 
+
+> [!TIP]
+> **What this proves:** The workspace is the single governed home for every asset in the solution.
 
 1. Click on the **App launcher (1)** and select **Microsoft fabric (2)** icon.
 
@@ -37,6 +43,10 @@ The **Caldova-Build-Unify-xxxxx** Fabric workspace has already been created and 
 The required analytical and operational data has already been loaded into the Caldova_Lakehouse as Delta tables. In this step, we will validate that the required tables have been created successfully and that the data ingested from Azure Blob Storage and Azure SQL Database is available in the lakehouse.
 
 The validation ensures that the data is ready for downstream analytics, reporting, and AI workloads.
+
+
+> [!TIP]
+> **What this proves:** Data from Blob Storage and Azure SQL Database is in one place, without separate copies to maintain.
 
 1. Open the **Caldova_Lakehouse** lakehouse from the workspace.
 
@@ -61,6 +71,9 @@ The validation ensures that the data is ready for downstream analytics, reportin
 The business application data has already been loaded into the Fabric SQL Database from files stored in the Azure Storage Account. In this step, we will validate that the data has been loaded successfully and is available in the Fabric SQL Database for downstream applications, reporting, analytics, and AI workloads.
 
 The data movement was orchestrated using an Azure Logic App, which served as the integration layer between Azure Storage and Fabric SQL Database.
+
+> [!TIP]
+> **What this proves:** Application data arrives through a repeatable, managed integration.
 
 1. To verify the created tables in Fabric SQL Database, navigate back to the **Caldova-Build-Unify-xxxxx** workspace.
 
@@ -90,6 +103,10 @@ The data movement was orchestrated using an Azure Logic App, which served as the
 ## Step 4: Validate the Semantic Model, Power BI Report, and Data Agent
 
 The **Direct Lake semantic model and Data Agent** have already been created using the data from the **Fabric Lakehouse and Fabric SQL Database**. In this step, we will validate the semantic model and its table relationships, create a **Power BI report** using the semantic model, and validate the **Data Agent** to ensure it can provide business insights through natural language queries.
+
+
+> [!TIP]
+> **What this proves:** Reports and the Data Agent give the same answer because they use the same model.
 
 1. Navigate back to Fabric Portal and open the **Caldova-Build-Unify-xxxxx** Workspace.
 
@@ -139,6 +156,10 @@ The **Direct Lake semantic model and Data Agent** have already been created usin
 
 The Caldova Pharma Fabric workspace and data assets are already available in Microsoft Fabric. In this step, we will use OneLake Catalog to validate the available governance and security capabilities, including data discovery, access management, ownership, sensitivity, lineage, and compliance across the Fabric environment.
 
+
+> [!TIP]
+> **What this proves:** Every asset can be found, governed and secured from one catalog.
+
 1. Click **OneLake Catalog** **(1)** and navigate to catalog page.
 
    - Landing page of OneLake Catalog with show items and sub-items for all the workspaces **(2)**.
@@ -154,6 +175,13 @@ The Caldova Pharma Fabric workspace and data assets are already available in Mic
    ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u23.png) 
 
    > **Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
+
+
+### What this means for Caldova
+ 
+You started with five business problems: slow cross-functional answers, slow onboarding of new markets, conflicting numbers, compliance risk, and stalled AI projects. In this workshop you built a prototype that connects Caldova's data without extra copies, gives reports and AI one set of business definitions, governs it all from one catalog, and answers business questions in Microsoft 365 Copilot.
+ 
+**Next step:** Talk to your Microsoft account team about turning this prototype into a pilot with your own data. Ask about Frontier Accelerate for Azure for funding, expert help and skilling to get started.   
 
 ### Congratulations! You have successfully completed the Workshop.
 
