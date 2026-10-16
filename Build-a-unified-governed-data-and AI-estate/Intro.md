@@ -29,7 +29,7 @@ What this costs the business:
 The workshop takes each of Caldova's challenges and builds the matching Microsoft capability:
 
 - **One shared foundation:** OneLake becomes the common foundation for operational and analytical data. Azure SQL Database stays the operational source, and Azure Blob Storage stays the home for analytical and source data.
-- **Connecting sources without moving data:** Azure SQL Database is mirrored into the Lakehouse with Fabric Mirroring, and Blob Storage is reached through OneLake shortcuts, so the data doesn't need a separate physical copy. Data Factory is used only where data must be loaded, scheduled or transformed.
+- **Connecting sources without moving data:** Azure SQL Database is mirrored into the Lakehouse with Fabric Mirroring, and Blob Storage is reached through OneLake shortcuts, so the data doesn't need a separate physical copy. In a full implementation, Data Factory can be added where data must be loaded, scheduled or transformed.
 - **Bringing operational and analytical data together:** Bronze, Silver and Gold layers are used where needed to load, check, standardize and enrich data across the customer, product, sales, finance and supply-chain areas.
 - **Open and interoperable:** OneLake, open ways of reaching the data and reusable governed assets keep the platform open as tools and processing engines change. This avoids lock-in and new silos.
 - **Application integration:** Azure Logic Apps reads, checks and transforms the JSON data that business applications write, then loads it into Fabric SQL Database. Service Bus or Event Grid can be added for event-driven processing.
@@ -38,8 +38,7 @@ The workshop takes each of Caldova's challenges and builds the matching Microsof
 
 ## Workshop Outcomes
 
-
-> [!TIP]
+> [!NOTE]
 > By the end of the workshop, participants will have:
 >
 > - A unified, open and governed data foundation built with Fabric, so teams work from the same data instead of reconciling separate copies.
@@ -47,15 +46,6 @@ The workshop takes each of Caldova's challenges and builds the matching Microsof
 > - A repeatable way to bring application data into Fabric SQL Database, so business application data joins the same estate as everything else.
 > - Central discovery and access control through the OneLake catalog, so the business can see what data exists and who can use it.
 > - One trusted semantic layer for reporting and AI, so reports and AI answers use the same business definitions.
-
-
-By the end of the workshop, participants will have:
-
-- A unified, open and governed data foundation built with Fabric
-- Low-copy connections to operational and analytical data through OneLake
-- A way to bring application data into Fabric SQL Database
-- Central discovery and access control through the OneLake catalog
-- One trusted semantic layer for reporting and AI-driven insights
 
 ## Accessing your Sandbox Environment
 
