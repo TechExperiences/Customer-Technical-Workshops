@@ -332,11 +332,7 @@ The objective is to demonstrate how a business requirement can be translated int
 
 1. If you see the following prompt:
    
-   > [!TIP]
-   > The command requires the extension logic.
-   > Do you want to install it now?
-   > The command will continue to run after the extension is installed. (Y/n):
-
+   > **Note:** The command requires the extension logic. Do you want to install it now? The command will continue to run after the extension is installed. (Y/n):
  
 1. Enter `Y` and press Enter to allow the required Azure CLI extension to be installed.
 
