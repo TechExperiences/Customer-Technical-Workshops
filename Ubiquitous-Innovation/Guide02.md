@@ -447,6 +447,559 @@ This approach helps us measure the agent's response quality and validate whether
 
 ## Topic 3: From One Agent to a Coordinated System 
 
-## Continue...
+### Activity 3.1 – Create the  Market Launch Cordinator
+
+### Create and Configure a New Agent in Copilot Studio
+
+1. Open **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/copilot/products/copilot-studio)**.
+
+1. Navigate to the **Agents** section.
+
+1. Click the drop-down arrow next to **New agent**.
+
+1. Under **Other ways to build**, select **Agent (Standard)** to create an agent with predefined rules and flows.
+
+   ![](../Sandbox-Environment-Guides/Images/agentstandard.png) 
+
+1. Provide **Market Launch Coordinator** for the agent.and Click **Create** to create the agent.
+
+1. Once the agent is created, navigate to the **Instructions** tab.
+
+1. Copy the instructions provided below and paste them into the **Instructions** field.
+
+   ![](../Sandbox-Environment-Guides/Images/intro.png) 
+   ```
+   # Caldova Market Launch Coordinator — Agent Instructions
+ 
+   ## 1. Role and purpose
+   
+   You are the Market Launch Coordinator for Caldova, a pharmaceutical product launch.
+   
+   Your responsibility is to help Product, Engineering, Quality, Regulatory, Supply    Chain, Operations, and Sales coordinate launch readiness. You turn business updates    and questions into clear, evidence-based assessments, identify dependencies and  risks, and recommend appropriate next steps.
+   
+   You are the business-process coordination agent. You coordinate information and  decisions; you do not replace qualified business owners, Quality or Regulatory    reviewers, or authorized approvers.
+   
+   ## 2. Scope of support
+   
+   Help users with:
+
+   - Overall launch readiness and milestone status.
+
+   - Workstream updates, owners, deadlines, and open actions.
+
+   - Supplier delays, component availability, and supply-chain dependencies.
+
+   - Engineering validation and testing dependencies.
+
+   - Quality and Regulatory deliverables, evidence, and outstanding reviews.
+
+   - Product, Operations, and Sales launch dependencies.
+
+   - Risk identification, impact assessment, mitigation options, and escalation.
+
+   - Summaries of launch updates and preparation for readiness reviews.
+
+   - Identification of missing information, conflicting updates, and decisions requiring  approval.
+   
+   Politely redirect unrelated requests to the appropriate support channel.
+   
+   ## 3. Use of connected knowledge, tools, and agents
+   
+   Use the connected SharePoint launch-readiness information as the governed source of    record when it is available and relevant.
+   
+   Use the Supply-Chain-BI-Agent in Microsoft Foundry when a question requires   specialist supply-chain analysis, such as:
+
+   - Assessing the potential impact of a supplier or component delay.
+
+   - Identifying downstream dependencies and affected milestones.
+
+   - Comparing supply-chain scenarios or mitigation options.
+
+   - Evaluating supply-chain risks and missing evidence.
+   
+   Invoke the specialist through its configured connection and provide the relevant    business context, including the reported change, affected workstream, known dates,  dependencies, and available evidence.
+   
+   Use only knowledge sources, tools, and connections actually configured and available   to you. Do not claim that you accessed SharePoint, Work IQ, Microsoft Foundry, Teams  messages, or other systems unless the relevant information was successfully retrieved.
+   
+   Work IQ may be used only when an authorized and supported connection or tool is  available. Do not assume that access to Microsoft 365 context is automatically    available to every workflow.
+   
+   ## 4. Understand and classify business updates
+   
+   When a user provides a launch update, extract the following information where    available:
+   
+   - Source message or document.
+
+   - Workstream.
+
+   - Milestone or deliverable.
+
+   - Current or previous status.
+
+   - New or proposed status.
+
+   - Current and proposed dates.
+
+   - Responsible owner.
+
+   - Dependencies and downstream milestones.
+
+   - Supporting evidence or source link.
+
+   - Potential impact on launch readiness.
+
+   - Confidence in the assessment.
+
+   - Missing information or conflicting evidence.
+
+   - Recommended next step.
+   
+   Distinguish explicitly between:
+
+   - Verified facts.
+
+   - Information reported by a person or source.
+
+   - Inferences and potential impacts.
+
+   - Unknown or unverified information.
+   
+   Do not invent owners, dates, milestone statuses, evidence, approvals, or confidence    scores.
+   
+   If a material field is missing, ask a concise clarifying question when the answer is   necessary to proceed. Otherwise, provide a preliminary assessment and state what   remains unknown.
+   
+   ## 5. Assess launch readiness and impact
+   
+   When asked to assess a change or risk:
+   
+   1. Identify the affected workstream and milestone.
+
+   2. Retrieve relevant launch-plan information and supporting evidence using available   connected sources.
+
+   3. Identify dependencies and downstream milestones.
+
+   4. Compare the reported change with the available plan and previous status, if that    information is available.
+
+   5. Assess the potential effect on launch timing, readiness, and related workstreams.
+
+   6. Identify missing evidence, conflicting updates, and assumptions.
+
+   7. Recommend practical mitigation options and the appropriate owner or reviewer,    where known.
+
+   8. State whether the assessment is preliminary or sufficiently supported by the  available evidence.
+   
+   Do not declare that a milestone will be delayed solely because a dependency might be   affected. Explain the dependency and evidence supporting the assessment.
+   
+   Do not declare the product ready for launch or make a final Quality or Regulatory   determination unless the appropriate authoritative records and authorized decision    process support that conclusion.
+   
+   ## 6. Confidence, conflicts, and escalation
+   
+   Use qualitative confidence levels unless a configured tool provides a validated  numerical confidence score.
+   
+   - High confidence: relevant, consistent evidence supports the assessment.
+
+   - Medium confidence: some evidence is available, but important details remain    unverified.
+
+   - Low confidence: evidence is insufficient, ambiguous, outdated, or conflicting.
+   
+   Do not manufacture numerical confidence scores or apply arbitrary thresholds.
+   
+   Request human review or escalate through a configured mechanism when:
+
+   - Material evidence is missing.
+
+   - Two sources conflict.
+
+   - The potential launch impact is significant.
+
+   - A critical milestone or dependency is at risk.
+
+   - Ownership is unclear.
+
+   - Quality or Regulatory review is required.
+
+   - The proposed action requires approval.
+
+   - The available information does not support a reliable recommendation.
+   
+   If an escalation mechanism is not configured, identify the need for escalation and  recommend the responsible role when known. Do not claim that an escalation was sent.
+   
+   ## 7. SharePoint record handling
+   
+   When answering questions, use relevant SharePoint launch-readiness records when  available.
+   
+   When a write or update action is requested, use only an explicitly configured and   authorized action for that purpose.
+   
+   Before writing a record, validate the available fields and identify missing mandatory  information. Preserve the source message or document reference when supported.
+   
+   Never claim a record was created or updated unless the action returns a successful  result.
+   
+   If the required write action is unavailable, provide the proposed record details for   review and explain that the record has not been saved.
+   
+   Treat SharePoint as the governed record only to the extent that the configured   SharePoint lists, libraries, permissions, and business process support that role.
+   
+   ## 8. Approval and controlled actions
+   
+   Recommend actions and explain their rationale, dependencies, risks, and required    approvals.
+   
+   Never independently approve a business decision, bypass an approval process, or  execute a consequential action merely because a user requests it in a message.
+   
+   For actions requiring approval:
+
+   1. Summarize the proposed action.
+
+   2. Explain the business reason and supporting evidence.
+
+   3. Identify known risks and uncertainties.
+
+   4. Request approval through the configured approval mechanism.
+
+   5. Execute the controlled action only after the required approval is verified.
+
+   6. Report the result only after the connected action confirms its outcome.
+   
+   A statement such as "yes" or "proceed" is not sufficient if the configured approval    process requires a formal approval record or an authorized approver.
+   
+   If approval is rejected, do not execute the action. Explain the rejection outcome   when available and recommend the appropriate next step.
+   
+   ## 9. Follow-up questions in Teams
+   
+   After answering a substantive business question, suggest one or two relevant next   questions.
+   
+   Choose follow-ups based on the user's request and the information already retrieved.
+   
+   Examples:
+
+   - "Which launch milestones depend on this component?"
+
+   - "What evidence is still missing?"
+
+   - "Who owns the next action?"
+   ```
+ 
+### Activity 3.2 - Detect and Structure a Launch –Readiness Change 
+
+### Activity 3.3 – Confirm the Copilot Studio Model and Connect the Foundry Specialist Agent
+
+**Connect a Microsoft Foundry Agent to the Market Launch Coordinator**
+1. Navigate to the existing **Market Launch Coordinator** agent and Select the **Agents** tab.
+
+   ![](../Sandbox-Environment-Guides/Images/tools.png) 
+
+1. Click **Add an agent**.
+
+   ![](../Sandbox-Environment-Guides/Images/addagent.png) 
+
+1. In the agent selection window, click the **Connect to an external agent** drop-down and Select **Microsoft Foundry**.
+
+   ![](../Sandbox-Environment-Guides/Images/foundryagent.png) 
+
+1. Review the connection information or create a new connection if required. and Click **Next** to continue.
+
+   ![](../Sandbox-Environment-Guides/Images/nextbutton.png) 
+
+1. Provide the details required to connect to the existing Microsoft Foundry agent.
+
+1. Locate and select the existing **Supply-Chain-BI-Agent**.
+
+1. Configure the connection details as prompted by the interface.
+
+1. In the **Details** section, configure the following information:
+
+   - **Name:** `Supply-Chain-BI-Agent`
+   - **Description:** `Supply chain BI agent will handle retail business for Caldova`
+   - **AgentId:** `Supply-Chain-BI-Agent`
+
+1. Verify that the agent identifier references the correct Foundry agent.
+
+### Activity 3.4 – Assess Launch Impact and Return a Mitigation
+
+1. Navigate back to **Market Launch Coordinator** agent in Microsoft Copilot Studio.
+
+2. In the **Test your agent** panel on the right, copy the prompt provided below and paste it into the chat input box.
+
+   ![](../Sandbox-Environment-Guides/Images/testing.png)
+
+   ```
+   What are Caldova's main priorities for the November launch?
+   ```
+   ```
+   What is the November capacity utilization of PL01?
+   ```
+
+1. Review the response provided by agent
+
+
+### Activity 3.6 – Shape, Publish and Run the Participant Experience 
+
+1. Click on **Publish** button
+
+1. Navigate back to **Market Launch Coordinator** agent and navigate to the **Channels** tab.
+
+   ![](../Sandbox-Environment-Guides/Images/channelteam.png)
+
+1. Under **Microsoft channels**, select **Microsoft 365 and Microsoft Teams**.
+
+1. In the agent configuration panel, click **See agent in Teams**.
+
+   ![](../Sandbox-Environment-Guides/Images/seeagents.png)
+
+1. When prompted to choose how to access Teams, select **Use the web app instead**.
+
+   ![](../Sandbox-Environment-Guides/Images/usewebapp.png)
+
+1. Microsoft Teams will open in your browser. Locate **Market Launch Coordinator** under **Chats**.
+
+   ![](../Sandbox-Environment-Guides/Images/openedinteams.png)
+
+1. Click **Market Launch Coordinator** to open the chat and verify that the agent is available.
+
+## Topic 4: Trust and Cost Are the Same Conversation
+
+### Activity 4.1 – Discover and Register the Agent
+
+1. Click on  [agent 365](https://admin.cloud.microsoft/?referrer=entra#/agents/overview) 
+
+1. From the left navigation pane, expand **Agents** and select **All agents**.
+
+   ![](../Sandbox-Environment-Guides/Images/agent365.png)
+
+1. In the search box, enter `supply-chain` to locate the **Supply-Chain-BI-Agent**.
+
+1. Select the agent's **More options (...)** menu and click **View in map**.
+
+   ![](../Sandbox-Environment-Guides/Images/viewinmap.png)
+
+1. Review the agent map to understand the agent's connections and dependencies, including the configured tools, connected data agents, SharePoint resources, and associated users.
+
+   ![](../Sandbox-Environment-Guides/Images/map.png)
+
+1. Verify that the required tools and resources are connected to the **Supply-Chain-BI-Agent** and review the available tool usage information.
+
+1. Use the agent map to understand how the agent interacts with its connected tools and resources to support supply-chain business queries.
+
+### Activity 4.2 – Review Identity and Security Controls
+
+Review the relationship between agent identity, Microsoft Entra ID, Microsoft Purview, Foundry guardrails, and Microsoft Defender to understand how the AI agent is authenticated, authorized, governed, and protected.
+
+### 1. Agent Identity and Microsoft Entra ID
+
+- Review how the agent is identified and authenticated when accessing connected tools, data sources, and other agents.
+- Understand how Microsoft Entra ID supports authentication, access control, identity management, and permissions for users and applications.
+- Verify that the agent and its connected resources use appropriate identities and least-privilege access.
+- Review how user identities, application identities, and delegated permissions are handled when the agent invokes tools or accesses enterprise data.
+
+### 2. Microsoft Purview – Data Governance and Compliance
+
+- **Data Catalogue:** Discover enterprise data assets and manage business and technical metadata.
+- **Data Classification:** Identify sensitive and regulated data that the agent may access or process.
+- **Data Lineage:** Trace data movement and transformations across supported data and analytics workflows.
+- **Data Quality:** Monitor data quality rules, issues, and quality insights to support reliable AI responses.
+- **Compliance and Privacy:** Support regulatory requirements, data policies, retention, and privacy governance.
+- Review how data governance policies and sensitivity labels apply to the data used by the agent, where supported.
+
+### 3. Microsoft Foundry Guardrails – Responsible AI Protection
+
+- Review configured guardrails that help protect the agent against unsafe or inappropriate inputs and outputs.
+- Understand how content safety filters help detect harmful content and reduce unsafe responses.
+- Evaluate protection against prompt injection and attempts to manipulate the agent into ignoring its instructions, where supported by the configured safeguards.
+- Review how input validation, output filtering, and grounding help improve the reliability and safety of agent responses.
+- Verify that guardrails are configured appropriately for the agent's business use case and connected tools.
+
+### 4. Microsoft Defender – Security Posture and Threat Protection
+
+- **AI Security:** Assess AI application and agent security posture, identify supported AI risks, and improve protection of AI workloads.
+- **Cloud Security Posture:** Identify misconfigurations, vulnerabilities, and exposed cloud resources across supported environments.
+- **Data and Workload Protection:** Detect threats affecting supported databases, storage, virtual machines, containers, and cloud workloads.
+- **Threat Detection and Response:** Correlate alerts, investigate suspicious activity, and support incident response.
+- **Identity Threat Protection:** Identify compromised identities and risky access patterns using relevant Defender identity capabilities alongside Microsoft Entra ID controls.
+- **Security Governance:** Prioritize remediation and track security posture to support enterprise readiness and compliance.
+
+### 5. Understand How the Components Work Together
+
+Review the following relationships:
+
+- **Agent Identity + Microsoft Entra ID:** Establish and manage the identity used to authenticate the agent and control access to connected resources.
+- **Microsoft Entra ID + Microsoft Purview:** Support identity-based access controls alongside data discovery, classification, and governance policies.
+- **Microsoft Purview + Foundry Guardrails:** Complement data governance and compliance controls with runtime protections for AI inputs and outputs.
+- **Microsoft Defender + Microsoft Entra ID:** Help detect identity-related threats and protect cloud resources and AI workloads.
+- **Microsoft Defender + Foundry:** Support AI security posture assessment and threat detection for supported AI resources and integrations.
+- **Overall Security:** Combine identity management, least-privilege access, data governance, AI safety controls, and threat protection to help secure the Supply-Chain-BI-Agent.
+
+### Activity 4.4 – Review the Security Event
+
+Review the agent's details, connected tools, security protections, permissions, and usage activity in Microsoft Agent 365. Investigate exceptions and available security findings using the linked Microsoft security portals.
+
+1. Select the **Details** tab.
+
+1. Review the agent's availability and platform.
+
+1. Under **Overview**, inspect the following details:
+   - Created and last-updated dates
+   - Last published and last-used dates
+   - Channel and publisher information
+   - Publisher type and owner
+   - Created-by information and Entra agent ID
+
+1. Identify any missing or incomplete metadata.
+
+   ![](../Sandbox-Environment-Guides/Images/supplychain.png)
+
+1. Select the **Data & tools** tab.
+
+1. Review the agent's capabilities and data-access information.
+
+1. Check the **Can read** and **Graph connectors** fields.
+
+1. Under **Tools**, inspect the configured tools, such as:
+   - `knowledge-base`
+   - `WorkIQSharePoint2`
+
+1. Verify that the listed tools are expected and appropriate for the agent's purpose.
+
+   ![](../Sandbox-Environment-Guides/Images/datatools.png)
+
+1. Select the **Activity** tab.
+
+1. Review the selected date range and the last activity date.
+
+1. Under **Usage**, examine the available metrics:
+   - **Active users** – number of users who interacted with the agent.
+   - **Sessions** – number of recorded agent sessions.
+   - **Exceptions** – recorded exceptions during agent activity.
+   - **Agent run-time** – recorded agent execution time.
+
+1. Review the **Active users over time** chart to identify usage patterns.
+
+1. Review the **Sessions over time** chart to compare successful sessions and exceptions.
+
+   ![](../Sandbox-Environment-Guides/Images/activity.png)
+
+1. Scroll down to the **Active users** table to inspect total sessions and last activity dates.
+
+   ![](../Sandbox-Environment-Guides/Images/activity2.png)
+
+1. Select the **Permissions** tab.
+
+1. Review the permissions associated with the agent.
+
+1. Select **See in portal** to open the relevant Defender for Cloud Apps view, where available.
+
+1. Select **View Permissions** to inspect the associated permissions in Microsoft Entra.
+
+   ![](../Sandbox-Environment-Guides/Images/permission.png)
+
+1. Select the **Security** tab.
+
+1. Under **Enabled policies and protections**, review the available Microsoft Purview protections.
+
+1. Select **View agent activity** under *Monitor agent activity* to inspect monitored interactions.
+
+1. Select **View sensitive interactions** under *Protect sensitive data* to review available sensitive-data findings.
+
+1. Under *Evaluate compliance gaps*, select **Review** to inspect the available AI baseline assessment and compliance findings.
+
+1. Review the Microsoft Entra protections displayed on the page, if available.
+
+1. Document any findings and recommended actions.
+
+   ![](../Sandbox-Environment-Guides/Images/review.png)
+
+After completing this activity, participants should be able to:
+
+- Locate and review an agent in Agent 365.
+- Identify configured tools and data-access capabilities.
+- Review available security protections and compliance findings.
+- Inspect agent permissions and navigate to the relevant security portals.
+- Analyze usage metrics, exceptions, and session trends.
+- Investigate available security events and document remediation actions.
+
+### Activity 4.5 – Test Sensitive Data Protection
+
+Test how the AI agent handles restricted R&D information stored in SharePoint. Review the agent's response and use Microsoft Purview to investigate sensitive AI interactions, review data protection insights, and identify potential compliance gaps.
+
+1. When you click on Review button in previous sessions it will open new Ui in other tab
+
+1. Open **Compliance Manager** in Microsoft Purview.
+
+1. Select **Overview**.
+
+1. Review the overall compliance score and assessment progress.
+
+1. Navigate to **Assessments** or **Improvement actions**, if required.
+
+1. Review recommendations relevant to data protection, access control, and AI governance.
+
+1. Record any applicable recommendations for follow-up.
+
+   ![](../Sandbox-Environment-Guides/Images/CM.png)
+
+1. Select **Data Security Investigations** from the left navigation pane.
+
+1. On the **Overview** page, locate the section **Investigate faster with a search template**.
+
+   ![](../Sandbox-Environment-Guides/Images/DS.png)
+
+1. In Microsoft Purview, open **Data Loss Prevention**.
+
+1. Navigate to the analytics or recommendations section available in your tenant.
+
+1. Review the recommended task **Turn on analytics for risk detection and policy refinement (preview)**, if displayed.
+
+1. If authorized, follow the portal guidance to enable analytics in the lab environment.
+
+1. Review the available risk insights and recommendations for improving data protection policies.
+
+   ![](../Sandbox-Environment-Guides/Images/DLP.png)
+
+
+> Note: Enabling analytics may require administrator permissions. Do not modify production policies without approval.
+
+### Activity 4.6 – Review Cost and Model Economics
+
+The **Billing** section in the Microsoft 365 admin center allows administrators to manage the organization's Microsoft products, subscriptions, licenses, and billing-related settings.
+
+1. Navigate back to Microsoft 365 admin center.
+
+1. Expand **Billing** in the left navigation pane.
+
+1. Select **Your products** to view the products and subscriptions owned by the organization.
+
+   ![](../Sandbox-Environment-Guides/Images/billing.png)
+
+### Key Capabilities
+
+- **Purchase services:** Explore and purchase additional Microsoft products and services.
+- **Your products:** View purchased products, subscription status, assigned licenses, purchased quantity, and available licenses.
+- **Licenses:** Review and manage the organization's available licenses and assignments.
+- **License requests:** Review and manage requests for product licenses.
+- **Bills & payments:** Review billing statements, invoices, and payment-related information.
+- **Billing accounts:** View and manage billing account details.
+- **Payment methods:** Manage the payment methods associated with billing accounts.
+- **Billing notifications:** Configure or review notifications related to billing activities.
+- **Pay-as-you-go:** Review and manage applicable pay-as-you-go billing arrangements.
+
+### Review Your Products
+
+1. Navigate to **Billing → Your products**.
+
+   ![](../Sandbox-Environment-Guides/Images/products.png)
+
+1. Select the **Products** tab to review the organization's purchased products and subscriptions.
+
+1. Review the following information:
+
+   - **Product name:** Name of the Microsoft product or subscription.
+   - **Assigned licenses:** Number of licenses currently assigned.
+   - **Purchased quantity:** Total number of licenses purchased.
+   - **Available licenses:** Number of licenses available for assignment.
+   - **Subscription status:** Current status of the subscription.
+
+1. Use the search bar and filters to locate specific products or narrow the results by subscription status or billing profile.
+
+1. Use **Export to CSV** to export the displayed product information for reporting or further analysis.
+
+1. Select a product to review its available management and billing settings.
+
+> **Note:** Available options depend on the organization's subscriptions, billing arrangement, administrator permissions, and Microsoft 365 configuration.
 
 #### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session.
