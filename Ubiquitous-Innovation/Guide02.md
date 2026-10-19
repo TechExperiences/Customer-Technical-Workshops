@@ -842,7 +842,7 @@ Review the agent's details, connected tools, security protections, permissions, 
 
 1. Identify any missing or incomplete metadata.
 
-   ![](../Sandbox-Environment-Guides/Images/supplychain.png)
+   ![](../Sandbox-Environment-Guides/Images/suuplychain.png)
 
 1. Select the **Data & tools** tab.
 
