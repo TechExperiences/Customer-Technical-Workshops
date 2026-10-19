@@ -12,7 +12,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
 ### Verify Resources in the Azure Resource Group
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-caldova-ubiquitous** Resource Group.
 
    ![](../Sandbox-Environment-Guides/Images/UI-RG.png)
 
@@ -76,7 +76,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp27.png)
 
-1. Navigate to **`C:\`** path **(1)**, then select the **Unifydata** folder **(2)** and then **Select folder (3)**.
+1. Navigate to **`C:\`** path **(1)**, then select the **Ubiquitos-Innovation** folder **(2)** and then **Select folder (3)**.
 
    ![](../Sandbox-Environment-Guides/Images/uivscode.png)
 
@@ -110,7 +110,7 @@ Instead of starting with individual configuration tasks, you’ll describe what 
 
 ## What Will This Prompt Do?
 
-When you provide the architecture and prompt to **GitHub Copilot**, it can help work through the implementation of the **Fabric IQ** prototype, including:
+When you provide the architecture and prompt to **GitHub Copilot**, it can help work through the implementation of the **Microsoft Agent** prototype, including:
 
 1. Build Agents and Software at the Speed of AI: **GitHub Copilot + Microsoft Foundry**
 1. Agents That Know Your Business: **Microsoft Foundry + Microsoft IQ**
@@ -119,16 +119,21 @@ When you provide the architecture and prompt to **GitHub Copilot**, it can help 
 
 The goal is to move from **manually building each component** to **describing the desired solution through prompts and using GitHub Copilot to help implement it**. You’ll guide Copilot with your requirements, review what it creates, and refine your prompts as you build the prototype.
 
-## Topic 1 - Build agents and software at the speed of AI
+# Topic 1 - Build agents and software at the speed of AI
 Transform an existing agent design into a **production-ready, secure capability** using GitHub Copilot—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
 
-### Activity 1.1: Start Whiteboarding
-Review the prepared **Future-State-Architecture** design and walk through the four key areas: what the agent needs to know, the tools it can call and the production systems behind those tools, what actions it can perform autonomously versus where human approval is required, and where the agent will run once built. The starting point is that the agent already answers questions, but no code for the new action capability exists yet; the whiteboard represents the design for this new capability and serves as the foundation for the implementation activities that follow.
+### Activity 1.1: Whiteboarding: Caldova Market Launch Challenge
 
-Whiteboard [Link](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQDTzUYleJUrSam4WftDPpZ2AX33HhN8Z7CFeGr_t79F1p0?e=PeZ7Jf)
+The **Future-State Architecture** was developed during the previous whiteboarding activity. Review the architecture below to understand the agreed design before moving into implementation.
+Focus on the four key areas:
+- **Knowledge:** What the agent needs to know.
+- **Tools and Systems:** The tools the agent can call and the production systems behind those tools.
+- **Actions and Approvals:** What the agent can perform autonomously and where human approval is required.
+- **Deployment:** Where the agent will run once implemented.
+The agent can already answer questions. The next activities will build on this architecture to implement the **new action capability**.
 
-Whiteboard Image
- ![](../Sandbox-Environment-Guides/Images/UICusNew.png)
+## Future-State Architecture
+![Future-State Architecture](../Sandbox-Environment-Guides/Images/UIArchi.png)
 
 ### Activity 1.2: Turn the Whiteboard into a Reviewed Plan
 Turn the whiteboard into a reviewed implementation plan and issue set for extending the existing agent, without manually transcribing it.
