@@ -33,7 +33,7 @@ Whiteboarding is connected directly to Caldova's six-month market-launch story a
 
 1. Open a new browser tab in the Edge browser.
 
-1. Right-click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQDTzUYleJUrSam4WftDPpZ2AX33HhN8Z7CFeGr_t79F1p0?e=PeZ7Jf), then select **Copy link** and then paste it on the browser tab.
+1. Right-click on the following Whiteboard template link -  ["Whiteboard Template"](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQDmuN_zZp8aToXscfBEt9rWAQjO1NLtL1nXH-6fDirtq7I?e=wCiwCK), then select **Copy link** and then paste it on the browser tab.
 
 1. If prompted, sign in with your ODL user credentials.
 
@@ -43,17 +43,18 @@ Whiteboarding is connected directly to Caldova's six-month market-launch story a
 
 1. Use the **Zoom out** option to view the Whiteboard template clearly.
 
-   ![](../Sandbox-Environment-Guides/Images/UICusNew.png)
+   ![](../Sandbox-Environment-Guides/Images/UICustomerWorkshopNewrrr.png)
 
 1. Please follow along as the **Facilitator** guides you through the **Business** and **Technical** Envisioning Session. During the session, you will identify key business challenges, define priorities, assess the current environment, and design a future-state solution architecture.
 
-### Activities
-
+## Activities
 1. Review the **Business Envisioning Notes** to understand the organization's goals, challenges, and desired outcomes.
-1. Review the **Technical Envisioning** section and:
+
+2. Review the **Technical Envisioning** section:
    - Review the **Top 5 Pain Points**.
    - Review the **Top Priorities** and corresponding **Success Criteria**.
-## Top 5 Pain Points
+
+### Top 5 Pain Points
 
 1. Disconnected data and systems
 2. Manual processes and reporting
@@ -61,7 +62,7 @@ Whiteboarding is connected directly to Caldova's six-month market-launch story a
 4. Limited cross-team coordination
 5. Generic insights without business context
 
-## Top Priorities and Success Criteria
+### Top Priorities and Success Criteria
 
 | Top Priority | Success Criteria |
 |---|---|
@@ -71,16 +72,16 @@ Whiteboarding is connected directly to Caldova's six-month market-launch story a
 | Enable faster decision-making | Reduced manual reporting and improved access to actionable insights |
 | Improve cross-team collaboration | Shared information and better coordination across business functions |
 
-
-1. Complete the **Technical Discovery** by documenting:
+3. Complete the **Technical Discovery** by documenting:
    - Current-state architecture
    - Systems
 
-1. Design the **Future-State Architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
+4. Design the **Future-State Architecture** to illustrate how the proposed solution addresses business needs and technical requirements.
 
-1. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
+5. Review the completed envisioning outputs and validate their alignment with the desired business outcomes.
 
-## Next plan for Future State Architecture
+
+### Next plan for Future State Architecture
 
 Once the **Future State Architecture** has been defined during the Envisioning session, the next step is to bring the proposed solution to life as a working prototype.
 
