@@ -450,7 +450,7 @@ This enables the Business Intelligence agent to use live manufacturing context w
    •	Configure and connect the Data Agent under the Tools section of the existing Foundry agent using tool calling.
    •	Ensure the Foundry agent can invoke the Data Agent to retrieve operational data when answering relevant questions.
    ```
-
+ ![](../Sandbox-Environment-Guides/Images/task2.2.png)
 1. Verify that the **Fabric Data Agent** is attached under the **Tools** section of the existing Foundry agent.
 
 1. Confirm that the Data Agent is connected and configured correctly.
@@ -492,6 +492,7 @@ This allows the agent to combine operational data with documented manufacturing 
    •	Configure the agent to use this knowledge source when answering questions about the documents
 
    ```
+ ![](../Sandbox-Environment-Guides/Images/task2.3.png)
 
 1. Verify that the **Foundry IQ knowledge base** is configured under the **Knowledge** section of the existing Foundry agent.
 
@@ -532,7 +533,7 @@ This adds organizational context to the agent's existing operational and enterpr
    •	Ensure the agent can retrieve and use relevant business-context documents, including launch priorities, business commitments, and team responsibilities.
    •	Configure the agent to use **Work IQ** when answering questions about Caldova's business and organizational context.
    ```
-
+ ![](../Sandbox-Environment-Guides/Images/task2.4.png)
 1. Verify that the ****Work IQ** SharePoint integration** is configured under the **Tools** section of the existing Foundry agent.
 
 1. Confirm that the SharePoint source is connected properly and the relevant business-context documents are accessible.
@@ -592,7 +593,7 @@ This approach helps us measure the agent's response quality and validate whether
    Do not invent evaluation results or modify the agent without reviewing the proposed changes.
 
    ```
-
+ ![](../Sandbox-Environment-Guides/Images/task2.5.png)
 ---
 
 # Topic 3: From One Agent to a Coordinated System 
