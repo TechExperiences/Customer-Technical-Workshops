@@ -133,6 +133,7 @@ This allows us to establish the foundation for the unified data solution through
 
 
 > [!TIP]
+
 > **Business value:** Caldova starts with the Azure resources it already has: the same storage account, database, and Fabric capacity. Nothing is replaced. Access is set when the workspace is created, so governance starts on day one rather than being added later.
 
 
