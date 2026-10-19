@@ -396,8 +396,9 @@ Get approval from a **person** or a **CODEOWNER**.
 
 > **Tip:** Before you merge, you can still mention `@copilot` in a comment to ask for more changes to the pull request.
 
+---
 
-## Topic 2: Agents That Know Your Business 
+# Topic 2: Agents That Know Your Business 
 
 ### Activity 2.1: Validate the Deployed Business Intelligence Agent
 
@@ -423,6 +424,7 @@ This baseline will help us evaluate how the agent improves as we add live operat
    2.	Review its model, role, instructions, and capabilities without modifying or recreating the agent.
    3.	Run the following baseline Supply Chain prompt and summarize the response, including any information gaps
    ```
+ ![](../Sandbox-Environment-Guides/Images/task2.1.png)
 
 1. Review the Response provided by agent
 
@@ -461,7 +463,7 @@ This enables the Business Intelligence agent to use live manufacturing context w
 
 1. Review the response provided by the Foundry agent and verify that it retrieves the expected manufacturing data through the Fabric Data Agent.
 
-
+---
 ### Activity 2.3: Ground the Agent with Enterprise Knowledge
 
 Operational data alone may not explain the procedures and constraints that influence manufacturing decisions. The agent also needs access to Caldova's manufacturing documents, including scheduling guidance and relevant procedures.
@@ -503,7 +505,7 @@ This allows the agent to combine operational data with documented manufacturing 
 
 1. Review the response provided by the Foundry agent and verify that it uses the relevant manufacturing documents to provide a grounded answer.
 
-
+---
 ### Activity 2.4: Add Organizational Context
 
 To make better launch decisions, the Business Intelligence agent must understand not only manufacturing operations and procedures, but also Caldova's business priorities, commitments, and team responsibilities.
@@ -553,11 +555,9 @@ This adds organizational context to the agent's existing operational and enterpr
 
 1. Review the responses and confirm that all integrations work as expected.
 
-### Activity 2.5: Enable the Agent to Act
+---
 
-
-
-### Activity 2.6: Evaluate the Agent 
+### Activity 2.5: Evaluate the Agent 
 
 ### Evaluating the Business Intelligence Agent
 
@@ -593,9 +593,9 @@ This approach helps us measure the agent's response quality and validate whether
 
    ```
 
+---
 
-
-## Topic 3: From One Agent to a Coordinated System 
+# Topic 3: From One Agent to a Coordinated System 
 
 ### Activity 3.1 – Create the  Market Launch Cordinator
 
@@ -825,9 +825,11 @@ This approach helps us measure the agent's response quality and validate whether
 
    - "Who owns the next action?"
    ```
- 
+ ---
 ### Activity 3.2 - Detect and Structure a Launch –Readiness Change 
+In-progress
 
+---
 ### Activity 3.3 – Confirm the Copilot Studio Model and Connect the Foundry Specialist Agent
 
 **Connect a Microsoft Foundry Agent to the Market Launch Coordinator**
@@ -861,6 +863,7 @@ This approach helps us measure the agent's response quality and validate whether
 
 1. Verify that the agent identifier references the correct Foundry agent.
 
+---
 ### Activity 3.4 – Assess Launch Impact and Return a Mitigation
 
 1. Navigate back to **Market Launch Coordinator** agent in Microsoft Copilot Studio.
@@ -878,8 +881,9 @@ This approach helps us measure the agent's response quality and validate whether
 
 1. Review the response provided by agent
 
+---
 
-### Activity 3.6 – Shape, Publish and Run the Participant Experience 
+### Activity 3.5 – Shape, Publish and Run the Participant Experience 
 
 1. Click on **Publish** button
 
@@ -903,7 +907,9 @@ This approach helps us measure the agent's response quality and validate whether
 
 1. Click **Market Launch Coordinator** to open the chat and verify that the agent is available.
 
-## Topic 4: Trust and Cost Are the Same Conversation
+---
+---
+# Topic 4: Trust and Cost Are the Same Conversation
 
 ### Activity 4.1 – Discover and Register the Agent
 
@@ -927,6 +933,7 @@ This approach helps us measure the agent's response quality and validate whether
 
 1. Use the agent map to understand how the agent interacts with its connected tools and resources to support supply-chain business queries.
 
+---
 ### Activity 4.2 – Review Identity and Security Controls
 
 Review the relationship between agent identity, Microsoft Entra ID, Microsoft Purview, Foundry guardrails, and Microsoft Defender to understand how the AI agent is authenticated, authorized, governed, and protected.
@@ -975,6 +982,7 @@ Review the following relationships:
 - **Microsoft Defender + Foundry:** Support AI security posture assessment and threat detection for supported AI resources and integrations.
 - **Overall Security:** Combine identity management, least-privilege access, data governance, AI safety controls, and threat protection to help secure the Supply-Chain-BI-Agent.
 
+---
 ### Activity 4.4 – Review the Security Event
 
 Review the agent's details, connected tools, security protections, permissions, and usage activity in Microsoft Agent 365. Investigate exceptions and available security findings using the linked Microsoft security portals.
@@ -1063,6 +1071,7 @@ After completing this activity, participants should be able to:
 - Analyze usage metrics, exceptions, and session trends.
 - Investigate available security events and document remediation actions.
 
+---
 ### Activity 4.5 – Test Sensitive Data Protection
 
 Test how the AI agent handles restricted R&D information stored in SharePoint. Review the agent's response and use Microsoft Purview to investigate sensitive AI interactions, review data protection insights, and identify potential compliance gaps.
@@ -1104,6 +1113,7 @@ Test how the AI agent handles restricted R&D information stored in SharePoint. R
 
 > Note: Enabling analytics may require administrator permissions. Do not modify production policies without approval.
 
+---
 ### Activity 4.6 – Review Cost and Model Economics
 
 The **Billing** section in the Microsoft 365 admin center allows administrators to manage the organization's Microsoft products, subscriptions, licenses, and billing-related settings.
