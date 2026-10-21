@@ -118,7 +118,7 @@ You will use ******GitHub Copilot****** to generate ARM or Bicep templates using
 
    ![](../Sandbox-Environment-Guides/Images/amp33.png)
 
-## Migration From On-Prem SQL to Azure SQL Database Hyperscale with ******GitHub Copilot******
+## Modernizing SQL Server to Azure SQL Database Hyperscale with ******GitHub Copilot******
 
 ### Why Caldova Should Modernize to Azure SQL Database Hyperscale
 
@@ -261,7 +261,7 @@ Review the **Caldova Order Management** legacy web application and familiarize y
 Take a moment to explore the application and understand its current functionality before proceeding to the **application modernization activities**.
 1. **Look up a customer**
    - Select **Customer Lookup** from the top navigation.
-   - Enter **1** as the **Customer ID**.
+   - Enter **3** as the **Customer ID**.
    - Select **Search** to view the customer details.
    
   ![](../Modernize-with-confidence/Images/LegacyApp1.png)
