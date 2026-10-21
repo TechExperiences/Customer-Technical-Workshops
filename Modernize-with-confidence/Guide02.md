@@ -157,7 +157,7 @@ In this step, the prompt acts as the implementation plan that connects the exist
    Instructions:
    1.Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
    2.Use Existing Azure SQL Server and one Azure SQL Hyperscale Database (CaldovaOrderManagement) which is available in same Resource Group
-   3.Make UPN - <inject key="AzureAdUserEmail"></inject> set as admin to the azure sql server and hyperscale database
+   3.Make UPN - set as admin to the azure sql server and hyperscale database
    4.Connect VM: vm-onprem-sql (Public IP: 20.69.251.88) using credentials (User name: azureuser, passwrod: Password@123)
    5.Connect and Access the OnPrem SQL Server using credentials
       - User Name: caldova-admin
