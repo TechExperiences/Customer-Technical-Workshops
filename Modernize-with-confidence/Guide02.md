@@ -190,10 +190,11 @@ In this step, the prompt acts as the implementation plan that connects the exist
 
      ![](../Modernize-with-confidence/Images/m22.png)
 
-1. f prompted by GitHub Copilot, enter your Azure AD / Microsoft Entra ID User Principal Name (UPN) in the input field.
-   UPN - <inject key="AzureAdUserEmail"></inject>
+1. If prompted by GitHub Copilot, enter your **Azure AD / Microsoft Entra ID** User Principal Name (UPN) in the input field.
+   **UPN** - <inject key="AzureAdUserEmail"></inject>
 1. Click **Submit** or press Ctrl + Enter.
   ![](../Modernize-with-confidence/Images/AADUPN.png)
+
 1. Continue with the migration steps after Copilot accepts the UPN.   
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
