@@ -241,6 +241,7 @@ As reviewed in the **Caldova Current-State Architecture during the Whiteboard En
 2. Paste the URL into the **Microsoft Edge address bar**.
 3. Press **Enter** to open the application.
   ![](../Modernize-with-confidence/Images/LegacyApp.png)
+
 #### Step 3: Review the Current Application
 
 Review the **Caldova Order Management** legacy web application and familiarize yourself with the current experience.
@@ -249,7 +250,9 @@ Take a moment to explore the application and understand its current functionalit
    - Select **Customer Lookup** from the top navigation.
    - Enter **1** as the **Customer ID**.
    - Select **Search** to view the customer details.
+   
   ![](../Modernize-with-confidence/Images/LegacyApp1.png)
+  
 2. **Create a new order**
    - Select **New Order** from the top navigation.
    - Select a **Customer** from the dropdown.
@@ -257,9 +260,12 @@ Take a moment to explore the application and understand its current functionalit
    - Enter the required **Quantity**.
    - If needed, select **Add another product** to add additional products.
    - Select **Save Order** to create the order.
+
   ![](../Modernize-with-confidence/Images/LegacyApp2.png)
+  
 3. **Review the experience**
    - Explore the application and familiarize yourself with the current order-management experience before proceeding to the modernization activities.
+ 
   ![](../Modernize-with-confidence/Images/LegacyApp3.png)
 
 #### Why Caldova Wants to Modernize the Order Management Application
