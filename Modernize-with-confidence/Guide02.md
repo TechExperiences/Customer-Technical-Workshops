@@ -223,8 +223,55 @@ In this step, the prompt acts as the implementation plan that connects the exist
 
 ## Migration From On-Prem Web Application to Azure App Service with ******GitHub Copilot******
 
-**Extend the Prototype to the Application Layer**
+### Activity: Review the Caldova Legacy Order Management Application
 
+As reviewed in the **Caldova Current-State Architecture during the Whiteboard Envisioning session**, Caldova currently uses a legacy web application for order management. In this activity, you will open and review the existing application running on the Virtual Machine (VM).
+
+#### Step 1: Open Microsoft Edge
+
+1. In the **Virtual Machine (VM)**, open **Microsoft Edge**.
+2. Open a **new browser tab**.
+
+#### Step 2: Open the Legacy Application
+
+1. Copy the following URL:
+
+   [Caldova Order Management Application](http://20.69.251.88/customer)
+
+2. Paste the URL into the **Microsoft Edge address bar**.
+3. Press **Enter** to open the application.
+  ![](../Modernize-with-confidence/Images/LegacyApp.png)
+#### Step 3: Review the Current Application
+
+Review the **Caldova Order Management** legacy web application and familiarize yourself with the current experience.
+Take a moment to explore the application and understand its current functionality before proceeding to the **application modernization activities**.
+1. **Look up a customer**
+   - Select **Customer Lookup** from the top navigation.
+   - Enter **1** as the **Customer ID**.
+   - Select **Search** to view the customer details.
+  ![](../Modernize-with-confidence/Images/LegacyApp1.png)
+2. **Create a new order**
+   - Select **New Order** from the top navigation.
+   - Select a **Customer** from the dropdown.
+   - Under **Order Lines**, select a **Product**.
+   - Enter the required **Quantity**.
+   - If needed, select **Add another product** to add additional products.
+   - Select **Save Order** to create the order.
+  ![](../Modernize-with-confidence/Images/LegacyApp2.png)
+3. **Review the experience**
+   - Explore the application and familiarize yourself with the current order-management experience before proceeding to the modernization activities.
+  ![](../Modernize-with-confidence/Images/LegacyApp3.png)
+
+#### Why Caldova Wants to Modernize the Order Management Application
+
+Caldova wants to modernize its legacy **Order Management application** to improve operational efficiency and provide a more scalable, secure, and intelligent platform.
+1. **Reduce infrastructure management** by moving the legacy application from a VM to **Azure App Service**.
+2. **Improve scalability and availability** to support growing customer and order volumes.
+3. **Accelerate application delivery** through modern development and automated CI/CD.
+4. **Strengthen security and reliability** using Azure-managed services, identity, monitoring, and configuration.
+5. **Enable AI-powered experiences** by creating a modern foundation for intelligent customer, product, and order-management capabilities.
+
+**Extend the Prototype to the Application Layer**
 The database has now been migrated to Azure SQL Database Hyperscale. 
 The next step is to modernize the application that currently runs in the on-premises environment and move it to Azure App Service.
 
