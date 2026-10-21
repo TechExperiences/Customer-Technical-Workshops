@@ -1,4 +1,4 @@
-# Modernize with Confidence - CAIP Customer Workshops
+# Microsoft Technical Workshop: Modernize Applications and Databases Faster with Agentic AI
 *Caldova Representative customer journey*
  
  ![](../Sandbox-Environment-Guides/Images/MWCNew.png)
