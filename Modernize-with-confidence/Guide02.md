@@ -9,26 +9,6 @@ You will use ******GitHub Copilot****** to generate ARM or Bicep templates using
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
 
-### Verify Resources in the Azure Resource Group
-
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups (1)** and select  **Resource groups (2)**.
-
-   ![](../Modernize-with-confidence/Images/m18.png)
-
-1. Click on **rg-caldova-modernize** Resource Group.
-
-   ![](../Modernize-with-confidence/Images/m19.png)
-
-1. Confirm that the resource group contains the following resources:
-   
-   - **Azure OpenAI**
-   - **Azure SQL Database Hyperscale** 
-   - **SQL Server** 
-
-     ![](../Modernize-with-confidence/Images/m20.png)
-
-1. Once you have verified the resources, you can proceed with the next steps.
-
 ### Sign in to ******GitHub Copilot****** Chat
 
 
@@ -209,7 +189,12 @@ In this step, the prompt acts as the implementation plan that connects the exist
    - Then click **Send** button.
 
      ![](../Modernize-with-confidence/Images/m22.png)
-   
+
+1. f prompted by GitHub Copilot, enter your Azure AD / Microsoft Entra ID User Principal Name (UPN) in the input field.
+   UPN - <inject key="AzureAdUserEmail"></inject>
+1. Click **Submit** or press Ctrl + Enter.
+  ![](../Modernize-with-confidence/Images/AADUPN.png)
+1. Continue with the migration steps after Copilot accepts the UPN.   
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
 
 1. If Copilot asks you to aunthenticate like below, please click the provided link and provide the code which was given by copilot 
@@ -274,6 +259,9 @@ As reviewed in the **Caldova Current-State Architecture during the Whiteboard En
 2. Paste the URL into the **Microsoft Edge address bar**.
 3. Press **Enter** to open the application.
   ![](../Modernize-with-confidence/Images/LegacyApp.png)
+
+4. Select **Dashboard** from the top navigation to view the **Caldova Order Management** Portal.
+   ![](../Modernize-with-confidence/Images/Dashboard.png)
 
 #### Step 3: Review the Current Application
 
