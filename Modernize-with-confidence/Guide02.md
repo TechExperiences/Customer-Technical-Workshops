@@ -234,7 +234,7 @@ In this step, the prompt acts as the implementation plan that connects the exist
 
    >**Note**: Similarly click other tables to compare and validate data.
 
-## Migration From On-Prem Web Application to Azure App Service with ******GitHub Copilot******
+## Modernizing SQL Server to Azure SQL Database Hyperscale with ******GitHub Copilot******
 
 ### Activity: Review the Caldova Legacy Order Management Application
 
