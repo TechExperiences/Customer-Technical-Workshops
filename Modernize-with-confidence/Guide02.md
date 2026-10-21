@@ -323,7 +323,7 @@ The purpose of this prompt is to take the **migrated database** and **extend the
  
 Follow the below instructions to migrate On-prem Web application to Azure app service.
 
-1. Navigate back to **VS Code** and paste the below prompt in ******GitHub Copilot****** Chat**.
+1. Navigate back to **VS Code** and paste the below prompt in ******GitHub Copilot****** Chat.
 
    <!--   
    ```
