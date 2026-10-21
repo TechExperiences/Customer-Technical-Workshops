@@ -72,7 +72,25 @@ You'll leave the workshop with:
 
    ![](../Sandbox-Environment-Guides/Images/amp17.png)
 
-1. You will return to this portal in the upcoming steps. Keep the portal open and proceed to the next steps.
+### Verify Resources in the Azure Resource Group
+
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups (1)** and select  **Resource groups (2)**.
+
+   ![](../Modernize-with-confidence/Images/m18.png)
+
+1. Click on **rg-caldova-modernize** Resource Group.
+
+   ![](../Modernize-with-confidence/Images/m19.png)
+
+1. Confirm that the resource group contains the following resources:
+   
+   - **Azure OpenAI**
+   - **Azure SQL Database Hyperscale** 
+   - **SQL Server** 
+
+     ![](../Modernize-with-confidence/Images/m20.png)
+
+1. You will return to Azure portal in the upcoming steps. Keep the portal open and proceed to the next steps.
 
 
 ### Now, click on **`Next >>`** to continue with **`Envisioning Session Using Whiteboarding`**.
