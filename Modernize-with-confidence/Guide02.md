@@ -120,6 +120,19 @@ You will use ******GitHub Copilot****** to generate ARM or Bicep templates using
 
 ## Migration From On-Prem SQL to Azure SQL Database Hyperscale with ******GitHub Copilot******
 
+### Why Caldova Should Modernize to Azure SQL Database Hyperscale
+
+- **Scale for growing order data**  
+   Support growing orders, inventory, and product data with highly scalable database storage.
+- **Scale compute independently**  
+   Scale compute resources as application demand changes without moving the underlying data.
+- **Improve transactional performance**  
+   Support high-throughput transactional reads and writes for the Order Management application.
+- **Improve backup and recovery**  
+   Use snapshot-based backups and fast restore capabilities to strengthen database recovery.
+- **Build a scalable data foundation**  
+   Provide a modern, scalable data platform that can grow with Caldova's application and database workloads.
+
 The **solution architecture** defines how Caldova's existing on-premises database can be modernized by moving it to **Azure SQL Database Hyperscale**.
 Traditionally, this migration would require manually connecting to the on-premises environment, identifying the database and its objects, configuring the target Azure SQL environment, migrating tables and data, and validating the migrated database.
 
