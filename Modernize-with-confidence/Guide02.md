@@ -192,8 +192,10 @@ In this step, the prompt acts as the implementation plan that connects the exist
 
 1. If prompted by GitHub Copilot, enter your **Azure AD / Microsoft Entra ID** User Principal Name (UPN) in the input field.
    **UPN** - <inject key="AzureAdUserEmail"></inject>
-1. Click **Submit** or press Ctrl + Enter.
-  ![](../Modernize-with-confidence/Images/AADUPN.png)
+
+1. Click **Submit** or press **Ctrl + Enter**.
+
+ ![](../Modernize-with-confidence/Images/AADUPN.png)
 
 1. Continue with the migration steps after Copilot accepts the UPN.   
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
@@ -269,9 +271,9 @@ As reviewed in the **Caldova Current-State Architecture during the Whiteboard En
 Review the **Caldova Order Management** legacy web application and familiarize yourself with the current experience.
 Take a moment to explore the application and understand its current functionality before proceeding to the **application modernization activities**.
 1. **Look up a customer**
-   - Select **Customer Lookup** from the top navigation.
-   - Enter **3** as the **Customer ID**.
-   - Select **Search** to view the customer details.
+      - Select **Customer Lookup** from the top navigation.
+      - Enter **3** as the **Customer ID**.
+      - Select **Search** to view the customer details.
    
   ![](../Modernize-with-confidence/Images/LegacyApp1.png)
   
