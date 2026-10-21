@@ -163,7 +163,8 @@ In this step, the prompt acts as the implementation plan that connects the exist
    ![](../Sandbox-Environment-Guides/Images/b89.png)
 
 1. Along with the attached **Solution Architecture**, please paste the below prompt in the Chat.
-   
+
+   <!--   
    ```
    You are my smart agent to understand below are the problem statement and planned solution architecture design which will help Caldova to overcome from their problems. After that, please prepare bicep/ARM template and deploy the resources in the respective environment.
 
@@ -184,6 +185,25 @@ In this step, the prompt acts as the implementation plan that connects the exist
    6.Access database CaldovaOrderManagement in this OnPrem server.
    7.Migrate Tables and data into the created Azure SQL Hyperscale Database
    8.Maintain a similar relationship among all tables.
+   ```
+   -->
+
+   ```
+   You are my smart agent to understand below are the problem statement and planned solution architecture design which will help Caldova to overcome from their problems. After that, please prepare bicep/ARM template and deploy the resources in the respective environment.
+ 
+   Proposed Solution: The proposed solution is to migrate Caldova’s on-premises SQL Server database from the existing VM-based environment to Azure SQL Database Hyperscale. The migration will preserve the existing database objects. The migrated database will provide a scalable and secure foundation for the modernized .NET application on Azure App Service and future capabilities such as native SQL vector search over product descriptions, while reducing infrastructure-management overhead and supporting Caldova’s planned business growth.
+   
+   Planned Solution Architecture Design: Attached  Future-State-Architecture.png.
+   
+   First Migrate OnPrem SQL Database available in the VM to Azure SQL Server  (Hyperscale) and modernize it with following below instructions:
+   
+   Instructions:
+   1.Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
+   2.Use Existing Azure SQL Server and one Azure SQL Hyperscale Database   (CaldovaOrderManagement) which is available in same Resource Group
+   3.Make UPN -  set as admin to the Azure SQL server and hyperscale database
+   4.Use the existing Caldova_DB_script (in the same project folder) which holds all our OnPrem SQL Server Database object along with data. 
+   5.Use this above SQL script and deploy table in Azure SQL database then load data in the tables.
+   6.Maintain the relationship among tables.
    ```
 
    - Then click **Send** button.
@@ -314,6 +334,7 @@ Follow the below instructions to migrate On-prem Web application to Azure app se
 
 1. Navigate back to **VS Code** and paste the below prompt in ******GitHub Copilot****** Chat**.
 
+   <!--   
    ```
    Great, you have completed OnPrem SQL migration to Azure SQL Database Hyperscale. Now we need to migrate OnPrem Web Application to Azure App Service and modernize. 
 
@@ -335,6 +356,28 @@ Follow the below instructions to migrate On-prem Web application to Azure app se
    7.	Please include one more page(in Web Application) for "Traditional SQL Search" where user will perform product based search.
 
    ```
+   -->
+
+   ```
+   Great, you have completed OnPrem SQL migration to Azure SQL Database Hyperscale. Now we need to migrate OnPrem Web Application to Azure App Service and modernize.
+ 
+   Follow the instructions below:
+   
+   Instructions:
+   1.	Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
+   2.	Use the CaldovaOrderManagement folder(in the same project location) which  holds our OnPrem MVC Web Application artifacts and migrate CaldovaOrderManagement web application to Azure Web App Service. 
+   3.	Modernize the migrated web application and follow below modernization   activities:
+      a.Use latest .NET Framework (.NET 10) 
+      b.Use CSS/Bootstrap etc. to make modernize look and feel
+      c.Can use some visuals in the Dashboard page to enhance the look and feel
+      d.Menu items should places at left side of the page. 
+      e.Top banner with company details with optimized details/views
+      f.Modernized Web App responsiveness
+   4.	Migrated and Modernized web applications should integrate with Azure SQL   Database (CaldovaOrderManagement) and integrate all functional pages to the  respective tables. 
+   5.	Please include one more page(in Web Application) for "Traditional SQL Search" where user will perform product based search.
+
+   ````
+
    - Then click **Send** button.
 
      ![](../Modernize-with-confidence/Images/m25.png)    
