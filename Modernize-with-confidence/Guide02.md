@@ -180,7 +180,7 @@ In this step, the prompt acts as the implementation plan that connects the exist
    Instructions:
    1.Use existing Resource-Group (rg-caldova-modernize) in Azure and proceed further
    2.Use Existing Azure SQL Server and one Azure SQL Hyperscale Database   (CaldovaOrderManagement) which is available in same Resource Group
-   3.Make UPN -  set as admin to the Azure SQL server and hyperscale database
+   3.Make UPN - <inject key="AzureAdUserEmail"></inject>  set as admin to the Azure SQL server and hyperscale database
    4.Use the existing Caldova_DB_script (in the same project folder) which holds all our OnPrem SQL Server Database object along with data. 
    5.Use this above SQL script and deploy table in Azure SQL database then load data in the tables.
    6.Maintain the relationship among tables.
@@ -190,12 +190,6 @@ In this step, the prompt acts as the implementation plan that connects the exist
 
      ![](../Modernize-with-confidence/Images/m22.png)
 
-1. If prompted by GitHub Copilot, enter your **Azure AD / Microsoft Entra ID** User Principal Name (UPN) in the input field.
-   **UPN** - <inject key="AzureAdUserEmail"></inject>
-
-1. Click **Submit** or press **Ctrl + Enter**.
-
- ![](../Modernize-with-confidence/Images/AADUPN.png)
 
 1. Continue with the migration steps after Copilot accepts the UPN.   
 1. Once Copilot starts generating the response, monitor the process closely. Do not take any action; simply watch the progress.
