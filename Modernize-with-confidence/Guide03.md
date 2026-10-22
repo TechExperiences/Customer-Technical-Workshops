@@ -4,7 +4,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
 The **Caldova Order Management solution** has already been pre-deployed to provide a ready-to-use modernization experience. You will explore and validate how the pharmaceutical manufacturing application has been modernized from **on-premises SQL Server and web application infrastructure to Azure SQL Database Hyperscale and Azure App Service**.
 
-1. Navigate to the Azure portal. Click on **Resource group**.
+1. Navigate to the **Azure portal**. Select **Resource group**.
 
    ![](../Sandbox-Environment-Guides/Images/amp52.png)
 
@@ -24,7 +24,7 @@ The CaldovaOrderManagement database has already been migrated to Azure SQL Datab
 
    ![](../Modernize-with-confidence/Images/m3.png)
 
-1. Navigate to **Query editor (1)** to connect SQL Database.
+1. Navigate to **Query editor (1)** to connect to the SQL database.
 
    - To authorize user click on **Connect as odl_user_<inject key="Deployment-ID" enableCopy="false"/> (2)**
 
@@ -54,9 +54,9 @@ The Caldova Order Management application has already been deployed to Azure App 
 
    ![](../Modernize-with-confidence/Images/m8.png)
 
-1. In migrated application you can see `Traditional Sql Search` section got added.
+1. In the migrated application, you will see the `Traditional SQL Search` section.
 
-1. Click on **Traditional Sql Search** section.
+1. Select **Traditional Sql Search** section.
 
    ![](../Modernize-with-confidence/Images/m9.png)   
 
@@ -82,7 +82,7 @@ The Caldova Order Management application has already been deployed to Azure App 
 
    - `Vector search` converts product descriptions and user search queries into numerical **embeddings** that represent their meaning. The application can then compare the similarity between the user's query and product descriptions instead of relying only on exact keyword matches.
 
-     >**Note:** Will do Semantic search validation once next deployment(Vector embedding) is done.
+     >**Note:** Semantic search validation will be performed after the next deployment, which includes vector embedding functionality.
 
 1. In the next Section, we will:
 
