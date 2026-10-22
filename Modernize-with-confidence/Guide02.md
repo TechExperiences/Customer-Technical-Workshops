@@ -292,7 +292,7 @@ Take a moment to explore the application and understand its current functionalit
  
   ![](../Modernize-with-confidence/Images/LegacyApp3.png)
 
-#### Why Caldova Wants to Modernize the Order Management Application
+#### Why Caldova Wants to Modernize the Order Management Application and User Experience
 
 Caldova wants to modernize its legacy **Order Management application** to improve operational efficiency and provide a more scalable, secure, and intelligent platform.
 1. **Reduce infrastructure management** by moving the legacy application from a VM to **Azure App Service**.
