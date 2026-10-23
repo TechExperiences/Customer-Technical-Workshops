@@ -3,16 +3,16 @@
 
 Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
-## Rapid Prototyping using GitHub Copilot
+## Rapid Prototyping using ****GitHub Copilot****
 
-You will use GitHub Copilot to generate ARM or Bicep templates using the Future State Architecture arrived at from the previous Whiteboarding exercise.
+You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the Future State Architecture arrived at from the previous Whiteboarding exercise.
 
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
 
 ### Verify Resources in the Azure Resource Group
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-caldova-ubiquitous** Resource Group.
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
 
    ![](../Sandbox-Environment-Guides/Images/UI-RG.png)
 
@@ -20,15 +20,15 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
       - **Fabric Capacity**
       - **Storage Account**
 
-1. Verify that the resources are available in their respective Azure regions and that the migration environment has been provisioned successfully.
+1. Verify that the resources are available in their respective Azure regions.
 ---
-## Sign in to GitHub Copilot Chat
+## Sign in to ****GitHub Copilot**** Chat
 
 1. Click on the **Visual Studio Code** from the VM desktop.
 
    ![](../Sandbox-Environment-Guides/Images/amp14.png)
 
-1. Click on **Continue with GitHub** to sign in to GitHub Copilot.
+1. Click on **Continue with GitHub** to sign in to ****GitHub Copilot****.
 
    ![](../Sandbox-Environment-Guides/Images/amp18.png)
 
@@ -80,7 +80,7 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/uivscode.png)
 
-1. From the **GitHub Copilot Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
+1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b6.png)
 
@@ -102,43 +102,62 @@ You will use GitHub Copilot to generate ARM or Bicep templates using the Future 
 
    ![](../Sandbox-Environment-Guides/Images/amp33.png)
 
+## From Architecture to a Working Business Solution
+
+The **whiteboarding** exercise established the business requirements and the proposed **future-state architecture** for Caldova. In this rapid-prototyping session, we will turn that design into a working, testable solution using ****GitHub Copilot**** and the Microsoft AI platform.
+
+We will follow the solution through four connected stages:
+
+1. **Build agents and software at the speed of AI:** Translate the architecture into a reviewed implementation plan, delegate development, and validate code quality and security.
+2. **Agents That Know Your Business:** Extend the existing Supply-Chain-BI-Agent with live manufacturing data, enterprise knowledge, and organizational context, then evaluate its responses.
+3. **From One Agent to a Coordinated System:** Introduce the Market Launch Coordinator in Copilot Studio and connect it to the specialist agent so it can coordinate business questions and launch-readiness decisions.
+4. **Trust and Cost Are the Same Conversation:** Discover the agent in Agent 365, review its identity and security posture, test sensitive-data protection, and examine the available usage and billing information.
+
+Each stage builds on the previous one. We begin with the architecture and implementation plan, add the knowledge needed to answer business questions, expose the capability through a coordinated agent experience, and then examine how the solution can be governed and operated responsibly.
+
+**By the end of the session**, you will have followed Caldova's journey from a business design to an integrated agent experience, with validation checkpoints at each stage. Review generated changes and confirm consequential actions rather than treating AI-generated output as automatically correct.
+
 ## Future State Architecture
 
-The **Future State Architecture** shows what we want the solution to look like. Rather than manually creating each Fabric resource and configuring every component step by step, we’ll use **GitHub Copilot** to help turn that architecture into a working prototype.
+The **Future State Architecture** shows what we want the solution to look like. Rather than manually creating each Fabric resource and configuring every component step by step, we’ll use ******GitHub Copilot****** to help turn that architecture into a working prototype.
 
-Instead of starting with individual configuration tasks, you’ll describe what you want to build through a prompt. The prompt provides **GitHub Copilot** with the architecture, implementation requirements, resources to reuse, data needed for the scenario, and how the Fabric components should work together.
+Instead of starting with individual configuration tasks, you’ll describe what you want to build through a prompt. The prompt provides ******GitHub Copilot****** with the architecture, implementation requirements, resources to reuse, data needed for the scenario, and how the Fabric components should work together.
 
-## What Will This Prompt Do?
+## Topic 1 - Build agents and software at the speed of AI
+Transform an existing agent design into a **production-ready, secure capability** using ****GitHub Copilot****—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
 
-When you provide the architecture and prompt to **GitHub Copilot**, it can help work through the implementation of the **Microsoft Agent** prototype, including:
+### Activity 1.1: Start Whiteboarding
+Review the prepared **Future-State-Architecture** design and walk through the four key areas: what the agent needs to know, the tools it can call and the production systems behind those tools, what actions it can perform autonomously versus where human approval is required, and where the agent will run once built. The starting point is that the agent already answers questions, but no code for the new action capability exists yet; the whiteboard represents the design for this new capability and serves as the foundation for the implementation activities that follow.
 
-1. Build Agents and Software at the Speed of AI: **GitHub Copilot + Microsoft Foundry**
-1. Agents That Know Your Business: **Microsoft Foundry + Microsoft IQ**
-1. From One Agent to a Coordinated System: **Copilot Studio + Microsoft Foundry**: Connect agents into an end-to-end workflow with human approvals and controlled actions.
-1. Secure, Govern, and Optimize Agents: **Agent 365**: Manage agent identity, security, governance, usage, and cost at scale.
+Whiteboard [Link](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQDTzUYleJUrSam4WftDPpZ2AX33HhN8Z7CFeGr_t79F1p0?e=PeZ7Jf)
 
-The goal is to move from **manually building each component** to **describing the desired solution through prompts and using GitHub Copilot to help implement it**. You’ll guide Copilot with your requirements, review what it creates, and refine your prompts as you build the prototype.
-
-# Topic 1 - Build agents and software at the speed of AI
-Transform an existing agent design into a **production-ready, secure capability** using GitHub Copilot—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
-
-### Activity 1.1: Whiteboarding: Caldova Market Launch Challenge
-
-The **Future-State Architecture** was developed during the previous whiteboarding activity. Review the architecture below to understand the agreed design before moving into implementation.
-Focus on the four key areas:
-- **Knowledge:** What the agent needs to know.
-- **Tools and Systems:** The tools the agent can call and the production systems behind those tools.
-- **Actions and Approvals:** What the agent can perform autonomously and where human approval is required.
-- **Deployment:** Where the agent will run once implemented.
-The agent can already answer questions. The next activities will build on this architecture to implement the **new action capability**.
-
-## Future-State Architecture
-![Future-State Architecture](../Sandbox-Environment-Guides/Images/UIArchi.png)
-
----
+Whiteboard Image
+ ![](../Sandbox-Environment-Guides/Images/UICusNew.png)
 
 ### Activity 1.2: Turn the Whiteboard into a Reviewed Plan
 Turn the whiteboard into a reviewed implementation plan and issue set for extending the existing agent, without manually transcribing it.
+
+A **whiteboard** captures the intended design, but developers need a clear implementation plan before they begin making changes. Manually translating every component into requirements can lead to missed dependencies, duplicated work, or incomplete testing.
+
+In this activity, ****GitHub Copilot**** will analyze the attached **future-state architecture** and turn it into a structured design review. The resulting document will help the business and technical teams understand the proposed implementation before code changes begin.
+
+#### What Will This Prompt Do?
+
+The prompt instructs ****GitHub Copilot**** to:
+
+- Analyze the architecture from left to right and explain the purpose of its components.
+- Produce a table connecting each component to its associated activities.
+- Propose how the new tool handler should be implemented.
+- Identify the required agent-instruction changes, test approach, and proposed issues.
+- Compare the proposed issues with the existing **“make the agent act”** issue.
+- Create only `Design-Review.md`, as requested.
+
+#### What Should You Validate?
+
+After Copilot finishes, open `Design-Review.md` in the Project Explorer. Check that the architecture is represented accurately, dependencies are explained, and the proposed work aligns with the business requirement.
+
+Treat the document as a draft for review, not as an approved implementation plan. It becomes the reference for the next activity, where you will confirm the requirements and resolve any gaps before delegating the build.
+
 
 1. Please copy the below prompt and paste it in the copilot chat win
 
@@ -166,27 +185,44 @@ Turn the whiteboard into a reviewed implementation plan and issue set for extend
 1. Once Copilot starts generating the response, monitor the process closely. 
 
 #### Validation
-Once GitHub Copilot completes the execution, validate the Project Explorer to confirm whether the review document has been successfully created and is available in the expected project location.
+Once ****GitHub Copilot**** completes the execution, validate the Project Explorer to confirm whether the review document has been successfully created and is available in the expected project location.
 
 1. Navigate to the project explorer in VS code to validate review docuemnt.
 
    ![](../Sandbox-Environment-Guides/Images/Design-Review.png)
 
----
-
 ### Activity 1.3: Ground Copilot in What the Business Already Decided
-Turn the whiteboard into a reviewed implementation plan and issue set for extending the existing agent, without manually transcribing it.
+
+The initial design review may contain assumptions, missing details, or recommendations that do not match the decisions made during the whiteboarding session. Before development begins, the implementation plan must reflect the agreed business requirements.
+
+In this activity, **GitHub Copilot** will review the existing `Design-Review.md` and identify any changes needed to align it with the architecture and the intended agent behavior.
+
+#### What Will This Prompt Do?
+
+- Reassess the existing implementation plan against the future-state architecture.
+- Verify that the required components, tools, and agent capabilities are included.
+- Identify missing, incorrect, duplicated, or unnecessary items.
+- Propose corrections to the same document instead of creating a separate plan.
+- Present the proposed changes for human confirmation before finalizing the plan.
+
+#### What Should You Validate?
+
+Review the updated document and confirm that it accurately represents the intended implementation. Check the tool-handler requirements, agent instructions, constraints, and test approach before proceeding.
+
+**Transition:** Once the plan is reviewed and the required changes are confirmed, the coding agent can use it as the reference for implementation in Activity 1.5.
 
 1. Please copy the below prompt and paste it in the copilot chat window.
+
+
    ```
    Great. You have created above design review guide. Now review the same with below points and provide me with instructions and after confirmation include them in the same document.
 
    Instructions:
-   1.	Review the implementation plan generated by GitHub Copilot.
+   1.	Review the implementation plan generated by ****GitHub Copilot****.
    2.	Validate the plan against the intended agent requirements and architecture.
    3.	Verify that all required components, primitives, tools, and agent capabilities are correctly captured.
    4.	Identify and correct any missing, incorrect, or unnecessary items in the plan.
-   5.	Finalize and approve the plan before handing it off to GitHub Copilot for implementation.
+   5.	Finalize and approve the plan before handing it off to ****GitHub Copilot**** for implementation.
    ```
 
    - Then click **Send** button.
@@ -197,12 +233,12 @@ Turn the whiteboard into a reviewed implementation plan and issue set for extend
 
    ![](../Sandbox-Environment-Guides/Images/Revised-Plan.png)
 
----
 
 ### Activity 1.4: Choose the Model for the Job
+Select the most appropriate model for the task while staying within the models and policies enabled by the organization. Review the available models using /model, switch between models to understand that model selection is task-specific, and use /model auto to allow ****GitHub Copilot**** to select an appropriate model based on the task, effort, and optimization settings such as Balanced versus Intelligence. Use /usage to review session usage and /context to understand the available context and session information. Finally, repeat the same task using a Frontier model and Auto mode to compare their output, performance, value, and cost, and understand when each approach is most appropriate.
 
-Pick the best model for the task. Use only the models and policies your organization has enabled. Learn that the right model depends on the task, and let GitHub Copilot's **Auto** mode pick a model based on the task's needs and how complex it is.
-
+Based on the context, the user can switch between the available models and validate their suitability for the task. Finally, select the **Auto** option to allow ****GitHub Copilot**** to automatically choose the most appropriate model based on the requirements and complexity of the work.
+ 
 #### Step 1: Open GitHub Copilot and your session
 1. Open the **GitHub Copilot** app.
 2. In the left pane under **Projects**, pick your project and session (for example, *Add Supply Chain BI Agent*).
@@ -271,9 +307,28 @@ Type the command below to see the available context and session details:
 
 ---
 
-### Activity 1.5: Hand the Build to the Coding Agent (GitHub Copilot)
+### Activity 1.5: Hand the Build to the Coding Agent
+Validate the local changes from Activities 1.2 and 1.3, then use /delegate from the same ****GitHub Copilot**** session to hand off the implementation to the coding agent, accepting the checkpoint so the agent branch includes the existing scaffold and updated instructions. While the agent works, review the session log and reasoning, and demonstrate concurrent work by showing another active session before returning to the current task. 
 
-Review the local changes completed in **Activities** **1.2** and **1.3**. In the same GitHub Copilot session, use **`/delegate`** to hand off the build to the **coding agent**, and accept the checkpoint so the agent’s branch includes the existing scaffold and updated instructions. While the agent is working, monitor its progress and continue working in another session. Once the agent finishes, review the draft pull request, run a Copilot code review, and ask `@copilot` to make the required fixes on the same branch.
+Once complete, open the draft pull request in GitHub and verify that the diff includes the tool handler, updated agent instructions, and tests. Before human review, request a Copilot code review, evaluate its findings, and then add a follow-up comment beginning with @copilot requesting any necessary revisions so Copilot updates and commits the changes to the same branch.
+
+With the implementation plan reviewed, the next step is to move from planning to development. GitHub Copilot's coding agent can work on the agreed changes in a delegated task while preserving the existing project context.
+
+Rather than accepting generated code immediately, we will use a draft pull request as the checkpoint for inspecting the implementation, tests, and agent-instruction changes.
+
+#### What Will This Prompt Do?
+
+- Delegate the agreed implementation to the coding agent.
+- Carry the existing project scaffold and reviewed requirements into the task.
+- Update `Review-Plan.md` with the final requirements, constraints, and test approach.
+- Create a draft pull request when the implementation is ready.
+- Enable the participant to review the changes and request corrections on the same branch.
+
+#### What Should You Validate?
+
+When the coding agent completes the task, inspect the draft pull request. Confirm that the tool handler, agent instructions, and tests are included. Review Copilot's code-review findings, determine which findings are valid, and request fixes where needed.
+
+Do not merge solely because the coding agent reports completion. Human review, required checks, and the applicable approval process must still be satisfied.
 
 #### Step 1: Check the local changes
 Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in place and working before you hand off the build.
@@ -321,12 +376,12 @@ Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in pl
    > **Note:** The end of the first line was cut off in the screenshot (it stops at "tests as …"). Copy the full line from your lab guide.
 2. Click **Send**.
    ![](../Sandbox-Environment-Guides/Images/Delegate1.png)
+
 #### Step 8: Check the fixes
 1. Confirm that Copilot **committed the changes to the same PR branch**.
 2. Read Copilot's list of **remaining issues** that a person needs to review before the pull request is finalized.
 
 ---
-  
 ### Activity 1.6: Fix Security in the Same Pull Request (GitHub)
 Check that the capability meets the agreed business requirements, governance standards, approval limits, and risk controls. Make sure that:
 - Every business risk found has been fixed
