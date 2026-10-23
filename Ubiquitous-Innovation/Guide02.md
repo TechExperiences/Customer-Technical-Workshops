@@ -127,12 +127,15 @@ Instead of starting with individual configuration tasks, you’ll describe what 
 Transform an existing agent design into a **production-ready, secure capability** using ****GitHub Copilot****—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
 
 ### Activity 1.1: Start Whiteboarding
-Review the prepared **Future-State-Architecture** design and walk through the four key areas: what the agent needs to know, the tools it can call and the production systems behind those tools, what actions it can perform autonomously versus where human approval is required, and where the agent will run once built. The starting point is that the agent already answers questions, but no code for the new action capability exists yet; the whiteboard represents the design for this new capability and serves as the foundation for the implementation activities that follow.
+The Future-State Architecture was developed during the previous whiteboarding activity. Review the architecture below to understand the agreed design before moving into implementation. Focus on the four key areas:
 
-Whiteboard [Link](https://sandboxailabs1002-my.sharepoint.com/:wb:/g/personal/amplify_user_sandboxailabs1002_onmicrosoft_com/IQDTzUYleJUrSam4WftDPpZ2AX33HhN8Z7CFeGr_t79F1p0?e=PeZ7Jf)
+**Knowledge**: What the agent needs to know.
+**Tools and Systems:** The tools the agent can call and the production systems behind those tools.
+**Actions and Approvals:** What the agent can perform autonomously and where human approval is required.
+**Deployment:** Where the agent will run once implemented. The agent can already answer questions. The next activities will build on this architecture to implement the new action capability.
 
 Whiteboard Image
- ![](../Sandbox-Environment-Guides/Images/UICusNew.png)
+ ![](../Sandbox-Environment-Guides/Images/UIArchi.png)
 
 ### Activity 1.2: Turn the Whiteboard into a Reviewed Plan
 Turn the whiteboard into a reviewed implementation plan and issue set for extending the existing agent, without manually transcribing it.
