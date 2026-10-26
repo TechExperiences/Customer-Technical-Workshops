@@ -4,9 +4,9 @@
 
 Whiteboarding helps technical teams to quickly align on business goals, current challenges, current-state and future-state architecture, and solution priorities. It turns abstract ideas into a shared visual plan and helps accelerate decisions for building a unified, governed data and AI estate.
 
-Let's consider a common pharmaceutical manufacturing and distribution use case. Caldova Pharmaceuticals is expanding its product portfolio and entering new markets, each with its own pharmaceutical regulations. Customer, product, inventory, supply chain, sales, finance and operational data is spread across business applications, databases, files and cloud storage. Custom integrations, manual preparation, separate reporting datasets, duplicate copies and inconsistent definitions make it difficult to gain unified visibility, govern data, meet compliance requirements and analyze information across business domains.
+Let's consider a common pharmaceutical manufacturing and distribution use case. **Caldova Pharmaceuticals** is expanding its product portfolio and entering new markets, each with its own pharmaceutical regulations. Customer, product, inventory, supply chain, sales, finance and operational data is spread across business applications, databases, files and cloud storage. Custom integrations, manual preparation, separate reporting datasets, duplicate copies and inconsistent definitions make it difficult to gain unified visibility, govern data, meet compliance requirements and analyze information across business domains.
 
-You will start with whiteboarding to architect a future state of a unified, open and governed data solution which can:
+You will start with **whiteboarding** to architect a future state of a **unified, open and governed data solution** which can:
 
 - Connect operational and analytical data with minimal unnecessary data movement
 - Unify data across customer, product, inventory, supply chain, sales, finance and operations
