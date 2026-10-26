@@ -761,7 +761,6 @@ This approach helps us measure the agent's response quality and validate whether
 
  In this topic, we will explore how **Microsoft Copilot Studio** coordinates workflows, connects with **Microsoft Foundry agents**, and brings their outputs together through a **Market Launch Coordinator**.
 
-**Think about this:** How can multiple specialized agents collaborate to achieve a common business goal?
 ---
 
 # Topic 3: From One Agent to a Coordinated System 
