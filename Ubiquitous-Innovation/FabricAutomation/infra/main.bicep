@@ -80,12 +80,14 @@ resource foundryAccount 'Microsoft.CognitiveServices/accounts@2025-06-01' = {
   properties: {
     customSubDomainName: foundryAccountName
     publicNetworkAccess: 'Enabled'
+    allowProjectManagement: true
   }
 }
 
 resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2025-06-01' = {
   parent: foundryAccount
   name: foundryProjectName
+  location: foundryLocation
   properties: {
     displayName: foundryProjectName
     description: 'Ubiquitous Innovation Supply Chain project.'
@@ -95,6 +97,9 @@ resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2025-06-0
 resource gptMiniDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-06-01' = {
   parent: foundryAccount
   name: 'gpt5mini'
+  dependsOn: [
+    foundryProject
+  ]
   sku: {
     name: 'GlobalStandard'
     capacity: 1
