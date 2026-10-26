@@ -149,7 +149,8 @@ Invoke-Checked {
     az deployment group create --resource-group $ResourceGroupName --template-file (Join-Path $PSScriptRoot 'infra/main.bicep') `
         --parameters capacityName=$capacityName location=$Location capacityAdministratorObjectId=$capacityAdministratorObjectId capacityAdministratorUpn=$CapacityAdministratorUpn `
         storageAccountName=$StorageAccountName storageBlobDataContributorPrincipalId=$capacityAdministratorObjectId `
-        foundryAccountName=$foundryAccountName foundryProjectName=$foundryProjectName foundryAgentDeveloperPrincipalId=$capacityAdministratorObjectId foundryLocation=$FoundryLocation --only-show-errors 1>$null
+        foundryAccountName=$foundryAccountName foundryProjectName=$foundryProjectName foundryAutomationPrincipalId=$capacityAdministratorObjectId `
+        foundryPortalUserPrincipalId=$workspaceAdminPrincipalId foundryLocation=$FoundryLocation --only-show-errors 1>$null
 } 'Fabric capacity, ADLS Gen2, or Foundry project deployment failed.'
 
 $capacityResourceId = (& az resource show --resource-group $ResourceGroupName --resource-type Microsoft.Fabric/capacities --name $capacityName --query id -o tsv).Trim()
