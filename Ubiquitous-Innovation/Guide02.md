@@ -102,6 +102,12 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
    ![](../Sandbox-Environment-Guides/Images/amp33.png)
 
+1. Select the **Future-State-Architecture.png**.
+
+1. From the ********GitHub Copilot****** Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
+
+   ![](../Sandbox-Environment-Guides/Images/step1.png)
+
 ## From Architecture to a Working Business Solution
 
 The **whiteboarding** exercise established the business requirements and the proposed **future-state architecture** for Caldova. In this rapid-prototyping session, we will turn that design into a working, testable solution using ****GitHub Copilot**** and the Microsoft AI platform.
@@ -188,6 +194,7 @@ Treat the document as a draft for review, not as an approved implementation plan
 1. Once Copilot starts generating the response, monitor the process closely. 
 
 #### Validation
+
 Once ****GitHub Copilot**** completes the execution, validate the Project Explorer to confirm whether the review document has been successfully created and is available in the expected project location.
 
 1. Navigate to the project explorer in VS code to validate review docuemnt.
@@ -252,6 +259,10 @@ Based on the context, the user can switch between the available models and valid
    ```
    /model
    ```
+   ![](../Sandbox-Environment-Guides/Images/app.png)
+
+   ![](../Sandbox-Environment-Guides/Images/model.png)
+   
 
 #### Step 3: Switch between models
 1. Pick a different model from the list that `/model` shows.
@@ -263,6 +274,9 @@ Based on the context, the user can switch between the available models and valid
    ```
    /model auto
    ```
+
+   ![](../Sandbox-Environment-Guides/Images/automodel.png)
+
 2. Copilot bases its choice on:
    - **The task**: what you're asking it to do
    - **Effort**: how complex the work is
@@ -323,7 +337,7 @@ Rather than accepting generated code immediately, we will use a draft pull reque
 
 - Delegate the agreed implementation to the coding agent.
 - Carry the existing project scaffold and reviewed requirements into the task.
-- Update `Review-Plan.md` with the final requirements, constraints, and test approach.
+- Update `Design-Review.md` with the final requirements, constraints, and test approach.
 - Create a draft pull request when the implementation is ready.
 - Enable the participant to review the changes and request corrections on the same branch.
 
@@ -341,12 +355,13 @@ Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in pl
 2. Copy this prompt and paste it into the Copilot chat window:
    ```
    1. Run /delegate and accept the checkpoint to delegate the implementation.
-   2. Update Review-Plan.md with the final agent instructions, tool-handler requirements, constraints, and test approach.
+   2. Update Design-Review.md with the final agent instructions, tool-handler requirements, constraints, and test approach.
    Monitor the coding-agent execution and
    3. Create a Draft Pull Request when complete.
    ```
 3. Click **Send**.
    ![](../Sandbox-Environment-Guides/Images/Delegate.png)
+   
 4. When Copilot asks about the checkpoint, **accept it**. This way the agent's branch includes:
    - The existing scaffold
    - The updated instructions
@@ -373,7 +388,7 @@ Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in pl
 #### Step 7: Ask `@copilot` for fixes
 1. Add a follow-up comment that **starts with `@copilot`**. Paste this prompt:
    ```
-   1. @copilot Please address the valid review findings, update the implementation, Review-Plan.md, agent instructions, and tests as ...
+   1. @copilot Please address the valid review findings, update the implementation, Design-Review.md, agent instructions, and tests as ...
    2. Confirm the revised changes are committed to the same PR branch and report any remaining issues requiring human review.
    ```
    > **Note:** The end of the first line was cut off in the screenshot (it stops at "tests as …"). Copy the full line from your lab guide.
