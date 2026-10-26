@@ -10,25 +10,9 @@ By the end of this exercise, Caldova's operations, supply chain and customer dat
 
 You will use GitHub Copilot to build the Future State Architecture from the Whiteboarding exercise. You describe what you need in plain language, and Copilot creates and configures the Fabric and Azure components.
 
-### Step 0: Verify Resources in the Azure Resource Group
-
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
-
-   ![](../Sandbox-Environment-Guides/Images/RG.png)
-
-1.  Confirm that the resource group contains the following resources:
-      - **Fabric Capacity**
-      - **SQL Database** 
-      - **SQL Server** 
-      - **Storage Account**
-
-      ![](../Sandbox-Environment-Guides/Images/rg-resource.png)
-
-1. Verify that the resources are available in their respective Azure regions.
-
 ## Sign in to ****GitHub Copilot**** Chat
 
-### Step 1: Creation Of Fabric Workspace
+### Step 1: Creation of Fabric Workspace
 
 1. Click on the **Visual Studio Code** from the VM desktop.
 
