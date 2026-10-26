@@ -75,7 +75,22 @@ By the end of the workshop, participants will have:
 
    ![](../Sandbox-Environment-Guides/Images/amp17.png)
 
-1. You will return to this portal in the upcoming steps. Keep the portal open and proceed with the next steps.
 
+### Step : Verify Resources in the Azure Resource Group
+
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
+
+   ![](../Sandbox-Environment-Guides/Images/RG.png)
+
+1.  Confirm that the resource group contains the following resources:
+      - **Fabric Capacity**
+      - **SQL Database** 
+      - **SQL Server** 
+      - **Storage Account**
+
+      ![](../Sandbox-Environment-Guides/Images/rg-resource.png)
+
+1. Verify that the resources are available in their respective Azure regions.
+1. You will return to this portal in the upcoming steps. Keep the portal open and proceed with the next steps.
 
 ### Now, click on **`Next >>`** to continue with **`Envisioning Session Using Whiteboarding`**.
