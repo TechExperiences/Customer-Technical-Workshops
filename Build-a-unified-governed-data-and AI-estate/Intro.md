@@ -78,15 +78,15 @@ By the end of the workshop, participants will have:
 
 ### Step : Verify Resources in the Azure Resource Group
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and click on **rg-unified** Resource Group.
 
    ![](../Sandbox-Environment-Guides/Images/RG.png)
 
 1.  Confirm that the resource group contains the following resources:
-      - **Fabric Capacity**
-      - **SQL Database** 
-      - **SQL Server** 
-      - **Storage Account**
+      - **Microsoft Fabric Capacity**
+      - **Azure SQL Database** 
+      - **Azure SQL Server** 
+      - **Azure Data Lake Storage**
 
       ![](../Sandbox-Environment-Guides/Images/rg-resource.png)
 
