@@ -80,6 +80,7 @@ resource foundryAccount 'Microsoft.CognitiveServices/accounts@2025-06-01' = {
   properties: {
     customSubDomainName: foundryAccountName
     publicNetworkAccess: 'Enabled'
+    allowProjectManagement: true
   }
 }
 
