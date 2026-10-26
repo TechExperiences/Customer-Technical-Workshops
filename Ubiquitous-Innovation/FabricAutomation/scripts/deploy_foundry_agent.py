@@ -1,40 +1,48 @@
-"""Create the one prompt agent required in the newly provisioned Foundry project."""
+"""Create the required prompt agent through the current Foundry Projects SDK."""
 from __future__ import annotations
 
 import argparse
 import os
 import time
 
-import requests
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import PromptAgentDefinition
+from azure.core.exceptions import HttpResponseError
+from azure.identity import ClientSecretCredential
 
 
 INSTRUCTIONS = "You are my Supply chain agent."
-API_VERSION = "2025-05-01"
+AGENT_NAME = "SupplyChainAgent"
 
 
-def create_agent_when_ready(project_endpoint: str, model_deployment_name: str) -> dict:
-    token = os.environ.get("AZURE_FOUNDRY_ACCESS_TOKEN")
-    if not token:
-        raise RuntimeError("AZURE_FOUNDRY_ACCESS_TOKEN is not available. Run through up.ps1.")
+def credential_from_environment() -> ClientSecretCredential:
+    required = ("AZURE_TENANT_ID", "AZURE_CLIENT_ID", "AZURE_CLIENT_SECRET")
+    missing = [name for name in required if not os.environ.get(name)]
+    if missing:
+        raise RuntimeError(f"Missing Foundry credential settings: {', '.join(missing)}")
+    return ClientSecretCredential(
+        tenant_id=os.environ["AZURE_TENANT_ID"],
+        client_id=os.environ["AZURE_CLIENT_ID"],
+        client_secret=os.environ["AZURE_CLIENT_SECRET"],
+    )
 
-    url = f"{project_endpoint}/agents?api-version={API_VERSION}"
-    payload = {
-        "name": "SupplyChainAgent",
-        "model": model_deployment_name,
-        "instructions": INSTRUCTIONS,
-    }
-    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
 
+def create_agent_when_ready(project_endpoint: str, model_deployment_name: str) -> object:
+    project = AIProjectClient(endpoint=project_endpoint, credential=credential_from_environment())
     for attempt in range(1, 61):
-        response = requests.post(url, headers=headers, json=payload, timeout=60)
-        if response.status_code in {200, 201}:
-            return response.json()
-        if response.status_code not in {403, 404, 409} or attempt == 60:
-            raise RuntimeError(
-                f"Foundry agent creation failed with HTTP {response.status_code}: {response.text}"
+        try:
+            return project.agents.create_version(
+                agent_name=AGENT_NAME,
+                definition=PromptAgentDefinition(
+                    model=model_deployment_name,
+                    instructions=INSTRUCTIONS,
+                ),
             )
-        print(f"Foundry project access is not ready; waiting 5 seconds (attempt {attempt}/60)...")
-        time.sleep(5)
+        except HttpResponseError as error:
+            if error.status_code not in {403, 404, 409} or attempt == 60:
+                raise RuntimeError(f"Foundry agent creation failed: {error}") from error
+            print(f"Foundry project access is not ready; waiting 5 seconds (attempt {attempt}/60)...")
+            time.sleep(5)
 
     raise RuntimeError("Foundry agent creation did not complete.")
 
@@ -51,10 +59,11 @@ def main() -> None:
         f"api/projects/{args.project_name}"
     )
     agent = create_agent_when_ready(project_endpoint, args.model_deployment_name)
-    agent_id = agent.get("id")
+    agent_id = getattr(agent, "id", None)
+    agent_version = getattr(agent, "version", None)
     if not agent_id:
         raise RuntimeError("Foundry agent creation did not return an agent ID.")
-    print(f"Created Foundry agent SupplyChainAgent ({agent_id}).")
+    print(f"Created Foundry agent {AGENT_NAME} ({agent_id}), version {agent_version}.")
 
 
 if __name__ == "__main__":

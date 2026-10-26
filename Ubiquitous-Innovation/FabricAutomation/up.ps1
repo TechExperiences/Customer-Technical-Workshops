@@ -160,9 +160,8 @@ Invoke-Checked { python -m pip install --disable-pip-version-check -q -r (Join-P
 $env:AZURE_FABRIC_ACCESS_TOKEN = (& az account get-access-token --resource https://api.fabric.microsoft.com --query accessToken -o tsv).Trim()
 $env:AZURE_STORAGE_ACCESS_TOKEN = (& az account get-access-token --resource https://storage.azure.com/ --query accessToken -o tsv).Trim()
 $env:AZURE_POWERBI_ACCESS_TOKEN = (& az account get-access-token --resource https://analysis.windows.net/powerbi/api --query accessToken -o tsv).Trim()
-$env:AZURE_FOUNDRY_ACCESS_TOKEN = (& az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv).Trim()
-if (-not $env:AZURE_FABRIC_ACCESS_TOKEN -or -not $env:AZURE_STORAGE_ACCESS_TOKEN -or -not $env:AZURE_POWERBI_ACCESS_TOKEN -or -not $env:AZURE_FOUNDRY_ACCESS_TOKEN) {
-    throw 'Could not acquire Fabric, Storage, Power BI, or Foundry access tokens.'
+if (-not $env:AZURE_FABRIC_ACCESS_TOKEN -or -not $env:AZURE_STORAGE_ACCESS_TOKEN -or -not $env:AZURE_POWERBI_ACCESS_TOKEN) {
+    throw 'Could not acquire Fabric, Storage, or Power BI access tokens.'
 }
 
 try {
@@ -210,5 +209,4 @@ try {
     Remove-Item Env:AZURE_FABRIC_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_STORAGE_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_POWERBI_ACCESS_TOKEN -ErrorAction SilentlyContinue
-    Remove-Item Env:AZURE_FOUNDRY_ACCESS_TOKEN -ErrorAction SilentlyContinue
 }
