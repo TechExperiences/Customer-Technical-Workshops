@@ -606,7 +606,7 @@ This enables the Business Intelligence agent to use live manufacturing context w
 
 1. Review the response provided by the Foundry agent and verify that it retrieves the expected manufacturing data through the Fabric Data Agent.
 
-   ![](../Sandbox-Environment-Guides/Images/foundryresponse.png)
+   ![](../Sandbox-Environment-Guides/Images/foundryreseponse.png)
 
 ---
 ### Activity 2.3: Ground the Agent with Enterprise Knowledge
