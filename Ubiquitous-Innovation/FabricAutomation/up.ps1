@@ -87,6 +87,7 @@ foreach ($required in @('AZURE_SUBSCRIPTION_ID', 'AZURE_TENANT_ID', 'AZURE_CLIEN
 }
 
 $Location = $env:AZURE_LOCATION
+$FoundryLocation = 'westus'
 $ResourceGroupName = $env:AZURE_RESOURCE_GROUP
 $CapacityAdministratorUpn = $env:FABRIC_CAPACITY_ADMIN_UPN
 $LakehouseName = if ($configuration.Contains('LAKEHOUSE_NAME') -and $configuration['LAKEHOUSE_NAME']) { $configuration['LAKEHOUSE_NAME'] } else { 'Ubiquitous_Lakehouse' }
@@ -137,16 +138,19 @@ for ($attempt = 1; $attempt -le 12; $attempt++) {
 if (-not $suffix) { throw 'Could not generate an available ADLS Gen2 storage account name after 12 attempts.' }
 $capacityName = "fabricubiquitous$suffix"
 $workspaceName = "Ubiquitous-Innovation-$suffix"
+$foundryAccountName = "foundryubiquitous$suffix"
+$foundryProjectName = 'ubiquitous-innovation-project'
 
 Write-Host "Creating resource group $ResourceGroupName in $Location..." -ForegroundColor Cyan
 Invoke-Checked { az group create --name $ResourceGroupName --location $Location --only-show-errors 1>$null } "Could not create resource group $ResourceGroupName."
 
-Write-Host "Creating F16 Fabric capacity $capacityName and ADLS Gen2 account $StorageAccountName..." -ForegroundColor Cyan
+Write-Host "Creating F16 Fabric capacity $capacityName, ADLS Gen2 account $StorageAccountName, and Foundry project $foundryProjectName..." -ForegroundColor Cyan
 Invoke-Checked {
     az deployment group create --resource-group $ResourceGroupName --template-file (Join-Path $PSScriptRoot 'infra/main.bicep') `
         --parameters capacityName=$capacityName location=$Location capacityAdministratorObjectId=$capacityAdministratorObjectId capacityAdministratorUpn=$CapacityAdministratorUpn `
-        storageAccountName=$StorageAccountName storageBlobDataContributorPrincipalId=$capacityAdministratorObjectId --only-show-errors 1>$null
-} 'Fabric capacity and ADLS Gen2 deployment failed.'
+        storageAccountName=$StorageAccountName storageBlobDataContributorPrincipalId=$capacityAdministratorObjectId `
+        foundryAccountName=$foundryAccountName foundryProjectName=$foundryProjectName foundryAgentDeveloperPrincipalId=$capacityAdministratorObjectId foundryLocation=$FoundryLocation --only-show-errors 1>$null
+} 'Fabric capacity, ADLS Gen2, or Foundry project deployment failed.'
 
 $capacityResourceId = (& az resource show --resource-group $ResourceGroupName --resource-type Microsoft.Fabric/capacities --name $capacityName --query id -o tsv).Trim()
 if ($LASTEXITCODE -ne 0 -or -not $capacityResourceId) { throw 'The newly created Fabric capacity could not be resolved.' }
@@ -155,8 +159,9 @@ Invoke-Checked { python -m pip install --disable-pip-version-check -q -r (Join-P
 $env:AZURE_FABRIC_ACCESS_TOKEN = (& az account get-access-token --resource https://api.fabric.microsoft.com --query accessToken -o tsv).Trim()
 $env:AZURE_STORAGE_ACCESS_TOKEN = (& az account get-access-token --resource https://storage.azure.com/ --query accessToken -o tsv).Trim()
 $env:AZURE_POWERBI_ACCESS_TOKEN = (& az account get-access-token --resource https://analysis.windows.net/powerbi/api --query accessToken -o tsv).Trim()
-if (-not $env:AZURE_FABRIC_ACCESS_TOKEN -or -not $env:AZURE_STORAGE_ACCESS_TOKEN -or -not $env:AZURE_POWERBI_ACCESS_TOKEN) {
-    throw 'Could not acquire Fabric, Storage, or Power BI access tokens.'
+$env:AZURE_FOUNDRY_ACCESS_TOKEN = (& az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv).Trim()
+if (-not $env:AZURE_FABRIC_ACCESS_TOKEN -or -not $env:AZURE_STORAGE_ACCESS_TOKEN -or -not $env:AZURE_POWERBI_ACCESS_TOKEN -or -not $env:AZURE_FOUNDRY_ACCESS_TOKEN) {
+    throw 'Could not acquire Fabric, Storage, Power BI, or Foundry access tokens.'
 }
 
 try {
@@ -193,9 +198,16 @@ try {
             --workspace-id $fabric.workspaceId --semantic-model-id $semanticModel.semanticModelId
     } 'Data Agent deployment failed.'
 
-    Write-Host "Completed. Storage account: $StorageAccountName; Workspace: $workspaceName; Lakehouse: $LakehouseName; Semantic model: Ubiquitous_Innovation_SemanticModel; Data Agent: Ubiquitous_Innovation_DataAgent" -ForegroundColor Green
+    Write-Host 'Creating the Foundry Supply Chain agent...' -ForegroundColor Cyan
+    Invoke-Checked {
+        python (Join-Path $PSScriptRoot 'scripts/deploy_foundry_agent.py') `
+            --foundry-account-name $foundryAccountName --project-name $foundryProjectName --model-deployment-name gpt5mini
+    } 'Foundry agent deployment failed.'
+
+    Write-Host "Completed. Storage account: $StorageAccountName; Workspace: $workspaceName; Lakehouse: $LakehouseName; Semantic model: Ubiquitous_Innovation_SemanticModel; Data Agent: Ubiquitous_Innovation_DataAgent; Foundry project: $foundryProjectName; Foundry agent: SupplyChainAgent" -ForegroundColor Green
 } finally {
     Remove-Item Env:AZURE_FABRIC_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_STORAGE_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_POWERBI_ACCESS_TOKEN -ErrorAction SilentlyContinue
+    Remove-Item Env:AZURE_FOUNDRY_ACCESS_TOKEN -ErrorAction SilentlyContinue
 }
