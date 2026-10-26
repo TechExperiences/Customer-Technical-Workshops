@@ -124,7 +124,7 @@ This allows us to establish the foundation for the unified data solution through
 1. Please copy the below prompt and paste it in the copilot chat window.
 
    ```
-   You are my Smart Agent supporting Caldova Pharma. I am planning to build a unified solution to improve business operations and decision-making.
+   You are my Agent supporting Caldova Pharma. I am planning to build a unified solution to improve business operations and decision-making.
  
    Please follow the instructions below to build Fabric Workspace:
    
