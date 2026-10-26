@@ -361,7 +361,7 @@ Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in pl
    ```
 3. Click **Send**.
    ![](../Sandbox-Environment-Guides/Images/Delegate.png)
-   
+
 4. When Copilot asks about the checkpoint, **accept it**. This way the agent's branch includes:
    - The existing scaffold
    - The updated instructions
@@ -519,11 +519,13 @@ This enables the Business Intelligence agent to use live manufacturing context w
 
    ```
    Follow the instructions below to connect the existing Data Agent from the Caldova_UI workspace as a tool in the existing Microsoft Foundry agent (supply-chain-Bi-agent).
+   •  Please read the design-review.md file and upgrade my foundry agent accordingly(example: model and instructions)
    •	Locate the existing Data Agent in the Caldova_UI workspace.
    •	Configure and connect the Data Agent under the Tools section of the existing Foundry agent using tool calling.
    •	Ensure the Foundry agent can invoke the Data Agent to retrieve operational data when answering relevant questions.
    ```
  ![](../Sandbox-Environment-Guides/Images/task2.2.png)
+
 1. Verify that the **Fabric Data Agent** is attached under the **Tools** section of the existing Foundry agent.
 
 1. Confirm that the Data Agent is connected and configured correctly.
@@ -535,6 +537,8 @@ This enables the Business Intelligence agent to use live manufacturing context w
    ```
 
 1. Review the response provided by the Foundry agent and verify that it retrieves the expected manufacturing data through the Fabric Data Agent.
+
+   ![](../Sandbox-Environment-Guides/Images/foundryresponse.png)
 
 ---
 ### Activity 2.3: Ground the Agent with Enterprise Knowledge
@@ -558,11 +562,11 @@ This allows the agent to combine operational data with documented manufacturing 
 
    ```
    Follow the instructions below to create a Foundry IQ knowledge base from the  existing Caldova manufacturing documents in Azure Blob Storage and connect it under the Knowledge section of the existing Microsoft Foundry agent (supply-chain-Bi-agent)
-   •	Create a Foundry IQ knowledge base using documents stored in Azure Blob    Storage under the rg-caldova-ubiquituos resource group.
-   •	Access the testingsharepoint storage container and its data folder.
-   •	Configure the knowledge base to index and retrieve the available  documents in above folder.
-   •	Add the knowledge base under the Knowledge section of the existing   Caldova Business Intelligence Agent in Microsoft Foundry, not under Tools.
-   •	Configure the agent to use this knowledge source when answering questions about the documents
+   •  Create a Foundry IQ knowledge base using documents stored in    Azure Blob Storage under the rg-ubiquituos resource group.
+   •  Access the adlsubiquitoust5sba storage container and its data   folder.
+   •  Configure the knowledge base to index and retrieve the available documents in above folder.
+   •  Add the knowledge base under the Knowledge section of the    existing Caldova Business Intelligence Agent in Microsoft Foundry,  not under Tools.
+   •  Configure the agent to use this knowledge source when answering questions about the documents
 
    ```
  ![](../Sandbox-Environment-Guides/Images/task2.3.png)
@@ -578,6 +582,8 @@ This allows the agent to combine operational data with documented manufacturing 
    ```
 
 1. Review the response provided by the Foundry agent and verify that it uses the relevant manufacturing documents to provide a grounded answer.
+
+   ![](../Sandbox-Environment-Guides/Images/knowledgeresponse.png)
 
 ---
 ### Activity 2.4: Add Organizational Context
@@ -607,6 +613,7 @@ This adds organizational context to the agent's existing operational and enterpr
    •	Configure the agent to use **Work IQ** when answering questions about Caldova's business and organizational context.
    ```
  ![](../Sandbox-Environment-Guides/Images/task2.4.png)
+
 1. Verify that the ****Work IQ** SharePoint integration** is configured under the **Tools** section of the existing Foundry agent.
 
 1. Confirm that the SharePoint source is connected properly and the relevant business-context documents are accessible.
@@ -616,6 +623,8 @@ This adds organizational context to the agent's existing operational and enterpr
    ```
    What are Caldova's main priorities for the November launch?
    ```
+
+    ![](../Sandbox-Environment-Guides/Images/sharepointresponse.png)
 
 1. Review the response provided by the Foundry agent and verify that it uses the relevant organizational context, including launch priorities, business commitments, and team responsibilities.
 
@@ -628,6 +637,8 @@ This adds organizational context to the agent's existing operational and enterpr
    ```
 
 1. Review the responses and confirm that all integrations work as expected.
+
+   ![](../Sandbox-Environment-Guides/Images/comboresponse.png)
 
 ---
 
