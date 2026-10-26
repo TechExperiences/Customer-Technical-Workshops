@@ -70,24 +70,31 @@ resource storageBlobDataContributor 'Microsoft.Authorization/roleAssignments@202
   }
 }
 
-resource foundryAccount 'Microsoft.CognitiveServices/accounts@2025-06-01' = {
+resource foundryAccount 'Microsoft.CognitiveServices/accounts@2025-04-01-preview' = {
   name: foundryAccountName
   location: foundryLocation
   kind: 'AIServices'
+  identity: {
+    type: 'SystemAssigned'
+  }
   sku: {
     name: 'S0'
   }
   properties: {
     customSubDomainName: foundryAccountName
     publicNetworkAccess: 'Enabled'
+    disableLocalAuth: false
     allowProjectManagement: true
   }
 }
 
-resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2025-06-01' = {
+resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2025-04-01-preview' = {
   parent: foundryAccount
   name: foundryProjectName
   location: foundryLocation
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     displayName: foundryProjectName
     description: 'Ubiquitous Innovation Supply Chain project.'
