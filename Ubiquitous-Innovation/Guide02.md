@@ -239,11 +239,6 @@ Review the updated document and confirm that it accurately represents the intend
 
 1. Once Copilot starts generating the response, monitor the process closely. 
 
-#### Validation
-
-   ![](../Sandbox-Environment-Guides/Images/Revised-Plan.png)
-
-
 ### Activity 1.4: Choose the Model for the Job
 Select the most appropriate model for the task while staying within the models and policies enabled by the organization. Review the available models using /model, switch between models to understand that model selection is task-specific, and use /model auto to allow ****GitHub Copilot**** to select an appropriate model based on the task, effort, and optimization settings such as Balanced versus Intelligence. Use /usage to review session usage and /context to understand the available context and session information. Finally, repeat the same task using a Frontier model and Auto mode to compare their output, performance, value, and cost, and understand when each approach is most appropriate.
 
