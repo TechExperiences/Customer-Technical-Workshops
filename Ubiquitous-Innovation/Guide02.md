@@ -537,6 +537,15 @@ Get approval from a **person** or a **CODEOWNER**.
 
 > **Tip:** Before you merge, you can still mention `@copilot` in a comment to ask for more changes to the pull request.
 
+
+In this topic, we explored how GitHub Copilot helps accelerate software development, review architecture, generate code, and identify potential security concerns. These capabilities help teams build solutions faster, but developing an application is only one part of the journey.
+
+For an AI solution to deliver meaningful business value, its agents must also understand enterprise data, business terminology, operational context, and organizational knowledge. The next topic builds on this foundation by exploring how business data and enterprise knowledge can ground agents in relevant information.
+
+Think about this: If an agent can generate code and understand a workflow, what additional capabilities does it need to answer business questions accurately and make context-aware recommendations?
+
+Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**, and **Work IQ** can provide that context.
+
 ---
 
 # Topic 2: Agents That Know Your Business 
@@ -746,6 +755,13 @@ This approach helps us measure the agent's response quality and validate whether
 
    ```
  ![](../Sandbox-Environment-Guides/Images/task2.5.png)
+
+
+ In this topic, we explored how agents use enterprise data and knowledge to provide context-aware insights. However, complex business processes often require multiple specialized agents to work together.
+
+ In this topic, we will explore how **Microsoft Copilot Studio** coordinates workflows, connects with **Microsoft Foundry agents**, and brings their outputs together through a **Market Launch Coordinator**.
+
+**Think about this:** How can multiple specialized agents collaborate to achieve a common business goal?
 ---
 
 # Topic 3: From One Agent to a Coordinated System 
@@ -1060,7 +1076,14 @@ In-progress
 
 1. Click **Market Launch Coordinator** to open the chat and verify that the agent is available.
 
----
+In this topic, we explored how **Microsoft Copilot Studio** coordinates specialized agents to support end-to-end business workflows.
+
+However, enterprise AI also requires strong security, governance, and cost management. In this final topic, we will explore how **Agent 365** and **Microsoft Purview** help manage agent identity, protect sensitive data, monitor activities, and understand costs.
+
+**Think about this:** How can we ensure agents operate securely, responsibly, and cost-effectively?
+
+Let's explore the key governance and security considerations for enterprise AI.
+
 ---
 # Topic 4: Trust and Cost Are the Same Conversation
 
