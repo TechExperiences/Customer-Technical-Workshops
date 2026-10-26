@@ -110,7 +110,7 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
 ## From Architecture to a Working Business Solution
 
-The **whiteboarding** exercise established the business requirements and the proposed **future-state architecture** for Caldova. In this rapid-prototyping session, we will turn that design into a working, testable solution using ****GitHub Copilot**** and the Microsoft AI platform.
+The **whiteboarding** exercise established the business requirements and the proposed ****future-state architecture**** for Caldova. In this rapid-prototyping session, we will turn that design into a working, testable solution using ****GitHub Copilot**** and the Microsoft AI platform.
 
 We will follow the solution through four connected stages:
 
@@ -133,7 +133,7 @@ Instead of starting with individual configuration tasks, you’ll describe what 
 Transform an existing agent design into a **production-ready, secure capability** using ****GitHub Copilot****—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
 
 ### Activity 1.1: Start Whiteboarding
-The Future-State Architecture was developed during the previous whiteboarding activity. Review the architecture below to understand the agreed design before moving into implementation. Focus on the four key areas:
+The **future-state architecture** was developed during the previous whiteboarding activity. Review the architecture below to understand the agreed design before moving into implementation. Focus on the four key areas:
 
 **Knowledge**: What the agent needs to know.
 **Tools and Systems:** The tools the agent can call and the production systems behind those tools.
@@ -148,7 +148,7 @@ Turn the whiteboard into a reviewed implementation plan and issue set for extend
 
 A **whiteboard** captures the intended design, but developers need a clear implementation plan before they begin making changes. Manually translating every component into requirements can lead to missed dependencies, duplicated work, or incomplete testing.
 
-In this activity, ****GitHub Copilot**** will analyze the attached **future-state architecture** and turn it into a structured design review. The resulting document will help the business and technical teams understand the proposed implementation before code changes begin.
+In this activity, ****GitHub Copilot**** will analyze the attached ****future-state architecture**** and turn it into a structured design review. The resulting document will help the business and technical teams understand the proposed implementation before code changes begin.
 
 #### What Will This Prompt Do?
 
@@ -170,13 +170,13 @@ Treat the document as a draft for review, not as an approved implementation plan
 
 1. Please copy the below prompt and paste it in the copilot chat win
 
-   >- This activity is required to validate the future-state architecture before development begins and ensure the proposed solution aligns with the business requirement.
+   >- This activity is required to validate the **future-state architecture** before development begins and ensure the proposed solution aligns with the business requirement.
    >- Review the architecture to understand each component and determine how the new tool-handler capability should be implemented, documented, and reviewed by the business team.
 
    
    **Prompt**
    ```
-   For my first activity, I have attached a whiteboard-generated future-state architecture design. Please review the architecture thoroughly and create a document based on your analysis. Follow the instructions below for this activity:
+   For my first activity, I have attached a whiteboard-generated **future-state architecture** design. Please review the architecture thoroughly and create a document based on your analysis. Follow the instructions below for this activity:
    
    Attached to future state architecture: Future-State-Architecture.png
 
@@ -209,7 +209,7 @@ In this activity, **GitHub Copilot** will review the existing `Design-Review.md`
 
 #### What Will This Prompt Do?
 
-- Reassess the existing implementation plan against the future-state architecture.
+- Reassess the existing implementation plan against the **future-state architecture**.
 - Verify that the required components, tools, and agent capabilities are included.
 - Identify missing, incorrect, duplicated, or unnecessary items.
 - Propose corrections to the same document instead of creating a separate plan.
@@ -239,7 +239,80 @@ Review the updated document and confirm that it accurately represents the intend
 
 1. Once Copilot starts generating the response, monitor the process closely. 
 
+## Understanding the Design Review
+
+### What Is a Design Review?
+
+A **Design Review** is a structured evaluation of the proposed **future-state architecture** to verify that the solution aligns with the business requirements, technical design, security expectations, and implementation objectives before development begins.
+
+In this activity, we will use **GitHub Copilot** to analyze Caldova's **future-state architecture** and generate a `Design-Review.md` document. The review explains the purpose of the architecture components, how they interact, what capabilities are required, and what implementation tasks need to be completed.
+
+The objective is to move beyond understanding the architecture diagram and translate it into a practical implementation plan that developers and business stakeholders can review and validate.
+
+### What Does the Design Review Cover?
+
+The design review examines the proposed solution across four key areas:
+
+1. **Data Sources and Knowledge Foundation:** Reviews how Microsoft Fabric OneLake, ADLS Gen2, Azure SQL Database, and SharePoint provide the enterprise data and knowledge required to ground AI agents in business information.
+
+2. **Agent Development and Engineering:** Explains how Microsoft Foundry, GitHub Copilot, GitHub Actions, models, and tools support agent development, implementation, testing, and deployment.
+
+3. **Agent Orchestration and Workflow Integration:** Reviews how Copilot Studio, the Agent Fleet, Workflow Orchestration, and escalation paths enable multiple agents to coordinate tasks, integrate with enterprise systems, and request human approval when necessary.
+
+4. **Governance, Security, and Cost Management:** Examines how Agent 365, Microsoft Entra ID, Azure Monitor, and cost-management capabilities contribute to agent discovery, identity and access control, monitoring, auditing, and operational oversight.
+
+### Why Are We Introducing a New Tool Handler?
+
+The architecture identifies an important gap between an agent that can provide recommendations and an agent that can perform actions in enterprise systems.
+
+For example, a procurement agent might identify a shortage of a critical component and recommend creating a purchase requisition. However, identifying the problem does not automatically create the requisition in SAP or another connected system.
+
+To address this gap, the design review proposes an **Enterprise Action Tool Handler** within the **workflow-orchestration layer**.
+
+The proposed design includes:
+
+- Validating the requested action and its input parameters.
+- Checking the caller's identity and permissions.
+- Validating relevant business data before execution.
+- Obtaining human approval when required.
+- Executing the action through the appropriate workflow and enterprise connector.
+- Recording the result and maintaining an audit trail.
+- Returning the actual execution outcome to the requesting agent.
+
+This capability represents the transition from **agents that recommend to agents that act**, while maintaining appropriate authorization, approval, and governance controls.
+
+### How Does GitHub Copilot Help?
+
+Instead of manually reviewing every architecture component and preparing the implementation documentation from scratch, we provide **GitHub Copilot** with the architecture and the business requirements.
+
+**GitHub Copilot** helps to:
+
+- Analyze the architecture and explain the responsibilities of its components.
+- Identify where the proposed tool handler fits into the existing design.
+- Define the handler's interface, authorization, approval, and execution requirements.
+- Identify required agent-instruction changes and testing scenarios.
+- Generate a list of engineering follow-up tasks.
+- Compare the proposed implementation with the existing business request, where that request is available.
+- Identify gaps, risks, dependencies, and decisions that require stakeholder input.
+
+The generated document serves as a starting point for technical and business review. It should be validated against the actual architecture, repository issues, implementation constraints, and stakeholder decisions rather than accepted without review.
+
+### What Should You Review in the Generated Document?
+
+After **GitHub Copilot** generates `Design-Review.md`, review the following sections:
+
+1. **Architecture Walkthrough:** Verify that the four architecture areas and their components are represented correctly.
+2. **Component Activity Table:** Confirm that each component's responsibilities, activities, and dependencies are clearly explained.
+3. **Proposed Tool Handler:** Review the proposed design for permissions, approval workflows, action execution, and auditing.
+4. **Testing Strategy:** Check whether the proposed tests cover successful execution, unauthorized requests, duplicate requests, invalid inputs, and approval rejection.
+5. **Follow-Up Issues:** Identify additional engineering work and distinguish essential pilot requirements from future enhancements.
+6. **Gap Analysis:** Verify which architecture requirements are missing or only partially addressed in the initial plan.
+7. **Final Implementation Plan:** Confirm the agreed scope, required changes, ownership, and outstanding decisions before development proceeds.
+
+**The key takeaway:** GitHub Copilot can accelerate architecture analysis and implementation planning, but the design must still be validated by the appropriate technical and business stakeholders before it is approved for development.
+
 ### Activity 1.4: Choose the Model for the Job
+
 Select the most appropriate model for the task while staying within the models and policies enabled by the organization. Review the available models using /model, switch between models to understand that model selection is task-specific, and use /model auto to allow ****GitHub Copilot**** to select an appropriate model based on the task, effort, and optimization settings such as Balanced versus Intelligence. Use /usage to review session usage and /context to understand the available context and session information. Finally, repeat the same task using a Frontier model and Auto mode to compare their output, performance, value, and cost, and understand when each approach is most appropriate.
 
 Based on the context, the user can switch between the available models and validate their suitability for the task. Finally, select the **Auto** option to allow ****GitHub Copilot**** to automatically choose the most appropriate model based on the requirements and complexity of the work.
