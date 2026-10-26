@@ -86,6 +86,7 @@ resource foundryAccount 'Microsoft.CognitiveServices/accounts@2025-06-01' = {
 resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2025-06-01' = {
   parent: foundryAccount
   name: foundryProjectName
+  location: foundryLocation
   properties: {
     displayName: foundryProjectName
     description: 'Ubiquitous Innovation Supply Chain project.'
