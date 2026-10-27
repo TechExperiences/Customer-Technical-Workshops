@@ -213,16 +213,23 @@ Before loading analytical data into Microsoft Fabric, verify that the source CSV
 
 1. Navigate to the [Azure portal](https://portal.azure.com/)
 
-1. Navigate to the existing storage account storage<Deployment-ID>.
+1. Search and select the **Storage account**.
 
-1. Under Data storage, select Containers.
+1. Navigate to the existing storage account storage named **storage<inject key="Deployment-ID" enableCopy="false"/>**.
 
-1. Open the data container and Open the **Analytical folder** and review the available CSV files.
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u43.png)
 
-   ![](../Sandbox-Environment-Guides/Images/blob.png)   
+1. Under Data storage, select **Containers (1)** amd then select **Data (2)** container.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u44.png)
+
+1. Select the **Analytical folder**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u45.png) 
+
+1. Review the available CSV files.   
 
    ![](../Sandbox-Environment-Guides/Images/blobcsv.png) 
-
 
 1. Navigate back to ****GitHub Copilot**** 
 
