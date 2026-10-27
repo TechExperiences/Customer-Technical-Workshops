@@ -421,15 +421,6 @@ Next, verify that the business application files are available in Azure Blob Sto
 
    ![](../Sandbox-Environment-Guides/Images/Fabric-SQLDB.png)
 
-1. Next, navigate to the **Azure Portal** and open the **rg-Unified** resource group.
-
-1. Under **Resources**, verify that the integration components created for the data-loading process are available:
-   - **caldova-blob-connection** – API connection used to connect to the Azure Storage account.
-   - **caldova-businessapp-ingest** – Logic App responsible for orchestrating the data ingestion.
-   - **caldova-fabricsql-connection** – API connection used to connect to the Fabric SQL Database.
-   - **caldova-integration-account** – Integration Account used as part of the integration workflow.
-
-   ![](../Sandbox-Environment-Guides/Images/LogicApp-Int.png)
 ---
 
 ### Step 4: Building **Semantic Model** using Fabric Lakehouse and SQL Database to generate PowerBI report
