@@ -204,8 +204,7 @@ Traditionally, this would require manually creating a Lakehouse, configuring con
 This approach demonstrates how different data sources can be brought together in OneLake while reducing the manual effort required to configure individual data integration components.
 
 
-> [!TIP]
-> **Business value:** Analytical files stay in Blob Storage, and operational data stays in Azure SQL Database where the business applications still use it. Shortcuts and mirroring make both available in OneLake without building pipelines or keeping extra copies. When Caldova enters a new market or acquires a company, its data can be connected the same way. The data is stored in the open Delta Parquet format, so Caldova can use other engines and tools later without migrating it.
+>**Business value:** Analytical files stay in Blob Storage, and operational data stays in Azure SQL Database where the business applications still use it. Shortcuts and mirroring make both available in OneLake without building pipelines or keeping extra copies. When Caldova enters a new market or acquires a company, its data can be connected the same way. The data is stored in the open Delta Parquet format, so Caldova can use other engines and tools later without migrating it.
 
 **Verify Analytical Source Data in Azure Blob Storage**
 
@@ -351,8 +350,7 @@ With ****GitHub Copilot****, we can describe the required integration flow and a
 The objective is to demonstrate how a business requirement can be translated into an integration workflow with the help of ****GitHub Copilot****, instead of manually building each component separately.
 
 
-> [!TIP]
-> **Business value:** Customer data written by business applications now lands in the same estate as operational and analytical data, through a managed Logic Apps workflow instead of custom integration code. The same pattern can be reused for the next application, and Service Bus or Event Grid can be added when Caldova needs event-driven updates.
+>**Business value:** Customer data written by business applications now lands in the same estate as operational and analytical data, through a managed Logic Apps workflow instead of custom integration code. The same pattern can be reused for the next application, and Service Bus or Event Grid can be added when Caldova needs event-driven updates.
 
 **Verify Business Application Source Data in Azure Blob Storage**
 
@@ -455,8 +453,7 @@ After the components are created, you will review the **Semantic Model** relatio
 This demonstrates how ****GitHub Copilot**** can help move from data integration to a usable analytics and AI experience.
 
 
-> [!TIP]
-> **Business value:** The semantic model holds one set of business definitions, such as what counts as revenue, an order or stock on hand. The Power BI report and the Data Agent both use it, so a dashboard and an AI answer return the same number. Direct Lake mode reads the data in OneLake directly, so reports don't depend on a separate imported copy.
+>**Business value:** The semantic model holds one set of business definitions, such as what counts as revenue, an order or stock on hand. The Power BI report and the Data Agent both use it, so a dashboard and an AI answer return the same number. Direct Lake mode reads the data in OneLake directly, so reports don't depend on a separate imported copy.
 
 1. Navigate back to ****GitHub Copilot**** 
 
@@ -557,8 +554,7 @@ In this step, we will use **OneLake Catalog** to explore the available data asse
 This step completes the prototype by connecting data integration and analytics with the governance and security capabilities needed to manage the unified data estate.
 
 
-> [!TIP]
-> **Business value:** As Caldova adds markets, each with its own pharmaceutical regulations, the business needs to know what data it has, who owns it and who can access it. The OneLake catalog gives one place to find, govern and secure the lakehouse, databases, semantic model and agent built today, instead of managing controls system by system.
+>**Business value:** As Caldova adds markets, each with its own pharmaceutical regulations, the business needs to know what data it has, who owns it and who can access it. The OneLake catalog gives one place to find, govern and secure the lakehouse, databases, semantic model and agent built today, instead of managing controls system by system.
 
 1. Click **OneLake Catalog** and navigate to catalog page.
 
@@ -592,7 +588,7 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
 - Access the published agent from Microsoft 365 Copilot.
 - Ask business questions and validate the answers against the unified data.
 
-> **Business value:** Business users get answers in Microsoft 365 Copilot, where they already work, without learning a new tool. The agent answers from the same governed semantic model as the reports, so access controls and business definitions carry through to every answer.
+>**Business value:** Business users get answers in Microsoft 365 Copilot, where they already work, without learning a new tool. The agent answers from the same governed semantic model as the reports, so access controls and business definitions carry through to every answer.
 
 1. Open **[Microsoft 365 Copilot](https://m365.cloud.microsoft/chat?omkt=en-001&source=post_page---------------------------)** and provide sign-in details.
 
