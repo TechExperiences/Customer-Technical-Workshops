@@ -319,9 +319,9 @@ Before integrating operational data into Microsoft Fabric, verify that the sourc
 
    ```
 
-**Operational data** resides in the existing **Azure SQL Database**, Instead of creating external shortcuts directly to the SQL tables, we first configure **Mirroring** to replicate the supported source data into a **mirrored database** in Microsoft Fabric.
+   - **Operational data** resides in the existing **Azure SQL Database**, Instead of creating external shortcuts directly to the SQL tables, we first configure **Mirroring** to replicate the supported source data into a **mirrored database** in Microsoft Fabric.
 
-We then create **shortcuts** from the **mirrored database** to the **Caldova-Lakehouse**, making the operational tables accessible alongside the analytical data
+   - We then create **shortcuts** from the **mirrored database** to the **Caldova-Lakehouse**, making the operational tables accessible alongside the analytical data
 
 1. Once the deployment is complete, you can verify the Created tables in the same Lakehouse.
 
