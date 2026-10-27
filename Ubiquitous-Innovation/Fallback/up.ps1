@@ -48,11 +48,6 @@ function Test-ServicePrincipalAzureCliSession {
     } catch { return $false }
 }
 
-function Test-AzdAuthentication {
-    & azd auth login --check-status --no-prompt 1>$null 2>$null
-    return $LASTEXITCODE -eq 0
-}
-
 function New-FabricDataAgentConnectionWhenReady {
     param(
         [Parameter(Mandatory)] [string]$ProjectEndpoint,
@@ -131,14 +126,12 @@ if (Test-ServicePrincipalAzureCliSession -ClientId $env:AZURE_CLIENT_ID -TenantI
 }
 Invoke-Checked { az account set --subscription $env:AZURE_SUBSCRIPTION_ID --only-show-errors } "Could not select subscription $($env:AZURE_SUBSCRIPTION_ID)."
 
-if (Test-AzdAuthentication) {
-    Write-Host 'Using the existing Azure Developer CLI session.' -ForegroundColor Cyan
-} else {
-    Write-Host 'Signing in to Azure Developer CLI with the configured service principal...' -ForegroundColor Cyan
-    Invoke-Checked {
-        azd auth login --client-id $env:AZURE_CLIENT_ID --client-secret $env:AZURE_CLIENT_SECRET --tenant-id $env:AZURE_TENANT_ID --no-prompt 1>$null
-    } 'Azure Developer CLI service-principal sign-in did not complete.'
-}
+Write-Host 'Signing in to Azure Developer CLI with the configured service principal...' -ForegroundColor Cyan
+Invoke-Checked {
+    # azd's connection extension uses its own credential store. Authenticate
+    # explicitly so a stale interactive azd session cannot be selected.
+    azd auth login --client-id $env:AZURE_CLIENT_ID --client-secret $env:AZURE_CLIENT_SECRET --tenant-id $env:AZURE_TENANT_ID --no-prompt 1>$null
+} 'Azure Developer CLI service-principal sign-in did not complete.'
 
 $resourceGroupExists = (& az group exists --name $ResourceGroupName --only-show-errors).Trim()
 if ($LASTEXITCODE -ne 0) { throw "Could not check whether resource group $ResourceGroupName exists." }
@@ -197,6 +190,13 @@ Invoke-Checked {
         foundryAccountName=$FoundryAccountName foundryProjectName=$FoundryProjectName foundryLocation=$FoundryLocation `
         automationPrincipalId=$automationPrincipalId portalUserPrincipalId=$portalUserPrincipalId --only-show-errors 1>$null
 } 'ADLS Gen2, Search, Cosmos DB, or Foundry Standard Agent Setup deployment failed.'
+
+Write-Host 'Setting the new Foundry project as the Azure Developer CLI context...' -ForegroundColor Cyan
+Invoke-Checked {
+    # The Foundry Connections extension resolves project connections from this
+    # azd project context when no azd environment exists in the folder.
+    azd ai project set $FoundryProjectEndpoint --no-prompt 1>$null
+} 'Could not set the Azure Developer CLI Foundry project context.'
 
 Write-Host 'Creating the Foundry project connection for the Fabric Data Agent...' -ForegroundColor Cyan
 New-FabricDataAgentConnectionWhenReady -ProjectEndpoint $FoundryProjectEndpoint -FabricMcpUrl $sourceAgent.mcpUrl
