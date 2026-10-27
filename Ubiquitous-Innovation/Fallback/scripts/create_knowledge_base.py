@@ -41,13 +41,15 @@ def project_credential() -> ClientSecretCredential:
 
 
 def create_vector_store_when_ready(openai_client):
-    for attempt in range(1, 61):
+    # Standard Agent Setup provisions its capability host asynchronously. Allow
+    # up to 30 minutes for its role assignments and managed connections to settle.
+    for attempt in range(1, 181):
         try:
             return openai_client.vector_stores.create(name="fallback-supply-chain-knowledge")
         except Exception as error:  # The capability host can take several minutes to become ready.
-            if attempt == 60:
+            if attempt == 180:
                 raise RuntimeError(f"Could not create the Foundry vector store: {error}") from error
-            print(f"Foundry knowledge storage is not ready; waiting 10 seconds (attempt {attempt}/60)...")
+            print(f"Foundry knowledge storage is not ready; waiting 10 seconds (attempt {attempt}/180)...")
             time.sleep(10)
     raise RuntimeError("Vector store creation did not complete.")
 
