@@ -67,7 +67,7 @@ if (-not (Get-Command az -ErrorAction Ignore)) { throw 'Azure CLI (az) is requir
 if (-not (Get-Command python -ErrorAction Ignore)) { throw 'Python is required.' }
 
 $configuration = Import-DotEnv -Path (Resolve-Path -LiteralPath $EnvFile)
-foreach ($required in @('AZURE_SUBSCRIPTION_ID', 'AZURE_TENANT_ID', 'AZURE_CLIENT_ID', 'AZURE_CLIENT_SECRET', 'AZURE_LOCATION', 'AZURE_RESOURCE_GROUP', 'FABRIC_CAPACITY_ADMIN_UPN')) {
+foreach ($required in @('AZURE_SUBSCRIPTION_ID', 'AZURE_TENANT_ID', 'AZURE_CLIENT_ID', 'AZURE_CLIENT_SECRET', 'AZURE_LOCATION', 'FABRIC_CAPACITY_ADMIN_UPN')) {
     $value = [string]$configuration[$required]
     if (-not $value -or $value -match '^<.*>$') { throw "Set a real value for $required in $EnvFile." }
     Set-Item -Path "Env:$required" -Value $value
@@ -75,12 +75,11 @@ foreach ($required in @('AZURE_SUBSCRIPTION_ID', 'AZURE_TENANT_ID', 'AZURE_CLIEN
 
 $Location = $env:AZURE_LOCATION
 $FoundryLocation = 'westus'
-$ResourceGroupName = $env:AZURE_RESOURCE_GROUP
+$ResourceGroupName = 'rg-Ubiquitous-Innovation'
 $SourceFabricResourceGroup = 'rg-Ubiquitous'
 $PortalUserUpn = $env:FABRIC_CAPACITY_ADMIN_UPN
 $BlobSourceFolder = Join-Path $PSScriptRoot 'BlobData'
 $SharepointSourceFolder = Join-Path $PSScriptRoot 'Sharepoint'
-if ($ResourceGroupName -ne 'rg-Ubiquitous-Innovation') { throw 'AZURE_RESOURCE_GROUP must be rg-Ubiquitous-Innovation for this creation-only workflow.' }
 foreach ($sourceFolder in @($BlobSourceFolder, $SharepointSourceFolder)) {
     if (-not (Test-Path -LiteralPath $sourceFolder -PathType Container)) { throw "Source folder does not exist: $sourceFolder" }
     if (-not (Get-ChildItem -LiteralPath $sourceFolder -Recurse -File | Select-Object -First 1)) { throw "Source folder contains no files: $sourceFolder" }

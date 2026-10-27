@@ -302,7 +302,9 @@ resource projectCosmosDataContributor 'Microsoft.DocumentDB/databaseAccounts/sql
   properties: {
     principalId: foundryProject.identity.principalId
     roleDefinitionId: cosmosDataContributorRole.id
-    scope: '/'
+    // Cosmos ARM RBAC expects the fully qualified account resource ID for
+    // account-wide data access; '/' is only a data-plane SDK-style scope.
+    scope: cosmosAccount.id
   }
 }
 
