@@ -197,7 +197,6 @@ Treat the document as a draft for review, not as an approved implementation plan
 
    ![](../Sandbox-Environment-Guides/Images/step1.png)
 
-
 1. Please copy the below prompt and paste it in the copilot chat win
 
    >- This activity is required to validate the **future-state architecture** before development begins and ensure the proposed solution aligns with the business requirement.
