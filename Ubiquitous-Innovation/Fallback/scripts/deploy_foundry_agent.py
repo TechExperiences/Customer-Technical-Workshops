@@ -5,7 +5,6 @@ import argparse
 import os
 import time
 
-import requests
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import (
     ActivityProtocolConfiguration,
@@ -25,8 +24,6 @@ from azure.identity import ClientSecretCredential
 INSTRUCTIONS = "You are my Supply chain agent."
 AGENT_NAME = "supply-chain-bi-agent"
 FABRIC_CONNECTION_NAME = "fabric-data-agent"
-FABRIC_AUDIENCE = "https://analysis.windows.net/powerbi/api"
-FABRIC_SCOPE = f"{FABRIC_AUDIENCE}/DataAgent.Execute.All"
 
 
 def credential_from_environment() -> ClientSecretCredential:
@@ -47,40 +44,6 @@ def project_endpoint(account_name: str, project_name: str) -> str:
 
 def create_project_client(endpoint: str, credential: ClientSecretCredential) -> AIProjectClient:
     return AIProjectClient(endpoint=endpoint, credential=credential, allow_preview=True)
-
-
-def create_fabric_connection_when_ready(
-    endpoint: str, credential: ClientSecretCredential, fabric_mcp_url: str
-) -> None:
-    """Create the project connection that forwards each caller's Entra context to Fabric."""
-    body = {
-        "properties": {
-            "category": "RemoteTool",
-            "target": fabric_mcp_url,
-            "authType": "UserEntraToken",
-            "audience": FABRIC_AUDIENCE,
-            "scopes": [FABRIC_SCOPE],
-            "metadata": {"type": "generic_mcp", "audience": FABRIC_AUDIENCE},
-        }
-    }
-    token = credential.get_token("https://ai.azure.com/.default").token
-    url = f"{endpoint}/connections/{FABRIC_CONNECTION_NAME}?api-version=v1"
-    for attempt in range(1, 61):
-        response = requests.put(
-            url,
-            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-            json=body,
-            timeout=60,
-        )
-        if response.ok:
-            return
-        if response.status_code not in {403, 404, 409} or attempt == 60:
-            raise RuntimeError(
-                f"Could not create Fabric Data Agent connection ({response.status_code}): {response.text}"
-            )
-        print(f"Foundry project connection is not ready; waiting 10 seconds (attempt {attempt}/60)...")
-        time.sleep(10)
-        token = credential.get_token("https://ai.azure.com/.default").token
 
 
 def create_agent_when_ready(
@@ -143,7 +106,6 @@ def main() -> None:
 
     endpoint = project_endpoint(args.foundry_account_name, args.project_name)
     credential = credential_from_environment()
-    create_fabric_connection_when_ready(endpoint, credential, args.fabric_mcp_url)
     project = create_project_client(endpoint, credential)
     try:
         agent = create_agent_when_ready(

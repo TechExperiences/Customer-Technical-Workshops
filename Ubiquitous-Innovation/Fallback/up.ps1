@@ -48,6 +48,38 @@ function Test-ServicePrincipalAzureCliSession {
     } catch { return $false }
 }
 
+function Test-AzdAuthentication {
+    & azd auth login --check-status --no-prompt 1>$null 2>$null
+    return $LASTEXITCODE -eq 0
+}
+
+function New-FabricDataAgentConnectionWhenReady {
+    param(
+        [Parameter(Mandatory)] [string]$ProjectEndpoint,
+        [Parameter(Mandatory)] [string]$FabricMcpUrl
+    )
+
+    # ARM returns after role assignment creation, but Foundry RBAC can take a
+    # short time to propagate. Retrying only those transient readiness errors
+    # keeps the one-command creation workflow reliable without reusing a
+    # connection from another run.
+    for ($attempt = 1; $attempt -le 60; $attempt++) {
+        $connectionOutput = & azd ai connection create fabric-data-agent --project-endpoint $ProjectEndpoint --kind remote-tool `
+            --target $FabricMcpUrl --auth-type user-entra-token --audience https://analysis.windows.net/powerbi/api `
+            --no-prompt 2>&1
+        if ($LASTEXITCODE -eq 0) { return }
+
+        $details = ($connectionOutput | Out-String).Trim()
+        $isReadinessError = $details -match '(?i)(\b403\b|\b404\b|\b409\b|forbidden|not found|conflict|not ready)'
+        if ($isReadinessError -and $attempt -lt 60) {
+            Write-Host "Foundry project connection is not ready; waiting 10 seconds (attempt $attempt/60)..." -ForegroundColor Yellow
+            Start-Sleep -Seconds 10
+            continue
+        }
+        throw "Could not create the Foundry project connection for the Fabric Data Agent: $details"
+    }
+}
+
 function Get-TokenObjectId {
     param([Parameter(Mandatory)] [string]$AccessToken)
     $segments = $AccessToken.Split('.')
@@ -64,6 +96,7 @@ function Get-TokenObjectId {
 }
 
 if (-not (Get-Command az -ErrorAction Ignore)) { throw 'Azure CLI (az) is required.' }
+if (-not (Get-Command azd -ErrorAction Ignore)) { throw 'Azure Developer CLI (azd) is required to create the Fabric MCP connection.' }
 if (-not (Get-Command python -ErrorAction Ignore)) { throw 'Python is required.' }
 
 $configuration = Import-DotEnv -Path (Resolve-Path -LiteralPath $EnvFile)
@@ -97,6 +130,15 @@ if (Test-ServicePrincipalAzureCliSession -ClientId $env:AZURE_CLIENT_ID -TenantI
     if ($LASTEXITCODE -ne 0) { throw 'Azure CLI service-principal sign-in did not complete.' }
 }
 Invoke-Checked { az account set --subscription $env:AZURE_SUBSCRIPTION_ID --only-show-errors } "Could not select subscription $($env:AZURE_SUBSCRIPTION_ID)."
+
+if (Test-AzdAuthentication) {
+    Write-Host 'Using the existing Azure Developer CLI session.' -ForegroundColor Cyan
+} else {
+    Write-Host 'Signing in to Azure Developer CLI with the configured service principal...' -ForegroundColor Cyan
+    Invoke-Checked {
+        azd auth login --client-id $env:AZURE_CLIENT_ID --client-secret $env:AZURE_CLIENT_SECRET --tenant-id $env:AZURE_TENANT_ID --no-prompt 1>$null
+    } 'Azure Developer CLI service-principal sign-in did not complete.'
+}
 
 $resourceGroupExists = (& az group exists --name $ResourceGroupName --only-show-errors).Trim()
 if ($LASTEXITCODE -ne 0) { throw "Could not check whether resource group $ResourceGroupName exists." }
@@ -143,6 +185,7 @@ $SearchServiceName = "searchubiquitous$suffix"
 $CosmosAccountName = "cosmosubiquitous$suffix"
 $FoundryAccountName = "foundryfallback$suffix"
 $FoundryProjectName = 'ubiquitous-innovation-project'
+$FoundryProjectEndpoint = "https://$FoundryAccountName.services.ai.azure.com/api/projects/$FoundryProjectName"
 
 Write-Host "Creating resource group $ResourceGroupName in $Location..." -ForegroundColor Cyan
 Invoke-Checked { az group create --name $ResourceGroupName --location $Location --only-show-errors 1>$null } "Could not create resource group $ResourceGroupName."
@@ -154,6 +197,9 @@ Invoke-Checked {
         foundryAccountName=$FoundryAccountName foundryProjectName=$FoundryProjectName foundryLocation=$FoundryLocation `
         automationPrincipalId=$automationPrincipalId portalUserPrincipalId=$portalUserPrincipalId --only-show-errors 1>$null
 } 'ADLS Gen2, Search, Cosmos DB, or Foundry Standard Agent Setup deployment failed.'
+
+Write-Host 'Creating the Foundry project connection for the Fabric Data Agent...' -ForegroundColor Cyan
+New-FabricDataAgentConnectionWhenReady -ProjectEndpoint $FoundryProjectEndpoint -FabricMcpUrl $sourceAgent.mcpUrl
 
 $env:AZURE_STORAGE_ACCESS_TOKEN = (& az account get-access-token --resource https://storage.azure.com/ --query accessToken -o tsv).Trim()
 if (-not $env:AZURE_STORAGE_ACCESS_TOKEN) { throw 'Could not acquire a Storage access token.' }
