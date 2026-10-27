@@ -104,9 +104,9 @@ By the end of the workshop, participants will understand how to:
 
 ### Verify Resources in the Azure Resource Group
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-Ubiquitous** Resource Group.
 
-   ![](../Sandbox-Environment-Guides/Images/UI-RG.png)
+   ![](../Ubiquitous-Innovation/Images/u61.png)
 
 1.  Confirm that the resource group contains the following resources:
       - **Fabric Capacity**
