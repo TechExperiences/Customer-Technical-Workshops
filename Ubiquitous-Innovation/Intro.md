@@ -104,16 +104,18 @@ By the end of the workshop, participants will understand how to:
 
 ### Verify Resources in the Azure Resource Group
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-Ubiquitous** Resource Group.
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**.
 
-   ![](../Ubiquitous-Innovation/Images/u61.png)
+1. Select **rg-Ubiquitous** Resource Group.
 
-1.  Confirm that the resource group contains the following resources:
+   ![](../Ubiquitous-Innovation/Images/u70.png)
+
+1. Confirm that the resource group contains the following resources:
       - **Fabric Capacity**
       - **Storage Account**
       - **Foundry Project**
 
-1. Verify that the resources are available in their respective Azure regions.
+      ![](../Ubiquitous-Innovation/Images/u69.png)      
 
 1. You will return to this portal in the upcoming steps. Keep the portal open and proceed with the next steps.
 
