@@ -65,9 +65,9 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
    ![](../Sandbox-Environment-Guides/Images/amp27.png)
 
-1. Navigate to **`C:\`** path **(1)**, then select the **Ubiquitos-Innovation** folder **(2)** and then **Select folder (3)**.
+1. Navigate to **`C:\`** path **(1)**, then select the **Ubiquitous** folder **(2)** and then **Select folder (3)**.
 
-   ![](../Sandbox-Environment-Guides/Images/uivscode.png)
+   ![](../Ubiquitous-Innovation/Images/u60.png)
 
 1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
 
@@ -77,25 +77,32 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
    ![](../Sandbox-Environment-Guides/Images/amp30.png)
 
-1. Click **Auto (1)** and then set the model to **Claude Sonnet 5 (2)**.
+1. Click on **Elipses (...) (1)**, select **Terminal (2)** and then **New Terminal (3)**.
 
-   ![](../Sandbox-Environment-Guides/Images/b7.png)
+   ![](../Ubiquitous-Innovation/Images/u63.png)
 
-    >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
+1. Enter the below command to clone the repository `https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>`.
 
-1. Click on **Default permission (1)** and then set it to **Allow all (2)**.
+   ```
+   git clone https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>
+   ```
 
-   ![](../Sandbox-Environment-Guides/Images/b8.png)
+    ![](../Ubiquitous-Innovation/Images/u64.png)
 
-1. Select **Enable**.
+1. Select **Sign in with your browser**.
 
-   ![](../Sandbox-Environment-Guides/Images/amp33.png)
+   ![](../Ubiquitous-Innovation/Images/u65.png)
 
-1. Select the **Future-State-Architecture.png**.
+1. If prompted, sign in with your Git credentials.   
 
-1. From the ********GitHub Copilot****** Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
+1. Select **Authorize git-ecosystem**.
 
-   ![](../Sandbox-Environment-Guides/Images/step1.png)
+   ![](../Ubiquitous-Innovation/Images/u66.png)
+
+1. Once the authentication is done, navigate back to Visual Studio Code and make sure cloning is done.
+
+   ![](../Ubiquitous-Innovation/Images/u67.png)
+
 
 ## From Architecture to a Working Business Solution
 
@@ -155,6 +162,40 @@ The prompt instructs ****GitHub Copilot**** to:
 After Copilot finishes, open `Design-Review.md` in the Project Explorer. Check that the architecture is represented accurately, dependencies are explained, and the proposed work aligns with the business requirement.
 
 Treat the document as a draft for review, not as an approved implementation plan. It becomes the reference for the next activity, where you will confirm the requirements and resolve any gaps before delegating the build.
+
+1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace (2)** to enable models.
+
+   ![](../Ubiquitous-Innovation/Images/u40.png)
+
+1. Click **Auto (1)** and then **turn off (2)** the **Auto** toggle. 
+
+   ![](../Ubiquitous-Innovation/Images/u31.png)
+
+1. Expand **Other Models**.
+
+   ![](../Ubiquitous-Innovation/Images/u32.png)
+
+1. Set the model to **Claude Sonnet 5**.
+
+   ![](../Ubiquitous-Innovation/Images/u33.png)
+
+    >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
+
+1. Click on **Default permission (1)** and then set it to **Allow all (2)**.
+
+   ![](../Sandbox-Environment-Guides/Images/b8.png)
+
+1. Select **Enable**.
+
+   ![](../Sandbox-Environment-Guides/Images/amp33.png)
+
+1. Select the **Future-State-Architecture.png**.
+
+   ![](../Ubiquitous-Innovation/Images/u68.png)
+
+1. From the ********GitHub Copilot****** Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
+
+   ![](../Sandbox-Environment-Guides/Images/step1.png)
 
 
 1. Please copy the below prompt and paste it in the copilot chat win
