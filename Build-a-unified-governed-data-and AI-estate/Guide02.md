@@ -407,6 +407,8 @@ Next, verify that the business application files are available in Azure Blob Sto
 
    ![](../Sandbox-Environment-Guides/Images/LogicApp-Extension.png)
 
+1. If prompted for the SQL database password, please provide the existing password **<inject key="sqlAdminPassword" enableCopy="false"/>**.     
+
 1. Once the deployment is complete, you can verify the Created tables in Fabric SQL Database
 
 1. Open the **Caldova_BusinessApp_SQLDB** from the **Caldova-Pharma** workspace.
