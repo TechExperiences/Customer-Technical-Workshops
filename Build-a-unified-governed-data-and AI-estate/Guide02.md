@@ -266,7 +266,7 @@ Before integrating operational data into Microsoft Fabric, verify that the sourc
 
 1. Navigate to the [Azure portal](https://portal.azure.com/)
 
-1. Navigate to the existing SQL server sql-operational-<Deployment-ID>.
+1. Navigate to the existing SQL server.
 
 1. Open the OperationalData database.
 
