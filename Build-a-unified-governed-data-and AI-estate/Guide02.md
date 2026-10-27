@@ -282,13 +282,19 @@ Before integrating operational data into Microsoft Fabric, verify that the sourc
 
 1. Navigate to the [Azure portal](https://portal.azure.com/)
 
-1. Navigate to the existing SQL server.
+1. Go back to **rg-Unified** Resource group.
 
-1. Open the OperationalData database.
+1. Select **OperationalData** database.
 
-1. Select Query editor and review the available tables.
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u46.png)
 
-   ![](../Sandbox-Environment-Guides/Images/sql.png)
+1. Select **Query editor (1)** and then click Connct as **odl_user_<inject key="Deployment-ID" enableCopy="false"/> (2)**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u47.png)
+
+1. Expand **dbo (1) > Tables (2) > Inventory (3)** to review the available tables.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u48.png)
 
 1. Navigate back to ****GitHub Copilot**** 
 
