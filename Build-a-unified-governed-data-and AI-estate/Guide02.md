@@ -360,13 +360,23 @@ Next, verify that the business application files are available in Azure Blob Sto
 
 1. Navigate to the [Azure portal](https://portal.azure.com/)
 
-1. Navigate to the existing storage account storage<Deployment-ID>.
+1. Search and select the **Storage account**.
 
-1. Under Data storage, select Containers and Open the **data** container.
+1. Navigate to the existing storage account storage named **storage<inject key="Deployment-ID" enableCopy="false"/>**.
 
-1. Open the **BusineesApplication** folder and review the available source files.
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u43.png)
 
-   ![](../Sandbox-Environment-Guides/Images/businessapp.png)
+1. Under Data storage, select **Containers (1)** amd then select **Data (2)** container.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u44.png)
+
+1. Open the **BusineesApplication** folder.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u49.png)
+
+1. Review the available source files.   
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u50.png)   
 
 1. Navigate back to ****GitHub Copilot**** 
 
