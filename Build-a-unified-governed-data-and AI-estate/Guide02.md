@@ -409,7 +409,9 @@ Next, verify that the business application files are available in Azure Blob Sto
 
 1. If prompted for the SQL database password, please provide the existing password **<inject key="sqlAdminPassword" enableCopy="false"/>**.     
 
-1. Once the deployment is complete, you can verify the Created tables in Fabric SQL Database
+1. Once the deployment is complete, you can verify the Created tables in Fabric SQL Database.
+
+1. Navigate back to the Workspace and refresh it.
 
 1. Open the **Caldova_BusinessApp_SQLDB** from the **Caldova-Pharma** workspace.
 
@@ -474,13 +476,17 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
    2. Create one Data Agent using the **Semantic Model** and add concise instructions based on the available tables.
 
    ```
-1. Navigate to Fabric Portal
+1. Navigate to Fabric Portal worksapce.
 
-1. Open the created ****Semantic Model**** and review the configured table relationships to ensure the data model is correctly connected.
+1. Refresh te Workspace and select the created **Semantic Model**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u51.png)
+
+1. Review the configured table relationships to ensure the data model is correctly connected.
 
    ![](../Sandbox-Environment-Guides/Images/Semantic-Model.png)
 
-1. Locate the created ****Semantic Model**** and Select the **More options (...)** menu for the **Semantic Model** and Select **Create report**.
+1. Locate the created ****Semantic Model**** and Select the **More options (...) (1)** menu for the **Semantic Model** and Select **Create report (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/Create-Report.png)
 
@@ -497,15 +503,17 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    ![](../Sandbox-Environment-Guides/Images/Report.png)
 
+1. Save the report with the name **CaldovaReport<inject key="Deployment-ID" enableCopy="false"/>**.   
+
 ### Building Data Agent using Semantic Model.
 
-1. Navigate to the created **Data Agent**.
+1. Navigate back to the Workspace and select the created **Data Agent**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u52.png)
 
 1. Open the **Data** section and verify that the tables are selected and available to the Data Agent.
 
    - If the tables are not selected, select the tables.
-
-   ![](../Sandbox-Environment-Guides/Images/DataAgent.png)
 
 1. Open the **Test Agent** option.
 
@@ -514,21 +522,22 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
    ```
    What is our average supplier lead time by supplier, and which supplier has the best quality rating?
 
-   ```
+   ```   
+
+    ![](../Sandbox-Environment-Guides/Images/DataAgent.png)
 
 1. Review the response provided by the **Data Agent**
 
    ![](../Sandbox-Environment-Guides/Images/DA-Response.png)
 
 
-   > [!TIP]
-   > **What this shows:** The question combines supplier performance and quality data. Before, answering it meant pulling extracts from separate systems and reconciling them by hand. Here, anyone with access can ask it in plain language and get an answer based on the governed model.
+   >**What this shows:** The question combines supplier performance and quality data. Before, answering it meant pulling extracts from separate systems and reconciling them by hand. Here, anyone with access can ask it in plain language and get an answer based on the governed model.
 
 1. In the Data Agent editor, click **Publish** to publish the latest changes.
 
    ![](../Sandbox-Environment-Guides/Images/publish.png)
 
-1. In the **Publish changes** window, enable **Also publish to Microsoft 365 Copilot** and click on **Publish**.
+1. In the **Publish changes** window, enable **Also publish to Microsoft 365 Copilot (1)** and click on **Publish (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/365.png)
 
@@ -566,10 +575,9 @@ This step completes the prototype by connecting data integration and analytics w
 
 1. Click the **Secure** tab where all users will be managed under one space and add, remove, and manage access across all the domains and workspaces.
 
-
    ![](../Sandbox-Environment-Guides/Images/Secure.png)
 
-   > **Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
+    >**Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
 
 ### Step 6: Integrating the Fabric Data Agent with Microsoft 365 Copilot
 
@@ -587,11 +595,11 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
 
 > **Business value:** Business users get answers in Microsoft 365 Copilot, where they already work, without learning a new tool. The agent answers from the same governed semantic model as the reports, so access controls and business definitions carry through to every answer.
 
-1. Open **[Microsoft 365 Copilot](https://m365.cloud.microsoft/chat?omkt=en-001&source=post_page---------------------------)** and provide sign-in details
+1. Open **[Microsoft 365 Copilot](https://m365.cloud.microsoft/chat?omkt=en-001&source=post_page---------------------------)** and provide sign-in details.
 
-1. Navigate to **Agents**. and Under **Your agents**, select **Caldova_Unified_DataAgent**.
+1. Navigate to **Agents (1)**. and Under **Your agents**, select **Caldova_Pharma_DataAgent (2)**.
 
-   ![](../Sandbox-Environment-Guides/Images/agent_copilot.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u53.png)
 
 1. Enter the following prompt in the chat window:
 
@@ -602,6 +610,8 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
    ![](../Sandbox-Environment-Guides/Images/copilotagent.png)
 
 1. Review the response.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u54.png)
 
 
 #### What you built and why it matters for Caldova
