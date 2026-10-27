@@ -85,6 +85,10 @@ foreach ($sourceFolder in @($BlobSourceFolder, $SharepointSourceFolder)) {
     if (-not (Get-ChildItem -LiteralPath $sourceFolder -Recurse -File | Select-Object -First 1)) { throw "Source folder contains no files: $sourceFolder" }
 }
 
+# Verify the local runtime before any Azure resource is created. This avoids a
+# partially provisioned environment when Python dependencies are incompatible.
+Invoke-Checked { python -m pip install --disable-pip-version-check -q -r (Join-Path $PSScriptRoot 'requirements.txt') } 'Could not install the Python dependencies.'
+
 if (Test-ServicePrincipalAzureCliSession -ClientId $env:AZURE_CLIENT_ID -TenantId $env:AZURE_TENANT_ID) {
     Write-Host 'Using the existing Azure CLI session for the configured service principal.' -ForegroundColor Cyan
 } else {
@@ -151,7 +155,6 @@ Invoke-Checked {
         automationPrincipalId=$automationPrincipalId portalUserPrincipalId=$portalUserPrincipalId --only-show-errors 1>$null
 } 'ADLS Gen2, Search, Cosmos DB, or Foundry Standard Agent Setup deployment failed.'
 
-Invoke-Checked { python -m pip install --disable-pip-version-check -q -r (Join-Path $PSScriptRoot 'requirements.txt') } 'Could not install the Python dependencies.'
 $env:AZURE_STORAGE_ACCESS_TOKEN = (& az account get-access-token --resource https://storage.azure.com/ --query accessToken -o tsv).Trim()
 if (-not $env:AZURE_STORAGE_ACCESS_TOKEN) { throw 'Could not acquire a Storage access token.' }
 
