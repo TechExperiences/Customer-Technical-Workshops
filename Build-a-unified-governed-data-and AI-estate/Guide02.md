@@ -134,7 +134,7 @@ This allows us to establish the foundation for the unified data solution through
 
 > [!TIP]
 
-> **Business value:** Caldova starts with the Azure resources it already has: the same storage account, database, and Fabric capacity. Nothing is replaced. Access is set when the workspace is created, so governance starts on day one rather than being added later.
+> **Business value:** Caldova starts with the Azure resources it already has: the same storage account, database, and Fabric capacity. Nothing is replaced. Access is set when the workspace is created, so governance starts on day one rather than being added later.  
 
 
 1. Please copy the below prompt and paste it in the copilot chat window.
@@ -213,6 +213,22 @@ This approach demonstrates how different data sources can be brought together in
 > [!TIP]
 > **Business value:** Analytical files stay in Blob Storage, and operational data stays in Azure SQL Database where the business applications still use it. Shortcuts and mirroring make both available in OneLake without building pipelines or keeping extra copies. When Caldova enters a new market or acquires a company, its data can be connected the same way. The data is stored in the open Delta Parquet format, so Caldova can use other engines and tools later without migrating it.
 
+**Verify Analytical Source Data in Azure Blob Storage**
+
+Before loading analytical data into Microsoft Fabric, verify that the source CSV files are available in **Azure Blob Storage**.
+
+1. Navigate to the [Azure portal](https://portal.azure.com/)
+
+1. Navigate to the existing storage account storage<Deployment-ID>.
+
+1. Under Data storage, select Containers.
+
+1. Open the data container and Open the **Analytical folder** and review the available CSV files.
+
+   ![](../Sandbox-Environment-Guides/Images/blob.png)   
+
+   ![](../Sandbox-Environment-Guides/Images/blobcsv.png) 
+
 
 1. Navigate back to ****GitHub Copilot**** 
 
@@ -244,6 +260,8 @@ This approach demonstrates how different data sources can be brought together in
    
    >Wait for the deployment to complete.
 
+1. Here We are creating **external shortcuts** in the **Caldova-Lakehouse** to access these files directly from **Azure Blob Storage**. This makes the source data accessible through OneLake without manually copying the files into the Lakehouse.
+
 1. Once the deployment is complete, you can verify the created Lakehouse in fabric workspace.
 
 1. Navigate to the **Microsoft Fabric** portal and Open the **Caldova-Lakehouse** lakehouse from the workspace.
@@ -254,7 +272,22 @@ This approach demonstrates how different data sources can be brought together in
 
 1. Select the **DimDate** table to open and review the table data. 
 
-   ![](../Sandbox-Environment-Guides/Images/LH-AnalyticalData.png)   
+   ![](../Sandbox-Environment-Guides/Images/LH-AnalyticalData.png) 
+
+
+**Verify Operational Source Data in Azure SQL Database**
+
+Before integrating operational data into Microsoft Fabric, verify that the source database is available in **Azure SQL Database**.
+
+1. Navigate to the [Azure portal](https://portal.azure.com/)
+
+1. Navigate to the existing SQL server sql-operational-<Deployment-ID>.
+
+1. Open the OperationalData database.
+
+1. Select Query editor and review the available tables.
+
+   ![](../Sandbox-Environment-Guides/Images/sql.png)
 
 1. Navigate back to ****GitHub Copilot**** 
 
@@ -278,6 +311,10 @@ This approach demonstrates how different data sources can be brought together in
    After completing the above steps, please validate Lakehouse. All delta  tables are created successfully and data moved from Azure SQL Database.  
 
    ```
+
+**Operational data** resides in the existing **Azure SQL Database**, Instead of creating external shortcuts directly to the SQL tables, we first configure **Mirroring** to replicate the supported source data into a **mirrored database** in Microsoft Fabric.
+
+We then create **shortcuts** from the **mirrored database** to the **Caldova-Lakehouse**, making the operational tables accessible alongside the analytical data
 
 1. Once the deployment is complete, you can verify the Created tables in the same Lakehouse.
 
@@ -307,6 +344,20 @@ The objective is to demonstrate how a business requirement can be translated int
 
 > [!TIP]
 > **Business value:** Customer data written by business applications now lands in the same estate as operational and analytical data, through a managed Logic Apps workflow instead of custom integration code. The same pattern can be reused for the next application, and Service Bus or Event Grid can be added when Caldova needs event-driven updates.
+
+**Verify Business Application Source Data in Azure Blob Storage**
+
+Next, verify that the business application files are available in Azure Blob Storage. These files will be used by the Logic App to load data into the Fabric SQL Database.
+
+1. Navigate to the [Azure portal](https://portal.azure.com/)
+
+1. Navigate to the existing storage account storage<Deployment-ID>.
+
+1. Under Data storage, select Containers and Open the **data** container.
+
+1. Open the **BusineesApplication** folder and review the available source files.
+
+   ![](../Sandbox-Environment-Guides/Images/businessapp.png)
 
 1. Navigate back to ****GitHub Copilot**** 
 
@@ -512,8 +563,6 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
 - Access the published agent from Microsoft 365 Copilot.
 - Ask business questions and validate the answers against the unified data.
 
-
-> [!TIP]
 > **Business value:** Business users get answers in Microsoft 365 Copilot, where they already work, without learning a new tool. The agent answers from the same governed semantic model as the reports, so access controls and business definitions carry through to every answer.
 
 1. Open **[Microsoft 365 Copilot](https://m365.cloud.microsoft/chat?omkt=en-001&source=post_page---------------------------)** and provide sign-in details
