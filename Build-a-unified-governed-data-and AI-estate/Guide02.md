@@ -10,25 +10,9 @@ By the end of this exercise, Caldova's operations, supply chain and customer dat
 
 You will use GitHub Copilot to build the Future State Architecture from the Whiteboarding exercise. You describe what you need in plain language, and Copilot creates and configures the Fabric and Azure components.
 
-### Step 0: Verify Resources in the Azure Resource Group
+### Sign in to ****GitHub Copilot**** Chat
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
-
-   ![](../Sandbox-Environment-Guides/Images/RG.png)
-
-1.  Confirm that the resource group contains the following resources:
-      - **Fabric Capacity**
-      - **SQL Database** 
-      - **SQL Server** 
-      - **Storage Account**
-
-      ![](../Sandbox-Environment-Guides/Images/rg-resource.png)
-
-1. Verify that the resources are available in their respective Azure regions.
-
-## Sign in to ****GitHub Copilot**** Chat
-
-### Step 1: Creation Of Fabric Workspace
+#### Step 1: Creation of Fabric Workspace
 
 1. Click on the **Visual Studio Code** from the VM desktop.
 
@@ -123,7 +107,7 @@ The unified Caldova Pharma solution requires a **Microsoft Fabric workspace** to
 
 Traditionally, this would involve manually creating the workspace, selecting the appropriate capacity, and configuring the required access permissions. Instead, we will provide ****GitHub Copilot**** with the workspace requirements and details of the existing Azure resources.
 
-## What will this prompt do?
+#### What will this prompt do?
 
 - Reuse the existing Azure Resource Group, storage account, and Fabric capacity.
 - Create the Caldova-Pharma Fabric workspace and attach the existing capacity.
@@ -140,7 +124,7 @@ This allows us to establish the foundation for the unified data solution through
 1. Please copy the below prompt and paste it in the copilot chat window.
 
    ```
-   You are my Smart Agent supporting Caldova Pharma. I am planning to build a unified solution to improve business operations and decision-making.
+   You are my Agent supporting Caldova Pharma. I am planning to build a unified solution to improve business operations and decision-making.
  
    Please follow the instructions below to build Fabric Workspace:
    
@@ -190,10 +174,11 @@ This allows us to establish the foundation for the unified data solution through
 
    ![](../Sandbox-Environment-Guides/Images/workspace-created.png)
 
+---
 
-## Step 2: Loading Required Data into the Lakehouse
+### Step 2: Loading Required Data into the Lakehouse
 
-### Bringing Analytical and Operational Data into OneLake
+#### Bringing Analytical and Operational Data into OneLake
 
 With the Fabric workspace created, the next step is to bring together Caldova's analytical and operational data so that it can be used for reporting, analysis, and AI-driven insights.
 
@@ -320,10 +305,10 @@ We then create **shortcuts** from the **mirrored database** to the **Caldova-Lak
 
    ![](../Sandbox-Environment-Guides/Images/LH-Operational.png)
 
+---
+### Step 3: Loading Business Application Data into Fabric SQL Database:
 
-## Step 3: Loading Business Application Data into Fabric SQL Database:
-
-### Integrating Business Application Data
+#### Integrating Business Application Data
 
 In addition to analytical and operational data, Caldova's solution requires business application data to be available for downstream reporting, analytics, and AI workloads. This data is stored separately in Azure Blob Storage and needs to be loaded into Fabric SQL Database.
 
@@ -409,10 +394,11 @@ Next, verify that the business application files are available in Azure Blob Sto
    - **caldova-integration-account** – Integration Account used as part of the integration workflow.
 
    ![](../Sandbox-Environment-Guides/Images/LogicApp-Int.png)
+---
 
-## Step 4: Building **Semantic Model** using Fabric Lakehouse and SQL Database to generate PowerBI report
+### Step 4: Building **Semantic Model** using Fabric Lakehouse and SQL Database to generate PowerBI report
 
-### Turning Unified Data into Business Insights
+#### Turning Unified Data into Business Insights
 
 Once the **analytical, operational, and business application** data are available, the next step is to make the data meaningful and accessible to business users.
 
@@ -420,7 +406,7 @@ Once the **analytical, operational, and business application** data are availabl
 
 In this exercise, we will use ****GitHub Copilot**** to accelerate the creation of these components and demonstrate how the unified data can be used for both visual analytics and natural-language interactions.
 
-### What will this prompt do?
+#### What will this prompt do?
 - Create a Direct Lake **Semantic Model** using the available Lakehouse and Fabric SQL Database tables.
 - Establish relationships between related tables.
 - Create a Data Agent using the **Semantic Model** and provide instructions based on the available data.
@@ -510,9 +496,9 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    ![](../Sandbox-Environment-Guides/Images/365.png)
 
-## Step 5: Govern & Secure - Caldova Operation
+### Step 5: Govern & Secure - Caldova Operation
 
-### Establishing Governance and Security Across the Unified Data Estate
+#### Establishing Governance and Security Across the Unified Data Estate
 After creating the data and analytics components, the final step is to review how the resulting assets can be discovered, governed, and secured within Microsoft Fabric.
 
 As the solution grows, it becomes important to understand which workspaces and data assets are available, review governance information, and manage access permissions appropriately.
@@ -549,15 +535,15 @@ This step completes the prototype by connecting data integration and analytics w
 
    > **Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
 
-## Step 6: Integrating the Fabric Data Agent with Microsoft 365 Copilot
+### Step 6: Integrating the Fabric Data Agent with Microsoft 365 Copilot
 
-### Bringing Unified Business Insights into Microsoft 365
+#### Bringing Unified Business Insights into Microsoft 365
 
 With the Fabric Data Agent created and validated against the semantic model, the next step is to make these insights accessible through Microsoft 365 Copilot. This allows business users to ask natural-language questions about Caldova Pharma's operational data from their Microsoft 365 experience without rebuilding the underlying data solution.
 
 In this exercise, you will publish the existing Fabric Data Agent, access it through Microsoft 365 Copilot, and validate its responses using business questions about supplier performance, sales, and inventory.
 
-### What will you achieve?
+#### What will you achieve?
 
 - Publish the existing Fabric Data Agent for Microsoft 365 Copilot.
 - Access the published agent from Microsoft 365 Copilot.
@@ -582,7 +568,7 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
 1. Review the response.
 
 
-### What you built and why it matters for Caldova
+#### What you built and why it matters for Caldova
  
 - One governed data estate across analytical, operational and application data, built on the resources Caldova already had
 - New sources connected without new copies or custom pipelines, so new markets and acquisitions come online faster

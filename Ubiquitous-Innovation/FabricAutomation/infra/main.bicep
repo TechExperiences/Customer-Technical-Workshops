@@ -6,16 +6,17 @@ param storageAccountName string
 param storageBlobDataContributorPrincipalId string
 param foundryAccountName string
 param foundryProjectName string
-param foundryAgentDeveloperPrincipalId string
+param foundryAutomationPrincipalId string
+param foundryPortalUserPrincipalId string
 param foundryLocation string
 
 var storageBlobDataContributorRoleDefinitionId = subscriptionResourceId(
   'Microsoft.Authorization/roleDefinitions',
   'ba92f5b4-2d11-453d-a403-e96b0029c9fe'
 )
-var azureAiDeveloperRoleDefinitionId = subscriptionResourceId(
+var foundryUserRoleDefinitionId = subscriptionResourceId(
   'Microsoft.Authorization/roleDefinitions',
-  '64702f94-c441-49e6-a78b-ef80e0188fee'
+  '53ca6127-db72-4b80-b1b0-d745d6d5456d'
 )
 
 resource fabricCapacity 'Microsoft.Fabric/capacities@2023-11-01' = {
@@ -120,12 +121,22 @@ resource gptMiniDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
   }
 }
 
-resource foundryAgentDeveloper 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(foundryProject.id, foundryAgentDeveloperPrincipalId, azureAiDeveloperRoleDefinitionId)
+resource foundryAutomationUser 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(foundryProject.id, foundryAutomationPrincipalId, foundryUserRoleDefinitionId)
   scope: foundryProject
   properties: {
-    principalId: foundryAgentDeveloperPrincipalId
+    principalId: foundryAutomationPrincipalId
     principalType: 'ServicePrincipal'
-    roleDefinitionId: azureAiDeveloperRoleDefinitionId
+    roleDefinitionId: foundryUserRoleDefinitionId
+  }
+}
+
+resource foundryPortalUser 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(foundryProject.id, foundryPortalUserPrincipalId, foundryUserRoleDefinitionId)
+  scope: foundryProject
+  properties: {
+    principalId: foundryPortalUserPrincipalId
+    principalType: 'User'
+    roleDefinitionId: foundryUserRoleDefinitionId
   }
 }
