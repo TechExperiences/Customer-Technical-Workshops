@@ -152,6 +152,14 @@ The **Direct Lake semantic model and Data Agent** have already been created usin
 
    ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u20.png) 
 
+1. In the Data Agent editor, click **Publish** to publish the latest changes.
+
+   ![](../Sandbox-Environment-Guides/Images/publish.png)
+
+1. In the **Publish changes** window, enable **Also publish to Microsoft 365 Copilot (1)** and click on **Publish (2)**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u55.png)
+
 ## Step 5: Validate Governance and Security Using OneLake Catalog
 
 The Caldova Pharma Fabric workspace and data assets are already available in Microsoft Fabric. In this step, we will use OneLake Catalog to validate the available governance and security capabilities, including data discovery, access management, ownership, sensitivity, lineage, and compliance across the Fabric environment.
@@ -177,11 +185,39 @@ The Caldova Pharma Fabric workspace and data assets are already available in Mic
    > **Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
 
 
-### What this means for Caldova
- 
-You started with five business problems: slow cross-functional answers, slow onboarding of new markets, conflicting numbers, compliance risk, and stalled AI projects. In this workshop you built a prototype that connects Caldova's data without extra copies, gives reports and AI one set of business definitions, governs it all from one catalog, and answers business questions in Microsoft 365 Copilot.
- 
-**Next step:** Talk to your Microsoft account team about turning this prototype into a pilot with your own data. Ask about Frontier Accelerate for Azure for funding, expert help and skilling to get started.   
+## Step 6: Integrating the Fabric Data Agent with Microsoft 365 Copilot
+
+### Bringing Unified Business Insights into Microsoft 365
+
+With the Fabric Data Agent created and validated against the semantic model, the next step is to make these insights accessible through Microsoft 365 Copilot. This allows business users to ask natural-language questions about Caldova Pharma's operational data from their Microsoft 365 experience without rebuilding the underlying data solution.
+
+In this exercise, you will publish the existing Fabric Data Agent, access it through Microsoft 365 Copilot, and validate its responses using business questions about supplier performance, sales, and inventory.
+
+#### What will you achieve?
+
+- Publish the existing Fabric Data Agent for Microsoft 365 Copilot.
+- Access the published agent from Microsoft 365 Copilot.
+- Ask business questions and validate the answers against the unified data.
+
+> **Business value:** Business users get answers in Microsoft 365 Copilot, where they already work, without learning a new tool. The agent answers from the same governed semantic model as the reports, so access controls and business definitions carry through to every answer.
+
+1. Open **[Microsoft 365 Copilot](https://m365.cloud.microsoft/chat?omkt=en-001&source=post_page---------------------------)** and provide sign-in details.
+
+1. Navigate to **Agents (1)**. and Under **Your agents**, select **Caldova_Unified_DataAgent (2)**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u56.png)
+
+1. Enter the following prompt in the chat window:
+
+   ```
+   What is our average supplier lead time by supplier, and which supplier has the best quality rating?
+   ```
+
+    ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u57.png)
+
+1. Review the response.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u58.png)  
 
 ### Congratulations! You have successfully completed the Workshop.
 
