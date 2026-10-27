@@ -323,6 +323,8 @@ Before integrating operational data into Microsoft Fabric, verify that the sourc
 
    - We then create **shortcuts** from the **mirrored database** to the **Caldova-Lakehouse**, making the operational tables accessible alongside the analytical data
 
+1. If prompted for the SQL database password, please provide the existing password **<inject key="sqlAdminPassword" enableCopy="false"/>**.   
+
 1. Once the deployment is complete, you can verify the Created tables in the same Lakehouse.
 
    ![](../Sandbox-Environment-Guides/Images/LH-Operational.png)
