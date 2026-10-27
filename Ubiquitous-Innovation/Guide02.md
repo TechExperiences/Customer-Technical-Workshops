@@ -81,7 +81,7 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
    ![](../Ubiquitous-Innovation/Images/u63.png)
 
-1. Enter the below command to clone the repository `https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>`.
+1. Enter the below command to clone the repository **https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>**.
 
    ```
    git clone https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>
