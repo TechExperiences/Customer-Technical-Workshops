@@ -1,0 +1,5 @@
+azure-core>=1.37.0,<2.0.0
+azure-ai-projects>=2.3.0
+azure-identity>=1.25.0
+azure-storage-file-datalake==12.22.0
+requests==2.32.5
