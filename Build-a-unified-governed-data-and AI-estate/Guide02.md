@@ -530,8 +530,7 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    ![](../Sandbox-Environment-Guides/Images/DA-Response.png)
 
-
-   >**What this shows:** The question combines supplier performance and quality data. Before, answering it meant pulling extracts from separate systems and reconciling them by hand. Here, anyone with access can ask it in plain language and get an answer based on the governed model.
+    >**What this shows:** The question combines supplier performance and quality data. Before, answering it meant pulling extracts from separate systems and reconciling them by hand. Here, anyone with access can ask it in plain language and get an answer based on the governed model.
 
 1. In the Data Agent editor, click **Publish** to publish the latest changes.
 
@@ -607,7 +606,7 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
    What is our average supplier lead time by supplier, and which supplier has the best quality rating?
    ```
 
-   ![](../Sandbox-Environment-Guides/Images/copilotagent.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u59.png)
 
 1. Review the response.
 
