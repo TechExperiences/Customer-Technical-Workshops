@@ -66,13 +66,13 @@ You will use GitHub Copilot to build the Future State Architecture from the Whit
 
    ![](../Sandbox-Environment-Guides/Images/amp27.png)
 
-1. Navigate to **`C:\`** path **(1)**, then select the **Unifydata** folder **(2)** and then **Select folder (3)**.
+1. Navigate to **`C:\`** path **(1)**, then select the **unifydata** folder **(2)** and then **Select folder (3)**.
 
-   ![](../Sandbox-Environment-Guides/Images/unifyvscode.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u39.png)
 
-1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
+1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace (2)** to enable models.
 
-   ![](../Sandbox-Environment-Guides/Images/b6.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u40.png)
 
 1. Select **Trust Folder and Continue**.
 
@@ -120,6 +120,13 @@ This allows us to establish the foundation for the unified data solution through
 
 > **Business value:** Caldova starts with the Azure resources it already has: the same storage account, database, and Fabric capacity. Nothing is replaced. Access is set when the workspace is created, so governance starts on day one rather than being added later.  
 
+1. Select the **Future-State-Architecture.png** image.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u41.png)
+
+1. From the ********GitHub Copilot****** Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u42.png)
 
 1. Please copy the below prompt and paste it in the copilot chat window.
 
@@ -159,6 +166,8 @@ This allows us to establish the foundation for the unified data solution through
 1. After some time, Copilot may ask you a few questions. Review each question carefully and select the appropriate response. 
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
+
+1. If prompted for the SQL database password, please provide the existing password **<inject key="sqlAdminPassword" enableCopy="false"/>**.
 
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
    
