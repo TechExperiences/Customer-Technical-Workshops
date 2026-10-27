@@ -80,7 +80,7 @@ By the end of the workshop, participants will have:
 
 1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and click on **rg-unified** Resource Group.
 
-   ![](../Sandbox-Environment-Guides/Images/RG.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u37.png)
 
 1.  Confirm that the resource group contains the following resources:
       - **Microsoft Fabric Capacity**
@@ -88,9 +88,10 @@ By the end of the workshop, participants will have:
       - **Azure SQL Server** 
       - **Azure Data Lake Storage**
 
-      ![](../Sandbox-Environment-Guides/Images/rg-resource.png)
+      ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u38.png)
 
 1. Verify that the resources are available in their respective Azure regions.
+
 1. You will return to this portal in the upcoming steps. Keep the portal open and proceed with the next steps.
 
 ### Now, click on **`Next >>`** to continue with **`Envisioning Session Using Whiteboarding`**.
