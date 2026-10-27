@@ -10,18 +10,7 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
 
-### Verify Resources in the Azure Resource Group
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
-
-   ![](../Sandbox-Environment-Guides/Images/UI-RG.png)
-
-1.  Confirm that the resource group contains the following resources:
-      - **Fabric Capacity**
-      - **Storage Account**
-
-1. Verify that the resources are available in their respective Azure regions.
----
 ## Sign in to ****GitHub Copilot**** Chat
 
 1. Click on the **Visual Studio Code** from the VM desktop.

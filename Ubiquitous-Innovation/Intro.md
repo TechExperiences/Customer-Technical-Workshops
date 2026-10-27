@@ -102,6 +102,18 @@ By the end of the workshop, participants will understand how to:
 
    ![](../Sandbox-Environment-Guides/Images/amp17.png)
 
+### Verify Resources in the Azure Resource Group
+
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
+
+   ![](../Sandbox-Environment-Guides/Images/UI-RG.png)
+
+1.  Confirm that the resource group contains the following resources:
+      - **Fabric Capacity**
+      - **Storage Account**
+
+1. Verify that the resources are available in their respective Azure regions.
+
 1. You will return to this portal in the upcoming steps. Keep the portal open and proceed with the next steps.
 
 
