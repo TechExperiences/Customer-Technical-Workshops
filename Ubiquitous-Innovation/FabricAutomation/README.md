@@ -23,7 +23,7 @@ The workflow is creation-only and stops if `rg-Ubiquitous` already exists. It cr
 7. One published Data Agent: `Ubiquitous_Innovation_DataAgent`
 8. One Azure AI Foundry account and project in West US
 9. One low-capacity `gpt-5-mini` (`2025-08-07`) Global Standard deployment: `gpt5mini`
-10. One Foundry prompt agent: `SupplyChainAgent`, with the instruction `You are my Supply chain agent.`
+10. One Foundry prompt agent: `supply-chain-bi-agent`, with the instruction `You are my Supply chain agent.` Its endpoint enables the Responses and Activity protocols with Entra and Bot Service RBAC authorization schemes.
 
 The service principal creates the workspace and Lakehouse. `FABRIC_CAPACITY_ADMIN_UPN` is added as a capacity administrator and workspace `Admin`, so that user can see and open the new workspace normally in the Fabric portal.
 
