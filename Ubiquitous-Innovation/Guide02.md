@@ -1280,11 +1280,7 @@ Build a Copilot Studio workflow to automatically detect incoming market launch e
 
    ![](../Sandbox-Environment-Guides/Images/NewEmail.png)
 
-1. Validating the email is arrived
-
-   ![](../Sandbox-Environment-Guides/Images/Outlook-Email.png)
-
-1. Validate the **Workflow** in the **Activity** tab.
+1. Once email arrived, validate the **Workflow** in the **Activity** tab.
 
    ![](../Sandbox-Environment-Guides/Images/Workflow-Execution.png)
 
