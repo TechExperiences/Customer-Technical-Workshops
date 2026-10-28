@@ -795,9 +795,11 @@ This allows the agent to combine operational data with documented manufacturing 
    •  Configure the agent to use this knowledge source when answering questions about the documents
 
    ```
- ![](../Sandbox-Environment-Guides/Images/task2.3.png)
+   ![](../Sandbox-Environment-Guides/Images/task2.3.png)
 
-1. Verify that the **Foundry IQ knowledge base** is configured under the **Knowledge** section of the existing Foundry agent.
+1. Navigate back to the **Agent** in **Foundry**. Verify that the **Foundry IQ knowledge base** is configured under the **Knowledge** section of the existing Foundry agent.
+
+   ![](../Ubiquitous-Innovation/Images/u99.png)
 
 1. Confirm that the knowledge base is connected properly and the relevant manufacturing documents are available for retrieval.
 
