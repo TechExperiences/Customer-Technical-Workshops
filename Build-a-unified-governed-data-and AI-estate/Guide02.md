@@ -143,7 +143,7 @@ This allows us to establish the foundation for the unified data solution through
    
    Use existing Fabric Capacity (fabriccapacity<inject key="Deployment-ID" enableCopy="false"/>).
    
-   Create a new Fabric Workspace (Caldova-Pharma) and attach capacity.
+   Create a new Fabric Workspace (Caldova-Pharma<inject key="Deployment-ID" enableCopy="false"/>) and attach capacity.
    
    Please provide Fabric admin access to the UPN <inject key="AzureAdUserEmail"></inject> to see the fabric workspace (Caldova-Pharma)
 
@@ -235,7 +235,7 @@ Before loading analytical data into Microsoft Fabric, verify that the source CSV
 1. Copy the below prompt and paste it in the chat window 
 
    ``` 
-   Great. You have created Fabric Workspace (Caldova-Pharma). Now follow below instructions to create Lakehouse and delta table for Analytical data.
+   Great. You have created Fabric Workspace (Caldova-Pharma<inject key="Deployment-ID" enableCopy="false"/>). Now follow below instructions to create Lakehouse and delta table for Analytical data.
  
    Instructions:  
    
