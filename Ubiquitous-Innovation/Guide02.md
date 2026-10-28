@@ -125,7 +125,7 @@ The **Future State Architecture** shows what we want the solution to look like. 
 
 Instead of starting with individual configuration tasks, you’ll describe what you want to build through a prompt. The prompt provides ******GitHub Copilot****** with the architecture, implementation requirements, resources to reuse, data needed for the scenario, and how the Fabric components should work together.
 
-## Topic 1 - Build agents and software at the speed of AI
+## **Topic 1 - Build agents and software at the speed of AI**
 Transform an existing agent design into a **production-ready, secure capability** using ****GitHub Copilot****—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
 
 ### Activity 1.1: Start Whiteboarding
