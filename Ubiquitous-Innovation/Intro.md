@@ -113,6 +113,7 @@ By the end of the workshop, participants will understand how to:
 1. Confirm that the resource group contains the following resources:
       - **Fabric Capacity**
       - **Storage Account**
+      - **Foundry**
       - **Foundry Project**
 
       ![](../Ubiquitous-Innovation/Images/u69.png)      
