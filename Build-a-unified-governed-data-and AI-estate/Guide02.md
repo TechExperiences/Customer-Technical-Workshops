@@ -179,7 +179,7 @@ This allows us to establish the foundation for the unified data solution through
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
 
-1. Navigate to **Workspaces**, there should be workspace created with the name similar to **Caldova-Pharma**. 
+1. Navigate to **Workspaces**, there should be workspace created with the name similar to **Caldova-Pharma<inject key="Deployment-ID" enableCopy="false"/>**. 
 
    ![](../Sandbox-Environment-Guides/Images/workspace-created.png)
 
@@ -264,7 +264,7 @@ Before loading analytical data into Microsoft Fabric, verify that the source CSV
 
 1. Once the deployment is complete, you can verify the created Lakehouse in fabric workspace.
 
-1. Navigate to the **Microsoft Fabric** portal and Open the **Caldova-Lakehouse** lakehouse from the workspace.
+1. Navigate to the **Microsoft Fabric** workspace (Caldova-Pharma<inject key="Deployment-ID" enableCopy="false"/>) and Open the **Caldova-Lakehouse** lakehouse from the workspace.
 
 1. In the **Explorer** pane, expand **Tables**.
 
@@ -300,7 +300,7 @@ Before integrating operational data into Microsoft Fabric, verify that the sourc
 1. Copy the below prompt and paste it in the chat window 
 
    ```
-   Great. Now you have created Fabric Lakehouse in the Workspace (Caldova-Pharma) and ingested data from Azure Blob storage. Now follow the instructions below to ingest operational data from Azure SQL Database.
+   Great. Now you have created Fabric Lakehouse in the Workspace (Caldova-Pharma<inject key="Deployment-ID" enableCopy="false"/>) and ingested data from Azure Blob storage. Now follow the instructions below to ingest operational data from Azure SQL Database.
  
    Instructions:  
    
@@ -387,7 +387,7 @@ Next, verify that the business application files are available in Azure Blob Sto
    
    1. Use existing Resource Group: rg-unified.
    
-   2. Create a new Fabric SQL Database in the existing Fabric Workspace    (Caldova-Pharma).
+   2. Create a new Fabric SQL Database in the existing Fabric Workspace (Caldova-Pharma<inject key="Deployment-ID" enableCopy="false"/>).
    
    3. Create a new Azure Integration Service in the above resource group.
    
@@ -409,7 +409,7 @@ Next, verify that the business application files are available in Azure Blob Sto
 
 1. Once the deployment is complete, you can verify the Created tables in Fabric SQL Database.
 
-1. Navigate back to the Workspace and refresh it.
+1. Navigate back to the Microsoft Fabric Workspace (Caldova-Pharma<inject key="Deployment-ID" enableCopy="false"/>) and refresh it.
 
 1. Open the **Caldova_BusinessApp_SQLDB** from the **Caldova-Pharma** workspace.
 
@@ -464,7 +464,7 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
    2. Create one Data Agent using the **Semantic Model** and add concise instructions based on the available tables.
 
    ```
-1. Navigate to Fabric Portal worksapce.
+1. Navigate to Fabric worksapce (Caldova-Pharma<inject key="Deployment-ID" enableCopy="false"/>).
 
 1. Refresh te Workspace and select the created **Semantic Model**.
 
