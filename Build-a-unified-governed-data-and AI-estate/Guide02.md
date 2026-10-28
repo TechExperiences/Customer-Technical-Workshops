@@ -391,7 +391,8 @@ Next, verify that the business application files are available in Azure Blob Sto
    
    3. Create a new Azure Integration Service in the above resource group.
    
-   4. Create an Azure Logic App to read Application data from:    storage<inject key="Deployment-ID" enableCopy="false"/>→ Application folder under data container and load it into  the Fabric SQL Database.
+   4. Create an Azure Logic App to read Application data from:    storage<inject key="Deployment-ID" enableCopy="false"/>→ Application folder under storage2448129→ Application folder under data
+> BusinessApplication container and load it into  the Fabric SQL Database.
 
    ```
 
