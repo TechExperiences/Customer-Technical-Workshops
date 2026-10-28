@@ -139,10 +139,10 @@ Transform an existing agent design into a **production-ready, secure capability*
 
 The **future-state architecture** was developed during the previous whiteboarding activity. Review the architecture below to understand the agreed design before moving into implementation. Focus on the four key areas:
 
-**Knowledge**: What the agent needs to know.
-**Tools and Systems:** The tools the agent can call and the production systems behind those tools.
-**Actions and Approvals:** What the agent can perform autonomously and where human approval is required.
-**Deployment:** Where the agent will run once implemented. The agent can already answer questions. The next activities will build on this architecture to implement the new action capability.
+- **Knowledge**: What the agent needs to know.
+- **Tools and Systems:** The tools the agent can call and the production systems behind those tools.
+- **Actions and Approvals:** What the agent can perform autonomously and where human approval is required.
+- **Deployment:** Where the agent will run once implemented. The agent can already answer questions. The next activities will build on this architecture to implement the new action capability.
 
  ![](../Sandbox-Environment-Guides/Images/UIArchi.png)
 
