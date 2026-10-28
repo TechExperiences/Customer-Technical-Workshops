@@ -642,7 +642,7 @@ For an AI solution to deliver meaningful business value, its agents must also un
 
 Think about this: If an agent can generate code and understand a workflow, what additional capabilities does it need to answer business questions accurately and make context-aware recommendations?
 
-Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**, and **Work IQ** can provide that context.
+### Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**, and **Work IQ** can provide that context.
 ---
 
 # Topic 2: Agents That Know Your Business 
@@ -671,7 +671,7 @@ This baseline will help us evaluate how the agent improves as we add live operat
    • Review its model, role, instructions, and capabilities without modifying or recreating the agent.
 
    ```
- ![](../Sandbox-Environment-Guides/Images/task2.1.png)
+   ![](../Sandbox-Environment-Guides/Images/task2.1.png)
 
 1. Review the Response provided by agent
 
@@ -717,9 +717,24 @@ This enables the Business Intelligence agent to use live manufacturing context w
    Note: Reuse existing workspaces, agents, and resources.
 
    ```
- ![](../Sandbox-Environment-Guides/Images/task2.2.png)
+   ![](../Sandbox-Environment-Guides/Images/task2.2.png)
 
-1. Verify that the **Fabric Data Agent** is attached under the **Tools** section of the existing Foundry agent.
+ 
+1. To verify that the **Fabric Data Agent** is attached under the **Tools** section of the existing Foundry agent. Navigate to **Azure portal**.
+
+1. Navigate to **rg-Ubiquitous** and select the **Ubiquitous-innoation-project (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/u96.png)
+
+1. Click **Go to Foundry**.
+
+1. Navigate to **Agents (1)** and then select **supply-chain-bi-agent (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/u97.png)
+
+1. Verify that the **Fabric Data Agent** is attached under the **Tools** section.
+
+   ![](../Ubiquitous-Innovation/Images/u98.png)
 
 1. Confirm that the Data Agent is connected and configured correctly.
 
