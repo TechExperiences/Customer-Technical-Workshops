@@ -788,8 +788,8 @@ This allows the agent to combine operational data with documented manufacturing 
 
    ```
    Follow the instructions below to create a Foundry IQ knowledge base from the  existing Caldova manufacturing documents in Azure Blob Storage and connect it under the Knowledge section of the existing Microsoft Foundry agent (supply-chain-Bi-agent)
-   •  Create a Foundry IQ knowledge base using documents stored in    Azure Blob Storage under the rg-ubiquituos resource group.
-   •  Access the adlsubiquitoust5sba storage container and its data   folder.
+   •  Create a Foundry IQ knowledge base using documents stored in  Azure Blob Storage under the rg-ubiquituos resource group.
+   •  Access the container in the storage account that starts with adlsubiquitous and its data folder.
    •  Configure the knowledge base to index and retrieve the available documents in above folder.
    •  Add the knowledge base under the Knowledge section of the    existing Caldova Business Intelligence Agent in Microsoft Foundry,  not under Tools.
    •  Configure the agent to use this knowledge source when answering questions about the documents
