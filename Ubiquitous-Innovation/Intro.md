@@ -104,7 +104,7 @@ By the end of the workshop, participants will understand how to:
 
 ### Verify Resources in the Azure Resource Group
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**.
+1. From the [Azure portal](https://portal.azure.com/), search and select **Resource groups**.
 
 1. Select **rg-Ubiquitous** Resource Group.
 
