@@ -87,7 +87,7 @@ By the end of the workshop, participants will have:
       - **Microsoft Fabric Capacity**
       - **Azure SQL Database** 
       - **Azure SQL Server** 
-      - **Azure Data Lake Storage**
+      - **Azure Blob Storage**
 
       ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u38.png)
 
