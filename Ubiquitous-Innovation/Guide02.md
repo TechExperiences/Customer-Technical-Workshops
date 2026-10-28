@@ -238,7 +238,7 @@ The initial design review may contain assumptions, missing details, or recommend
 
 In this activity, **GitHub Copilot** will review the existing `Design-Review.md` and identify any changes needed to align it with the architecture and the intended agent behavior.
 
-#### What Will This Prompt Do?
+#### **What Will This Prompt Do?**
 
 - Reassess the existing implementation plan against the **future-state architecture**.
 - Verify that the required components, tools, and agent capabilities are included.
@@ -246,14 +246,13 @@ In this activity, **GitHub Copilot** will review the existing `Design-Review.md`
 - Propose corrections to the same document instead of creating a separate plan.
 - Present the proposed changes for human confirmation before finalizing the plan.
 
-#### What Should You Validate?
+#### **What Should You Validate?**
 
 Review the updated document and confirm that it accurately represents the intended implementation. Check the tool-handler requirements, agent instructions, constraints, and test approach before proceeding.
 
 **Transition:** Once the plan is reviewed and the required changes are confirmed, the coding agent can use it as the reference for implementation in Activity 1.5.
 
 1. Please copy the below prompt and paste it in the copilot chat window.
-
 
    ```
    Great. You have created above design review guide. Now review the same with below points and provide me with instructions and after confirmation include them in the same document.
