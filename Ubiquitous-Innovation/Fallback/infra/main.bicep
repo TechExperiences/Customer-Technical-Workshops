@@ -208,7 +208,9 @@ resource gptMiniDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
   ]
   sku: {
     name: 'GlobalStandard'
-    capacity: 1
+    // Global Standard capacity is allocated in 1K TPM units. This reserves
+    // 50K TPM for the Foundry Supply Chain agent's gpt-5-mini deployment.
+    capacity: 50
   }
   properties: {
     model: {
