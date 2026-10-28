@@ -1,6 +1,5 @@
 # 2. Rapid Prototyping
 
-
 Now that you have completed the envisioning **Whiteboard session** and identified key business opportunities, it is time to move from ideas to a working prototype. Explore how a intelligent solution can bring the envisioned scenario to life, validate its potential, and demonstrate how it could work in practice.
 
 ## Rapid Prototyping using ****GitHub Copilot****
@@ -640,6 +639,9 @@ Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**
 ---
 
 # Topic 2: Agents That Know Your Business 
+Topic 2 enhances Caldova’s existing Business Intelligence agent by grounding it in live operational data through Fabric IQ, enterprise knowledge through Foundry IQ, and organizational context through Work IQ. It enables controlled tool execution via MCP and evaluates responses through measurable tests, refining the agent’s instructions and grounding.
+
+The outcome is a validated, business-aware agent that goes beyond identifying market launch risks to recommending informed, context-driven next actions.
 
 ### **Activity 2.1: Validate the Deployed Business Intelligence Agent**
 
@@ -909,12 +911,47 @@ This approach helps us measure the agent's response quality and validate whether
 ---
 
 # Topic 3: From One Agent to a Coordinated System 
+opic 3 implements an automated market launch-readiness workflow using Copilot Studio, Power Automate, and Microsoft Foundry. Copilot Studio orchestrates the Market Launch Coordinator, while Power Automate detects incoming launch emails, structures workstream updates, and triggers the appropriate agent to validate launch details and assess business risks using Work IQ context.
+
+Approval and escalation workflows ensure that conflicting, uncertain, or high-impact changes receive human oversight before mitigation actions proceed. The solution is published through Microsoft Teams or Microsoft 365 Copilot, providing a coordinated experience from launch-update detection and risk assessment to approval and action.
 
 ### Activity 3.1 – Create the  Market Launch Cordinator
+
+### Connect PowerPlatform to create environment
+Dedicated environment need to created for each user to allocate capacity usage and isolate the work.
+
+1. Browse [link](https://admin.powerplatform.microsoft.com/) in your VM to access admin portal.
+
+   ![](../Sandbox-Environment-Guides/Images/PowerPlatform.png) 
+
+1. Click **Manage**, then click **Environment** and click **New** to create new environment.
+
+   ![](../Sandbox-Environment-Guides/Images/Environment-Create.png) 
+
+1. Provide the details to create environment.
+   
+   - Type: `Developer`
+   - Name: `UI-UserID`
+
+   ![](../Sandbox-Environment-Guides/Images/NewEnv-I.png) 
+
+1. Scroll down and click **Change default settings** and enable **Add a Dataverse data store?** 
+
+   ![](../Sandbox-Environment-Guides/Images/Change-Setting.png) 
+
+1. Click **Next** then click **Next** to create environment.
+
+1. Wait for sometime to popup green message on the screen once environment created.
+
+   ![](../Sandbox-Environment-Guides/Images/Env-Cretaed.png) 
 
 ### Create and Configure a New Agent in Copilot Studio
 
 1. Open **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/copilot/products/copilot-studio)**.
+
+1. Select the created environment and start the further work.
+
+   ![](../Sandbox-Environment-Guides/Images/Env-Selection.png) 
 
 1. Navigate to the **Agents** section.
 
@@ -1139,8 +1176,104 @@ This approach helps us measure the agent's response quality and validate whether
    - "Who owns the next action?"
    ```
  ---
-### Activity 3.2 - Detect and Structure a Launch –Readiness Change 
-In-progress
+### Activity 3.2 - Detect and Structure a Launch – Readiness Change 
+Build a Copilot Studio workflow to automatically detect incoming market launch emails and extract key launch details. The workflow will engage the designated agent to validate and confirm the launch information, then send a confirmation email summarizing the agreed launch details to the relevant stakeholders.
+
+1. To create **Workflow**
+
+   - Click **Workflow** icon
+   - Click **New workflows** dropdown and select **Workflows**
+
+   ![](../Sandbox-Environment-Guides/Images/Workflow-Create.png)
+   
+1. Click **Start** action and change to **Connector**
+
+   ![](../Sandbox-Environment-Guides/Images/Connector.png)
+
+1. Click **Office 365 Outlook** to navigate activity selection pan. Click **When a new email arrives**.
+
+   ![](../Sandbox-Environment-Guides/Images/EmailArrive.png)
+
+1. Configure arrival emails. Click `+` to add next activity.
+
+   - To: `UPN`
+   - subject filter: `Caldova market launch validator`
+
+   ![](../Sandbox-Environment-Guides/Images/Email-Config.png)
+
+1. Search **Agent** and click **Agent**.
+
+   ![](../Sandbox-Environment-Guides/Images/Agent-Selection.png)
+
+1. Configure **Agent**.
+
+   ![](../Sandbox-Environment-Guides/Images/Agent-Config.png)
+
+   - Provide agent instruction.
+   - Select model: `Sonnet 5`
+   - Click `+` sign in **Knowledge**
+
+1. To connect SharePoint, provide SharePoint document site link and click **Add**
+
+   - URL: [Link](https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base&viewid=2aae9886%2D5883%2D4e2a%2D8949%2D612beaeb50ac&xsdata=MDV8MDJ8fGY0MTA3NTFkMzdiMzRlOTNjODM2MDhkZjM0Yzc4OGI3fDcyZjk4OGJmODZmMTQxYWY5MWFiMmQ3Y2QwMTFkYjQ3fDB8MHw2MzkyODc3MDM3MDY3ODE3NTB8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T2prME5qazNNalJsTWpJMk5qUTRORFk0WkRCbE56TTJObUZpWW1NMk16WXhRSFJvY21WaFpDNTJNaTl0WlhOellXZGxjeTh4Tnprek1UY3pOVGN3TXpnNXwxZjlkMzliOWYxZjY0Yjg3NWFlMDA4ZGYzNGM3ODhiN3xhNTQ0ODdkNzE0MjE0NjVlYTM1YjcyNDdiNjQzMmY3YQ%3D%3D&sdata=NE5HYmRQaGx1c1pQcEJ2UDBEb0ZxUjgxZjRGMWtGeWtONDduc2YyUENzST0%3D&ovuser=72f988bf-86f1-41af-91ab-2d7cd011db47%2Csidhartha%40waferwire.com)
+
+   ![](../Sandbox-Environment-Guides/Images/SP-Add.png)
+
+1. Click **Add to agent**. Click **Collapse** button to minimize the section.
+
+   ![](../Sandbox-Environment-Guides/Images/Agent-Configured.png)
+
+1. Now agent is configures. Next, move to add another activity.
+
+1. Click `+` icon in the center pan to add another new activity. 
+
+1. Click **Connector** and click **Office 365 Outlook** to navigate activity selection pan. Click **Send an email**. 
+
+   ![](../Sandbox-Environment-Guides/Images/Send-Email.png)
+
+1. While configuring, provide below details.
+
+   - To (Whom you want to send): `UPN`
+   - Subject: `Market Launch Agent Response`
+   - Body: `Click **Dynamic content** icon` and select **Agent Response**
+
+   ![](../Sandbox-Environment-Guides/Images/SendEmail-Config.png)
+
+1. After these configuration, click **Save** and wait to **Publish** button enable to publish.
+
+   ![](../Sandbox-Environment-Guides/Images/Save-Publish.png)
+
+1. Nagivate to **Workflow** section and see if it created or not.
+
+   ![](../Sandbox-Environment-Guides/Images/Workflow-Created.png)
+
+1. Open **Outlook** by browsing [Link](https://outlook.office365.com/mail/) and sign in.
+
+1. Compose one email with providing below and **Send**
+
+   - To: `UPN`
+   - Subject: `Caldova market launch validator`
+   - Body: `What are Caldova's main priorities for the November launch?`
+
+   ![](../Sandbox-Environment-Guides/Images/NewEmail.png)
+
+1. Validating the email is arrived
+
+   ![](../Sandbox-Environment-Guides/Images/Outlook-Email.png)
+
+1. Validate the **Workflow** in the **Activity** tab.
+
+   ![](../Sandbox-Environment-Guides/Images/Workflow-Execution.png)
+
+1. Click left side **Execution** section to see the details.
+
+   ![](../Sandbox-Environment-Guides/Images/Detailed-Execution.png)
+
+1. Navigate to the user **Outlook** to validate the agent resonse.
+
+   ![](../Sandbox-Environment-Guides/Images/Agent-Email-Response.png)  
+
+>**Note:** Now, user can see the market launch details and move forward. Similarly, **Workflow** will help to create kinda decision making processes.
 
 ---
 ### Activity 3.3 – Confirm the Copilot Studio Model and Connect the Foundry Specialist Agent
@@ -1230,6 +1363,7 @@ Let's explore the key governance and security considerations for enterprise AI.
 
 ---
 # Topic 4: Trust and Cost Are the Same Conversation
+Topic 4 governs Caldova’s agent ecosystem through centralized visibility, identity management, security monitoring, and cost control. Agent 365, Entra, Purview, Foundry Guardrails, and Defender support agent discovery, access control, data protection, and security oversight. The team validates protection against prompt injection and sensitive-data exposure while monitoring security events, token usage, model routing, and costs to ensure responsible, secure, and cost-efficient AI operations.
 
 ### Activity 4.1 – Discover and Register the Agent
 
