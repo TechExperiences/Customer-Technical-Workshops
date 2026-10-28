@@ -360,8 +360,38 @@ Select the most appropriate model for the task while staying within the models a
 Based on the context, the user can switch between the available models and validate their suitability for the task. Finally, select the **Auto** option to allow ****GitHub Copilot**** to automatically choose the most appropriate model based on the requirements and complexity of the work.
  
 #### Step 1: Open GitHub Copilot and your session
-1. Open the **GitHub Copilot** app.
-2. In the left pane under **Projects**, pick your project and session (for example, *Add Supply Chain BI Agent*).
+
+1. Minimize the **Visual Studio Code**, navigate back to the `LabVM desktop`.
+
+1. Click on the **GitHub Copilot** app.
+
+   ![](../Ubiquitous-Innovation/Images/u88.png)
+
+1. Click **Sign in to GitHub**.
+
+   ![](../Ubiquitous-Innovation/Images/u89.png)
+
+1. Select **Continue**.
+
+   ![](../Ubiquitous-Innovation/Images/u76.png)
+
+1. To get the code, select the **GitHub Copilot** App from Task bar.
+
+   ![](../Ubiquitous-Innovation/Images/u90.png)   
+
+1. Copy the Code.
+
+   ![](../Ubiquitous-Innovation/Images/u77.png)
+
+1. Navigate back to the browser tab, paste the code **(1)** and click **Continue (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/u78.png)
+
+1. dd
+
+   ![](../Ubiquitous-Innovation/Images/u79.png)
+
+1. In the left pane under **Projects**, pick your project and session (for example, *Add Supply Chain BI Agent*).
 
 #### Step 2: Review the available models
 1. Click in the chat box (*"Ask anything. Use / for commands, @ files, & sessions, # issues…"*).
