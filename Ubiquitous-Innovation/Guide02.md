@@ -824,7 +824,7 @@ In this activity, we will connect the existing SharePoint source through ****Wor
 
 Before connecting the enterprise knowledge source to the agent, verify that the required documents are available in SharePoint.
 
-1. Open the [Enterprise AI Knowledge Base – SharePoint](https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base%5C&viewid=2aae9886-5883-4e2a-8949-612beaeb50ac) link.
+1. Open the [Enterprise AI Knowledge Base – SharePoint](https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base&viewid=2aae9886%2D5883%2D4e2a%2D8949%2D612beaeb50ac&newTargetListUrl=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents&viewpath=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FForms%2FAllItems%2Easpx) link.
 
 1. Verify that the following documents are available:
    - `Caldova_Business_Roles_and_Responsibilities.docx`
