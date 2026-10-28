@@ -20,4 +20,6 @@ No Fabric workspace, Data Agent ID, or MCP endpoint belongs in `.env`. The pipel
 
 The VM needs Azure CLI (`az`), Azure Developer CLI (`azd`), and Python. The pipeline signs `az` and, when necessary, `azd` in with the configured service principal. The generated Foundry connection uses `user-entra-token` so a caller's own Entra context is forwarded to Fabric; the caller must have Fabric access and the required delegated Fabric Data Agent permission when invoking the agent.
 
+`FABRIC_CAPACITY_ADMIN_UPN` receives `Foundry User` on the new Foundry project and the Cosmos DB Built-in Data Reader data-plane role on the new Cosmos account. This permits that user to inspect Foundry-managed thread and memory records in Cosmos Data Explorer but not change or delete them.
+
 The pipeline checks that the Fallback resource group does not already exist and never reuses it.

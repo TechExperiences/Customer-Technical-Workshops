@@ -298,6 +298,11 @@ resource cosmosDataContributorRole 'Microsoft.DocumentDB/databaseAccounts/sqlRol
   name: '00000000-0000-0000-0000-000000000002'
 }
 
+resource cosmosDataReaderRole 'Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions@2022-05-15' existing = {
+  parent: cosmosAccount
+  name: '00000000-0000-0000-0000-000000000001'
+}
+
 resource projectCosmosDataContributor 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2022-05-15' = {
   parent: cosmosAccount
   name: guid(cosmosAccount.id, foundryProject.id, cosmosDataContributorRole.id)
@@ -306,6 +311,18 @@ resource projectCosmosDataContributor 'Microsoft.DocumentDB/databaseAccounts/sql
     roleDefinitionId: cosmosDataContributorRole.id
     // Cosmos ARM RBAC expects the fully qualified account resource ID for
     // account-wide data access; '/' is only a data-plane SDK-style scope.
+    scope: cosmosAccount.id
+  }
+}
+
+// The designated portal user may inspect Foundry-managed thread and memory
+// records in Data Explorer, but cannot change or delete them.
+resource portalUserCosmosDataReader 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2022-05-15' = {
+  parent: cosmosAccount
+  name: guid(cosmosAccount.id, portalUserPrincipalId, cosmosDataReaderRole.id)
+  properties: {
+    principalId: portalUserPrincipalId
+    roleDefinitionId: cosmosDataReaderRole.id
     scope: cosmosAccount.id
   }
 }
