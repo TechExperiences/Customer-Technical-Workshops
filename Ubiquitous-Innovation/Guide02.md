@@ -387,9 +387,17 @@ Based on the context, the user can switch between the available models and valid
 
    ![](../Ubiquitous-Innovation/Images/u78.png)
 
-1. dd
+1. Select **Authorize github**
 
-   ![](../Ubiquitous-Innovation/Images/u79.png)
+   ![](../Ubiquitous-Innovation/Images/u91.png)
+
+1. Once your set, navigate back to **GitHub Copilot** from the task bar.
+
+   ![](../Ubiquitous-Innovation/Images/u92.png)
+
+1. Select **CL-Labs-04/UI- (1)** repository and then **Continue (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/u93.png)
 
 1. In the left pane under **Projects**, pick your project and session (for example, *Add Supply Chain BI Agent*).
 
