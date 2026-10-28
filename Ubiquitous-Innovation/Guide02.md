@@ -395,7 +395,7 @@ Based on the context, the user can switch between the available models and valid
 
    ![](../Ubiquitous-Innovation/Images/u92.png)
 
-1. Select **CL-Labs-04/UI- (1)** repository and then **Continue (2)**.
+1. Select **CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/> (1)** repository and then **Continue (2)**.
 
    ![](../Ubiquitous-Innovation/Images/u93.png)
 
