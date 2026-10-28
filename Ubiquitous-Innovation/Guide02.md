@@ -128,7 +128,8 @@ Instead of starting with individual configuration tasks, you’ll describe what 
 ## **Topic 1 - Build agents and software at the speed of AI**
 Transform an existing agent design into a **production-ready, secure capability** using ****GitHub Copilot****—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
 
-### Activity 1.1: Start Whiteboarding
+### **Activity 1.1: Start Whiteboarding**
+
 The **future-state architecture** was developed during the previous whiteboarding activity. Review the architecture below to understand the agreed design before moving into implementation. Focus on the four key areas:
 
 **Knowledge**: What the agent needs to know.
@@ -139,7 +140,8 @@ The **future-state architecture** was developed during the previous whiteboardin
 Whiteboard Image
  ![](../Sandbox-Environment-Guides/Images/UIArchi.png)
 
-### Activity 1.2: Turn the Whiteboard into a Reviewed Plan
+### **Activity 1.2: Turn the Whiteboard into a Reviewed Plan**
+
 Turn the whiteboard into a reviewed implementation plan and issue set for extending the existing agent, without manually transcribing it.
 
 A **whiteboard** captures the intended design, but developers need a clear implementation plan before they begin making changes. Manually translating every component into requirements can lead to missed dependencies, duplicated work, or incomplete testing.
@@ -220,7 +222,7 @@ Treat the document as a draft for review, not as an approved implementation plan
 
 1. Once Copilot starts generating the response, monitor the process closely. 
 
-### Validation
+### **Validation**
 
 Once ****GitHub Copilot**** completes the execution, validate the Project Explorer to confirm whether the review document has been successfully created and is available in the expected project location.
 
@@ -228,7 +230,7 @@ Once ****GitHub Copilot**** completes the execution, validate the Project Explor
 
    ![](../Sandbox-Environment-Guides/Images/Design-Review.png)
 
-### Activity 1.3: Ground Copilot in What the Business Already Decided
+### **Activity 1.3: Ground Copilot in What the Business Already Decided**
 
 The initial design review may contain assumptions, missing details, or recommendations that do not match the decisions made during the whiteboarding session. Before development begins, the implementation plan must reflect the agreed business requirements.
 
@@ -338,7 +340,7 @@ After **GitHub Copilot** generates `Design-Review.md`, review the following sect
 
 **The key takeaway:** GitHub Copilot can accelerate architecture analysis and implementation planning, but the design must still be validated by the appropriate technical and business stakeholders before it is approved for development.
 
-### Activity 1.4: Choose the Model for the Job
+### **Activity 1.4: Choose the Model for the Job**
 
 Select the most appropriate model for the task while staying within the models and policies enabled by the organization. Review the available models using /model, switch between models to understand that model selection is task-specific, and use /model auto to allow ****GitHub Copilot**** to select an appropriate model based on the task, effort, and optimization settings such as Balanced versus Intelligence. Use /usage to review session usage and /context to understand the available context and session information. Finally, repeat the same task using a Frontier model and Auto mode to compare their output, performance, value, and cost, and understand when each approach is most appropriate.
 
@@ -419,7 +421,8 @@ Type the command below to see the available context and session details:
 
 ---
 
-### Activity 1.5: Hand the Build to the Coding Agent
+### **Activity 1.5: Hand the Build to the Coding Agent**
+
 Validate the local changes from Activities 1.2 and 1.3, then use /delegate from the same ****GitHub Copilot**** session to hand off the implementation to the coding agent, accepting the checkpoint so the agent branch includes the existing scaffold and updated instructions. While the agent works, review the session log and reasoning, and demonstrate concurrent work by showing another active session before returning to the current task. 
 
 Once complete, open the draft pull request in GitHub and verify that the diff includes the tool handler, updated agent instructions, and tests. Before human review, request a Copilot code review, evaluate its findings, and then add a follow-up comment beginning with @copilot requesting any necessary revisions so Copilot updates and commits the changes to the same branch.
@@ -495,7 +498,9 @@ Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in pl
 2. Read Copilot's list of **remaining issues** that a person needs to review before the pull request is finalized.
 
 ---
-### Activity 1.6: Fix Security in the Same Pull Request (GitHub)
+
+### **Activity 1.6: Fix Security in the Same Pull Request (GitHub)**
+
 Check that the capability meets the agreed business requirements, governance standards, approval limits, and risk controls. Make sure that:
 - Every business risk found has been fixed
 - The required stakeholder approvals are in place
@@ -577,7 +582,7 @@ Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**
 
 # Topic 2: Agents That Know Your Business 
 
-### Activity 2.1: Validate the Deployed Business Intelligence Agent
+### **Activity 2.1: Validate the Deployed Business Intelligence Agent**
 
 Before adding business context to the agent, we need to establish a baseline by validating the existing Business Intelligence agent deployed in Microsoft Foundry during Topic 1.
 
@@ -605,7 +610,7 @@ This baseline will help us evaluate how the agent improves as we add live operat
 
 1. Review the Response provided by agent
 
-### Activity 2.2: Connect Live Manufacturing Context
+### **Activity 2.2: Connect Live Manufacturing Context**
 
 The existing Business Intelligence agent needs access to live manufacturing data to answer questions about plant capacity, production schedules, and operational readiness. In this activity, we will connect the existing Fabric Data Agent from the `Caldova_UI` workspace to the Foundry agent using tool calling.
 
