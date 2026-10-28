@@ -565,16 +565,22 @@ Review the implementation's security findings, apply appropriate fixes, and vali
 Go through the full business process: design and review, then risk check, approval, and final release. This makes sure the capability is controlled and ready for business use before people start using it.
 
 #### Step 1: Open the pull request 
+
+1. Open a new tab in Microsoft Edge.
+
 1. Copy the GitHub URL.
- ```
+
+   ```
     https://github.com/
    ```
-2. Open a new tab in Microsoft Edge.
-3. Paste the copied URL into the address bar and press Enter.
-4. Open your repository (for example, `CL-Labs-04 / UI-2413984`).
-5. Click the **Pull requests** tab and open the pull request (for example, *Fix Windows Foundry CLI invocation and BI validator false negatives #2*).
 
-    ![](../Sandbox-Environment-Guides/Images/GithubPR.png)
+1. Paste the copied URL into the address bar and press Enter.
+
+1. Select the repository **CL-Labs-04 / UI-<inject key="Deployment-ID" enableCopy="false"/> (1)** amd click **View all (2)** under Pull requests.
+
+   ![](../Ubiquitous-Innovation/Images/u94.png)
+
+1. Click the **Pull requests** tab and open the pull request (for example, *Fix Windows Foundry CLI invocation and BI validator false negatives #2*).
 
 #### Step 2: Approve and run the workflows
 1. On the pull request, click **Approve and run workflows**.
@@ -606,7 +612,7 @@ Get approval from a **person** or a **CODEOWNER**.
 1. Open the pull request on GitHub.
 2. Check these items:
    - The title (for example, *Fix Windows Foundry CLI invocation and BI validator false negatives #2*) and the **Open** status
-   - The source and target branches: it merges from `odl-user-2413984-clabs-publish-bi-agent-update` into `feature/supply-chain-agent-gpt5mini`
+   - The source and target branches: it merges from **odl-user-<inject key="Deployment-ID" enableCopy="false"/>-clabs-publish-bi-agent-update** into `feature/supply-chain-agent-gpt5mini`
    - The **Ready to merge** label at the top right
    - The **Summary** section in the PR description, which lists the changes made. For example:
      - A shared Foundry REST helper used by the BI publishing and validation scripts
