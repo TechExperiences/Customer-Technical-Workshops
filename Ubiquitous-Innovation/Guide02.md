@@ -230,7 +230,7 @@ Once ****GitHub Copilot**** completes the execution, validate the Project Explor
 
 1. Navigate to the project explorer in VS code to validate review docuemnt.
 
-   ![](../Sandbox-Environment-Guides/Images/Design-Review.png)
+   ![](../Ubiquitous-Innovation/Images/u85.png)
 
 ### **Activity 1.3: Ground Copilot in What the Business Already Decided**
 
