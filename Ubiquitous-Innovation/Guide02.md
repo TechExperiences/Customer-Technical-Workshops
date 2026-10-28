@@ -782,7 +782,7 @@ Confirm that all five documents are present before proceeding with the knowledge
 
 This allows the agent to combine operational data with documented manufacturing procedures and scheduling guidance when responding to business questions.
 
-1. Navigate back to **vs code**
+1. Navigate back to **VS Code**
 
 1. Copy the below prompt and paste it in chat window
 
