@@ -60,7 +60,7 @@ Participants will explore how to manage agents at scale by reviewing:
 **Problem:** Critical data, knowledge, decisions, and workflows are distributed across teams and systems.
 
 **Approach:** Create a common agent foundation that enables AI agents to understand business context, coordinate decisions, take actions, and operate securely.
-
+Are we still including "take actions" since I recall we do not have Dynamic 365 license except we've included it?
 **Goal:** **Know. Decide. Act. Get Caldova into the new market before the competition.**
 
 ## Workshop Outcomes
