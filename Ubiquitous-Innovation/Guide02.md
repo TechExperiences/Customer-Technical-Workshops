@@ -467,8 +467,6 @@ Type the command below to see the available context and session details:
 - **Chat box bar** (for example, `Interactive | Auto · Intelligence`): the current mode and optimization setting
 - **Status note** (for example, *"Auto effort changed to Intelligence"*): confirms that the setting changed
 
-   ![](../Sandbox-Environment-Guides/Images/Model-Selection.png)
-
 with this Participants understand how **model** selection influences response quality, development efficiency, and usage cost, enabling them to choose the most appropriate **model** for each task before proceeding with implementation
 
 ---
@@ -520,6 +518,8 @@ Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in pl
 1. Read the **session log** while the agent works.
 2. Read the agent's **reasoning** to see how it approaches the build.
 
+   ![](../Ubiquitous-Innovation/Images/u95.png)
+
 #### Step 4: Show that you can work in parallel
 1. Open **another active session** from the left pane in GitHub Copilot. This shows you can keep working while the agent runs in the background.
 2. Go back to the **current task** session.
@@ -564,16 +564,22 @@ Review the implementation's security findings, apply appropriate fixes, and vali
 Go through the full business process: design and review, then risk check, approval, and final release. This makes sure the capability is controlled and ready for business use before people start using it.
 
 #### Step 1: Open the pull request 
+
+1. Open a new tab in Microsoft Edge.
+
 1. Copy the GitHub URL.
- ```
+
+   ```
     https://github.com/
    ```
-2. Open a new tab in Microsoft Edge.
-3. Paste the copied URL into the address bar and press Enter.
-4. Open your repository (for example, `CL-Labs-04 / UI-2413984`).
-5. Click the **Pull requests** tab and open the pull request (for example, *Fix Windows Foundry CLI invocation and BI validator false negatives #2*).
 
-    ![](../Sandbox-Environment-Guides/Images/GithubPR.png)
+1. Paste the copied URL into the address bar and press Enter.
+
+1. Select the repository **CL-Labs-04 / UI-<inject key="Deployment-ID" enableCopy="false"/> (1)** amd click **View all (2)** under Pull requests.
+
+   ![](../Ubiquitous-Innovation/Images/u94.png)
+
+1. Click the **Pull requests** tab and open the pull request (for example, *Fix Windows Foundry CLI invocation and BI validator false negatives #2*).
 
 #### Step 2: Approve and run the workflows
 1. On the pull request, click **Approve and run workflows**.
@@ -605,7 +611,7 @@ Get approval from a **person** or a **CODEOWNER**.
 1. Open the pull request on GitHub.
 2. Check these items:
    - The title (for example, *Fix Windows Foundry CLI invocation and BI validator false negatives #2*) and the **Open** status
-   - The source and target branches: it merges from `odl-user-2413984-clabs-publish-bi-agent-update` into `feature/supply-chain-agent-gpt5mini`
+   - The source and target branches: it merges from **odl-user-<inject key="Deployment-ID" enableCopy="false"/>-clabs-publish-bi-agent-update** into `feature/supply-chain-agent-gpt5mini`
    - The **Ready to merge** label at the top right
    - The **Summary** section in the PR description, which lists the changes made. For example:
      - A shared Foundry REST helper used by the BI publishing and validation scripts
@@ -635,7 +641,7 @@ For an AI solution to deliver meaningful business value, its agents must also un
 
 Think about this: If an agent can generate code and understand a workflow, what additional capabilities does it need to answer business questions accurately and make context-aware recommendations?
 
-Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**, and **Work IQ** can provide that context.
+### Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**, and **Work IQ** can provide that context.
 ---
 
 # Topic 2: Agents That Know Your Business 
@@ -657,7 +663,7 @@ Traditionally, this would involve manually reviewing the agent configuration and
 
 This baseline will help us evaluate how the agent improves as we add live operational data, enterprise knowledge, and organizational context in the following activities.
 
-1. Navigate back to **vs code**
+1. Navigate back to **VS code**
 
 1. Copy the below prompt and paste it in chat window
 
@@ -667,7 +673,7 @@ This baseline will help us evaluate how the agent improves as we add live operat
    • Review its model, role, instructions, and capabilities without modifying or recreating the agent.
 
    ```
- ![](../Sandbox-Environment-Guides/Images/task2.1.png)
+   ![](../Sandbox-Environment-Guides/Images/task2.1.png)
 
 1. Review the Response provided by agent
 
@@ -713,9 +719,24 @@ This enables the Business Intelligence agent to use live manufacturing context w
    Note: Reuse existing workspaces, agents, and resources.
 
    ```
- ![](../Sandbox-Environment-Guides/Images/task2.2.png)
+   ![](../Sandbox-Environment-Guides/Images/task2.2.png)
 
-1. Verify that the **Fabric Data Agent** is attached under the **Tools** section of the existing Foundry agent.
+ 
+1. To verify that the **Fabric Data Agent** is attached under the **Tools** section of the existing Foundry agent. Navigate to **Azure portal**.
+
+1. Navigate to **rg-Ubiquitous** and select the **Ubiquitous-innoation-project (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/u96.png)
+
+1. Click **Go to Foundry**.
+
+1. Navigate to **Agents (1)** and then select **supply-chain-bi-agent (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/u97.png)
+
+1. Verify that the **Fabric Data Agent** is attached under the **Tools** section.
+
+   ![](../Ubiquitous-Innovation/Images/u98.png)
 
 1. Confirm that the Data Agent is connected and configured correctly.
 
@@ -742,11 +763,11 @@ Before connecting the enterprise knowledge source, verify that the required docu
 
 1. Navigate to the Azure portal and open **rg-Ubiquitous** resource group.
 
-1. Under Resources, locate and open the **adlsubiquitousg8g0y** storage account.
+1. Under Resources, locate and open the storage account with the name starts with **adlsubiquitous**.
 
    ![](../Sandbox-Environment-Guides/Images/strg.png)
 
-1. click on **Containers** and Open the **data** container.
+1. Click on **Containers** under **Data Storage** and Open the **data** container.
 
 1. Verify that the following documents are available:
 
@@ -763,22 +784,24 @@ Confirm that all five documents are present before proceeding with the knowledge
 
 This allows the agent to combine operational data with documented manufacturing procedures and scheduling guidance when responding to business questions.
 
-1. Navigate back to **vs code**
+1. Navigate back to **VS Code**
 
 1. Copy the below prompt and paste it in chat window
 
    ```
    Follow the instructions below to create a Foundry IQ knowledge base from the  existing Caldova manufacturing documents in Azure Blob Storage and connect it under the Knowledge section of the existing Microsoft Foundry agent (supply-chain-Bi-agent)
-   •  Create a Foundry IQ knowledge base using documents stored in    Azure Blob Storage under the rg-ubiquituos resource group.
-   •  Access the adlsubiquitoust5sba storage container and its data   folder.
+   •  Create a Foundry IQ knowledge base using documents stored in  Azure Blob Storage under the rg-ubiquituos resource group.
+   •  Access the container in the storage account that starts with adlsubiquitous and its data folder.
    •  Configure the knowledge base to index and retrieve the available documents in above folder.
    •  Add the knowledge base under the Knowledge section of the    existing Caldova Business Intelligence Agent in Microsoft Foundry,  not under Tools.
    •  Configure the agent to use this knowledge source when answering questions about the documents
 
    ```
- ![](../Sandbox-Environment-Guides/Images/task2.3.png)
+   ![](../Sandbox-Environment-Guides/Images/task2.3.png)
 
-1. Verify that the **Foundry IQ knowledge base** is configured under the **Knowledge** section of the existing Foundry agent.
+1. Navigate back to the **Agent** in **Foundry**. Verify that the **Foundry IQ knowledge base** is configured under the **Knowledge** section of the existing Foundry agent.
+
+   ![](../Ubiquitous-Innovation/Images/u99.png)
 
 1. Confirm that the knowledge base is connected properly and the relevant manufacturing documents are available for retrieval.
 
@@ -803,7 +826,7 @@ In this activity, we will connect the existing SharePoint source through ****Wor
 
 Before connecting the enterprise knowledge source to the agent, verify that the required documents are available in SharePoint.
 
-1. Open the [Enterprise AI Knowledge Base – SharePoint](https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base%5C&viewid=2aae9886-5883-4e2a-8949-612beaeb50ac) link.
+1. Open the [Enterprise AI Knowledge Base – SharePoint](https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base&viewid=2aae9886%2D5883%2D4e2a%2D8949%2D612beaeb50ac&newTargetListUrl=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents&viewpath=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FForms%2FAllItems%2Easpx) link.
 
 1. Verify that the following documents are available:
    - `Caldova_Business_Roles_and_Responsibilities.docx`
@@ -831,12 +854,12 @@ This adds organizational context to the agent's existing operational and enterpr
 
    ```
    Follow the instructions below to connect the existing SharePoint documents as a **Work IQ** tool in the existing Microsoft Foundry agent (supply-chain-Bi-agent).
-   •	Use the following SharePoint URL to configure the **Work IQ** integration: https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base&viewid=2aae9886%2D5883%2D4e2a%2D8949%2D612beaeb50ac
+   •	Use the following SharePoint URL to configure the **Work IQ** integration: https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base&viewid=2aae9886%2D5883%2D4e2a%2D8949%2D612beaeb50ac&newTargetListUrl=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents&viewpath=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FForms%2FAllItems%2Easpx
    •	Connect the SharePoint source through **Work IQ** and add it under the Tools section of the existing Foundry agent.
    •	Ensure the agent can retrieve and use relevant business-context documents, including launch priorities, business commitments, and team responsibilities.
    •	Configure the agent to use **Work IQ** when answering questions about Caldova's business and organizational context.
    ```
- ![](../Sandbox-Environment-Guides/Images/task2.4.png)
+   ![](../Sandbox-Environment-Guides/Images/task2.4.png)
 
 1. Verify that the ****Work IQ** SharePoint integration** is configured under the **Tools** section of the existing Foundry agent.
 
