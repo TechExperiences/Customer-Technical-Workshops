@@ -69,9 +69,9 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
    ![](../Ubiquitous-Innovation/Images/u60.png)
 
-1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
+1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace (2)** to enable models.
 
-   ![](../Sandbox-Environment-Guides/Images/b6.png)
+   ![](../Ubiquitous-Innovation/Images/u83.png)
 
 1. Select **Trust Folder and Continue**.
 
