@@ -661,7 +661,7 @@ Traditionally, this would involve manually reviewing the agent configuration and
 
 This baseline will help us evaluate how the agent improves as we add live operational data, enterprise knowledge, and organizational context in the following activities.
 
-1. Navigate back to **vs code**
+1. Navigate back to **VS code**
 
 1. Copy the below prompt and paste it in chat window
 
