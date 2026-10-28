@@ -468,8 +468,6 @@ Type the command below to see the available context and session details:
 - **Chat box bar** (for example, `Interactive | Auto · Intelligence`): the current mode and optimization setting
 - **Status note** (for example, *"Auto effort changed to Intelligence"*): confirms that the setting changed
 
-   ![](../Sandbox-Environment-Guides/Images/Model-Selection.png)
-
 with this Participants understand how **model** selection influences response quality, development efficiency, and usage cost, enabling them to choose the most appropriate **model** for each task before proceeding with implementation
 
 ---
@@ -520,6 +518,8 @@ Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in pl
 #### Step 3: Watch the coding agent work
 1. Read the **session log** while the agent works.
 2. Read the agent's **reasoning** to see how it approaches the build.
+
+   ![](../Ubiquitous-Innovation/Images/u95.png)
 
 #### Step 4: Show that you can work in parallel
 1. Open **another active session** from the left pane in GitHub Copilot. This shows you can keep working while the agent runs in the background.
