@@ -222,6 +222,8 @@ Treat the document as a draft for review, not as an approved implementation plan
 
 1. Once Copilot starts generating the response, monitor the process closely. 
 
+1. Once the process is completed, click **Keep** to keep the files.
+
 ### **Validation**
 
 Once ****GitHub Copilot**** completes the execution, validate the Project Explorer to confirm whether the review document has been successfully created and is available in the expected project location.
