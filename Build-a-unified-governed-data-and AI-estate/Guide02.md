@@ -66,13 +66,13 @@ You will use GitHub Copilot to build the Future State Architecture from the Whit
 
    ![](../Sandbox-Environment-Guides/Images/amp27.png)
 
-1. Navigate to **`C:\`** path **(1)**, then select the **Unifydata** folder **(2)** and then **Select folder (3)**.
+1. Navigate to **`C:\`** path **(1)**, then select the **unifydata** folder **(2)** and then **Select folder (3)**.
 
-   ![](../Sandbox-Environment-Guides/Images/unifyvscode.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u39.png)
 
-1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
+1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace (2)** to enable models.
 
-   ![](../Sandbox-Environment-Guides/Images/b6.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u40.png)
 
 1. Select **Trust Folder and Continue**.
 
@@ -120,6 +120,13 @@ This allows us to establish the foundation for the unified data solution through
 
 > **Business value:** Caldova starts with the Azure resources it already has: the same storage account, database, and Fabric capacity. Nothing is replaced. Access is set when the workspace is created, so governance starts on day one rather than being added later.  
 
+1. Select the **Future-State-Architecture.png** image.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u41.png)
+
+1. From the ********GitHub Copilot****** Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u42.png)
 
 1. Please copy the below prompt and paste it in the copilot chat window.
 
@@ -160,6 +167,8 @@ This allows us to establish the foundation for the unified data solution through
 
 1. Monitor the process to understand how it generates the response and handles or resolves errors.  
 
+1. If prompted for the SQL database password, please provide the existing password **<inject key="sqlAdminPassword" enableCopy="false"/>**.
+
    >**Note:** In between, if it asks you to **Continue to iterate**, please click **Continue**.
    
    >Wait for the deployment to complete.
@@ -195,8 +204,7 @@ Traditionally, this would require manually creating a Lakehouse, configuring con
 This approach demonstrates how different data sources can be brought together in OneLake while reducing the manual effort required to configure individual data integration components.
 
 
-> [!TIP]
-> **Business value:** Analytical files stay in Blob Storage, and operational data stays in Azure SQL Database where the business applications still use it. Shortcuts and mirroring make both available in OneLake without building pipelines or keeping extra copies. When Caldova enters a new market or acquires a company, its data can be connected the same way. The data is stored in the open Delta Parquet format, so Caldova can use other engines and tools later without migrating it.
+>**Business value:** Analytical files stay in Blob Storage, and operational data stays in Azure SQL Database where the business applications still use it. Shortcuts and mirroring make both available in OneLake without building pipelines or keeping extra copies. When Caldova enters a new market or acquires a company, its data can be connected the same way. The data is stored in the open Delta Parquet format, so Caldova can use other engines and tools later without migrating it.
 
 **Verify Analytical Source Data in Azure Blob Storage**
 
@@ -204,16 +212,23 @@ Before loading analytical data into Microsoft Fabric, verify that the source CSV
 
 1. Navigate to the [Azure portal](https://portal.azure.com/)
 
-1. Navigate to the existing storage account storage<Deployment-ID>.
+1. Search and select the **Storage account**.
 
-1. Under Data storage, select Containers.
+1. Navigate to the existing storage account storage named **storage<inject key="Deployment-ID" enableCopy="false"/>**.
 
-1. Open the data container and Open the **Analytical folder** and review the available CSV files.
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u43.png)
 
-   ![](../Sandbox-Environment-Guides/Images/blob.png)   
+1. Under Data storage, select **Containers (1)** amd then select **Data (2)** container.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u44.png)
+
+1. Select the **Analytical folder**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u45.png) 
+
+1. Review the available CSV files.   
 
    ![](../Sandbox-Environment-Guides/Images/blobcsv.png) 
-
 
 1. Navigate back to ****GitHub Copilot**** 
 
@@ -266,13 +281,19 @@ Before integrating operational data into Microsoft Fabric, verify that the sourc
 
 1. Navigate to the [Azure portal](https://portal.azure.com/)
 
-1. Navigate to the existing SQL server.
+1. Go back to **rg-Unified** Resource group.
 
-1. Open the OperationalData database.
+1. Select **OperationalData** database.
 
-1. Select Query editor and review the available tables.
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u46.png)
 
-   ![](../Sandbox-Environment-Guides/Images/sql.png)
+1. Select **Query editor (1)** and then click Connct as **odl_user_<inject key="Deployment-ID" enableCopy="false"/> (2)**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u47.png)
+
+1. Expand **dbo (1) > Tables (2) > Inventory (3)** to review the available tables.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u48.png)
 
 1. Navigate back to ****GitHub Copilot**** 
 
@@ -297,11 +318,13 @@ Before integrating operational data into Microsoft Fabric, verify that the sourc
 
    ```
 
-**Operational data** resides in the existing **Azure SQL Database**, Instead of creating external shortcuts directly to the SQL tables, we first configure **Mirroring** to replicate the supported source data into a **mirrored database** in Microsoft Fabric.
+   - **Operational data** resides in the existing **Azure SQL Database**, Instead of creating external shortcuts directly to the SQL tables, we first configure **Mirroring** to replicate the supported source data into a **mirrored database** in Microsoft Fabric.
 
-We then create **shortcuts** from the **mirrored database** to the **Caldova-Lakehouse**, making the operational tables accessible alongside the analytical data
+   - We then create **shortcuts** from the **mirrored database** to the **Caldova-Lakehouse**, making the operational tables accessible alongside the analytical data
 
-1. Once the deployment is complete, you can verify the Created tables in the same Lakehouse.
+1. If prompted for the SQL database password, please provide the existing password **<inject key="sqlAdminPassword" enableCopy="false"/>**.   
+
+1. Once the deployment is complete, you can verify the Created tables in the same Lakehouse from **Inventory** table.
 
    ![](../Sandbox-Environment-Guides/Images/LH-Operational.png)
 
@@ -327,8 +350,7 @@ With ****GitHub Copilot****, we can describe the required integration flow and a
 The objective is to demonstrate how a business requirement can be translated into an integration workflow with the help of ****GitHub Copilot****, instead of manually building each component separately.
 
 
-> [!TIP]
-> **Business value:** Customer data written by business applications now lands in the same estate as operational and analytical data, through a managed Logic Apps workflow instead of custom integration code. The same pattern can be reused for the next application, and Service Bus or Event Grid can be added when Caldova needs event-driven updates.
+>**Business value:** Customer data written by business applications now lands in the same estate as operational and analytical data, through a managed Logic Apps workflow instead of custom integration code. The same pattern can be reused for the next application, and Service Bus or Event Grid can be added when Caldova needs event-driven updates.
 
 **Verify Business Application Source Data in Azure Blob Storage**
 
@@ -336,13 +358,23 @@ Next, verify that the business application files are available in Azure Blob Sto
 
 1. Navigate to the [Azure portal](https://portal.azure.com/)
 
-1. Navigate to the existing storage account storage<Deployment-ID>.
+1. Search and select the **Storage account**.
 
-1. Under Data storage, select Containers and Open the **data** container.
+1. Navigate to the existing storage account storage named **storage<inject key="Deployment-ID" enableCopy="false"/>**.
 
-1. Open the **BusineesApplication** folder and review the available source files.
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u43.png)
 
-   ![](../Sandbox-Environment-Guides/Images/businessapp.png)
+1. Under Data storage, select **Containers (1)** amd then select **Data (2)** container.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u44.png)
+
+1. Open the **BusineesApplication** folder.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u49.png)
+
+1. Review the available source files.   
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u50.png)   
 
 1. Navigate back to ****GitHub Copilot**** 
 
@@ -373,7 +405,11 @@ Next, verify that the business application files are available in Azure Blob Sto
 
    ![](../Sandbox-Environment-Guides/Images/LogicApp-Extension.png)
 
-1. Once the deployment is complete, you can verify the Created tables in Fabric SQL Database
+1. If prompted for the SQL database password, please provide the existing password **<inject key="sqlAdminPassword" enableCopy="false"/>**.     
+
+1. Once the deployment is complete, you can verify the Created tables in Fabric SQL Database.
+
+1. Navigate back to the Workspace and refresh it.
 
 1. Open the **Caldova_BusinessApp_SQLDB** from the **Caldova-Pharma** workspace.
 
@@ -385,15 +421,6 @@ Next, verify that the business application files are available in Azure Blob Sto
 
    ![](../Sandbox-Environment-Guides/Images/Fabric-SQLDB.png)
 
-1. Next, navigate to the **Azure Portal** and open the **rg-Unified** resource group.
-
-1. Under **Resources**, verify that the integration components created for the data-loading process are available:
-   - **caldova-blob-connection** – API connection used to connect to the Azure Storage account.
-   - **caldova-businessapp-ingest** – Logic App responsible for orchestrating the data ingestion.
-   - **caldova-fabricsql-connection** – API connection used to connect to the Fabric SQL Database.
-   - **caldova-integration-account** – Integration Account used as part of the integration workflow.
-
-   ![](../Sandbox-Environment-Guides/Images/LogicApp-Int.png)
 ---
 
 ### Step 4: Building **Semantic Model** using Fabric Lakehouse and SQL Database to generate PowerBI report
@@ -417,8 +444,7 @@ After the components are created, you will review the **Semantic Model** relatio
 This demonstrates how ****GitHub Copilot**** can help move from data integration to a usable analytics and AI experience.
 
 
-> [!TIP]
-> **Business value:** The semantic model holds one set of business definitions, such as what counts as revenue, an order or stock on hand. The Power BI report and the Data Agent both use it, so a dashboard and an AI answer return the same number. Direct Lake mode reads the data in OneLake directly, so reports don't depend on a separate imported copy.
+>**Business value:** The semantic model holds one set of business definitions, such as what counts as revenue, an order or stock on hand. The Power BI report and the Data Agent both use it, so a dashboard and an AI answer return the same number. Direct Lake mode reads the data in OneLake directly, so reports don't depend on a separate imported copy.
 
 1. Navigate back to ****GitHub Copilot**** 
 
@@ -438,13 +464,17 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
    2. Create one Data Agent using the **Semantic Model** and add concise instructions based on the available tables.
 
    ```
-1. Navigate to Fabric Portal
+1. Navigate to Fabric Portal worksapce.
 
-1. Open the created ****Semantic Model**** and review the configured table relationships to ensure the data model is correctly connected.
+1. Refresh te Workspace and select the created **Semantic Model**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u51.png)
+
+1. Review the configured table relationships to ensure the data model is correctly connected.
 
    ![](../Sandbox-Environment-Guides/Images/Semantic-Model.png)
 
-1. Locate the created ****Semantic Model**** and Select the **More options (...)** menu for the **Semantic Model** and Select **Create report**.
+1. Locate the created ****Semantic Model**** and Select the **More options (...) (1)** menu for the **Semantic Model** and Select **Create report (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/Create-Report.png)
 
@@ -461,15 +491,17 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    ![](../Sandbox-Environment-Guides/Images/Report.png)
 
+1. Save the report with the name **CaldovaReport<inject key="Deployment-ID" enableCopy="false"/>**.   
+
 ### Building Data Agent using Semantic Model.
 
-1. Navigate to the created **Data Agent**.
+1. Navigate back to the Workspace and select the created **Data Agent**.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u52.png)
 
 1. Open the **Data** section and verify that the tables are selected and available to the Data Agent.
 
    - If the tables are not selected, select the tables.
-
-   ![](../Sandbox-Environment-Guides/Images/DataAgent.png)
 
 1. Open the **Test Agent** option.
 
@@ -478,21 +510,21 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
    ```
    What is our average supplier lead time by supplier, and which supplier has the best quality rating?
 
-   ```
+   ```   
+
+    ![](../Sandbox-Environment-Guides/Images/DataAgent.png)
 
 1. Review the response provided by the **Data Agent**
 
    ![](../Sandbox-Environment-Guides/Images/DA-Response.png)
 
-
-   > [!TIP]
-   > **What this shows:** The question combines supplier performance and quality data. Before, answering it meant pulling extracts from separate systems and reconciling them by hand. Here, anyone with access can ask it in plain language and get an answer based on the governed model.
+    >**What this shows:** The question combines supplier performance and quality data. Before, answering it meant pulling extracts from separate systems and reconciling them by hand. Here, anyone with access can ask it in plain language and get an answer based on the governed model.
 
 1. In the Data Agent editor, click **Publish** to publish the latest changes.
 
    ![](../Sandbox-Environment-Guides/Images/publish.png)
 
-1. In the **Publish changes** window, enable **Also publish to Microsoft 365 Copilot** and click on **Publish**.
+1. In the **Publish changes** window, enable **Also publish to Microsoft 365 Copilot (1)** and click on **Publish (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/365.png)
 
@@ -513,8 +545,7 @@ In this step, we will use **OneLake Catalog** to explore the available data asse
 This step completes the prototype by connecting data integration and analytics with the governance and security capabilities needed to manage the unified data estate.
 
 
-> [!TIP]
-> **Business value:** As Caldova adds markets, each with its own pharmaceutical regulations, the business needs to know what data it has, who owns it and who can access it. The OneLake catalog gives one place to find, govern and secure the lakehouse, databases, semantic model and agent built today, instead of managing controls system by system.
+>**Business value:** As Caldova adds markets, each with its own pharmaceutical regulations, the business needs to know what data it has, who owns it and who can access it. The OneLake catalog gives one place to find, govern and secure the lakehouse, databases, semantic model and agent built today, instead of managing controls system by system.
 
 1. Click **OneLake Catalog** and navigate to catalog page.
 
@@ -530,10 +561,9 @@ This step completes the prototype by connecting data integration and analytics w
 
 1. Click the **Secure** tab where all users will be managed under one space and add, remove, and manage access across all the domains and workspaces.
 
-
    ![](../Sandbox-Environment-Guides/Images/Secure.png)
 
-   > **Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
+    >**Perform a wide range of operations:** including data discovery, governance, security, monitoring, and lineage tracking across the enterprise data landscape through the centralized OneLake Catalog.
 
 ### Step 6: Integrating the Fabric Data Agent with Microsoft 365 Copilot
 
@@ -549,13 +579,13 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
 - Access the published agent from Microsoft 365 Copilot.
 - Ask business questions and validate the answers against the unified data.
 
-> **Business value:** Business users get answers in Microsoft 365 Copilot, where they already work, without learning a new tool. The agent answers from the same governed semantic model as the reports, so access controls and business definitions carry through to every answer.
+>**Business value:** Business users get answers in Microsoft 365 Copilot, where they already work, without learning a new tool. The agent answers from the same governed semantic model as the reports, so access controls and business definitions carry through to every answer.
 
-1. Open **[Microsoft 365 Copilot](https://m365.cloud.microsoft/chat?omkt=en-001&source=post_page---------------------------)** and provide sign-in details
+1. Open **[Microsoft 365 Copilot](https://m365.cloud.microsoft/chat?omkt=en-001&source=post_page---------------------------)** and provide sign-in details.
 
-1. Navigate to **Agents**. and Under **Your agents**, select **Caldova_Unified_DataAgent**.
+1. Navigate to **Agents (1)**. and Under **Your agents**, select **Caldova_Pharma_DataAgent (2)**.
 
-   ![](../Sandbox-Environment-Guides/Images/agent_copilot.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u53.png)
 
 1. Enter the following prompt in the chat window:
 
@@ -563,9 +593,11 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
    What is our average supplier lead time by supplier, and which supplier has the best quality rating?
    ```
 
-   ![](../Sandbox-Environment-Guides/Images/copilotagent.png)
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u59.png)
 
 1. Review the response.
+
+   ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u54.png)
 
 
 #### What you built and why it matters for Caldova

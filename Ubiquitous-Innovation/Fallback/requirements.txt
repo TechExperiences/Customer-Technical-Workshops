@@ -1,0 +1,8 @@
+azure-core>=1.37.0,<2.0.0
+azure-ai-projects>=2.3.0
+azure-identity>=1.25.0
+azure-storage-file-datalake==12.22.0
+requests==2.32.5
+# Requests rejects chardet 6+ at import time. Pin a supported release so the
+# provisioning output remains free of RequestsDependencyWarning noise.
+chardet>=3.0.2,<6.0.0

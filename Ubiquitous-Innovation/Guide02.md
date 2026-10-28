@@ -10,18 +10,7 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 - **ARM templates:** JSON-based Infrastructure-as-Code files used to define and deploy Azure resources.
 - **Bicep templates:** Simplified, declarative Infrastructure-as-Code files used to define and deploy Azure resources with cleaner syntax.
 
-### Verify Resources in the Azure Resource Group
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and Click on **rg-unified** Resource Group.
-
-   ![](../Sandbox-Environment-Guides/Images/UI-RG.png)
-
-1.  Confirm that the resource group contains the following resources:
-      - **Fabric Capacity**
-      - **Storage Account**
-
-1. Verify that the resources are available in their respective Azure regions.
----
 ## Sign in to ****GitHub Copilot**** Chat
 
 1. Click on the **Visual Studio Code** from the VM desktop.
@@ -76,37 +65,44 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
    ![](../Sandbox-Environment-Guides/Images/amp27.png)
 
-1. Navigate to **`C:\`** path **(1)**, then select the **Ubiquitos-Innovation** folder **(2)** and then **Select folder (3)**.
+1. Navigate to **`C:\`** path **(1)**, then select the **Ubiquitous** folder **(2)** and then **Select folder (3)**.
 
-   ![](../Sandbox-Environment-Guides/Images/uivscode.png)
+   ![](../Ubiquitous-Innovation/Images/u60.png)
 
-1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace to enable models (2)**.
+1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace (2)** to enable models.
 
-   ![](../Sandbox-Environment-Guides/Images/b6.png)
+   ![](../Ubiquitous-Innovation/Images/u83.png)
 
 1. Select **Trust Folder and Continue**.
 
    ![](../Sandbox-Environment-Guides/Images/amp30.png)
 
-1. Click **Auto (1)** and then set the model to **Claude Sonnet 5 (2)**.
+1. Click on **Elipses (...) (1)**, select **Terminal (2)** and then **New Terminal (3)**.
 
-   ![](../Sandbox-Environment-Guides/Images/b7.png)
+   ![](../Ubiquitous-Innovation/Images/u63.png)
 
-    >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
+1. Enter the below command to clone the repository **https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>**.
 
-1. Click on **Default permission (1)** and then set it to **Allow all (2)**.
+   ```
+   git clone https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>
+   ```
 
-   ![](../Sandbox-Environment-Guides/Images/b8.png)
+    ![](../Ubiquitous-Innovation/Images/u64.png)
 
-1. Select **Enable**.
+1. Select **Sign in with your browser**.
 
-   ![](../Sandbox-Environment-Guides/Images/amp33.png)
+   ![](../Ubiquitous-Innovation/Images/u65.png)
 
-1. Select the **Future-State-Architecture.png**.
+1. If prompted, sign in with your Git credentials.   
 
-1. From the ********GitHub Copilot****** Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
+1. Select **Authorize git-ecosystem**.
 
-   ![](../Sandbox-Environment-Guides/Images/step1.png)
+   ![](../Ubiquitous-Innovation/Images/u66.png)
+
+1. Once the authentication is done, navigate back to **Visual Studio Code** and make sure cloning is done.
+
+   ![](../Ubiquitous-Innovation/Images/u67.png)
+
 
 ## From Architecture to a Working Business Solution
 
@@ -133,10 +129,14 @@ Instead of starting with individual configuration tasks, you’ll describe what 
 
 **Outcome**: Establish a reviewed and tested foundation for extending the existing Agent with new capabilities.
 
-## Topic 1 - Build agents and software at the speed of AI
+**Caldova's future-state architecture** defines how its AI solution should work. In this topic, we will use GitHub Copilot to translate that design into a reviewed implementation plan, delegate development, and validate the resulting code and security checks.
+
+**Outcome**: Establish a reviewed and tested foundation for extending the existing Agent with new capabilities.
+
+## **Topic 1 - Build agents and software at the speed of AI**
 Transform an existing agent design into a **production-ready, secure capability** using ****GitHub Copilot****—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
 
-### Activity 1.1: Start Whiteboarding
+### **Activity 1.1: Start Whiteboarding**
 
 The **future-state architecture** was developed during the previous whiteboarding activity. Review the architecture below to understand the agreed design before moving into implementation. Focus on the four key areas:
 
@@ -147,7 +147,8 @@ The **future-state architecture** was developed during the previous whiteboardin
 
  ![](../Sandbox-Environment-Guides/Images/UIArchi.png)
 
-### Activity 1.2: Turn the Whiteboard into a Reviewed Plan
+### **Activity 1.2: Turn the Whiteboard into a Reviewed Plan**
+
 Turn the whiteboard into a reviewed implementation plan and issue set for extending the existing agent, without manually transcribing it.
 
 A **whiteboard** captures the intended design, but developers need a clear implementation plan before they begin making changes. Manually translating every component into requirements can lead to missed dependencies, duplicated work, or incomplete testing.
@@ -171,6 +172,35 @@ After Copilot finishes, open `Design-Review.md` in the Project Explorer. Check t
 
 Treat the document as a draft for review, not as an approved implementation plan. It becomes the reference for the next activity, where you will confirm the requirements and resolve any gaps before delegating the build.
 
+1. From the **GitHub Copilot Chat**, click **Auto (1)** and then **turn off (2)** the **Auto** toggle. 
+
+   ![](../Ubiquitous-Innovation/Images/u31.png)
+
+1. Expand **Other Models**.
+
+   ![](../Ubiquitous-Innovation/Images/u32.png)
+
+1. Set the model to **Claude Sonnet 5**.
+
+   ![](../Ubiquitous-Innovation/Images/u33.png)
+
+    >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
+
+1. Click on **Default permission (1)** and then set it to **Allow all (2)**.
+
+   ![](../Sandbox-Environment-Guides/Images/b8.png)
+
+1. Select **Enable**.
+
+   ![](../Sandbox-Environment-Guides/Images/amp33.png)
+
+1. Select the **Future-State-Architecture.png**.
+
+   ![](../Ubiquitous-Innovation/Images/u68.png)
+
+1. From the ********GitHub Copilot****** Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
+
+   ![](../Sandbox-Environment-Guides/Images/step1.png)
 
 1. Please copy the below prompt and paste it in the copilot chat win
 
@@ -198,6 +228,8 @@ Treat the document as a draft for review, not as an approved implementation plan
 
    - Then click **Send** button.
 
+     ![](../Ubiquitous-Innovation/Images/u86.png)
+
 1. Once Copilot starts generating the response, monitor the process closely. 
 
 **Validation**
@@ -206,15 +238,15 @@ Once ****GitHub Copilot**** completes the execution, validate the Project Explor
 
 1. Navigate to the project explorer in VS code to validate review docuemnt.
 
-   ![](../Sandbox-Environment-Guides/Images/Design-Review.png)
+   ![](../Ubiquitous-Innovation/Images/u85.png)
 
-### Activity 1.3: Ground Copilot in What the Business Already Decided
+### **Activity 1.3: Ground Copilot in What the Business Already Decided**
 
 The initial design review may contain assumptions, missing details, or recommendations that do not match the decisions made during the whiteboarding session. Before development begins, the implementation plan must reflect the agreed business requirements.
 
 In this activity, **GitHub Copilot** will review the existing `Design-Review.md` and identify any changes needed to align it with the architecture and the intended agent behavior.
 
-#### What Will This Prompt Do?
+#### **What Will This Prompt Do?**
 
 - Reassess the existing implementation plan against the **future-state architecture**.
 - Verify that the required components, tools, and agent capabilities are included.
@@ -222,14 +254,13 @@ In this activity, **GitHub Copilot** will review the existing `Design-Review.md`
 - Propose corrections to the same document instead of creating a separate plan.
 - Present the proposed changes for human confirmation before finalizing the plan.
 
-#### What Should You Validate?
+#### **What Should You Validate?**
 
 Review the updated document and confirm that it accurately represents the intended implementation. Check the tool-handler requirements, agent instructions, constraints, and test approach before proceeding.
 
 **Transition:** Once the plan is reviewed and the required changes are confirmed, the coding agent can use it as the reference for implementation in Activity 1.5.
 
 1. Please copy the below prompt and paste it in the copilot chat window.
-
 
    ```
    Great. You have created above design- review guide. Now review the same with below points and provide me with instructions and after confirmation include them in the same document.
@@ -245,6 +276,8 @@ Review the updated document and confirm that it accurately represents the intend
    ```
 
    - Then click **Send** button.
+
+     ![](../Ubiquitous-Innovation/Images/u87.png)   
 
 1. Once Copilot starts generating the response, monitor the process closely. 
 
@@ -320,7 +353,7 @@ After **GitHub Copilot** generates `Design-Review.md`, review the following sect
 
 **The key takeaway:** GitHub Copilot can accelerate architecture analysis and implementation planning, but the design must still be validated by the appropriate technical and business stakeholders before it is approved for development.
 
-### Activity 1.4: Choose the Model for the Job
+### **Activity 1.4: Choose the Model for the Job**
 
 Select the most appropriate model for the task while staying within the models and policies enabled by the organization. Review the available models using /model, switch between models to understand that model selection is task-specific, and use /model auto to allow ****GitHub Copilot**** to select an appropriate model based on the task, effort, and optimization settings such as Balanced versus Intelligence. Use /usage to review session usage and /context to understand the available context and session information. Finally, repeat the same task using a Frontier model and Auto mode to compare their output, performance, value, and cost, and understand when each approach is most appropriate.
 
@@ -403,7 +436,8 @@ with this Participants understand how **model** selection influences response qu
 
 ---
 
-### Activity 1.5: Hand the Build to the Coding Agent
+### **Activity 1.5: Hand the Build to the Coding Agent**
+
 Validate the local changes from Activities 1.2 and 1.3, then use /delegate from the same ****GitHub Copilot**** session to hand off the implementation to the coding agent, accepting the checkpoint so the agent branch includes the existing scaffold and updated instructions. While the agent works, review the session log and reasoning, and demonstrate concurrent work by showing another active session before returning to the current task. 
 
 Once complete, open the draft pull request in GitHub and verify that the diff includes the tool handler, updated agent instructions, and tests. Before human review, request a Copilot code review, evaluate its findings, and then add a follow-up comment beginning with @copilot requesting any necessary revisions so Copilot updates and commits the changes to the same branch.
@@ -479,7 +513,9 @@ Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in pl
 2. Read Copilot's list of **remaining issues** that a person needs to review before the pull request is finalized.
 
 ---
-### Activity 1.6: Fix Security in the Same Pull Request (GitHub)
+
+### **Activity 1.6: Fix Security in the Same Pull Request (GitHub)**
+
 Check that the capability meets the agreed business requirements, governance standards, approval limits, and risk controls. Make sure that:
 - Every business risk found has been fixed
 - The required stakeholder approvals are in place
@@ -567,7 +603,7 @@ Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**
 
 # Topic 2: Agents That Know Your Business 
 
-### Activity 2.1: Validate the Deployed Business Intelligence Agent
+### **Activity 2.1: Validate the Deployed Business Intelligence Agent**
 
 Before adding business context to the agent, we need to establish a baseline by validating the existing Business Intelligence agent deployed in Microsoft Foundry during Topic 1.
 
@@ -595,7 +631,7 @@ This baseline will help us evaluate how the agent improves as we add live operat
 
 1. Review the Response provided by agent
 
-### Activity 2.2: Connect Live Manufacturing Context
+### **Activity 2.2: Connect Live Manufacturing Context**
 
 The existing Business Intelligence agent needs access to live manufacturing data to answer questions about plant capacity, production schedules, and operational readiness. In this activity, we will connect the existing Fabric Data Agent from the `Caldova_UI` workspace to the Foundry agent using tool calling.
 
