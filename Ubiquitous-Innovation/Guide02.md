@@ -129,10 +129,15 @@ The **Future State Architecture** shows what we want the solution to look like. 
 
 Instead of starting with individual configuration tasks, you’ll describe what you want to build through a prompt. The prompt provides ******GitHub Copilot****** with the architecture, implementation requirements, resources to reuse, data needed for the scenario, and how the Fabric components should work together.
 
+**Caldova's future-state architecture** defines how its AI solution should work. In this topic, we will use GitHub Copilot to translate that design into a reviewed implementation plan, delegate development, and validate the resulting code and security checks.
+
+**Outcome**: Establish a reviewed and tested foundation for extending the existing Agent with new capabilities.
+
 ## Topic 1 - Build agents and software at the speed of AI
 Transform an existing agent design into a **production-ready, secure capability** using ****GitHub Copilot****—from whiteboard and business decisions to implementation, testing, security remediation, review, and merge. Demonstrate how **AI-assisted planning, model choice, delegated coding, governance, and security** accelerate agent development while keeping humans in control.
 
 ### Activity 1.1: Start Whiteboarding
+
 The **future-state architecture** was developed during the previous whiteboarding activity. Review the architecture below to understand the agreed design before moving into implementation. Focus on the four key areas:
 
 **Knowledge**: What the agent needs to know.
@@ -140,7 +145,6 @@ The **future-state architecture** was developed during the previous whiteboardin
 **Actions and Approvals:** What the agent can perform autonomously and where human approval is required.
 **Deployment:** Where the agent will run once implemented. The agent can already answer questions. The next activities will build on this architecture to implement the new action capability.
 
-Whiteboard Image
  ![](../Sandbox-Environment-Guides/Images/UIArchi.png)
 
 ### Activity 1.2: Turn the Whiteboard into a Reviewed Plan
@@ -177,23 +181,26 @@ Treat the document as a draft for review, not as an approved implementation plan
    **Prompt**
    ```
    For my first activity, I have attached a whiteboard-generated **future-state architecture** design. Please review the architecture thoroughly and create a document based on your analysis. Follow the instructions below for this activity:
-   
+
    Attached to future state architecture: Future-State-Architecture.png
 
    Instructions:
-   1.	Read the attached design and list down all the sections starting form left to right and explain in detail.  Also generate one tabular format to understand each section and component wise activity.
-   2.	Propose implementation of the new tool handler. 
-   3.	Review what comes back: the proposed tool handler, the changes to the agent instructions, the test approach, and the issues it would open. 
-   4.	Compare its proposed issues against the prepared “make the agent act” issue and point out the overlap. 
-   5.	Once all the above steps are completed, generate one Design-Review.md file with proper design for business team to review
-   Note: Please don’t create any other document or code at this moment apart from Design-Review.md. 
+   •	Read the attached design and list down all the sections starting  form left to right and explain in detail.  Also generate one tabular format to understand each section and component wise activity.
+   •	We have an existing agent deployed in Resource Group(rg-ubiquitous) and also code is available in attached project in the explorer  (UI).
+   •	Review the Implementation: Evaluate the proposed tool handler, its design, and integration with the agent.
+   •	Assess Changes and Testing: Review agent instruction changes, test  strategy, risks, dependencies, and new issues.
+   •	Identify Overlaps: Compare proposed issues with the existing to   Identify duplicates, gaps, and new requirements, and recommend   consolidation.
+   •	Once all the above steps are completed, generate one Design-Review.md file with proper design for business team to review
+
+   Note: Please don’t create any other document or code at this moment  apart from Design-Review.md.
+
    ```
 
    - Then click **Send** button.
 
 1. Once Copilot starts generating the response, monitor the process closely. 
 
-#### Validation
+**Validation**
 
 Once ****GitHub Copilot**** completes the execution, validate the Project Explorer to confirm whether the review document has been successfully created and is available in the expected project location.
 
@@ -225,14 +232,16 @@ Review the updated document and confirm that it accurately represents the intend
 
 
    ```
-   Great. You have created above design review guide. Now review the same with below points and provide me with instructions and after confirmation include them in the same document.
+   Great. You have created above design- review guide. Now review the same with below points and provide me with instructions and after confirmation include them in the same document.
 
    Instructions:
-   1.	Review the implementation plan generated by ****GitHub Copilot****.
-   2.	Validate the plan against the intended agent requirements and architecture.
-   3.	Verify that all required components, primitives, tools, and agent capabilities are correctly captured.
-   4.	Identify and correct any missing, incorrect, or unnecessary items in the plan.
-   5.	Finalize and approve the plan before handing it off to ****GitHub Copilot**** for implementation.
+   •	Review the implementation plan generated by ****GitHub Copilot****.
+   •	Validate the plan against the intended agent requirements and  architecture.
+   •	Verify that all required components, primitives, tools, and agent capabilities are correctly captured.
+   •	Identify and correct any missing, incorrect, or unnecessary items in the plan.
+   •	Identify Available and suitable model to suffice new architecture plan and it should support tool and knowledge compatibility.
+   •	Finalize and approve the plan before handing it off to ****GitHub Copilot**** for implementation.
+
    ```
 
    - Then click **Send** button.
@@ -390,6 +399,8 @@ Type the command below to see the available context and session details:
 
    ![](../Sandbox-Environment-Guides/Images/Model-Selection.png)
 
+with this Participants understand how **model** selection influences response quality, development efficiency, and usage cost, enabling them to choose the most appropriate **model** for each task before proceeding with implementation
+
 ---
 
 ### Activity 1.5: Hand the Build to the Coding Agent
@@ -473,6 +484,9 @@ Check that the capability meets the agreed business requirements, governance sta
 - Every business risk found has been fixed
 - The required stakeholder approvals are in place
 - The capability is ready to release
+
+Review the implementation's security findings, apply appropriate fixes, and validate the required checks and approvals before merging. This ensures security remediation is part of the development workflow rather than a separate afterthought.
+
 ### Objective
 Go through the full business process: design and review, then risk check, approval, and final release. This makes sure the capability is controlled and ready for business use before people start using it.
 
@@ -487,6 +501,7 @@ Go through the full business process: design and review, then risk check, approv
 5. Click the **Pull requests** tab and open the pull request (for example, *Fix Windows Foundry CLI invocation and BI validator false negatives #2*).
 
     ![](../Sandbox-Environment-Guides/Images/GithubPR.png)
+
 #### Step 2: Approve and run the workflows
 1. On the pull request, click **Approve and run workflows**.
 2. This starts the required checks.
@@ -525,7 +540,9 @@ Get approval from a **person** or a **CODEOWNER**.
      - Handling for the HR-specific refusal wording, plus new positive and negative regression test cases
    - The tabs: **Conversation**, **Commits**, **Checks**, and **Files changed**
    - **Reviewers**: Copilot should appear in the list
- ![](../Sandbox-Environment-Guides/Images/PR-I.png)
+
+   ![](../Sandbox-Environment-Guides/Images/PR-I.png)
+
 #### Validation 2: Merge the pull request
 1. Scroll to the bottom of the pull request conversation.
 2. Check that the merge box says:
@@ -533,6 +550,7 @@ Get approval from a **person** or a **CODEOWNER**.
    - *Merging can be performed automatically.*
 3. Click **Merge pull request**.
 4. Confirm the merge to commit the changes into the base branch.
+
   ![](../Sandbox-Environment-Guides/Images/PR-II.png)
 
 > **Tip:** Before you merge, you can still mention `@copilot` in a comment to ask for more changes to the pull request.
@@ -545,7 +563,6 @@ For an AI solution to deliver meaningful business value, its agents must also un
 Think about this: If an agent can generate code and understand a workflow, what additional capabilities does it need to answer business questions accurately and make context-aware recommendations?
 
 Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**, and **Work IQ** can provide that context.
-
 ---
 
 # Topic 2: Agents That Know Your Business 
@@ -570,9 +587,9 @@ This baseline will help us evaluate how the agent improves as we add live operat
 
    ```
    Please follow below instructions
-   1.	Open and validate the existing Caldova Pharma Business Intelligence agent(supply-chain-Bi-agent) deployed in Microsoft Foundry 
-   2.	Review its model, role, instructions, and capabilities without modifying or recreating the agent.
-   3.	Run the following baseline Supply Chain prompt and summarize the response, including any information gaps
+   •	Open and validate the existing Caldova Pharma Business Intelligence agent(supply-chain-bi-agent) deployed in Microsoft Foundry 
+   • Review its model, role, instructions, and capabilities without modifying or recreating the agent.
+
    ```
  ![](../Sandbox-Environment-Guides/Images/task2.1.png)
 
@@ -581,6 +598,24 @@ This baseline will help us evaluate how the agent improves as we add live operat
 ### Activity 2.2: Connect Live Manufacturing Context
 
 The existing Business Intelligence agent needs access to live manufacturing data to answer questions about plant capacity, production schedules, and operational readiness. In this activity, we will connect the existing Fabric Data Agent from the `Caldova_UI` workspace to the Foundry agent using tool calling.
+
+**Verify the Existing Fabric Data Agent**
+
+Before adding the **Data Agent** to the Microsoft Foundry agent, verify that the required Data Agent is available in the provided Fabric workspace.
+
+1. Navigate back to the Azure portal and Click on the **App launcher (1)** and select **Microsoft fabric** icon.
+
+   ![](../Sandbox-Environment-Guides/Images/amp55.png)
+
+1. Locate and open the **Ubiquitous-Innovation-g8g0y** workspace.
+
+   ![](../Sandbox-Environment-Guides/Images/WS.png)
+
+1. Verify that the **Ubiquitous_Innovation_DataAgent** Data Agent is listed in the workspace, as shown in the reference screenshots.
+
+   ![](../Sandbox-Environment-Guides/Images/fabricDA.png)
+
+Confirm that the Data Agent is available before proceeding to the next activity.
 
 **What will this prompt do?**
 
@@ -595,11 +630,12 @@ This enables the Business Intelligence agent to use live manufacturing context w
 1. Copy the below prompt and paste it in chat window
 
    ```
-   Follow the instructions below to connect the existing Data Agent from the Caldova_UI workspace as a tool in the existing Microsoft Foundry agent (supply-chain-Bi-agent).
-   •  Please read the design-review.md file and upgrade my foundry agent accordingly(example: model and instructions)
-   •	Locate the existing Data Agent in the Caldova_UI workspace.
-   •	Configure and connect the Data Agent under the Tools section of the existing Foundry agent using tool calling.
-   •	Ensure the Foundry agent can invoke the Data Agent to retrieve operational data when answering relevant questions.
+   Follow the instructions below to integrate the existing Microsoft Fabric Data Agent into the existing Microsoft Foundry agent (supply-chain-Bi-agent) as a tool, following the approach used in the ubiquitous-innovation workspace.
+   •	Read Design-Review.md and update the existing Foundry agent    accordingly, including selecting a compatible model that supports the Fabric Data Agent tool and updating the agent instructions.
+   •	Identify the existing Fabric Data Agent   (Ubiquitous-Innovation-dataagent) and Connect through the Tools section using the Fabric IQ OneLake Catalog integration.
+   •	Ensure the Foundry agent can invoke the Fabric Data Agent to   retrieve operational data and provide accurate, context-aware responses to relevant business questions.
+   Note: Reuse existing workspaces, agents, and resources.
+
    ```
  ![](../Sandbox-Environment-Guides/Images/task2.2.png)
 
@@ -623,6 +659,24 @@ This enables the Business Intelligence agent to use live manufacturing context w
 Operational data alone may not explain the procedures and constraints that influence manufacturing decisions. The agent also needs access to Caldova's manufacturing documents, including scheduling guidance and relevant procedures.
 
 In this activity, we will create a Foundry IQ knowledge base from the existing documents stored in Azure Blob Storage and connect it to the Knowledge section of the existing Foundry agent.
+
+**Verify the SharePoint Source Documents in Azure Blob Storage**
+
+Before connecting the enterprise knowledge source, verify that the required documents are available in the provided **Azure Storage account**.
+
+1. Navigate to the Azure portal and open **rg-Ubiquitous** resource group.
+
+1. Under Resources, locate and open the **adlsubiquitousg8g0y** storage account.
+
+   ![](../Sandbox-Environment-Guides/Images/strg.png)
+
+1. click on **Containers** and Open the **data** container.
+
+1. Verify that the following documents are available:
+
+   ![](../Sandbox-Environment-Guides/Images/strgcheck.png)
+
+Confirm that all five documents are present before proceeding with the knowledge source configuration.
 
 **What will this prompt do?**
 
@@ -668,6 +722,23 @@ This allows the agent to combine operational data with documented manufacturing 
 To make better launch decisions, the Business Intelligence agent must understand not only manufacturing operations and procedures, but also Caldova's business priorities, commitments, and team responsibilities.
 
 In this activity, we will connect the existing SharePoint source through ****Work IQ**** as a tool for the existing Microsoft Foundry agent.
+
+**Verify the SharePoint Knowledge Base Documents**
+
+Before connecting the enterprise knowledge source to the agent, verify that the required documents are available in SharePoint.
+
+1. Open the [Enterprise AI Knowledge Base – SharePoint](https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base%5C&viewid=2aae9886-5883-4e2a-8949-612beaeb50ac) link.
+
+1. Verify that the following documents are available:
+   - `Caldova_Business_Roles_and_Responsibilities.docx`
+   - `Caldova_Launch_Business_Context.docx`
+   - `Caldova_Launch_Commitments_and_Decisions.docx`
+
+1. Confirm that all three documents are present and accessible.
+
+   ![](../Sandbox-Environment-Guides/Images/sharepointpic.png)
+
+1. Proceed to configure the SharePoint knowledge source for the agent.
 
 **What will this prompt do?**
 
@@ -759,7 +830,7 @@ This approach helps us measure the agent's response quality and validate whether
 
  In this topic, we explored how agents use enterprise data and knowledge to provide context-aware insights. However, complex business processes often require multiple specialized agents to work together.
 
- In this topic, we will explore how **Microsoft Copilot Studio** coordinates workflows, connects with **Microsoft Foundry agents**, and brings their outputs together through a **Market Launch Coordinator**.
+ In the next topic, we will explore how **Microsoft Copilot Studio** coordinates workflows, connects with **Microsoft Foundry agents**, and brings their outputs together through a **Market Launch Coordinator**.
 
 ---
 
