@@ -218,7 +218,7 @@ Treat the document as a draft for review, not as an approved implementation plan
 
    - Then click **Send** button.
 
-     ![](../Ubiquitous-Innovation/Images/u84.png)
+     ![](../Ubiquitous-Innovation/Images/u86.png)
 
 1. Once Copilot starts generating the response, monitor the process closely. 
 
@@ -266,6 +266,8 @@ Review the updated document and confirm that it accurately represents the intend
    ```
 
    - Then click **Send** button.
+
+     ![](../Ubiquitous-Innovation/Images/u87.png)   
 
 1. Once Copilot starts generating the response, monitor the process closely. 
 
