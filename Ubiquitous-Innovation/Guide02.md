@@ -163,10 +163,6 @@ After Copilot finishes, open `Design-Review.md` in the Project Explorer. Check t
 
 Treat the document as a draft for review, not as an approved implementation plan. It becomes the reference for the next activity, where you will confirm the requirements and resolve any gaps before delegating the build.
 
-1. From the ******GitHub Copilot**** Chat**, select **Models (1)** and then select **Trust Workspace (2)** to enable models.
-
-   ![](../Ubiquitous-Innovation/Images/u40.png)
-
 1. Click **Auto (1)** and then **turn off (2)** the **Auto** toggle. 
 
    ![](../Ubiquitous-Innovation/Images/u31.png)
