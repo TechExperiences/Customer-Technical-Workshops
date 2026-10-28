@@ -99,7 +99,7 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
    ![](../Ubiquitous-Innovation/Images/u66.png)
 
-1. Once the authentication is done, navigate back to Visual Studio Code and make sure cloning is done.
+1. Once the authentication is done, navigate back to **Visual Studio Code** and make sure cloning is done.
 
    ![](../Ubiquitous-Innovation/Images/u67.png)
 
