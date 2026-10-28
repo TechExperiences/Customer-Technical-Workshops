@@ -761,11 +761,11 @@ Before connecting the enterprise knowledge source, verify that the required docu
 
 1. Navigate to the Azure portal and open **rg-Ubiquitous** resource group.
 
-1. Under Resources, locate and open the **adlsubiquitousg8g0y** storage account.
+1. Under Resources, locate and open the storage account with the name starts with **adlsubiquitous**.
 
    ![](../Sandbox-Environment-Guides/Images/strg.png)
 
-1. click on **Containers** and Open the **data** container.
+1. Click on **Containers** under **Data Storage** and Open the **data** container.
 
 1. Verify that the following documents are available:
 
