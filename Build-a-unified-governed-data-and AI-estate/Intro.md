@@ -1,4 +1,5 @@
-# Build a Unified, Governed data and AI estate CAIP Customer Workshops
+# Microsoft Technical Workshop: Unify a Trusted Data Estate for Your AI
+
 *Overview about Build a Unified, Governed data and AI estate*
 
 ![](../Sandbox-Environment-Guides/Images/unifiedHome.png)
