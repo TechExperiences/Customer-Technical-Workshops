@@ -216,6 +216,8 @@ Treat the document as a draft for review, not as an approved implementation plan
 
    - Then click **Send** button.
 
+     ![](../Ubiquitous-Innovation/Images/u84.png)
+
 1. Once Copilot starts generating the response, monitor the process closely. 
 
 #### Validation
