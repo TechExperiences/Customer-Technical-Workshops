@@ -110,9 +110,10 @@ The **whiteboarding** exercise established the business requirements and the pro
 We will follow the solution through four connected stages:
 
 1. **Build agents and software at the speed of AI:** Translate the architecture into a reviewed implementation plan, delegate development, and validate code quality and security.
-2. **Agents That Know Your Business:** Extend the existing Supply-Chain-BI-Agent with live manufacturing data, enterprise knowledge, and organizational context, then evaluate its responses.
-3. **From One Agent to a Coordinated System:** Introduce the Market Launch Coordinator in Copilot Studio and connect it to the specialist agent so it can coordinate business questions and launch-readiness decisions.
-4. **Trust and Cost Are the Same Conversation:** Discover the agent in Agent 365, review its identity and security posture, test sensitive-data protection, and examine the available usage and billing information.
+   Let's name it here that the agent built is Supply-Chain BI-Agent since we referred to it in the next process of Agents That Know Your Business
+3. **Agents That Know Your Business:** Extend the existing Supply-Chain-BI-Agent with live manufacturing data, enterprise knowledge, and organizational context, then evaluate its responses.
+4. **From One Agent to a Coordinated System:** Introduce the Market Launch Coordinator in Copilot Studio and connect it to the specialist agent so it can coordinate business questions and launch-readiness decisions.
+5. **Trust and Cost Are the Same Conversation:** Discover the agent in Agent 365, review its identity and security posture, test sensitive-data protection, and examine the available usage and billing information.
 
 Each stage builds on the previous one. We begin with the architecture and implementation plan, add the knowledge needed to answer business questions, expose the capability through a coordinated agent experience, and then examine how the solution can be governed and operated responsibly.
 
