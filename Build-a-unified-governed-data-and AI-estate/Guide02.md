@@ -137,7 +137,7 @@ This allows us to establish the foundation for the unified data solution through
    
    Instructions:
    
-   Use existing Resource Group (rg-unified) and proceed further.
+   Use existing Resource Group (rg-Unified) and proceed further.
    
    Use existing storage account(storage<inject key="Deployment-ID" enableCopy="false"/>) and container inside this.
    
