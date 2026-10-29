@@ -970,7 +970,7 @@ Dedicated environment need to created for each user to allocate capacity usage a
 
 ### Create and Configure a New Agent in Copilot Studio
 
-1. Open **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/copilot/products/copilot-studio)**.
+1. Open **[Microsoft Copilot Studio](https://copilotstudio.microsoft.com/)**.
 
 1. Select the created environment and start the further work.
 
