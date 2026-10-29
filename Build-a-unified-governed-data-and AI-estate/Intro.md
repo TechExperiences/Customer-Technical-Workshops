@@ -77,9 +77,9 @@ By the end of the workshop, participants will have:
    ![](../Sandbox-Environment-Guides/Images/amp17.png)
 
 
-### Step : Verify Resources in the Azure Resource Group
+### Verify Resources in the Azure Resource Group
 
-1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and click on **rg-unified** Resource Group.
+1. Navigate to the [Azure portal](https://portal.azure.com/). Search for **Resource groups**. and click on **rg-Unified** Resource Group.
 
    ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u37.png)
 
