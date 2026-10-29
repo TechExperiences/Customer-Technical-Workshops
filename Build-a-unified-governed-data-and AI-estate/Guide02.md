@@ -502,6 +502,8 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
   
    - Scroll down, expand **Q&A (1)**, select **Turn on Q&A (2)** and then **Apply (3)**.
 
+     ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u103.png)   
+
    - Once it is done, navigate back to report and send the prompt in Copilot again. 
 
 1. Once Copilot finishes creating the report, review the generated report.
