@@ -490,7 +490,7 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    >**Note**: If you get any message like the below after sending the prompt:
 
-    ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u100.png)
+     ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u100.png)
 
    - Click on **Settings (1)** from top and select **Power BI Settings (2)**.
 
