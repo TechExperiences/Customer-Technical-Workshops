@@ -488,6 +488,22 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    ![](../Sandbox-Environment-Guides/Images/PowerBI-Prompt.png)
 
+   >**Note**: If you get any message like the below after sending the prompt:
+
+    ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u100.png)
+
+   - Click on **Settings (1)** from top and select **Power BI Settings (2)**.
+
+     ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u101.png)
+
+   - Select **Sematic models** tab.
+
+     ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u102.png)
+  
+   - Scroll down, expand **Q&A (1)**, select **Turn on Q&A (2)** and then **Apply (3)**.
+
+   - Once it is done, navigate back to report and send the prompt in Copilot again. 
+
 1. Once Copilot finishes creating the report, review the generated report.
 
    ![](../Sandbox-Environment-Guides/Images/Report.png)
