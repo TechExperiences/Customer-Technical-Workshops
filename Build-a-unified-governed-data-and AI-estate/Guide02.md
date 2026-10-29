@@ -630,4 +630,4 @@ In this exercise, you will publish the existing Fabric Data Agent, access it thr
 - A single place to discover, govern and secure data assets
 - Answers to cross-functional questions in Microsoft 365 Copilot
 
-#### Congratulations! You have successfully completed the `Rapid Prototyping using ****GitHub Copilot****` session and validated the Unified governed Data&AI estate.
+#### Congratulations! You have successfully completed the `Rapid Prototyping using GitHub Copilot` session and validated the Unified governed Data&AI estate.
