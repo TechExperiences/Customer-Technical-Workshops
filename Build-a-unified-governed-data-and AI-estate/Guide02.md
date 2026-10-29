@@ -482,8 +482,11 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 1. Click on **Copilot** icon on top and paste the below prompt and click send button to create Report 
 
    ```
-   Create a Caldova Pharma Operations Report using only the attached **Semantic Model**. Build a clean single-page dashboard with 5 KPI cards at the top (Orders, Revenue/Sales, Products, Customers, Inventory/Stock), followed by 3–4 visuals including a donut chart, bar chart, line chart, and trend chart. Use relevant fields and measures from the model without inventing data, and apply a professional, consistent blue theme with clear titles, proper formatting, and an executive-friendly layout.
+   Create a Caldova Pharma Operations Report using only the attached **Semantic Model**. Build a clean single-page dashboard with 5 KPI cards visuals at the top (Orders, Revenue/Sales, Products, Customers, Inventory/Stock), followed by 4 visuals including a donut chart, bar chart, line chart, and trend chart. Use relevant fields and measures from the model without inventing data, and apply a professional, consistent blue theme with clear titles, proper formatting, and an executive-friendly layout.
 
+   Please take the decision at your end and create these above visuals in this report.
+ 
+   Also, use each visual title font size as 16 and boarder with blue color.
    ```
 
    ![](../Sandbox-Environment-Guides/Images/PowerBI-Prompt.png)
