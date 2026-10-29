@@ -488,7 +488,7 @@ This demonstrates how ****GitHub Copilot**** can help move from data integration
 
    ![](../Sandbox-Environment-Guides/Images/PowerBI-Prompt.png)
 
-   >**Note**: If you get any message like the below after sending the prompt:
+   >**Note**: If you encounter a message like the one below after submitting the prompt:
 
      ![](../Build-a-unified-governed-data-and%20AI-estate/Images/u100.png)
 
