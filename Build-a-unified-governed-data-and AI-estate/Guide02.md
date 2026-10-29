@@ -385,7 +385,7 @@ Next, verify that the business application files are available in Azure Blob Sto
  
    Instructions:
    
-   1. Use existing Resource Group: rg-unified.
+   1. Use existing Resource Group: rg-Unified.
    
    2. Create a new Fabric SQL Database in the existing Fabric Workspace (Caldova-Pharma<inject key="Deployment-ID" enableCopy="false"/>).
    
