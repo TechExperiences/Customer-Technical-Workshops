@@ -164,6 +164,7 @@ The prompt instructs ****GitHub Copilot**** to:
 - Identify the required agent-instruction changes, test approach, and proposed issues.
 - Compare the proposed issues with the existing **“make the agent act”** issue.
 - Create only `Design-Review.md`, as requested.
+- What "Make the agent act" issue are you referring to here.
 
 #### What Should You Validate?
 
