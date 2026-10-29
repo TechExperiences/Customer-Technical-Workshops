@@ -401,85 +401,34 @@ Based on the context, the user can switch between the available models and valid
 1. In the left pane under **Projects**, pick your project and session (for example, *Add Supply Chain BI Agent*).
 
 #### Step 2: Review the available models
-1. Click in the chat box (*"Ask anything. Use / for commands, @ files, & sessions, # issues…"*).
-2. Type the command below to list the models your organization allows:
+1. Type the below command in  to see all the models:
+
    ```
    /model
    ```
    ![](../Sandbox-Environment-Guides/Images/app.png)
 
+
    ![](../Sandbox-Environment-Guides/Images/model.png)
    
+>**Note:** User can select any particular model and execute prompts. However, the response will be based on the selected model.
 
-#### Step 3: Switch between models
-1. Pick a different model from the list that `/model` shows.
-2. Run the same task or prompt with each model and compare the answers.
-3. Notice that each model suits some tasks better than others.
+#### Step 3: Turn on Auto model selection
+User can select Auto option which can help while executing tasks and select appropriate models automatically based on requirements.
 
-#### Step 4: Turn on Auto model selection
 1. Type the command below so GitHub Copilot picks a suitable model for you:
+
    ```
    /model auto
    ```
 
    ![](../Sandbox-Environment-Guides/Images/automodel.png)
 
-2. Copilot bases its choice on:
-   - **The task**: what you're asking it to do
-   - **Effort**: how complex the work is
-   - **Optimization setting**: for example, **Balanced** or **Intelligence**
-#### Step 5: Check the optimization setting
-1. Check the bottom bar of the chat box. It shows the active mode and setting, for example **Interactive | Auto · Intelligence**.
-2. Change the setting (**Balanced** or **Intelligence**) if you need to. After a change, the chat shows a note such as *"Auto effort changed to Intelligence"*.
-
-#### Step 6: See which model Auto picked
-1. Look at the bar below Copilot's answer.
-2. It names the model that handled the request, for example **Auto · GPT-6 Luna**.
-
-#### Step 7: Review session usage
-Type the command below to see how much the session has used:
-```
-/usage
-```
-#### Step 8: Review context and session information
-Type the command below to see the available context and session details:
-```
-/context
-```
-#### Step 9: Compare a Frontier model with Auto mode
-1. Run the **same task** with a **Frontier model** that you choose by hand.
-2. Run it again in **Auto** mode.
-3. Compare the two runs on:
-   - **Output quality**
-   - **Performance** (speed and response time)
-   - **Value**
-   - **Cost** (look at `/usage`)
-4. Decide when each approach works best:
-   - **Frontier model**: complex reasoning work that needs a lot of capability.
-   - **Auto mode**: everyday work, where Copilot balances capability and cost for you.
-
-#### Step 10: Make your final choice
-1. Use what you learned to switch models and check how well each one fits the task.
-2. Finally, choose **Auto** so GitHub Copilot picks the best model for the requirements and complexity of the work.
-
-#### Key UI Indicators
-- **Response bar** (for example, `Auto · GPT-6 Luna`): the model that handled the response
-- **Chat box bar** (for example, `Interactive | Auto · Intelligence`): the current mode and optimization setting
-- **Status note** (for example, *"Auto effort changed to Intelligence"*): confirms that the setting changed
-
-with this Participants understand how **model** selection influences response quality, development efficiency, and usage cost, enabling them to choose the most appropriate **model** for each task before proceeding with implementation
-
 ---
 
 ### **Activity 1.5: Hand the Build to the Coding Agent**
 
-Validate the local changes from Activities 1.2 and 1.3, then use /delegate from the same ****GitHub Copilot**** session to hand off the implementation to the coding agent, accepting the checkpoint so the agent branch includes the existing scaffold and updated instructions. While the agent works, review the session log and reasoning, and demonstrate concurrent work by showing another active session before returning to the current task. 
-
-Once complete, open the draft pull request in GitHub and verify that the diff includes the tool handler, updated agent instructions, and tests. Before human review, request a Copilot code review, evaluate its findings, and then add a follow-up comment beginning with @copilot requesting any necessary revisions so Copilot updates and commits the changes to the same branch.
-
-With the implementation plan reviewed, the next step is to move from planning to development. GitHub Copilot's coding agent can work on the agreed changes in a delegated task while preserving the existing project context.
-
-Rather than accepting generated code immediately, we will use a draft pull request as the checkpoint for inspecting the implementation, tests, and agent-instruction changes.
+Delegate the implementation to GitHub Copilot’s coding agent using /delegate in the current session. Accept the checkpoint, monitor progress, and review the agent’s work. Once complete, open the draft pull request and verify the implementation, updated agent instructions, and tests. Request a Copilot code review, evaluate its findings, and use an @copilot follow-up comment to address valid issues and commit revisions to the same branch. Use the draft PR to validate changes before human review and merging.
 
 #### What Will This Prompt Do?
 
@@ -495,47 +444,23 @@ When the coding agent completes the task, inspect the draft pull request. Confir
 
 Do not merge solely because the coding agent reports completion. Human review, required checks, and the applicable approval process must still be satisfied.
 
-#### Step 1: Check the local changes
-Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in place and working before you hand off the build.
+#### Executing /delegate to setup checkpoint
 
-#### Step 2: Hand off the build to the coding agent
-1. Use the **same GitHub Copilot session** you used in the earlier activities.
-2. Copy this prompt and paste it into the Copilot chat window:
+1. Copy this prompt and paste it into the Copilot chat window:
    ```
    1. Run /delegate and accept the checkpoint to delegate the implementation.
    2. Update Design-Review.md with the final agent instructions, tool-handler requirements, constraints, and test approach.
    Monitor the coding-agent execution and
    3. Create a Draft Pull Request when complete.
    ```
-3. Click **Send**.
+1. Click **Send**.
    ![](../Sandbox-Environment-Guides/Images/Delegate.png)
 
 4. When Copilot asks about the checkpoint, **accept it**. This way the agent's branch includes:
    - The existing scaffold
    - The updated instructions
 
-#### Step 3: Watch the coding agent work
-1. Read the **session log** while the agent works.
-2. Read the agent's **reasoning** to see how it approaches the build.
-
-   ![](../Ubiquitous-Innovation/Images/u95.png)
-
-#### Step 4: Show that you can work in parallel
-1. Open **another active session** from the left pane in GitHub Copilot. This shows you can keep working while the agent runs in the background.
-2. Go back to the **current task** session.
-
-#### Step 5: Open and check the draft pull request
-1. When the agent is done, open the **draft pull request** in GitHub.
-2. Check that the diff includes:
-   - [ ] The **tool handler**
-   - [ ] The **updated agent instructions**
-   - [ ] The **tests**
-
-#### Step 6: Ask Copilot to review the code
-1. **Before any person reviews the pull request**, ask Copilot for a **code review**.
-2. Read what Copilot found and decide which findings are valid and need fixing.
-
-#### Step 7: Ask `@copilot` for fixes
+#### Step 7: Ask `@copilot` for fixes - to be check once review done.
 1. Add a follow-up comment that **starts with `@copilot`**. Paste this prompt:
    ```
    1. @copilot Please address the valid review findings, update the implementation, Design-Review.md, agent instructions, and tests as ...
@@ -553,93 +478,52 @@ Make sure the local changes from **Activity 1.2** and **Activity 1.3** are in pl
 
 ### **Activity 1.6: Fix Security in the Same Pull Request (GitHub)**
 
-Check that the capability meets the agreed business requirements, governance standards, approval limits, and risk controls. Make sure that:
-- Every business risk found has been fixed
-- The required stakeholder approvals are in place
-- The capability is ready to release
-
-Review the implementation's security findings, apply appropriate fixes, and validate the required checks and approvals before merging. This ensures security remediation is part of the development workflow rather than a separate afterthought.
-
-### Objective
-Go through the full business process: design and review, then risk check, approval, and final release. This makes sure the capability is controlled and ready for business use before people start using it.
+Validate business requirements, governance, risk controls, and security findings. Fix identified issues, obtain required approvals, verify all checks, and merge only when the capability is secure and release-ready.
 
 #### Step 1: Open the pull request 
 
-1. Open a new tab in Microsoft Edge.
+1. After execution of above prompt, draft pull request will be created and agent will provide a link to view the PR.
 
-1. Copy the GitHub URL.
+1. Click the below created **PullRequest** for review
 
+   ![](../Ubiquitous-Innovation/Images/PRLink.png)
+
+1. Now admin can view PR.
+
+   ![](../Ubiquitous-Innovation/Images/PullRequestReview.png)
+
+1. Admin can review the PR details and files to be changed and provide his review comments and click save.
+
+   ![](../Ubiquitous-Innovation/Images/ReviewComments.png)
+
+1. Add a follow-up comment that **starts with `@copilot`**. Paste this prompt:
    ```
-    https://github.com/
+   1. @copilot Please address the valid review findings, update the implementation, Design-Review.md, agent instructions, and tests as ...
+   2. Confirm the revised changes are committed to the same PR branch and report any remaining issues requiring human review.
    ```
+   ![](../Ubiquitous-Innovation/Images/CopilotPrompt.png)
 
-1. Paste the copied URL into the address bar and press Enter.
+1. We can see review comments
 
-1. Select the repository **CL-Labs-04 / UI-<inject key="Deployment-ID" enableCopy="false"/> (1)** amd click **View all (2)** under Pull requests.
+   ![](../Ubiquitous-Innovation/Images/CopilotRivew.png)
 
-   ![](../Ubiquitous-Innovation/Images/u94.png)
+1. Now need to merge our PR in to main branch. 
 
-1. Click the **Pull requests** tab and open the pull request (for example, *Fix Windows Foundry CLI invocation and BI validator false negatives #2*).
+   - Click **ViewPR** and enable **Agent merge**
+   - Click **Merge pull request**
+   - Click **Draft** to navigate to merge process
 
-#### Step 2: Approve and run the workflows
-1. On the pull request, click **Approve and run workflows**.
-2. This starts the required checks.
+   ![](../Ubiquitous-Innovation/Images/PRMerge.png)
 
-#### Step 3: Check the code scanning results
-1. Open the **code scanning** results for the pull request. You'll find them in the **Checks** tab or under **Security and quality**.
-2. Find the vulnerability flagged in the **tool handler**.
+1. click **Ready for review** and then click **Merge**
 
-#### Step 4: Apply the Autofix and commit it
-1. Read the **Autofix** suggestion for the flagged vulnerability.
-2. Commit the fix **directly to the same pull request branch**.
+   ![](../Ubiquitous-Innovation/Images/MergePR-I.png)
 
-#### Step 5: Wait for the checks to pass
-Wait until **every required check and validation passes**.
+   >Note: There should not be any unresolved issues.
 
-#### Step 6: Get the required approval
-Get approval from a **person** or a **CODEOWNER**.
+1. After successfull merge, we can see the confirmation message.
 
-#### Step 7: Review the changes and merge
-1. Look over the **final changes**. The **Files changed** tab shows the diff.
-2. **Merge** the pull request.
-
-### Validation
-
-**Expected result:** The pull request is created and ready for review and commit.
-
-#### Validation 1: Open the pull request and check the summary
-1. Open the pull request on GitHub.
-2. Check these items:
-   - The title (for example, *Fix Windows Foundry CLI invocation and BI validator false negatives #2*) and the **Open** status
-   - The source and target branches: it merges from **odl-user-<inject key="Deployment-ID" enableCopy="false"/>-clabs-publish-bi-agent-update** into `feature/supply-chain-agent-gpt5mini`
-   - The **Ready to merge** label at the top right
-   - The **Summary** section in the PR description, which lists the changes made. For example:
-     - A shared Foundry REST helper used by the BI publishing and validation scripts
-     - A fix for how Azure CLI is called on Windows MSI installs
-     - Handling for the HR-specific refusal wording, plus new positive and negative regression test cases
-   - The tabs: **Conversation**, **Commits**, **Checks**, and **Files changed**
-   - **Reviewers**: Copilot should appear in the list
-
-   ![](../Sandbox-Environment-Guides/Images/PR-I.png)
-
-#### Validation 2: Merge the pull request
-1. Scroll to the bottom of the pull request conversation.
-2. Check that the merge box says:
-   - **No conflicts with base branch**
-   - *Merging can be performed automatically.*
-3. Click **Merge pull request**.
-4. Confirm the merge to commit the changes into the base branch.
-
-  ![](../Sandbox-Environment-Guides/Images/PR-II.png)
-
-> **Tip:** Before you merge, you can still mention `@copilot` in a comment to ask for more changes to the pull request.
-
-
-In this topic, we explored how GitHub Copilot helps accelerate software development, review architecture, generate code, and identify potential security concerns. These capabilities help teams build solutions faster, but developing an application is only one part of the journey.
-
-For an AI solution to deliver meaningful business value, its agents must also understand enterprise data, business terminology, operational context, and organizational knowledge. The next topic builds on this foundation by exploring how business data and enterprise knowledge can ground agents in relevant information.
-
-Think about this: If an agent can generate code and understand a workflow, what additional capabilities does it need to answer business questions accurately and make context-aware recommendations?
+   ![](../Ubiquitous-Innovation/Images/PRMerged.png)
 
 ### Let's explore how business data, **Microsoft Fabric Data Agent**, **Foundry IQ**, and **Work IQ** can provide that context.
 ---
@@ -669,14 +553,19 @@ This baseline will help us evaluate how the agent improves as we add live operat
 
    ```
    Please follow below instructions
-   •	Open and validate the existing Caldova Pharma Business Intelligence agent(supply-chain-bi-agent) deployed in Microsoft Foundry 
-   • Review its model, role, instructions, and capabilities without modifying or recreating the agent.
+   •	Use exiting rerouce group (rg-Ubiquitous)
+   •	Connect Foundry Project (ubiquitous-innovation-project) and open and validate the existing Caldova Pharma Business Intelligence agent(supply-chain-bi-agent) deployed in Microsoft Foundry 
+   • Review and provide the details about used what model, role, instructions, and capabilities without modifying or recreating the agent.
+
+   Dont create any new agent and dont modify existing agent.
 
    ```
+   **Prompt execution**
    ![](../Sandbox-Environment-Guides/Images/task2.1.png)
 
 1. Review the Response provided by agent
 
+   ![](../Sandbox-Environment-Guides/Images/OldAgentDetails.png)
 ### **Activity 2.2: Connect Live Manufacturing Context**
 
 The existing Business Intelligence agent needs access to live manufacturing data to answer questions about plant capacity, production schedules, and operational readiness. In this activity, we will connect the existing Fabric Data Agent from the `Caldova_UI` workspace to the Foundry agent using tool calling.
