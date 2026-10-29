@@ -8,10 +8,10 @@
 
 In this hands-on technical workshop, you'll design and build a unified, open and governed data and AI estate with Microsoft Fabric, OneLake, Azure Integration Services, Power BI and Fabric Data Agent. You'll start with a whiteboarding session to agree on business goals, current challenges and priorities. Then you'll build a future-state design that:
 
-- connects operational and analytical data without copying it more than necessary
-- brings application data into the platform
-- manages discovery, governance and security in one place
-- gives reports and AI one trusted source of business meaning
+- Connects operational and analytical data without copying it more than necessary
+- Brings application data into the platform
+- Manages discovery, governance and security in one place
+- Gives reports and AI one trusted source of business meaning
 
 ## Caldova Scenario
 
