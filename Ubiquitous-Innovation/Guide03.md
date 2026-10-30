@@ -137,7 +137,47 @@ Before connecting the enterprise knowledge source to the agent, verify that the 
 
 1. Lets add the **SharePoint** under the **Tools** section of the existing Foundry agent.
 
-1. 
+1. Click **Add (1)** frop down and then select **Add tools (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/ui10.png)
+
+1. Select **SharePoint (1)** and then **Add tool (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/ui11.png)
+
+1. Enter the below **Site URL (1)** and then **Connect (2)**.
+
+   ```
+   https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx
+   ```
+
+   ![](../Ubiquitous-Innovation/Images/ui12.png)
+
+1. Confirm that the **SharePoint** source is connected properly and the relevant business-context documents are accessible.
+
+   ![](../Ubiquitous-Innovation/Images/ui13.png)
+
+1. Copy the following prompt and paste it into the **Agent Playground**:
+
+   ```
+   What are Caldova's main priorities for the November launch?
+   ```
+
+    ![](../Sandbox-Environment-Guides/Images/sharepointresponse.png)
+
+1. Review the response provided by the Foundry agent and verify that it uses the relevant organizational context, including launch priorities, business commitments, and team responsibilities.
+
+1. To Verify that the agent retrieves accurate information from the **Fabric Data Agent, Foundry IQ knowledge base, and **Work IQ**** integrations.
+
+1. Test the existing agent in the **Agent Playground** , copy below prompt and paste it in **Agent Playground**
+
+   ```
+   Assess Caldova's manufacturing readiness for the November launch of product P0001. Identify key risks, explain the relevant business and manufacturing considerations, and recommend appropriate next steps using the available information.
+   ```
+
+1. Review the responses and confirm that all integrations work as expected.
+
+   ![](../Sandbox-Environment-Guides/Images/comboresponse.png)
 
 
 
