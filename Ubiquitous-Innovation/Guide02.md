@@ -409,7 +409,7 @@ Based on the context, the user can switch between the available models and valid
    ![](../Sandbox-Environment-Guides/Images/app.png)
 
 
-   ![](../Sandbox-Environment-Guides/Images/model.png)
+   ![](../Sandbox-Environment-Guides/Images/Model.png)
    
 >**Note:** User can select any particular model and execute prompts. However, the response will be based on the selected model.
 
@@ -460,19 +460,7 @@ Do not merge solely because the coding agent reports completion. Human review, r
    - The existing scaffold
    - The updated instructions
 
-#### Step 7: Ask `@copilot` for fixes - to be check once review done.
-1. Add a follow-up comment that **starts with `@copilot`**. Paste this prompt:
-   ```
-   1. @copilot Please address the valid review findings, update the implementation, Design-Review.md, agent instructions, and tests as ...
-   2. Confirm the revised changes are committed to the same PR branch and report any remaining issues requiring human review.
-   ```
-   > **Note:** The end of the first line was cut off in the screenshot (it stops at "tests as …"). Copy the full line from your lab guide.
-2. Click **Send**.
-   ![](../Sandbox-Environment-Guides/Images/Delegate1.png)
 
-#### Step 8: Check the fixes
-1. Confirm that Copilot **committed the changes to the same PR branch**.
-2. Read Copilot's list of **remaining issues** that a person needs to review before the pull request is finalized.
 
 ---
 
