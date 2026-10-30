@@ -17,9 +17,9 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
 ### Let's explore how `business data, Microsoft Fabric Data Agent, Foundry IQ, and Work IQ` can provide that context.
 
-## Agents That Know Your Business 
+## Topic 1: Agents That Know Your Business 
 
-### Activity 2.1: Connect Live Manufacturing Context
+### Activity 1.1: Connect Live Manufacturing Context
 
 The existing Business Intelligence agent needs access to live manufacturing data to answer questions about plant capacity, production schedules, and operational readiness. In this activity, we will connect the existing Fabric Data Agent from the `Caldova_UI` workspace to the Foundry agent using tool calling.
 
@@ -70,7 +70,7 @@ Before adding the **Data Agent** to the Microsoft Foundry agent, verify that the
    ![](../Ubiquitous-Innovation/Images/ui6.png)
 
 
-### Activity 2.2: Ground the Agent with Enterprise Knowledge
+### Activity 1.2: Ground the Agent with Enterprise Knowledge
 
 Operational data alone may not explain the procedures and constraints that influence manufacturing decisions. The agent also needs access to Caldova's manufacturing documents, including scheduling guidance and relevant procedures.
 
@@ -112,7 +112,7 @@ Confirm that all five documents are present before proceeding with the knowledge
 
    ![](../Sandbox-Environment-Guides/Images/knowledgeresponse.png)
 
-### Activity 2.3: Add Organizational Context
+### Activity 1.3: Add Organizational Context
 
 To make better launch decisions, the Business Intelligence agent must understand not only manufacturing operations and procedures, but also Caldova's business priorities, commitments, and team responsibilities.
 
@@ -180,17 +180,17 @@ Before connecting the enterprise knowledge source to the agent, verify that the 
    ![](../Sandbox-Environment-Guides/Images/comboresponse.png)
 
 
-### From One Agent to a Coordinated System 
+## Topic 2: From One Agent to a Coordinated System 
 
 This Topic mplements an automated market launch-readiness workflow using Copilot Studio, Power Automate, and Microsoft Foundry. Copilot Studio orchestrates the Market Launch Coordinator, while Power Automate detects incoming launch emails, structures workstream updates, and triggers the appropriate agent to validate launch details and assess business risks using Work IQ context.
 
 Approval and escalation workflows ensure that conflicting, uncertain, or high-impact changes receive human oversight before mitigation actions proceed. The solution is published through Microsoft Teams or Microsoft 365 Copilot, providing a coordinated experience from launch-update detection and risk assessment to approval and action.
 
-### Activity – Create the  Market Launch Cordinator
+### Activity 2.1 – Create the  Market Launch Cordinator
 
-### Connect PowerPlatform to create environment
+### Step 1: Connect PowerPlatform to create environment
 
->**Note:** If you have already completed this step during the **Rapid Prototyping using GitHub Copilot** section, skip to **Step 3**. Otherwise, proceed with the steps below to create the Power Platform environment.
+>**Note:** If you have already completed this step during the **Rapid Prototyping using GitHub Copilot** section, skip to **`Step 2`**. Otherwise, proceed with the steps below to create the Power Platform environment.
 
 
 Dedicated environment need to created for each user to allocate capacity usage and isolate the work.
@@ -222,7 +222,7 @@ Dedicated environment need to created for each user to allocate capacity usage a
 
    ![](../Sandbox-Environment-Guides/Images/Env-Cretaed.png) 
 
-### Create and Configure a New Agent in Copilot Studio
+### Step 2: Create and Configure a New Agent in Copilot Studio
 
 1. Open **[Microsoft Copilot Studio](https://copilotstudio.microsoft.com/)**.
 
@@ -244,7 +244,8 @@ Dedicated environment need to created for each user to allocate capacity usage a
 
 1. Copy the instructions provided below and paste them into the **Instructions** field.
 
-   ![](../Sandbox-Environment-Guides/Images/intro.png) 
+   ![](../Sandbox-Environment-Guides/Images/intro.png)
+   
    ```
    # Caldova Market Launch Coordinator — Agent Instructions
  
@@ -453,6 +454,7 @@ Dedicated environment need to created for each user to allocate capacity usage a
    - "Who owns the next action?"
    ```
  ---
+
 ### Activity 3.2 - Detect and Structure a Launch – Readiness Change 
 Build a Copilot Studio workflow to automatically detect incoming market launch emails and extract key launch details. The workflow will engage the designated agent to validate and confirm the launch information, then send a confirmation email summarizing the agreed launch details to the relevant stakeholders.
 
