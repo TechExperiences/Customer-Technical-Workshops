@@ -31,7 +31,7 @@ Before adding the **Data Agent** to the Microsoft Foundry agent, verify that the
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
 
-1. Navigate to **Workspaces (1)**, there should be workspace created with the name starting with  **Ubiquitous-Innovation (2)**. Select the workspace. 
+1. Navigate to **Workspaces (1)**, there should be a workspace created with the name starting with  **Ubiquitous-Innovation (2)**. Select the workspace. 
 
    ![](../Ubiquitous-Innovation/Images/ui3.png)
 
@@ -49,15 +49,15 @@ Before adding the **Data Agent** to the Microsoft Foundry agent, verify that the
 
 1. Click **Go to Foundry**.
 
-1. Navigate to **Agents (1)** and then select **supply-chain-bi-agent (2)**.
+1. Navigate to **Agents (1)** and then select **Ubiquitous-Supply-Chain-BI-Agent (2)**.
 
-   ![](../Ubiquitous-Innovation/Images/u97.png)
+   ![](../Ubiquitous-Innovation/Images/ui14.png)
 
 1. Verify that the **Fabric Data Agent** is attached under the **Tools** section.
 
-   ![](../Ubiquitous-Innovation/Images/ui5.png)   
+   ![](../Ubiquitous-Innovation/Images/ui15.png)   
 
-1. Confirm that the Data Agent is connected and configured correctly.
+1. Confirm that the **Data Agent** is connected and configured correctly.
 
 1. Copy the following prompt and paste it into the **Agent Playground**:
 
@@ -139,7 +139,7 @@ Before connecting the enterprise knowledge source to the agent, verify that the 
 
 1. Click **Add (1)** frop down and then select **Add tools (2)**.
 
-   ![](../Ubiquitous-Innovation/Images/ui10.png)
+   ![](../Ubiquitous-Innovation/Images/ui16.png)
 
 1. Select **SharePoint (1)** and then **Add tool (2)**.
 
@@ -155,7 +155,7 @@ Before connecting the enterprise knowledge source to the agent, verify that the 
 
 1. Confirm that the **SharePoint** source is connected properly and the relevant business-context documents are accessible.
 
-   ![](../Ubiquitous-Innovation/Images/ui13.png)
+   ![](../Ubiquitous-Innovation/Images/ui17.png)
 
 1. Copy the following prompt and paste it into the **Agent Playground**:
 
@@ -245,7 +245,7 @@ Dedicated environment need to created for each user to allocate capacity usage a
 1. Copy the instructions provided below and paste them into the **Instructions** field.
 
    ![](../Sandbox-Environment-Guides/Images/intro.png)
-   
+
    ```
    # Caldova Market Launch Coordinator — Agent Instructions
  
@@ -601,7 +601,7 @@ Connect a **Microsoft Foundry Agent** to the **Market Launch Coordinator**.
 
 1. Provide the details required to connect to the existing Microsoft Foundry agent.
 
-1. Locate and select the existing **Supply-Chain-BI-Agent**.
+1. Locate and select the existing **Ubiquitous-Supply-Chain-BI-Agent**.
 
 1. Configure the connection details as prompted by the interface.
 
