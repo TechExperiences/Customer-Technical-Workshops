@@ -95,3 +95,19 @@ Before connecting the enterprise knowledge source, verify that the required docu
    ![](../Ubiquitous-Innovation/Images/ui9.png)
 
 Confirm that all five documents are present before proceeding with the knowledge source configuration.
+
+1. Navigate back to the **Agent** in **Foundry**. Verify that the **Foundry IQ knowledge base** is configured under the **Knowledge** section of the existing Foundry agent.
+
+   ![](../Ubiquitous-Innovation/Images/u99.png)
+
+1. Confirm that the knowledge base is connected properly and the relevant manufacturing documents are available for retrieval.
+
+1. Copy the following prompt and paste it into the **Agent Playground**:
+
+   ```
+   According to Caldova's scheduling guidance, what should we consider when planning a production batch?
+   ```
+
+1. Review the response provided by the Foundry agent and verify that it uses the relevant manufacturing documents to provide a grounded answer.
+
+   ![](../Sandbox-Environment-Guides/Images/knowledgeresponse.png)
