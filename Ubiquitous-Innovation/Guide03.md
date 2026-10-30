@@ -19,7 +19,7 @@ Now that you have deployed the generated template with GitHub Copilot, let’s e
 
 ## Agents That Know Your Business 
 
-### Connect Live Manufacturing Context**
+### Activity 2.1: Connect Live Manufacturing Context
 
 The existing Business Intelligence agent needs access to live manufacturing data to answer questions about plant capacity, production schedules, and operational readiness. In this activity, we will connect the existing Fabric Data Agent from the `Caldova_UI` workspace to the Foundry agent using tool calling.
 
@@ -68,3 +68,30 @@ Before adding the **Data Agent** to the Microsoft Foundry agent, verify that the
 1. Review the response provided by the Foundry agent and verify that it retrieves the expected manufacturing data through the Fabric Data Agent.
 
    ![](../Ubiquitous-Innovation/Images/ui6.png)
+
+
+### Activity 2.2: Ground the Agent with Enterprise Knowledge
+
+Operational data alone may not explain the procedures and constraints that influence manufacturing decisions. The agent also needs access to Caldova's manufacturing documents, including scheduling guidance and relevant procedures.
+
+In this activity, we will create a Foundry IQ knowledge base from the existing documents stored in Azure Blob Storage and connect it to the Knowledge section of the existing Foundry agent.
+
+### Verify the SharePoint Source Documents in Azure Blob Storage
+
+Before connecting the enterprise knowledge source, verify that the required documents are available in the provided **Azure Storage account**.
+
+1. Navigate to the Azure portal and open **rg-Ubiquitous-Innovation** resource group.
+
+1. Under Resources, locate and open the storage account with the name starts with **adlsubiquitous**.
+
+   ![](../Ubiquitous-Innovation/Images/ui7.png)
+
+1. Click on **Containers (1)** under **Data Storage** and open the **data (2)** container.
+
+   ![](../Ubiquitous-Innovation/Images/ui8.png)
+
+1. Verify that the following documents are available:
+
+   ![](../Ubiquitous-Innovation/Images/ui9.png)
+
+Confirm that all five documents are present before proceeding with the knowledge source configuration.
