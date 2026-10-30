@@ -111,3 +111,33 @@ Confirm that all five documents are present before proceeding with the knowledge
 1. Review the response provided by the Foundry agent and verify that it uses the relevant manufacturing documents to provide a grounded answer.
 
    ![](../Sandbox-Environment-Guides/Images/knowledgeresponse.png)
+
+### Activity 2.3: Add Organizational Context
+
+To make better launch decisions, the Business Intelligence agent must understand not only manufacturing operations and procedures, but also Caldova's business priorities, commitments, and team responsibilities.
+
+In this activity, we will connect the existing SharePoint source through ****Work IQ**** as a tool for the existing Microsoft Foundry agent.
+
+### Verify the SharePoint Knowledge Base Documents
+
+Before connecting the enterprise knowledge source to the agent, verify that the required documents are available in SharePoint.
+
+1. Open the [Enterprise AI Knowledge Base – SharePoint](https://sandboxailabs1002.sharepoint.com/sites/EnterpriseAIKnowledgeBase/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FAI%20Knowledge%20Base&viewid=2aae9886%2D5883%2D4e2a%2D8949%2D612beaeb50ac&newTargetListUrl=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents&viewpath=%2Fsites%2FEnterpriseAIKnowledgeBase%2FShared%20Documents%2FForms%2FAllItems%2Easpx) link.
+
+1. Verify that the following documents are available:
+   - `Caldova_Business_Roles_and_Responsibilities.docx`
+   - `Caldova_Launch_Business_Context.docx`
+   - `Caldova_Launch_Commitments_and_Decisions.docx`
+
+1. Confirm that all three documents are present and accessible.
+
+   ![](../Sandbox-Environment-Guides/Images/sharepointpic.png)
+
+1. Navigate back to the **Foundry Agent.**
+
+1. Lets add the **SharePoint** under the **Tools** section of the existing Foundry agent.
+
+1. 
+
+
+
