@@ -594,12 +594,11 @@ This baseline will help us evaluate how the agent improves as we add live operat
    Dont create any new agent and dont modify existing agent.
 
    ```
-   **Prompt execution**
-   ![](../Sandbox-Environment-Guides/Images/task2.1.png)
+1. Click **Send** to execute prompt
 
 1. Review the Response provided by agent
 
-   ![](../Sandbox-Environment-Guides/Images/OldAgentDetails.png)
+   ![](../Ubiquitous-Innovation/Images/ReviewOldAgent.png)
 
 ### **Activity 2.2: Connect Live Manufacturing Context**
 
