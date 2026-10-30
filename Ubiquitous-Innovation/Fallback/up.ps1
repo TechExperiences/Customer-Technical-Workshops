@@ -217,11 +217,11 @@ try {
     Write-Host 'Creating the Foundry Supply Chain agent with Fabric analytics and document knowledge tools...' -ForegroundColor Cyan
     Invoke-Checked {
         python (Join-Path $PSScriptRoot 'scripts/deploy_foundry_agent.py') `
-            --foundry-account-name $FoundryAccountName --project-name $FoundryProjectName --model-deployment-name gpt5mini `
+            --foundry-account-name $FoundryAccountName --project-name $FoundryProjectName --model-deployment-name gpt51 `
             --vector-store-id $vectorStoreId --fabric-mcp-url $sourceAgent.mcpUrl
     } 'Foundry agent deployment failed.'
 
-    Write-Host "Completed. Storage account: $StorageAccountName; container: data; Search: $SearchServiceName; Cosmos: $CosmosAccountName; Foundry project: $FoundryProjectName; Foundry agent: supply-chain-bi-agent." -ForegroundColor Green
+    Write-Host "Completed. Storage account: $StorageAccountName; container: data; Search: $SearchServiceName; Cosmos: $CosmosAccountName; Foundry project: $FoundryProjectName; Foundry agent: Ubiquitous-Supply-Chain-BI-Agent." -ForegroundColor Green
 } finally {
     Remove-Item Env:AZURE_FABRIC_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_STORAGE_ACCESS_TOKEN -ErrorAction SilentlyContinue
