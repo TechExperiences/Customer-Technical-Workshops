@@ -642,8 +642,8 @@ This enables the Business Intelligence agent to use live manufacturing context w
    Note: Reuse existing workspaces, agents, and resources.
 
    ```
-   ![](../Sandbox-Environment-Guides/Images/task2.2.png)
 
+1. Click **Send** to execute the above prompt
  
 1. To verify that the **Fabric Data Agent** is attached under the **Tools** section of the existing Foundry agent. Navigate to **Azure portal**.
 
