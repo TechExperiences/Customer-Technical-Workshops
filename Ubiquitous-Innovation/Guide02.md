@@ -821,14 +821,14 @@ Dedicated environment need to created for each user to allocate capacity usage a
 
    ![](../Sandbox-Environment-Guides/Images/PowerPlatform.png) 
 
-1. Click **Manage**, then click **Environment** and click **New** to create new environment.
+1. Click **Manage (1)**, then click **Environment (2)** and click **New (3)** to create new environment.
 
    ![](../Sandbox-Environment-Guides/Images/Environment-Create.png) 
 
 1. Provide the details to create environment.
    
-   - Type: `Developer`
-   - Name: `UI-UserID`
+   - Type: `Developer (1)`
+   - Name: **UI-<inject key="Deployment-ID" enableCopy="false"/> (2)**
 
    ![](../Sandbox-Environment-Guides/Images/NewEnv-I.png) 
 
@@ -1093,8 +1093,8 @@ Build a Copilot Studio workflow to automatically detect incoming market launch e
 
 1. Configure arrival emails. Click `+` to add next activity.
 
-   - To: `UPN`
-   - subject filter: `Caldova market launch validator`
+   - To: **<inject key="AzureAdUserEmail"></inject>**
+   - Subject filter: `Caldova market launch validator`
 
    ![](../Sandbox-Environment-Guides/Images/Email-Config.png)
 
@@ -1156,7 +1156,7 @@ Build a Copilot Studio workflow to automatically detect incoming market launch e
 
 1. While configuring, provide below details.
 
-   - To (Whom you want to send): `UPN`
+   - To (Whom you want to send): **<inject key="AzureAdUserEmail"></inject>**
    - Subject: `Market Launch Agent Response`
    - Body: `Click **Dynamic content** icon` and select **Agent Response**
 
@@ -1174,7 +1174,7 @@ Build a Copilot Studio workflow to automatically detect incoming market launch e
 
 1. Compose one email with providing below and **Send**
 
-   - To: `UPN`
+   - To: **<inject key="AzureAdUserEmail"></inject>**
    - Subject: `Caldova market launch validator`
    - Body: `What are Caldova's main priorities for the November launch?`
 
