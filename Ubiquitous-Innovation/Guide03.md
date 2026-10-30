@@ -56,3 +56,15 @@ Before adding the **Data Agent** to the Microsoft Foundry agent, verify that the
 1. Verify that the **Fabric Data Agent** is attached under the **Tools** section.
 
    ![](../Ubiquitous-Innovation/Images/ui5.png)   
+
+1. Confirm that the Data Agent is connected and configured correctly.
+
+1. Copy the following prompt and paste it into the **Agent Playground**:
+
+   ```
+   What is the November capacity utilization of PL01?
+   ```
+
+1. Review the response provided by the Foundry agent and verify that it retrieves the expected manufacturing data through the Fabric Data Agent.
+
+   ![](../Ubiquitous-Innovation/Images/ui6.png)
