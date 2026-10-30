@@ -296,7 +296,7 @@ Review the updated document and confirm that it accurately represents the intend
 
    ![](../Ubiquitous-Innovation/Images/PushReviewPlan.png)
 
-1. Login to **[Github.com](https://github.com/CL-Labs-04/UI-2450678)** and validate
+1. Login to **[Github.com](https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>)** and validate
 
    ![](../Ubiquitous-Innovation/Images/GitPush.png)
 
@@ -432,7 +432,7 @@ Sometime we may not see selected GitHub Repositor under the session seciton.
 1. Select **Clone repository** and provide below repository URL.
 
    ```
-   https://github.com/CL-Labs-04/UI-2450678
+   https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>
    ```
 
 1. Click **Clone** and validate added session.
