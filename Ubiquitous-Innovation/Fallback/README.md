@@ -6,7 +6,7 @@ It creates a new `rg-Ubiquitous-Innovation` environment with:
 
 1. ADLS Gen2 storage in West US 2, including one `data` container.
 2. Azure AI Search and serverless Azure Cosmos DB for Foundry Standard Agent Setup in West US 2.
-3. A Foundry hub/project in West US, `gpt-5.1` version `2025-11-13`, and one `supply-chain-bi-agent`.
+3. A Foundry hub/project in West US, `gpt-5.1` version `2025-11-13`, and one `Ubiquitous-Supply-Chain-BI-Agent`.
 4. A document knowledge base sourced only from the ADLS `data` container.
 5. A Foundry Remote Tool connection using Microsoft Entra user delegation and a Fabric MCP tool, both discovered automatically from the single published `Ubiquitous_Innovation_DataAgent` created by the prior FabricAutomation run in `rg-Ubiquitous`.
 

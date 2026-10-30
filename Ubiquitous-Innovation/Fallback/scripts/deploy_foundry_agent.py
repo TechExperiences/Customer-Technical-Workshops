@@ -22,7 +22,7 @@ from azure.identity import ClientSecretCredential
 
 
 INSTRUCTIONS = "You are my Supply chain agent."
-AGENT_NAME = "supply-chain-bi-agent"
+AGENT_NAME = "Ubiquitous-Supply-Chain-BI-Agent"
 FABRIC_CONNECTION_NAME = "fabric-data-agent"
 
 
