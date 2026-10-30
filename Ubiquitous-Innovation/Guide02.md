@@ -503,7 +503,7 @@ Do not merge solely because the coding agent reports completion. Human review, r
 1. After executing the prompt, GitHub Copilot will create a Pull Request (PR) containing the proposed changes for review.
 
    ![](../Sandbox-Environment-Guides/Images/PRCreated.png)
-   
+
 ---
 
 ### **Activity 1.6: Fix Security in the Same Pull Request (GitHub)**
@@ -578,6 +578,10 @@ Traditionally, this would involve manually reviewing the agent configuration and
 This baseline will help us evaluate how the agent improves as we add live operational data, enterprise knowledge, and organizational context in the following activities.
 
 1. Navigate back to **VS code**
+
+1. First, user need to pull the changes made in GitHub Copilot App.
+
+   ![](../Ubiquitous-Innovation/Images/VSPullRepo.png)
 
 1. Copy the below prompt and paste it in chat window
 
