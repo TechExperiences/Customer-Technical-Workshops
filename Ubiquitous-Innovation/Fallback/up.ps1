@@ -107,11 +107,8 @@ $ResourceGroupName = 'rg-Ubiquitous-Innovation'
 $SourceFabricResourceGroup = 'rg-Ubiquitous'
 $PortalUserUpn = $env:FABRIC_CAPACITY_ADMIN_UPN
 $BlobSourceFolder = Join-Path $PSScriptRoot 'BlobData'
-$SharepointSourceFolder = Join-Path $PSScriptRoot 'Sharepoint'
-foreach ($sourceFolder in @($BlobSourceFolder, $SharepointSourceFolder)) {
-    if (-not (Test-Path -LiteralPath $sourceFolder -PathType Container)) { throw "Source folder does not exist: $sourceFolder" }
-    if (-not (Get-ChildItem -LiteralPath $sourceFolder -Recurse -File | Select-Object -First 1)) { throw "Source folder contains no files: $sourceFolder" }
-}
+if (-not (Test-Path -LiteralPath $BlobSourceFolder -PathType Container)) { throw "Source folder does not exist: $BlobSourceFolder" }
+if (-not (Get-ChildItem -LiteralPath $BlobSourceFolder -Recurse -File | Select-Object -First 1)) { throw "Source folder contains no files: $BlobSourceFolder" }
 
 # Verify the local runtime before any Azure resource is created. This avoids a
 # partially provisioned environment when Python dependencies are incompatible.
@@ -210,12 +207,7 @@ try {
         python (Join-Path $PSScriptRoot 'scripts/upload_to_adls.py') --storage-account-name $StorageAccountName --container data --source-folder $BlobSourceFolder
     } 'ADLS Gen2 data upload failed.'
 
-    Write-Host "Uploading local data from $SharepointSourceFolder to ADLS Gen2 container sharepoint..." -ForegroundColor Cyan
-    Invoke-Checked {
-        python (Join-Path $PSScriptRoot 'scripts/upload_to_adls.py') --storage-account-name $StorageAccountName --container sharepoint --source-folder $SharepointSourceFolder
-    } 'ADLS Gen2 SharePoint-source upload failed.'
-
-    Write-Host 'Indexing the data and sharepoint containers in the Foundry knowledge base...' -ForegroundColor Cyan
+    Write-Host 'Indexing the data container in the Foundry knowledge base...' -ForegroundColor Cyan
     $knowledgeOutput = & python (Join-Path $PSScriptRoot 'scripts/create_knowledge_base.py') `
         --storage-account-name $StorageAccountName --foundry-account-name $FoundryAccountName --project-name $FoundryProjectName
     if ($LASTEXITCODE -ne 0) { throw 'Foundry knowledge-base creation failed.' }
@@ -229,7 +221,7 @@ try {
             --vector-store-id $vectorStoreId --fabric-mcp-url $sourceAgent.mcpUrl
     } 'Foundry agent deployment failed.'
 
-    Write-Host "Completed. Storage account: $StorageAccountName; containers: data, sharepoint; Search: $SearchServiceName; Cosmos: $CosmosAccountName; Foundry project: $FoundryProjectName; Foundry agent: supply-chain-bi-agent." -ForegroundColor Green
+    Write-Host "Completed. Storage account: $StorageAccountName; container: data; Search: $SearchServiceName; Cosmos: $CosmosAccountName; Foundry project: $FoundryProjectName; Foundry agent: supply-chain-bi-agent." -ForegroundColor Green
 } finally {
     Remove-Item Env:AZURE_FABRIC_ACCESS_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:AZURE_STORAGE_ACCESS_TOKEN -ErrorAction SilentlyContinue

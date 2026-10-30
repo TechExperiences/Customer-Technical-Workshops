@@ -56,7 +56,7 @@ def upload(file_system, local_file: Path, destination_path: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--storage-account-name", required=True)
-    parser.add_argument("--container", required=True, choices=("data", "sharepoint"))
+    parser.add_argument("--container", required=True, choices=("data",))
     parser.add_argument("--source-folder", required=True)
     args = parser.parse_args()
 
