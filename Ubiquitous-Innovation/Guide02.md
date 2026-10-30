@@ -148,9 +148,9 @@ The **future-state architecture** was developed during the previous whiteboardin
 
 ### **Activity 1.2: Turn the Whiteboard into a Reviewed Plan**
 
-Turn the whiteboard into a reviewed implementation plan and issue set for extending the existing agent, without manually transcribing it.
+Convert the whiteboard into a reviewed implementation plan and issue set for extending the existing agent.
 
-A **whiteboard** captures the intended design, but developers need a clear implementation plan before they begin making changes. Manually translating every component into requirements can lead to missed dependencies, duplicated work, or incomplete testing.
+A clear plan helps developers identify requirements, dependencies, and testing needs while avoiding manual transcription and missed details.
 
 In this activity, ****GitHub Copilot**** will analyze the attached ****future-state architecture**** and turn it into a structured design review. The resulting document will help the business and technical teams understand the proposed implementation before code changes begin.
 
@@ -171,17 +171,9 @@ After Copilot finishes, open `Design-Review.md` in the Project Explorer. Check t
 
 Treat the document as a draft for review, not as an approved implementation plan. It becomes the reference for the next activity, where you will confirm the requirements and resolve any gaps before delegating the build.
 
-1. From the **GitHub Copilot Chat**, click **Auto (1)** and then **turn off (2)** the **Auto** toggle. 
+1. To prepare plan, click **Agent**
 
-   - Expand **Other Models**.
-
-   ![](../Ubiquitous-Innovation/Images/u32.png)
-
-1. Set the model to **Claude Sonnet 5**.
-
-   ![](../Ubiquitous-Innovation/Images/u33.png)
-
-    >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
+   ![](../Ubiquitous-Innovation/Images/PlanAuto.png)
 
 1. Click on **Default permission (1)** and then set it to **Allow all (2)**.
 
@@ -199,11 +191,10 @@ Treat the document as a draft for review, not as an approved implementation plan
 
    ![](../Sandbox-Environment-Guides/Images/step1.png)
 
-1. Please copy the below prompt and paste it in the copilot chat win
+1. Please copy the below prompt and paste it in the copilot chat window
 
    >- This activity is required to validate the **future-state architecture** before development begins and ensure the proposed solution aligns with the business requirement.
-   >- Review the architecture to understand each component and determine how the new tool-handler capability should be implemented, documented, and reviewed by the business team.
-
+   >- Prepare a plan after review the architecture to understand each component and determine how the new tool-handler capability should be implemented, documented, and reviewed by the business team.
    
    **Prompt**
    ```
@@ -229,13 +220,38 @@ Treat the document as a draft for review, not as an approved implementation plan
 
 1. Once Copilot starts generating the response, monitor the process closely. 
 
+1. From the **GitHub Copilot Chat**, click **Auto (1)** and then **turn off (2)** the **Auto** toggle. 
+
+   - Expand **Other Models**.
+
+   ![](../Ubiquitous-Innovation/Images/u32.png)
+
+1. Set the model to **Claude Sonnet 5**.
+
+   ![](../Ubiquitous-Innovation/Images/u33.png)
+
+1. Click **Plan** and choose **Agent**
+
+   ![](../Ubiquitous-Innovation/Images/PlanAuto.png)
+
+    >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
+
+1. Run this below prompt to create Design-Review.md
+
+   ```
+   Please record this complete plan in Design-Review.md
+   ```
+   ![](../Ubiquitous-Innovation/Images/PlanToDoc.png)
+
+   >Note: Follow same procedure to click **Send** button after prompt pasted.
+   
 **Validation**
 
 Once ****GitHub Copilot**** completes the execution, validate the Project Explorer to confirm whether the review document has been successfully created and is available in the expected project location.
 
 1. Navigate to the project explorer in VS code to validate review docuemnt.
 
-   ![](../Ubiquitous-Innovation/Images/u85.png)
+   ![](../Ubiquitous-Innovation/Images/ReviewDesign.png)
 
 ### **Activity 1.3: Ground Copilot in What the Business Already Decided**
 
@@ -245,8 +261,7 @@ In this activity, **GitHub Copilot** will review the existing `Design-Review.md`
 
 #### **What Will This Prompt Do?**
 
-- Reassess the existing implementation plan against the **future-state architecture**.
-- Verify that the required components, tools, and agent capabilities are included.
+- Verify that the required components, tools, and agent capabilities with comparing existing workload.
 - Identify missing, incorrect, duplicated, or unnecessary items.
 - Propose corrections to the same document instead of creating a separate plan.
 - Present the proposed changes for human confirmation before finalizing the plan.
@@ -272,12 +287,18 @@ Review the updated document and confirm that it accurately represents the intend
 
    Once all the above steps are completed, please check in all content into GitHub main branch and confirm.
    ```
-
-   - Then click **Send** button.
-
-     ![](../Ubiquitous-Innovation/Images/u87.png)   
+1. Click **Send** button.
 
 1. Once Copilot starts generating the response, monitor the process closely. 
+
+**Validation**
+1. Confirmed GitHub Push notificaiton
+
+   ![](../Ubiquitous-Innovation/Images/PushReviewPlan.png)
+
+1. Login to **[Github.com](https://github.com/CL-Labs-04/UI-2450678)** and validate
+
+   ![](../Ubiquitous-Innovation/Images/GitPush.png)
 
 ## Understanding the Design Review
 
@@ -353,9 +374,9 @@ After **GitHub Copilot** generates `Design-Review.md`, review the following sect
 
 ### **Activity 1.4: Choose the Model for the Job**
 
-Select the most appropriate model for the task while staying within the models and policies enabled by the organization. Review the available models using /model, switch between models to understand that model selection is task-specific, and use /model auto to allow ****GitHub Copilot**** to select an appropriate model based on the task, effort, and optimization settings such as Balanced versus Intelligence. Use /usage to review session usage and /context to understand the available context and session information. Finally, repeat the same task using a Frontier model and Auto mode to compare their output, performance, value, and cost, and understand when each approach is most appropriate.
+his activity helps users understand how to select the right model for different tasks and evaluate its suitability. Different models may produce different response quality, reasoning, and interaction experiences. An unsuitable model may complete a task but deliver less effective results. Users can explore available models using /model and compare their performance across planning, design, and coding tasks.
 
-Based on the context, the user can switch between the available models and validate their suitability for the task. Finally, select the **Auto** option to allow ****GitHub Copilot**** to automatically choose the most appropriate model based on the requirements and complexity of the work.
+Finally, introduce Copilot Fusion (formerly Auto), which automatically selects the most suitable model based on task requirements, complexity, and available capabilities. Compare manual model selection with Fusion to understand differences in output quality, performance, and cost.
  
 #### Step 1: Open GitHub Copilot and your session
 
@@ -399,6 +420,25 @@ Based on the context, the user can switch between the available models and valid
 
 1. In the left pane under **Projects**, pick your project and session (for example, *Add Supply Chain BI Agent*).
 
+#### Step 2: Session configuration
+Sometime we may not see selected GitHub Repositor under the session seciton. 
+
+>Note: Repository is already added then skip this part.
+
+1. In this case we need to click `+` to add a new session.
+
+   ![](../Sandbox-Environment-Guides/Images/CloneRepo.png)
+
+1. Select **Clone repository** and provide below repository URL.
+
+   ```
+   https://github.com/CL-Labs-04/UI-2450678
+   ```
+
+1. Click **Clone** and validate added session.
+
+   ![](../Sandbox-Environment-Guides/Images/CloneRepo.png)
+
 #### Step 2: Review the available models
 1. Type the below command in  to see all the models:
 
@@ -422,6 +462,8 @@ User can select Auto option which can help while executing tasks and select appr
    ```
 
    ![](../Sandbox-Environment-Guides/Images/automodel.png)
+
+1. Now user can see **Copilot fusion**
 
 ---
 
@@ -455,10 +497,13 @@ Do not merge solely because the coding agent reports completion. Human review, r
 1. Click **Send**.
    ![](../Sandbox-Environment-Guides/Images/Delegate.png)
 
-4. When Copilot asks about the checkpoint, **accept it**. This way the agent's branch includes:
-   - The existing scaffold
-   - The updated instructions
+   >Note: Please track and answer followup questions to make it proper interactive
 
+**Validation**
+1. After executing the prompt, GitHub Copilot will create a Pull Request (PR) containing the proposed changes for review.
+
+   ![](../Sandbox-Environment-Guides/Images/PRCreated.png)
+   
 ---
 
 ### **Activity 1.6: Fix Security in the Same Pull Request (GitHub)**
