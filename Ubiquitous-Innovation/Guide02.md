@@ -832,11 +832,13 @@ Dedicated environment need to created for each user to allocate capacity usage a
 
    ![](../Sandbox-Environment-Guides/Images/NewEnv-I.png) 
 
-1. Scroll down and click **Change default settings** and enable **Add a Dataverse data store?** 
+1. Scroll down and click **Change default settings** and enable **Add a Dataverse data store? (1)**.
+
+   - Click **Next (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/Change-Setting.png) 
 
-1. Click **Next** then click **Next** to create environment.
+1. Then click **Save** to create environment.   
 
 1. Wait for sometime to popup green message on the screen once environment created.
 
