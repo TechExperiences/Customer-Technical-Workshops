@@ -1,4 +1,4 @@
-"""Index both Fallback ADLS containers in one Foundry File Search vector store."""
+"""Index the Fallback ADLS data container in one Foundry File Search vector store."""
 from __future__ import annotations
 
 import argparse
@@ -64,7 +64,7 @@ def collect_documents(service: DataLakeServiceClient) -> list[tuple[str, Any, st
     """Validate and order every source document before creating a vector store."""
     documents: list[tuple[str, Any, str, str]] = []
     upload_names: set[str] = set()
-    for container in ("data", "sharepoint"):
+    for container in ("data",):
         file_system = service.get_file_system_client(container)
         paths = sorted(
             (path for path in file_system.get_paths(recursive=True) if not path.is_directory),
@@ -131,7 +131,7 @@ def main() -> None:
                 attributes={"source_container": container, "source_path": source_path},
             )
             print(f"Indexed {container}/{source_path}")
-        print(f"Created vector store {vector_store.id} from {len(documents)} file(s) in data and sharepoint.")
+        print(f"Created vector store {vector_store.id} from {len(documents)} file(s) in data.")
         print(vector_store.id)
     except Exception as error:
         if "vector_store" in locals():

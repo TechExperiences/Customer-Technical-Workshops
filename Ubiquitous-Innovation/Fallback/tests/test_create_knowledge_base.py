@@ -41,7 +41,6 @@ class CollectDocumentsTests(unittest.TestCase):
         service = FakeService(
             {
                 "data": FakeFileSystem([FakePath("zeta.docx"), FakePath("alpha.docx")]),
-                "sharepoint": FakeFileSystem([FakePath("context.docx")]),
             }
         )
 
@@ -52,7 +51,6 @@ class CollectDocumentsTests(unittest.TestCase):
             [
                 ("data", "alpha.docx", "data__alpha.docx"),
                 ("data", "zeta.docx", "data__zeta.docx"),
-                ("sharepoint", "context.docx", "sharepoint__context.docx"),
             ],
         )
 
@@ -60,7 +58,6 @@ class CollectDocumentsTests(unittest.TestCase):
         service = FakeService(
             {
                 "data": FakeFileSystem([FakePath("input.csv")]),
-                "sharepoint": FakeFileSystem([FakePath("context.docx")]),
             }
         )
 

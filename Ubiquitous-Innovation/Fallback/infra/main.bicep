@@ -64,14 +64,6 @@ resource dataContainer 'Microsoft.Storage/storageAccounts/blobServices/container
   }
 }
 
-resource sharepointContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = {
-  parent: blobService
-  name: 'sharepoint'
-  properties: {
-    publicAccess: 'None'
-  }
-}
-
 // Serverless is the lowest-cost Cosmos configuration. Foundry Standard Agent Setup
 // manages the required databases and containers after the capability host is ready.
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2024-11-15' = {
