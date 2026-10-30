@@ -25,6 +25,8 @@ The existing Business Intelligence agent needs access to live manufacturing data
 
 ### Verify the Existing Fabric Data Agent
 
+Before adding the **Data Agent** to the Microsoft Foundry agent, verify that the required Data Agent is available in the provided Fabric workspace.
+
 1. Click on the **App launcher (1)** and select **Microsoft fabric (2)** icon.
 
    ![](../Sandbox-Environment-Guides/Images/amp55.png)
@@ -37,4 +39,20 @@ The existing Business Intelligence agent needs access to live manufacturing data
 
    ![](../Sandbox-Environment-Guides/Images/fabricDA.png)
 
-Confirm that the Data Agent is available before proceeding to the next activity.
+   >**Note:** Confirm that the Data Agent is available before proceeding to the next activity.
+
+1. To verify that the **Fabric Data Agent** is attached under the **Tools** section of the existing Foundry agent. Navigate to **Azure portal**.
+
+1. Navigate to **rg-Ubiquitous- Innovation** and select the **ubiquitous-innoation-project (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/ui4.png)
+
+1. Click **Go to Foundry**.
+
+1. Navigate to **Agents (1)** and then select **supply-chain-bi-agent (2)**.
+
+   ![](../Ubiquitous-Innovation/Images/u97.png)
+
+1. Verify that the **Fabric Data Agent** is attached under the **Tools** section.
+
+   ![](../Ubiquitous-Innovation/Images/ui5.png)   
