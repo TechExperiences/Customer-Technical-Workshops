@@ -566,6 +566,7 @@ This baseline will help us evaluate how the agent improves as we add live operat
 1. Review the Response provided by agent
 
    ![](../Sandbox-Environment-Guides/Images/OldAgentDetails.png)
+
 ### **Activity 2.2: Connect Live Manufacturing Context**
 
 The existing Business Intelligence agent needs access to live manufacturing data to answer questions about plant capacity, production schedules, and operational readiness. In this activity, we will connect the existing Fabric Data Agent from the `Caldova_UI` workspace to the Foundry agent using tool calling.
