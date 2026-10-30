@@ -52,7 +52,7 @@ You will use ****GitHub Copilot**** to generate ARM or Bicep templates using the
 
    ![](../Sandbox-Environment-Guides/Images/amp26.png)
 
-   >**Note:** If you get any error pop up, please **Close.**
+   >**Note:** Like beow, if you get any error pop up, please **Close.**
 
     ![](../Sandbox-Environment-Guides/Images/b2.png)  
 
@@ -173,9 +173,7 @@ Treat the document as a draft for review, not as an approved implementation plan
 
 1. From the **GitHub Copilot Chat**, click **Auto (1)** and then **turn off (2)** the **Auto** toggle. 
 
-   ![](../Ubiquitous-Innovation/Images/u31.png)
-
-1. Expand **Other Models**.
+   - Expand **Other Models**.
 
    ![](../Ubiquitous-Innovation/Images/u32.png)
 
@@ -459,8 +457,6 @@ Do not merge solely because the coding agent reports completion. Human review, r
 4. When Copilot asks about the checkpoint, **accept it**. This way the agent's branch includes:
    - The existing scaffold
    - The updated instructions
-
-
 
 ---
 
