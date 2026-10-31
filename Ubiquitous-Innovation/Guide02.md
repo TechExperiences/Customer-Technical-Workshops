@@ -175,6 +175,12 @@ Treat the document as a draft for review, not as an approved implementation plan
 
    ![](../Ubiquitous-Innovation/Images/PlanAuto.png)
 
+   > **Note**: If **Plan** mode does not appear in GitHub Copilot, copy the command below, paste it into **GitHub Copilot Chat**, for upcoming prompt.
+      ```
+      /Plan
+      ```
+       ![](../Sandbox-Environment-Guides/Images/PlanImg.png)
+
 1. Click on **Default permission (1)** and then set it to **Allow all (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/b8.png)
@@ -186,10 +192,27 @@ Treat the document as a draft for review, not as an approved implementation plan
 1. Select the **Future-State-Architecture.png**.
 
    ![](../Ubiquitous-Innovation/Images/u68.png)
-
+   
 1. From the ********GitHub Copilot****** Chat**, click on **+ (1)** and then select the **Future-State-Architecture.png (2)**.
 
    ![](../Sandbox-Environment-Guides/Images/step1.png)
+
+1. From the **GitHub Copilot Chat**, click **Auto (1)** and then **turn off (2)** the **Auto** toggle. 
+
+   - Expand **Other Models**.
+
+   ![](../Ubiquitous-Innovation/Images/u32.png)
+
+1. Set the model to **Claude Sonnet 5**.
+
+   ![](../Ubiquitous-Innovation/Images/u33.png)
+
+1. Click **Plan** and choose **Agent**
+
+   ![](../Ubiquitous-Innovation/Images/PlanAuto.png)
+
+    >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
+    
 
 1. Please copy the below prompt and paste it in the copilot chat window
 
@@ -219,22 +242,6 @@ Treat the document as a draft for review, not as an approved implementation plan
      ![](../Ubiquitous-Innovation/Images/u86.png)
 
 1. Once Copilot starts generating the response, monitor the process closely. 
-
-1. From the **GitHub Copilot Chat**, click **Auto (1)** and then **turn off (2)** the **Auto** toggle. 
-
-   - Expand **Other Models**.
-
-   ![](../Ubiquitous-Innovation/Images/u32.png)
-
-1. Set the model to **Claude Sonnet 5**.
-
-   ![](../Ubiquitous-Innovation/Images/u33.png)
-
-1. Click **Plan** and choose **Agent**
-
-   ![](../Ubiquitous-Innovation/Images/PlanAuto.png)
-
-    >**Note:** If you're unable to select the **Models**, please wait for `2-3 minutes` then check and make sure you're signed in properly.
 
 1. Run this below prompt to create Design-Review.md
 
@@ -292,11 +299,14 @@ Review the updated document and confirm that it accurately represents the intend
 1. Once Copilot starts generating the response, monitor the process closely. 
 
 **Validation**
-1. Confirmed GitHub Push notificaiton
+1. Confirmed GitHub Push notification in Github Copilot chat.
 
    ![](../Ubiquitous-Innovation/Images/PushReviewPlan.png)
 
-1. Login to **[Github.com](https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>)** and validate
+1. Click the **committed repository link** above to review the pushed changes.
+   ![](../Ubiquitous-Innovation/Images/OpenGithub.png)
+
+1. If you are unable to see the option above, please follow this step Login to **[Github.com](https://github.com/CL-Labs-04/UI-<inject key="Deployment-ID" enableCopy="false"/>)** and validate
 
    ![](../Ubiquitous-Innovation/Images/GitPush.png)
 
@@ -304,73 +314,57 @@ Review the updated document and confirm that it accurately represents the intend
 
 ### What Is a Design Review?
 
-A **Design Review** is a structured evaluation of the proposed **future-state architecture** to verify that the solution aligns with the business requirements, technical design, security expectations, and implementation objectives before development begins.
+A **Design Review** checks the proposed **future-state architecture** before development starts. It confirms that the design meets the business, technical, security and implementation requirements.
+In this activity, **GitHub Copilot** analyzes Caldova's architecture and produces a `Design-Review.md` document that turns the diagram into an implementation plan that developers and stakeholders can review.
 
-In this activity, we will use **GitHub Copilot** to analyze Caldova's **future-state architecture** and generate a `Design-Review.md` document. The review explains the purpose of the architecture components, how they interact, what capabilities are required, and what implementation tasks need to be completed.
+### What Does It Cover?
 
-The objective is to move beyond understanding the architecture diagram and translate it into a practical implementation plan that developers and business stakeholders can review and validate.
+1. **Data and Knowledge:** OneLake, ADLS Gen2, Azure SQL and SharePoint supply the business data that grounds the AI agents.
+2. **Agent Development:** Microsoft Foundry, GitHub Copilot, GitHub Actions, models and tools are used to build, test and deploy agents.
+3. **Orchestration and Workflow:** Copilot Studio, the Agent Fleet and Workflow Orchestration coordinate agents, connect to enterprise systems and escalate to people for approval when needed.
+4. **Governance, Security and Cost:** Agent 365, Entra ID, Azure Monitor and cost-management tools handle agent discovery, access control, monitoring, auditing and spending oversight.
 
-### What Does the Design Review Cover?
+### Why a New Tool Handler?
 
-The design review examines the proposed solution across four key areas:
+Today, agents can **recommend** actions but can't **perform** them. For example, a procurement agent can spot a part shortage, but it can't create the purchase requisition in SAP.
+The proposed **Enterprise Action Tool Handler**, in the workflow-orchestration layer, closes this gap:
 
-1. **Data Sources and Knowledge Foundation:** Reviews how Microsoft Fabric OneLake, ADLS Gen2, Azure SQL Database, and SharePoint provide the enterprise data and knowledge required to ground AI agents in business information.
+- Validates the action and its inputs
+- Checks the caller's identity and permissions
+- Validates the business data
+- Gets human approval when required
+- Runs the action through the right workflow or connector
+- Logs the result for auditing
+- Returns the actual outcome to the agent
 
-2. **Agent Development and Engineering:** Explains how Microsoft Foundry, GitHub Copilot, GitHub Actions, models, and tools support agent development, implementation, testing, and deployment.
-
-3. **Agent Orchestration and Workflow Integration:** Reviews how Copilot Studio, the Agent Fleet, Workflow Orchestration, and escalation paths enable multiple agents to coordinate tasks, integrate with enterprise systems, and request human approval when necessary.
-
-4. **Governance, Security, and Cost Management:** Examines how Agent 365, Microsoft Entra ID, Azure Monitor, and cost-management capabilities contribute to agent discovery, identity and access control, monitoring, auditing, and operational oversight.
-
-### Why Are We Introducing a New Tool Handler?
-
-The architecture identifies an important gap between an agent that can provide recommendations and an agent that can perform actions in enterprise systems.
-
-For example, a procurement agent might identify a shortage of a critical component and recommend creating a purchase requisition. However, identifying the problem does not automatically create the requisition in SAP or another connected system.
-
-To address this gap, the design review proposes an **Enterprise Action Tool Handler** within the **workflow-orchestration layer**.
-
-The proposed design includes:
-
-- Validating the requested action and its input parameters.
-- Checking the caller's identity and permissions.
-- Validating relevant business data before execution.
-- Obtaining human approval when required.
-- Executing the action through the appropriate workflow and enterprise connector.
-- Recording the result and maintaining an audit trail.
-- Returning the actual execution outcome to the requesting agent.
-
-This capability represents the transition from **agents that recommend to agents that act**, while maintaining appropriate authorization, approval, and governance controls.
+**Result:** Agents move from *recommending* to *acting*, under proper governance.
 
 ### How Does GitHub Copilot Help?
 
-Instead of manually reviewing every architecture component and preparing the implementation documentation from scratch, we provide **GitHub Copilot** with the architecture and the business requirements.
+GitHub Copilot uses the architecture and the business requirements to:
 
-**GitHub Copilot** helps to:
+- Explain what each component does
+- Show where the tool handler fits
+- Define the handler's interface, permissions, approval and execution rules
+- Identify changes to agent instructions and the test scenarios needed
+- List follow-up engineering tasks
+- Compare the plan with the existing business request
+- Flag gaps, risks, dependencies and open decisions
 
-- Analyze the architecture and explain the responsibilities of its components.
-- Identify where the proposed tool handler fits into the existing design.
-- Define the handler's interface, authorization, approval, and execution requirements.
-- Identify required agent-instruction changes and testing scenarios.
-- Generate a list of engineering follow-up tasks.
-- Compare the proposed implementation with the existing business request, where that request is available.
-- Identify gaps, risks, dependencies, and decisions that require stakeholder input.
+The output is a **starting point** for review, not a final answer.
 
-The generated document serves as a starting point for technical and business review. It should be validated against the actual architecture, repository issues, implementation constraints, and stakeholder decisions rather than accepted without review.
+### What to Review in the Output
 
-### What Should You Review in the Generated Document?
+1. **Architecture Walkthrough:** Are all four areas and their components shown correctly?
+2. **Component Activity Table:** Are each component's responsibilities and dependencies clear?
+3. **Tool Handler Design:** Are permissions, approvals, execution and auditing covered?
+4. **Testing Strategy:** Do the tests cover a successful run, unauthorized requests, duplicate requests, invalid inputs and rejected approvals?
+5. **Follow-Up Issues:** Which items are required for the pilot and which are future enhancements?
+6. **Gap Analysis:** Which requirements are missing or only partly covered?
+7. **Final Plan:** Are the scope, changes, owners and open decisions agreed?
 
-After **GitHub Copilot** generates `Design-Review.md`, review the following sections:
+**Key takeaway:** GitHub Copilot speeds up analysis and planning, but technical and business stakeholders must validate the design before development begins.
 
-1. **Architecture Walkthrough:** Verify that the four architecture areas and their components are represented correctly.
-2. **Component Activity Table:** Confirm that each component's responsibilities, activities, and dependencies are clearly explained.
-3. **Proposed Tool Handler:** Review the proposed design for permissions, approval workflows, action execution, and auditing.
-4. **Testing Strategy:** Check whether the proposed tests cover successful execution, unauthorized requests, duplicate requests, invalid inputs, and approval rejection.
-5. **Follow-Up Issues:** Identify additional engineering work and distinguish essential pilot requirements from future enhancements.
-6. **Gap Analysis:** Verify which architecture requirements are missing or only partially addressed in the initial plan.
-7. **Final Implementation Plan:** Confirm the agreed scope, required changes, ownership, and outstanding decisions before development proceeds.
-
-**The key takeaway:** GitHub Copilot can accelerate architecture analysis and implementation planning, but the design must still be validated by the appropriate technical and business stakeholders before it is approved for development.
 
 ### **Activity 1.4: Choose the Model for the Job**
 
@@ -522,7 +516,11 @@ Validate business requirements, governance, risk controls, and security findings
 
    ![](../Ubiquitous-Innovation/Images/PullRequestReview.png)
 
-1. Admin can review the PR details and files to be changed and provide his review comments and click save.
+1. Admin can review the PR details and files to be changed and provide the below review comments and click save.
+
+   ```
+   These fixes are required for new agent deployment which will solve our performance issues along with multimodal agent design and bring appropriate business values. Here, I am giving my approval to merge and commit       with proper business justification. Also attach design flow for the future review.
+   ```
 
    ![](../Ubiquitous-Innovation/Images/ReviewComments.png)
 
