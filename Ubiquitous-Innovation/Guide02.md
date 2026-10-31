@@ -177,9 +177,9 @@ Treat the document as a draft for review, not as an approved implementation plan
 
    > **Note**: If **Plan** mode does not appear in GitHub Copilot, copy the command below, paste it into **GitHub Copilot Chat**, for upcoming prompt.
       ```
-      /Plan
+      /plan
       ```
-       ![](../Sandbox-Environment-Guides/Images/PlanImg.png)
+![](../Ubiquitous-Innovation/Images/PlanImg.png)
 
 1. Click on **Default permission (1)** and then set it to **Allow all (2)**.
 
